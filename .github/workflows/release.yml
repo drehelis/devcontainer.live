@@ -41,7 +41,7 @@ jobs:
       - name: "Bump to new version"
         id: bump
         run: |
-          _version=$(npm --no-git-tag-version version ${{ github.event.inputs.version }})
+          _version=$(npm --no-git-tag-version version ${{ github.event.inputs.version || 'patch' }})
 
           echo "new_version=$_version" >> $GITHUB_OUTPUT
           echo "New version: $_version"

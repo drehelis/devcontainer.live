@@ -65,7 +65,8 @@ export function useGenerator() {
     if (orchestration === "dockerfile") {
       const dockerfilePath =
         config.build?.dockerfile || config.build?.dockerFile || "Dockerfile";
-      const isCamelCase = !!config.build?.dockerFile && !config.build?.dockerfile;
+      const isCamelCase =
+        !!config.build?.dockerFile && !config.build?.dockerfile;
 
       config.build = {
         [isCamelCase ? "dockerFile" : "dockerfile"]: dockerfilePath,
