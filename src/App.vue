@@ -15,8 +15,14 @@ const { state, generatedJson, bashHistoryNote, indentation, reset } =
   useGenerator();
 const { currentTheme } = useTheme();
 const { sidebarWidth, startResizing } = useSidebarResize();
-const { copyStatus, showIndentMenu, copyToClipboard, downloadConfig } =
-  useEditorActions(generatedJson, reset);
+const {
+  copyStatus,
+  shareStatus,
+  showIndentMenu,
+  copyToClipboard,
+  copyShareLink,
+  downloadConfig,
+} = useEditorActions(generatedJson, reset);
 
 const activeSection = ref<
   "general" | "features" | "ports" | "history" | "advanced"
@@ -81,7 +87,9 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
 
         <EditorTabs
           :copy-status="copyStatus"
+          :share-status="shareStatus"
           @copy="copyToClipboard"
+          @share="copyShareLink"
           @download="downloadConfig"
           @reset="reset"
         />

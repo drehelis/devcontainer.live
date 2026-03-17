@@ -54,8 +54,16 @@ jobs:
           title: "chore(release): bump version to ${{ env.NEW_VERSION }}"
           body: "chore(release): bump version to ${{ env.NEW_VERSION }}"
           commit-message: "chore(release): bump version to ${{ env.NEW_VERSION }}"
+          branch: "release-${{ env.NEW_VERSION }}"
+          delete-branch: true
         env:
           NEW_VERSION: ${{ steps.bump.outputs.new_version }}
+
+      - name: "Auto-merge PR"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr merge --squash --auto "${{ steps.cpr.outputs.pull-request-number }}"
 
       - name: "Release"
         env:
@@ -65,9 +73,3 @@ jobs:
         run: |
           gh release create $NEW_VERSION \
             -t $NEW_VERSION
-
-      - name: "Auto-merge PR"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh pr merge --squash --auto "${{ steps.cpr.outputs.pull-request-number }}"

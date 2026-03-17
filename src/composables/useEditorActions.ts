@@ -5,6 +5,7 @@ export function useEditorActions(
   reset: () => void,
 ) {
   const copyStatus = ref<"idle" | "copied">("idle");
+  const shareStatus = ref<"idle" | "copied">("idle");
   const showIndentMenu = ref(false);
 
   async function copyToClipboard() {
@@ -16,6 +17,18 @@ export function useEditorActions(
       }, 2000);
     } catch (err) {
       console.error("Failed to copy!", err);
+    }
+  }
+
+  async function copyShareLink() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      shareStatus.value = "copied";
+      setTimeout(() => {
+        shareStatus.value = "idle";
+      }, 2000);
+    } catch (err) {
+      console.error("Failed to copy link!", err);
     }
   }
 
@@ -33,8 +46,10 @@ export function useEditorActions(
 
   return {
     copyStatus,
+    shareStatus,
     showIndentMenu,
     copyToClipboard,
+    copyShareLink,
     downloadConfig,
     reset,
   };

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 defineProps<{
   copyStatus: "idle" | "copied";
+  shareStatus: "idle" | "copied";
 }>();
 
 defineEmits<{
   (e: "copy"): void;
+  (e: "share"): void;
   (e: "download"): void;
   (e: "reset"): void;
 }>();
@@ -56,6 +58,42 @@ defineEmits<{
         </svg>
         <span class="text-[10px] font-bold uppercase tracking-widest">{{
           copyStatus === "copied" ? "Copied" : "Copy"
+        }}</span>
+      </button>
+      <button
+        @click="$emit('share')"
+        class="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright group"
+      >
+        <svg
+          v-if="shareStatus === 'idle'"
+          class="w-3.5 h-3.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
+          />
+        </svg>
+        <svg
+          v-else
+          class="w-3.5 h-3.5 text-ide-green"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="3"
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+        <span class="text-[10px] font-bold uppercase tracking-widest">{{
+          shareStatus === "copied" ? "Linked" : "Share"
         }}</span>
       </button>
       <button

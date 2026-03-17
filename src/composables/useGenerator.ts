@@ -1,4 +1,5 @@
 import { ref, computed, watch } from "vue";
+import LZString from "lz-string";
 import type { DevContainerConfig, OrchestrationType } from "../types";
 
 const STORAGE_KEY = "devcontainer_generator_state";
@@ -35,26 +36,55 @@ const DEFAULT_STATE = {
 };
 
 export function useGenerator() {
-  const savedState = localStorage.getItem(STORAGE_KEY);
-  const initialState = savedState ? JSON.parse(savedState) : DEFAULT_STATE;
+  const getHashState = () => {
+    const hash = window.location.hash.slice(1);
+    if (!hash) return null;
+    try {
+      const decompressed = LZString.decompressFromEncodedURIComponent(hash);
+      return decompressed ? JSON.parse(decompressed) : null;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  const savedState = getHashState() || localStorage.getItem(STORAGE_KEY);
+  let parsed: any = null;
+  try {
+    parsed =
+      typeof savedState === "string" ? JSON.parse(savedState) : savedState;
+  } catch (e) {
+    parsed = null;
+  }
 
   const state = ref<{
     orchestration: OrchestrationType;
     config: DevContainerConfig;
-  }>(JSON.parse(JSON.stringify(initialState)));
+  }>(JSON.parse(JSON.stringify(parsed?.state || DEFAULT_STATE)));
 
-  const indentation = ref(-1); // Default to Tabs
+  const indentation = ref(parsed?.indentation ?? -1);
 
   watch(
-    state,
-    (newState) => {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(newState));
+    [state, indentation],
+    () => {
+      const data = {
+        state: state.value,
+        indentation: indentation.value,
+      };
+      const stringified = JSON.stringify(data);
+      localStorage.setItem(STORAGE_KEY, stringified);
+
+      // Update URL hash without adding to history
+      const compressed = LZString.compressToEncodedURIComponent(stringified);
+      const url = new URL(window.location.href);
+      url.hash = compressed;
+      history.replaceState(null, "", url.toString());
     },
-    { deep: true },
+    { deep: true, immediate: true },
   );
 
   function reset() {
     state.value = JSON.parse(JSON.stringify(DEFAULT_STATE));
+    indentation.value = -1;
   }
 
   const generatedJson = computed(() => {
