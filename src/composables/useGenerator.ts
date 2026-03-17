@@ -61,9 +61,7 @@ export function useGenerator() {
     config: DevContainerConfig;
   }>(
     JSON.parse(
-      JSON.stringify(
-        parsed?.state?.config ? parsed.state : DEFAULT_STATE,
-      ),
+      JSON.stringify(parsed?.state?.config ? parsed.state : DEFAULT_STATE),
     ),
   );
 
@@ -94,7 +92,9 @@ export function useGenerator() {
   }
 
   const generatedJson = computed(() => {
-    const config: any = JSON.parse(JSON.stringify(state.value.config || DEFAULT_STATE.config));
+    const config: any = JSON.parse(
+      JSON.stringify(state.value.config || DEFAULT_STATE.config),
+    );
     const orchestration = state.value.orchestration;
 
     // Grouping Dockerfile properties
