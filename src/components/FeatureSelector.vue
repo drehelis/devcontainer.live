@@ -121,7 +121,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
 
     <!-- Features List -->
     <div
-      class="grid grid-cols-1 gap-3 max-h-[600px] overflow-y-auto custom-scrollbar pr-2 pb-4"
+      class="grid grid-cols-1 gap-3 lg:max-h-[600px] overflow-y-auto custom-scrollbar pr-2 pb-4"
     >
       <div
         v-for="feature in filteredFeatures"

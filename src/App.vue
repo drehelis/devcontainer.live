@@ -8,8 +8,11 @@ import { useEditorActions } from "./composables/useEditorActions";
 import ConfigForm from "./components/ConfigForm.vue";
 import CodePreview from "./components/CodePreview.vue";
 import ActivityBar from "./components/layout/ActivityBar.vue";
+import MobileNav from "./components/layout/MobileNav.vue";
+import MobileSectionNav from "./components/layout/MobileSectionNav.vue";
 import StatusBar from "./components/layout/StatusBar.vue";
 import EditorTabs from "./components/layout/EditorTabs.vue";
+import { useResponsive } from "./composables/useResponsive";
 
 const { state, generatedJson, bashHistoryNote, indentation, reset } =
   useGenerator();
@@ -23,6 +26,9 @@ const {
   copyShareLink,
   downloadConfig,
 } = useEditorActions(generatedJson, reset);
+
+const { isMobile } = useResponsive();
+const activeView = ref<"config" | "preview">("config");
 
 const activeSection = ref<
   "general" | "features" | "ports" | "history" | "advanced"
@@ -56,33 +62,44 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
   >
     <!-- Main Layout -->
     <div class="flex-1 flex overflow-hidden">
-      <ActivityBar v-model:active-section="activeSection" />
+      <ActivityBar
+        v-model:active-section="activeSection"
+        class="hidden lg:flex"
+      />
 
       <!-- Sidebar -->
       <section
+        v-show="!isMobile || activeView === 'config'"
         class="bg-ide-sidebar border-r border-ide-border flex flex-col z-10 relative"
-        :style="{ width: sidebarWidth + 'px' }"
+        :class="isMobile ? 'flex-1' : ''"
+        :style="{ width: isMobile ? '100%' : sidebarWidth + 'px' }"
       >
+        <MobileSectionNav v-model:active-section="activeSection" />
+
         <header
-          class="h-9 flex items-center px-4 bg-ide-activity border-b border-ide-border text-[10px] font-black uppercase tracking-widest text-ide-text"
+          class="h-9 hidden lg:flex items-center px-4 bg-ide-activity border-b border-ide-border text-[10px] font-black uppercase tracking-widest text-ide-text"
         >
           Configuration
         </header>
         <div
-          class="flex-1 overflow-y-auto overflow-x-hidden p-4 custom-scrollbar"
+          class="flex-1 overflow-y-auto overflow-x-hidden p-4 custom-scrollbar lg:pt-4 pt-2"
         >
           <ConfigForm v-model="state" :activeSection="activeSection" />
         </div>
 
-        <!-- Resize Handle -->
+        <!-- Resize Handle (Hidden on Mobile) -->
         <div
+          v-if="!isMobile"
           class="absolute top-0 right-0 w-1 h-full cursor-col-resize hover:bg-ide-accent/30 transition-colors z-30"
           @mousedown="startResizing"
         ></div>
       </section>
 
       <!-- Editor Area -->
-      <main class="flex-1 flex flex-col overflow-hidden relative">
+      <main
+        v-show="!isMobile || activeView === 'preview'"
+        class="flex-1 flex flex-col overflow-hidden relative"
+      >
         <div class="absolute inset-0 grid-overlay pointer-events-none"></div>
 
         <EditorTabs
@@ -95,7 +112,7 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
         />
 
         <div
-          class="flex-1 overflow-auto bg-ide-bg p-8 font-mono custom-scrollbar z-10 transition-colors duration-300"
+          class="flex-1 overflow-auto bg-ide-bg p-4 lg:p-8 font-mono custom-scrollbar z-10 transition-colors duration-300"
         >
           <CodePreview
             :code="generatedJson"
@@ -107,7 +124,11 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
       </main>
     </div>
 
+    <!-- Bottom Nav for Mobile -->
+    <MobileNav v-model:active-view="activeView" />
+
     <StatusBar
+      class="hidden lg:flex"
       :version="pkgVersion"
       :cursor-pos="cursorPos"
       v-model:indentation="indentation"

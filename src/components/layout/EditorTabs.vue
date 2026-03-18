@@ -1,15 +1,19 @@
 <script setup lang="ts">
+import { useResponsive } from "../../composables/useResponsive";
+
 defineProps<{
   copyStatus: "idle" | "copied";
   shareStatus: "idle" | "copied";
 }>();
 
-defineEmits<{
+const emit = defineEmits<{
   (e: "copy"): void;
   (e: "share"): void;
   (e: "download"): void;
   (e: "reset"): void;
 }>();
+
+const { isMobile } = useResponsive();
 </script>
 
 <template>
@@ -18,19 +22,19 @@ defineEmits<{
   >
     <div class="flex h-full">
       <div class="tab-item active">
-        <span class="text-ide-purple text-[10px] font-bold">{ }</span>
         <span>devcontainer.json</span>
       </div>
     </div>
 
-    <div class="flex items-center gap-2 px-4">
+    <div class="flex items-center gap-1 sm:gap-2 px-2 sm:px-4">
       <button
         @click="$emit('copy')"
-        class="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright group"
+        class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright group"
+        :title="copyStatus === 'copied' ? 'Copied' : 'Copy JSON'"
       >
         <svg
           v-if="copyStatus === 'idle'"
-          class="w-3.5 h-3.5"
+          class="w-4 h-4 lg:w-3.5 lg:h-3.5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -44,7 +48,7 @@ defineEmits<{
         </svg>
         <svg
           v-else
-          class="w-3.5 h-3.5 text-ide-green"
+          class="w-4 h-4 lg:w-3.5 lg:h-3.5 text-ide-green"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -56,17 +60,19 @@ defineEmits<{
             d="M5 13l4 4L19 7"
           />
         </svg>
-        <span class="text-[10px] font-bold uppercase tracking-widest">{{
+        <span v-if="!isMobile" class="text-[10px] font-bold uppercase tracking-widest">{{
           copyStatus === "copied" ? "Copied" : "Copy"
         }}</span>
       </button>
+
       <button
         @click="$emit('share')"
-        class="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright group"
+        class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright group"
+        :title="shareStatus === 'copied' ? 'Link Copied' : 'Share Configuration'"
       >
         <svg
           v-if="shareStatus === 'idle'"
-          class="w-3.5 h-3.5"
+          class="w-4 h-4 lg:w-3.5 lg:h-3.5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -80,7 +86,7 @@ defineEmits<{
         </svg>
         <svg
           v-else
-          class="w-3.5 h-3.5 text-ide-green"
+          class="w-4 h-4 lg:w-3.5 lg:h-3.5 text-ide-green"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -92,16 +98,18 @@ defineEmits<{
             d="M5 13l4 4L19 7"
           />
         </svg>
-        <span class="text-[10px] font-bold uppercase tracking-widest">{{
+        <span v-if="!isMobile" class="text-[10px] font-bold uppercase tracking-widest">{{
           shareStatus === "copied" ? "Linked" : "Share"
         }}</span>
       </button>
+
       <button
         @click="$emit('download')"
-        class="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright"
+        class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright"
+        title="Download devcontainer.json"
       >
         <svg
-          class="w-3.5 h-3.5"
+          class="w-4 h-4 lg:w-3.5 lg:h-3.5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -113,17 +121,20 @@ defineEmits<{
             d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
           />
         </svg>
-        <span class="text-[10px] font-bold uppercase tracking-widest"
+        <span v-if="!isMobile" class="text-[10px] font-bold uppercase tracking-widest"
           >Download</span
         >
       </button>
+
       <div class="w-px h-3 bg-ide-border mx-1"></div>
+
       <button
         @click="$emit('reset')"
-        class="flex items-center gap-1.5 px-2 py-1 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-red group"
+        class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-red/10 transition-colors text-ide-red/80 hover:text-ide-red group"
+        title="Reset to Template"
       >
         <svg
-          class="w-3.5 h-3.5"
+          class="w-4 h-4 lg:w-3.5 lg:h-3.5"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -132,10 +143,10 @@ defineEmits<{
             stroke-linecap="round"
             stroke-linejoin="round"
             stroke-width="2"
-            d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
           />
         </svg>
-        <span class="text-[10px] font-bold uppercase tracking-widest"
+        <span v-if="!isMobile" class="text-[10px] font-bold uppercase tracking-widest"
           >Reset</span
         >
       </button>

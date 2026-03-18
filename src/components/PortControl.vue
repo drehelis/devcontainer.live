@@ -100,7 +100,7 @@ function updateAttribute(port: string | number, key: string, value: any) {
         </div>
 
         <div
-          class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-ide-border/30"
+          class="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-2 pt-2 border-t border-ide-border/30"
         >
           <div class="space-y-1">
             <label

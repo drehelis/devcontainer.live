@@ -105,7 +105,7 @@ onMounted(() => {
       <div
         v-for="(line, index) in lines"
         :key="index"
-        class="relative group flex items-start px-2 cursor-text transition-colors border-l-2"
+        class="relative group flex items-start px-2 cursor-text transition-colors border-l-2 min-w-fit"
         :class="[
           activeLine === index
             ? 'bg-ide-accent/5 border-ide-accent'
@@ -115,7 +115,7 @@ onMounted(() => {
       >
         <!-- Line Numbers -->
         <span
-          class="w-10 inline-block text-right pr-4 select-none group-hover:text-ide-accent/40 font-bold transition-colors"
+          class="w-12 shrink-0 inline-block text-right pr-4 select-none group-hover:text-ide-accent/40 font-bold transition-colors"
           :class="
             activeLine === index
               ? 'text-ide-accent/60'
@@ -126,11 +126,11 @@ onMounted(() => {
         </span>
 
         <!-- Code Content -->
-        <span
+        <div
           class="whitespace-pre flex-1 code-content relative flex items-start"
         >
           <!-- Indentation Visualizers -->
-          <span class="flex">
+          <div class="flex shrink-0">
             <template v-if="indentation > 0">
               <span
                 v-for="i in Math.floor(
@@ -151,10 +151,10 @@ onMounted(() => {
                 >&nbsp;</span
               >
             </template>
-          </span>
+          </div>
 
           <!-- Actual Code -->
-          <span>
+          <div class="flex-1">
             <span
               v-for="(part, pIndex) in highlight(
                 getLineStructure(line).content,
@@ -164,7 +164,7 @@ onMounted(() => {
             >
               {{ part.text }}
             </span>
-          </span>
+          </div>
 
           <!-- Virtual Cursor -->
           <div
@@ -172,7 +172,7 @@ onMounted(() => {
             class="absolute top-0 bottom-0 w-[2px] bg-ide-accent animate-pulse pointer-events-none"
             :style="{ left: activeCol * 7.8 + 'px' }"
           ></div>
-        </span>
+        </div>
       </div>
     </div>
   </div>
