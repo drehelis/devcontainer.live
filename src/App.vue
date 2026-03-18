@@ -58,7 +58,7 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
 <template>
   <div
     :class="currentTheme.class"
-    class="h-screen w-screen flex flex-col bg-ide-bg overflow-hidden text-[13px] transition-colors duration-300"
+    class="h-[100dvh] w-screen flex flex-col bg-ide-bg overflow-hidden text-[13px] transition-colors duration-300"
   >
     <!-- Main Layout -->
     <div class="flex-1 flex overflow-hidden">

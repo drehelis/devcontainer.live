@@ -11,15 +11,15 @@ defineEmits<{
 
 <template>
   <nav
-    class="lg:hidden h-16 bg-ide-sidebar border-t border-ide-border flex items-center justify-around px-6 z-50 overflow-hidden"
+    class="lg:hidden h-[calc(4rem+env(safe-area-inset-bottom,0))] bg-ide-sidebar border-t border-ide-border flex items-center justify-around px-6 z-50 transition-all duration-300 pb-[env(safe-area-inset-bottom,0)]"
   >
     <button
       @click="$emit('update:activeView', 'config')"
-      class="flex flex-col items-center gap-1 transition-all"
+      class="flex flex-col items-center gap-1 transition-all min-w-[70px] active:opacity-70"
       :class="
         activeView === 'config'
           ? 'text-ide-accent scale-110'
-          : 'text-ide-text-muted'
+          : 'text-ide-text-muted/60'
       "
     >
       <svg
@@ -42,11 +42,11 @@ defineEmits<{
 
     <button
       @click="$emit('update:activeView', 'preview')"
-      class="flex flex-col items-center gap-1 transition-all"
+      class="flex flex-col items-center gap-1 transition-all min-w-[70px] active:opacity-70"
       :class="
         activeView === 'preview'
           ? 'text-ide-accent scale-110'
-          : 'text-ide-text-muted'
+          : 'text-ide-text-muted/60'
       "
     >
       <svg
@@ -69,7 +69,7 @@ defineEmits<{
 
     <!-- Version Tag in far corner -->
     <span
-      class="absolute bottom-1 right-2 text-[7px] font-mono text-ide-text-bright/40 uppercase tracking-tighter"
+      class="absolute bottom-1 right-2 text-[7px] font-mono text-ide-text-bright/30 uppercase tracking-tighter pointer-events-none"
       >v{{ version }}</span
     >
   </nav>
