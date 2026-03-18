@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   activeView: "config" | "preview";
+  version: string;
 }>();
 
 defineEmits<{
@@ -10,7 +11,7 @@ defineEmits<{
 
 <template>
   <nav
-    class="lg:hidden h-16 bg-ide-sidebar border-t border-ide-border flex items-center justify-around px-6 z-50"
+    class="lg:hidden h-16 bg-ide-sidebar border-t border-ide-border flex items-center justify-around px-6 z-50 overflow-hidden"
   >
     <button
       @click="$emit('update:activeView', 'config')"
@@ -65,5 +66,11 @@ defineEmits<{
         >Preview</span
       >
     </button>
+
+    <!-- Version Tag in far corner -->
+    <span
+      class="absolute bottom-1 right-2 text-[7px] font-mono text-ide-text-bright/40 uppercase tracking-tighter"
+      >v{{ version }}</span
+    >
   </nav>
 </template>

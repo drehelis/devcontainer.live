@@ -125,7 +125,7 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
     </div>
 
     <!-- Bottom Nav for Mobile -->
-    <MobileNav v-model:active-view="activeView" />
+    <MobileNav v-model:active-view="activeView" :version="pkgVersion" />
 
     <StatusBar
       class="hidden lg:flex"

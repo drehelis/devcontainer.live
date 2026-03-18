@@ -73,7 +73,7 @@ jobs:
           PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
         run: |
           while true; do
-            STATE=$(gh pr view "$PR_NUMBER" --json state --jq -r .state)
+            STATE=$(gh pr view "$PR_NUMBER" --json state --template '{{.state}}')
             if [ "$STATE" == "MERGED" ]; then
               echo "PR merged."
               break
