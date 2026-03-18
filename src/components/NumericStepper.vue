@@ -42,8 +42,18 @@ function handleInput(e: Event) {
         class="flex-1 flex items-center justify-center hover:bg-ide-accent hover:text-ide-bg transition-colors border-b border-ide-border"
         tabindex="-1"
       >
-        <svg class="w-1.5 h-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="5" d="M5 15l7-7 7 7" />
+        <svg
+          class="w-1.5 h-1.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="5"
+            d="M5 15l7-7 7 7"
+          />
         </svg>
       </button>
       <button
@@ -51,8 +61,18 @@ function handleInput(e: Event) {
         class="flex-1 flex items-center justify-center hover:bg-ide-accent hover:text-ide-bg transition-colors"
         tabindex="-1"
       >
-        <svg class="w-1.5 h-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="5" d="M19 9l-7 7-7-7" />
+        <svg
+          class="w-1.5 h-1.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="5"
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
     </div>

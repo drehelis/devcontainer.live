@@ -87,7 +87,12 @@ function updateSize(
             <NumericStepper
               :model-value="parseSize(config.hostRequirements?.memory).num"
               @update:model-value="
-                (val) => updateSize('memory', val.toString(), parseSize(config.hostRequirements?.memory).unit)
+                (val) =>
+                  updateSize(
+                    'memory',
+                    val.toString(),
+                    parseSize(config.hostRequirements?.memory).unit,
+                  )
               "
               class="flex-1 !rounded-r-none [&_input]:!rounded-r-none [&_input]:border-r-0"
               placeholder="4"
@@ -119,7 +124,12 @@ function updateSize(
             <NumericStepper
               :model-value="parseSize(config.hostRequirements?.storage).num"
               @update:model-value="
-                (val) => updateSize('storage', val.toString(), parseSize(config.hostRequirements?.storage).unit)
+                (val) =>
+                  updateSize(
+                    'storage',
+                    val.toString(),
+                    parseSize(config.hostRequirements?.storage).unit,
+                  )
               "
               class="flex-1 !rounded-r-none [&_input]:!rounded-r-none [&_input]:border-r-0"
               placeholder="32"
@@ -279,7 +289,8 @@ function updateSize(
                       updateSize(
                         'gpu.memory',
                         val.toString(),
-                        parseSize((config.hostRequirements?.gpu as any).memory).unit,
+                        parseSize((config.hostRequirements?.gpu as any).memory)
+                          .unit,
                       )
                   "
                   class="flex-1 !rounded-r-none [&_input]:!rounded-r-none [&_input]:border-r-0"
