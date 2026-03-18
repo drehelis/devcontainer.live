@@ -66,9 +66,9 @@ function getMountLabel(mount: any) {
 <template>
   <div class="space-y-4">
     <div
-      class="grid grid-cols-[1fr_1fr_80px_auto_auto] gap-2 p-3 bg-ide-activity border border-ide-border rounded-lg"
+      class="grid grid-cols-2 lg:grid-cols-[1fr_1fr_80px_auto_auto] gap-2 p-3 bg-ide-activity border border-ide-border rounded-lg"
     >
-      <div class="space-y-1">
+      <div class="space-y-1 col-span-2 lg:col-span-1">
         <label class="text-[8px] font-black uppercase opacity-50">Source</label>
         <input
           v-model="newMount.source"
@@ -77,7 +77,7 @@ function getMountLabel(mount: any) {
           class="ide-input w-full py-1 text-[10px]"
         />
       </div>
-      <div class="space-y-1">
+      <div class="space-y-1 col-span-2 lg:col-span-1">
         <label class="text-[8px] font-black uppercase opacity-50">Target</label>
         <input
           v-model="newMount.target"
@@ -86,11 +86,13 @@ function getMountLabel(mount: any) {
           class="ide-input w-full py-1 text-[10px]"
         />
       </div>
-      <div class="space-y-1">
+      <div class="space-y-1 col-span-1 lg:col-span-1">
         <label class="text-[8px] font-black uppercase opacity-50">Type</label>
         <SearchableSelect v-model="newMount.type" :options="MOUNT_TYPES" />
       </div>
-      <div class="space-y-1 flex flex-col justify-end pb-1.5">
+      <div
+        class="space-y-1 flex flex-col justify-end pb-1.5 col-span-1 lg:col-span-1"
+      >
         <label class="flex items-center gap-2 cursor-pointer group/ro">
           <input type="checkbox" v-model="newMount.readonly" class="hidden" />
           <div
@@ -115,10 +117,10 @@ function getMountLabel(mount: any) {
           <span class="text-[8px] font-black uppercase opacity-50">RO</span>
         </label>
       </div>
-      <div class="flex items-end">
+      <div class="flex items-end col-span-2 lg:col-span-1">
         <button
           @click="addMount"
-          class="bg-ide-accent text-ide-bg px-3 py-1.5 rounded-sm text-[9px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg shadow-ide-accent/10 h-[28px]"
+          class="bg-ide-accent text-ide-bg px-3 py-1.5 rounded-sm text-[9px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg shadow-ide-accent/10 h-[28px] w-full"
         >
           Add
         </button>

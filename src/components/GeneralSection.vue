@@ -60,7 +60,7 @@ const orchestrationOptions: { value: OrchestrationType; label: string }[] = [
 
     <SectionHeader title="Orchestration Type" />
     <div class="space-y-4">
-      <div class="grid grid-cols-3 gap-2">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
         <button
           v-for="opt in orchestrationOptions"
           :key="opt.value"
