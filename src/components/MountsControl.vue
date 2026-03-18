@@ -90,7 +90,9 @@ function getMountLabel(mount: any) {
         <label class="text-[8px] font-black uppercase opacity-50">Type</label>
         <SearchableSelect v-model="newMount.type" :options="MOUNT_TYPES" />
       </div>
-      <div class="space-y-1 flex flex-col justify-end pb-1.5 col-span-1 lg:col-span-1">
+      <div
+        class="space-y-1 flex flex-col justify-end pb-1.5 col-span-1 lg:col-span-1"
+      >
         <label class="flex items-center gap-2 cursor-pointer group/ro">
           <input type="checkbox" v-model="newMount.readonly" class="hidden" />
           <div

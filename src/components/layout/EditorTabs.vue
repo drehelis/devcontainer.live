@@ -60,15 +60,19 @@ const { isMobile } = useResponsive();
             d="M5 13l4 4L19 7"
           />
         </svg>
-        <span v-if="!isMobile" class="text-[10px] font-bold uppercase tracking-widest">{{
-          copyStatus === "copied" ? "Copied" : "Copy"
-        }}</span>
+        <span
+          v-if="!isMobile"
+          class="text-[10px] font-bold uppercase tracking-widest"
+          >{{ copyStatus === "copied" ? "Copied" : "Copy" }}</span
+        >
       </button>
 
       <button
         @click="$emit('share')"
         class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright group"
-        :title="shareStatus === 'copied' ? 'Link Copied' : 'Share Configuration'"
+        :title="
+          shareStatus === 'copied' ? 'Link Copied' : 'Share Configuration'
+        "
       >
         <svg
           v-if="shareStatus === 'idle'"
@@ -98,9 +102,11 @@ const { isMobile } = useResponsive();
             d="M5 13l4 4L19 7"
           />
         </svg>
-        <span v-if="!isMobile" class="text-[10px] font-bold uppercase tracking-widest">{{
-          shareStatus === "copied" ? "Linked" : "Share"
-        }}</span>
+        <span
+          v-if="!isMobile"
+          class="text-[10px] font-bold uppercase tracking-widest"
+          >{{ shareStatus === "copied" ? "Linked" : "Share" }}</span
+        >
       </button>
 
       <button
@@ -121,7 +127,9 @@ const { isMobile } = useResponsive();
             d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
           />
         </svg>
-        <span v-if="!isMobile" class="text-[10px] font-bold uppercase tracking-widest"
+        <span
+          v-if="!isMobile"
+          class="text-[10px] font-bold uppercase tracking-widest"
           >Download</span
         >
       </button>
@@ -146,7 +154,9 @@ const { isMobile } = useResponsive();
             d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
           />
         </svg>
-        <span v-if="!isMobile" class="text-[10px] font-bold uppercase tracking-widest"
+        <span
+          v-if="!isMobile"
+          class="text-[10px] font-bold uppercase tracking-widest"
           >Reset</span
         >
       </button>
