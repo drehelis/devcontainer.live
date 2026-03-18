@@ -19,29 +19,39 @@ const sections = [
 </script>
 
 <template>
-  <div
-    class="lg:hidden flex overflow-x-auto bg-ide-activity border-b border-ide-border no-scrollbar sticky top-0 z-30"
-  >
-    <button
-      v-for="s in sections"
-      :key="s.id"
-      @click="$emit('update:activeSection', s.id as Section)"
-      class="flex-shrink-0 px-5 py-3.5 flex items-center justify-center transition-all relative"
-      :class="
-        activeSection === s.id
-          ? 'text-ide-text-bright'
-          : 'text-ide-text-muted hover:text-ide-text'
-      "
+  <div class="lg:hidden sticky top-0 z-30 relative bg-ide-activity">
+    <div
+      class="flex overflow-x-auto border-b border-ide-border no-scrollbar scroll-smooth"
     >
-      <span
-        class="text-[10px] font-black uppercase tracking-[0.15em] border-b-2 pb-0.5"
+      <button
+        v-for="s in sections"
+        :key="s.id"
+        @click="$emit('update:activeSection', s.id as Section)"
+        class="flex-shrink-0 px-6 py-4 flex items-center justify-center transition-all relative"
         :class="
-          activeSection === s.id ? 'border-ide-accent' : 'border-transparent'
+          activeSection === s.id
+            ? 'text-ide-text-bright'
+            : 'text-ide-text-muted hover:text-ide-text'
         "
       >
-        {{ s.name }}
-      </span>
-    </button>
+        <span
+          class="text-[10px] font-black uppercase tracking-[0.15em] border-b-2 pb-0.5"
+          :class="
+            activeSection === s.id ? 'border-ide-accent' : 'border-transparent'
+          "
+        >
+          {{ s.name }}
+        </span>
+      </button>
+
+      <!-- Spacing div at the end to ensure the fade looks good -->
+      <div class="flex-shrink-0 w-8"></div>
+    </div>
+
+    <!-- Right Fade Indicator -->
+    <div
+      class="absolute top-0 right-0 w-12 h-[calc(100%-1px)] pointer-events-none bg-gradient-to-l from-ide-activity to-transparent"
+    ></div>
   </div>
 </template>
 

@@ -132,7 +132,10 @@ export function useGenerator() {
     }
 
     // Filter out empty arrays/objects to keep JSON clean
-    const cleanConfig: any = {};
+    const cleanConfig: any = {
+      $schema:
+        "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+    };
 
     // Core properties
     if (config.name) cleanConfig.name = config.name;

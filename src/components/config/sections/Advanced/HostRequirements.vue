@@ -3,6 +3,7 @@ import type { DevContainerConfig } from "../../../../types";
 import SectionHeader from "../../../SectionHeader.vue";
 import InfoTooltip from "../../../InfoTooltip.vue";
 import SearchableSelect from "../../../SearchableSelect.vue";
+import NumericStepper from "../../../NumericStepper.vue";
 
 const props = defineProps<{
   config: DevContainerConfig;
@@ -59,7 +60,7 @@ function updateSize(
   <div class="space-y-6 pt-8 border-t border-ide-border">
     <SectionHeader title="Host Requirements" />
     <div class="space-y-4">
-      <div class="grid grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div class="space-y-2">
           <div class="flex items-center gap-1.5">
             <label
@@ -68,16 +69,9 @@ function updateSize(
             >
             <InfoTooltip property="hostRequirements.cpus" />
           </div>
-          <input
-            :value="config.hostRequirements?.cpus"
-            @input="
-              updateConfig(
-                'hostRequirements.cpus',
-                Number(($event.target as HTMLInputElement).value),
-              )
-            "
-            type="number"
-            class="ide-input w-full"
+          <NumericStepper
+            :model-value="config.hostRequirements?.cpus"
+            @update:model-value="updateConfig('hostRequirements.cpus', $event)"
             placeholder="2"
           />
         </div>
@@ -90,18 +84,17 @@ function updateSize(
             <InfoTooltip property="hostRequirements.memory" />
           </div>
           <div class="flex">
-            <input
-              :value="parseSize(config.hostRequirements?.memory).num"
-              @input="
-                (e) =>
+            <NumericStepper
+              :model-value="parseSize(config.hostRequirements?.memory).num"
+              @update:model-value="
+                (val) =>
                   updateSize(
                     'memory',
-                    (e.target as HTMLInputElement).value,
+                    val.toString(),
                     parseSize(config.hostRequirements?.memory).unit,
                   )
               "
-              type="number"
-              class="ide-input w-full !rounded-r-none border-r-0"
+              class="flex-1 !rounded-r-none [&_input]:!rounded-r-none [&_input]:border-r-0"
               placeholder="4"
             />
             <SearchableSelect
@@ -115,7 +108,7 @@ function updateSize(
                     val,
                   )
               "
-              class="w-20 !rounded-l-none"
+              class="w-14 !rounded-l-none"
             />
           </div>
         </div>
@@ -128,18 +121,17 @@ function updateSize(
             <InfoTooltip property="hostRequirements.storage" />
           </div>
           <div class="flex">
-            <input
-              :value="parseSize(config.hostRequirements?.storage).num"
-              @input="
-                (e) =>
+            <NumericStepper
+              :model-value="parseSize(config.hostRequirements?.storage).num"
+              @update:model-value="
+                (val) =>
                   updateSize(
                     'storage',
-                    (e.target as HTMLInputElement).value,
+                    val.toString(),
                     parseSize(config.hostRequirements?.storage).unit,
                   )
               "
-              type="number"
-              class="ide-input w-full !rounded-r-none border-r-0"
+              class="flex-1 !rounded-r-none [&_input]:!rounded-r-none [&_input]:border-r-0"
               placeholder="32"
             />
             <SearchableSelect
@@ -153,7 +145,7 @@ function updateSize(
                     val,
                   )
               "
-              class="w-20 !rounded-l-none"
+              class="w-14 !rounded-l-none"
             />
           </div>
         </div>
@@ -266,21 +258,17 @@ function updateSize(
                 >
                 <InfoTooltip property="hostRequirements.gpu.cores" />
               </div>
-              <input
-                :value="(config.hostRequirements.gpu as any).cores"
-                @input="
-                  (e) => {
+              <NumericStepper
+                :model-value="(config.hostRequirements.gpu as any).cores"
+                @update:model-value="
+                  (val) => {
                     const gpu = {
                       ...((config.hostRequirements?.gpu as object) || {}),
                     };
-                    (gpu as any).cores = Number(
-                      (e.target as HTMLInputElement).value,
-                    );
+                    (gpu as any).cores = Number(val);
                     updateConfig('hostRequirements.gpu', gpu);
                   }
                 "
-                type="number"
-                class="ide-input w-full text-[10px]"
                 placeholder="1"
               />
             </div>
@@ -292,21 +280,20 @@ function updateSize(
                 <InfoTooltip property="hostRequirements.gpu.memory" />
               </div>
               <div class="flex">
-                <input
-                  :value="
+                <NumericStepper
+                  :model-value="
                     parseSize((config.hostRequirements?.gpu as any).memory).num
                   "
-                  @input="
-                    (e) =>
+                  @update:model-value="
+                    (val) =>
                       updateSize(
                         'gpu.memory',
-                        (e.target as HTMLInputElement).value,
+                        val.toString(),
                         parseSize((config.hostRequirements?.gpu as any).memory)
                           .unit,
                       )
                   "
-                  type="number"
-                  class="ide-input w-full !rounded-r-none border-r-0 text-[10px]"
+                  class="flex-1 !rounded-r-none [&_input]:!rounded-r-none [&_input]:border-r-0"
                   placeholder="4"
                 />
                 <SearchableSelect
@@ -323,7 +310,7 @@ function updateSize(
                         val,
                       )
                   "
-                  class="w-16 !rounded-l-none"
+                  class="w-14 !rounded-l-none"
                 />
               </div>
             </div>
