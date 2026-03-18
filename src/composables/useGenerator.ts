@@ -47,7 +47,16 @@ export function useGenerator() {
     }
   };
 
+  const initialHash = window.location.hash.slice(1);
   const savedState = getHashState() || localStorage.getItem(STORAGE_KEY);
+
+  // Clear hash from URL if present to keep it clean
+  if (initialHash) {
+    const url = new URL(window.location.href);
+    url.hash = "";
+    history.replaceState(null, "", url.toString());
+  }
+
   let parsed: any = null;
   try {
     parsed =
@@ -76,13 +85,8 @@ export function useGenerator() {
       };
       const stringified = JSON.stringify(data);
       localStorage.setItem(STORAGE_KEY, stringified);
-
-      // Update URL hash without adding to history
-      const compressed = LZString.compressToEncodedURIComponent(stringified);
-      const url = new URL(window.location.href);
-      url.hash = compressed;
-      history.replaceState(null, "", url.toString());
     },
+
     { deep: true, immediate: true },
   );
 
@@ -296,11 +300,24 @@ export function useGenerator() {
     return undefined;
   });
 
+  function getShareUrl() {
+    const data = {
+      state: state.value,
+      indentation: indentation.value,
+    };
+    const stringified = JSON.stringify(data);
+    const compressed = LZString.compressToEncodedURIComponent(stringified);
+    const url = new URL(window.location.href);
+    url.hash = compressed;
+    return url.toString();
+  }
+
   return {
     state,
     generatedJson,
     bashHistoryNote,
     indentation,
     reset,
+    getShareUrl,
   };
 }

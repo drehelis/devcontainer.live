@@ -3,6 +3,7 @@ import { ref } from "vue";
 export function useEditorActions(
   generatedJson: { value: string },
   reset: () => void,
+  getShareUrl: () => string,
 ) {
   const copyStatus = ref<"idle" | "copied">("idle");
   const shareStatus = ref<"idle" | "copied">("idle");
@@ -22,7 +23,7 @@ export function useEditorActions(
 
   async function copyShareLink() {
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(getShareUrl());
       shareStatus.value = "copied";
       setTimeout(() => {
         shareStatus.value = "idle";

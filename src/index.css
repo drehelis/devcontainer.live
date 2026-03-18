@@ -39,6 +39,9 @@
   --theme-text: #c9d1d9;
   --theme-text-muted: #8b949e;
   --theme-text-bright: #ffffff;
+
+  --mobile-nav-h: 4.5rem;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 .theme-dracula {
@@ -127,6 +130,11 @@
   }
   .tab-item.active {
     @apply bg-ide-bg text-ide-text-bright border-t-2 border-t-ide-accent;
+  }
+  .mobile-nav-container {
+    height: calc(var(--mobile-nav-h) + var(--safe-bottom));
+    padding-bottom: var(--safe-bottom);
+    @apply lg:hidden bg-ide-sidebar border-t border-ide-border flex items-center justify-around px-6 z-[1000] relative;
   }
 }
 

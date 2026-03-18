@@ -14,8 +14,14 @@ import StatusBar from "./components/layout/StatusBar.vue";
 import EditorTabs from "./components/layout/EditorTabs.vue";
 import { useResponsive } from "./composables/useResponsive";
 
-const { state, generatedJson, bashHistoryNote, indentation, reset } =
-  useGenerator();
+const {
+  state,
+  generatedJson,
+  bashHistoryNote,
+  indentation,
+  reset,
+  getShareUrl,
+} = useGenerator();
 const { currentTheme } = useTheme();
 const { sidebarWidth, startResizing } = useSidebarResize();
 const {
@@ -25,7 +31,7 @@ const {
   copyToClipboard,
   copyShareLink,
   downloadConfig,
-} = useEditorActions(generatedJson, reset);
+} = useEditorActions(generatedJson, reset, getShareUrl);
 
 const { isMobile } = useResponsive();
 const activeView = ref<"config" | "preview">("config");

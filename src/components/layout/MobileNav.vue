@@ -10,12 +10,10 @@ defineEmits<{
 </script>
 
 <template>
-  <nav
-    class="lg:hidden h-[calc(4rem+env(safe-area-inset-bottom,0))] bg-ide-sidebar border-t border-ide-border flex items-center justify-around px-6 z-50 transition-all duration-300 pb-[env(safe-area-inset-bottom,0)]"
-  >
+  <nav class="mobile-nav-container transition-all duration-300">
     <button
       @click="$emit('update:activeView', 'config')"
-      class="flex flex-col items-center gap-1 transition-all min-w-[70px] active:opacity-70"
+      class="flex flex-col items-center gap-1 transition-all min-w-20 active:opacity-70"
       :class="
         activeView === 'config'
           ? 'text-ide-accent scale-110'
@@ -42,7 +40,7 @@ defineEmits<{
 
     <button
       @click="$emit('update:activeView', 'preview')"
-      class="flex flex-col items-center gap-1 transition-all min-w-[70px] active:opacity-70"
+      class="flex flex-col items-center gap-1 transition-all min-w-20 active:opacity-70"
       :class="
         activeView === 'preview'
           ? 'text-ide-accent scale-110'
@@ -59,7 +57,13 @@ defineEmits<{
           stroke-linecap="round"
           stroke-linejoin="round"
           stroke-width="1.5"
-          d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+        />
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
         />
       </svg>
       <span class="text-[10px] font-black uppercase tracking-widest"
