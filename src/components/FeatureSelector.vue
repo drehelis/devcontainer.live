@@ -61,10 +61,11 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
 </script>
 
 <template>
-  <div class="space-y-6">
+  <div class="space-y-6 flex flex-col h-full">
     <!-- Custom Feature Input -->
+    <!-- ... stays same but shrink-0 ... -->
     <div
-      class="flex gap-2 p-3 bg-ide-activity/20 border border-dashed border-ide-border rounded-lg group hover:border-ide-accent/30 transition-colors"
+      class="flex gap-2 p-3 bg-ide-activity/20 border border-dashed border-ide-border rounded-lg group hover:border-ide-accent/30 transition-colors shrink-0"
     >
       <input
         v-model="customFeatureId"
@@ -83,7 +84,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
 
     <!-- Search & Loading -->
     <div
-      class="ide-input flex items-center gap-3 px-3 focus-within:border-ide-accent focus-within:ring-1 focus-within:ring-ide-accent/20 transition-all"
+      class="ide-input flex items-center gap-3 px-3 focus-within:border-ide-accent focus-within:ring-1 focus-within:ring-ide-accent/20 transition-all shrink-0"
     >
       <svg
         class="w-4 h-4 text-ide-text-muted shrink-0"
@@ -102,7 +103,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
         v-model="searchQuery"
         type="text"
         placeholder="SEARCH..."
-        class="flex-1 bg-transparent border-none outline-none py-1 text-[11px] font-mono placeholder:text-ide-text-muted/40"
+        class="flex-1 bg-transparent border-none outline-none py-1 text-[11px] font-mono placeholder:text-ide-text-muted/40 h-auto"
         :disabled="loading"
       />
       <div v-if="loading" class="shrink-0">
@@ -114,14 +115,14 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
 
     <div
       v-if="error"
-      class="p-3 bg-ide-orange/10 border border-ide-orange/30 rounded text-ide-orange text-[10px] italic"
+      class="p-3 bg-ide-orange/10 border border-ide-orange/30 rounded text-ide-orange text-[10px] italic shrink-0"
     >
       Error fetching features: {{ error }} - Using cached/offline list.
     </div>
 
     <!-- Features List -->
     <div
-      class="grid grid-cols-1 gap-3 lg:max-h-[600px] overflow-y-auto custom-scrollbar pr-2 pb-4"
+      class="flex-1 overflow-y-auto custom-scrollbar pr-2 pb-4 grid grid-cols-1 gap-3 min-h-0"
     >
       <div
         v-for="feature in filteredFeatures"

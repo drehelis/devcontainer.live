@@ -14,6 +14,8 @@ import StatusBar from "./components/layout/StatusBar.vue";
 import EditorTabs from "./components/layout/EditorTabs.vue";
 import { useResponsive } from "./composables/useResponsive";
 
+import PresetsGallery from "./components/presets/PresetsGallery.vue";
+
 const {
   state,
   generatedJson,
@@ -37,8 +39,17 @@ const { isMobile } = useResponsive();
 const activeView = ref<"config" | "preview">("config");
 
 const activeSection = ref<
-  "general" | "features" | "ports" | "history" | "advanced"
->("general");
+  "general" | "features" | "ports" | "history" | "advanced" | "presets"
+>("presets");
+
+function handleApplyPreset(payload: { orchestration: any; config: any }) {
+  state.value.orchestration = payload.orchestration;
+  state.value.config = {
+    ...state.value.config,
+    ...JSON.parse(JSON.stringify(payload.config)),
+  };
+  activeSection.value = "general";
+}
 
 const indentOptions = [
   { id: "2", name: "Spaces: 2", value: 2 },
@@ -88,10 +99,16 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
           Configuration
         </header>
         <div
-          class="flex-1 overflow-y-auto overflow-x-hidden p-4 custom-scrollbar lg:pt-4 pt-2"
+          class="flex-1 overflow-x-hidden flex flex-col custom-scrollbar"
         >
-          <ConfigForm v-model="state" :activeSection="activeSection" />
+          <div class="p-4 lg:pt-4 pt-2 flex-1 flex flex-col min-h-0">
+          <PresetsGallery
+            v-if="activeSection === 'presets'"
+            @apply="handleApplyPreset"
+          />
+          <ConfigForm v-else v-model="state" :activeSection="activeSection" />
         </div>
+      </div>
 
         <!-- Resize Handle (Hidden on Mobile) -->
         <div

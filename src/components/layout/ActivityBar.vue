@@ -1,5 +1,11 @@
 <script setup lang="ts">
-type Section = "general" | "features" | "ports" | "history" | "advanced";
+type Section =
+  | "general"
+  | "features"
+  | "ports"
+  | "history"
+  | "advanced"
+  | "presets";
 
 defineProps<{
   activeSection: Section;
@@ -14,6 +20,32 @@ defineEmits<{
   <aside
     class="w-12 bg-ide-activity border-r border-ide-border flex flex-col items-center py-4 gap-2 z-20"
   >
+    <div
+      @click="$emit('update:activeSection', 'presets')"
+      class="activity-item group"
+      :class="{ active: activeSection === 'presets' }"
+      title="Presets (Quick Start)"
+    >
+      <svg
+        class="w-6 h-6"
+        :class="
+          activeSection === 'presets'
+            ? 'text-ide-text-bright'
+            : 'text-ide-text-muted group-hover:text-ide-text'
+        "
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="1.5"
+          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+        />
+      </svg>
+    </div>
+
     <div
       @click="$emit('update:activeSection', 'general')"
       class="activity-item group"

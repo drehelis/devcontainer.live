@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type Section = "general" | "features" | "ports" | "history" | "advanced";
+type Section = "presets" | "general" | "features" | "ports" | "history" | "advanced";
 
 defineProps<{
   activeSection: Section;
@@ -10,6 +10,7 @@ defineEmits<{
 }>();
 
 const sections = [
+  { id: "presets", name: "Presets" },
   { id: "general", name: "General" },
   { id: "features", name: "Features" },
   { id: "ports", name: "Network" },
