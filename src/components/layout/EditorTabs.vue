@@ -23,19 +23,40 @@ const { isMobile } = useResponsive();
   <div
     class="h-9 bg-ide-sidebar border-b border-ide-border flex items-center justify-between z-20"
   >
-    <div class="flex h-full overflow-x-auto no-scrollbar">
+    <div class="relative flex-1 h-full min-w-0 overflow-hidden">
+      <!-- Left fade indicator (only really needed if we want to show it's scrolled) -->
       <div
-        v-for="file in files"
-        :key="file"
-        class="tab-item text-[11px] font-bold tracking-tight px-4 flex items-center justify-center cursor-pointer transition-all border-r border-ide-border select-none"
-        :class="
-          activeFile === file
-            ? 'active bg-ide-bg text-ide-accent border-t-2 border-t-ide-accent h-full'
-            : 'text-ide-text-muted hover:bg-ide-bg/40'
-        "
-        @click="$emit('update:activeFile', file)"
+        class="absolute left-0 top-0 bottom-0 w-4 bg-gradient-to-r from-ide-sidebar to-transparent z-10 pointer-events-none opacity-0 transition-opacity"
+        :class="{ 'opacity-100': isMobile }"
+      ></div>
+
+      <div class="flex h-full overflow-x-auto no-scrollbar scroll-smooth">
+        <div
+          v-for="file in files"
+          :key="file"
+          class="tab-item text-[11px] font-bold tracking-tight px-4 flex items-center justify-center cursor-pointer transition-all border-r border-ide-border select-none whitespace-nowrap min-w-fit"
+          :class="
+            activeFile === file
+              ? 'active bg-ide-bg text-ide-accent border-t-2 border-t-ide-accent h-full'
+              : 'text-ide-text-muted hover:bg-ide-bg/40'
+          "
+          @click="$emit('update:activeFile', file)"
+        >
+          <span>{{ file }}</span>
+        </div>
+      </div>
+
+      <!-- Right fade indicator -->
+      <div
+        class="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-ide-sidebar to-transparent z-10 pointer-events-none"
+        :class="{ 'hidden sm:block': !isMobile }"
       >
-        <span>{{ file }}</span>
+        <!-- Optional: small chevron hint -->
+        <div class="h-full flex items-center justify-end pr-1 text-ide-accent/40 lg:hidden">
+          <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
       </div>
     </div>
 
