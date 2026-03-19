@@ -6,24 +6,32 @@ const theme = {
   name: "css-variables-custom",
   tokenColors: [
     {
-      scope: ["string", "string.quoted.double.json", "string.quoted.single.json"],
+      scope: ["string", "string.quoted"],
       settings: { foreground: "var(--shiki-token-string)" },
     },
     {
-      scope: ["constant.numeric", "constant.language.json"],
+      scope: ["constant.numeric", "constant.language", "constant.character", "constant.other"],
       settings: { foreground: "var(--shiki-token-constant)" },
     },
     {
-      scope: ["support.type.property-name.json"],
-      settings: { foreground: "var(--shiki-token-keyword)" }, // Map key to keyword color
+      scope: ["keyword", "storage.type", "storage.modifier", "support.type.property-name"],
+      settings: { foreground: "var(--shiki-token-keyword)" },
     },
     {
-      scope: ["punctuation.definition.dictionary.begin.json", "punctuation.definition.dictionary.end.json", "punctuation.separator.dictionary.key-value.json", "punctuation.separator.dictionary.pair.json"],
+      scope: ["punctuation", "meta.brace", "punctuation.definition.parameters"],
       settings: { foreground: "var(--shiki-token-punctuation)" },
     },
     {
       scope: ["comment"],
       settings: { foreground: "var(--shiki-token-comment)" },
+    },
+    {
+      scope: ["entity.name.function", "support.function", "variable.function"],
+      settings: { foreground: "var(--shiki-token-function)" },
+    },
+    {
+      scope: ["variable.parameter", "support.variable"],
+      settings: { foreground: "var(--shiki-token-parameter)" },
     },
   ],
 };
@@ -36,7 +44,7 @@ export function useShiki() {
     if (highlighter.value) return;
     highlighter.value = await createHighlighter({
       themes: [theme],
-      langs: ["json"],
+      langs: ["json", "dockerfile", "yaml", "shell"],
     });
     isReady.value = true;
   }

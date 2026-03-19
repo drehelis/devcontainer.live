@@ -131,6 +131,13 @@
   .tab-item.active {
     @apply bg-ide-bg text-ide-text-bright border-t-2 border-t-ide-accent;
   }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
   .mobile-nav-container {
     height: calc(var(--mobile-nav-h) + var(--safe-bottom));
     padding-bottom: var(--safe-bottom);

@@ -4,6 +4,8 @@ import { useResponsive } from "../../composables/useResponsive";
 defineProps<{
   copyStatus: "idle" | "copied";
   shareStatus: "idle" | "copied";
+  files: string[];
+  activeFile: string;
 }>();
 
 const emit = defineEmits<{
@@ -11,6 +13,7 @@ const emit = defineEmits<{
   (e: "share"): void;
   (e: "download"): void;
   (e: "reset"): void;
+  (e: "update:activeFile", file: string): void;
 }>();
 
 const { isMobile } = useResponsive();
@@ -20,9 +23,19 @@ const { isMobile } = useResponsive();
   <div
     class="h-9 bg-ide-sidebar border-b border-ide-border flex items-center justify-between z-20"
   >
-    <div class="flex h-full">
-      <div class="tab-item active">
-        <span>devcontainer.json</span>
+    <div class="flex h-full overflow-x-auto no-scrollbar">
+      <div
+        v-for="file in files"
+        :key="file"
+        class="tab-item text-[11px] font-bold tracking-tight px-4 flex items-center justify-center cursor-pointer transition-all border-r border-ide-border select-none"
+        :class="
+          activeFile === file
+            ? 'active bg-ide-bg text-ide-accent border-t-2 border-t-ide-accent h-full'
+            : 'text-ide-text-muted hover:bg-ide-bg/40'
+        "
+        @click="$emit('update:activeFile', file)"
+      >
+        <span>{{ file }}</span>
       </div>
     </div>
 

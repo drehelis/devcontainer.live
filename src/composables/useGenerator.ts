@@ -6,6 +6,7 @@ const STORAGE_KEY = "devcontainer_generator_state";
 
 const DEFAULT_STATE = {
   orchestration: "image" as OrchestrationType,
+  presetFiles: {} as Record<string, string>,
   config: {
     name: "devcontainer.live",
     image: "mcr.microsoft.com/devcontainers/base:ubuntu",
@@ -67,6 +68,7 @@ export function useGenerator() {
 
   const state = ref<{
     orchestration: OrchestrationType;
+    presetFiles: Record<string, string>;
     config: DevContainerConfig;
   }>(
     JSON.parse(
@@ -312,9 +314,33 @@ export function useGenerator() {
     return url.toString();
   }
 
+  const allFiles = computed(() => {
+    const files: Record<string, { content: string; language: string }> = {
+      "devcontainer.json": {
+        content: generatedJson.value,
+        language: "json",
+      },
+    };
+
+    if (state.value.presetFiles) {
+      Object.entries(state.value.presetFiles).forEach(([name, content]) => {
+        let language = "text";
+        if (name.toLowerCase() === "dockerfile") language = "dockerfile";
+        if (name.endsWith(".yml") || name.endsWith(".yaml")) language = "yaml";
+        if (name.endsWith(".json")) language = "json";
+        if (name.endsWith(".sh")) language = "shell";
+
+        files[name] = { content, language };
+      });
+    }
+
+    return files;
+  });
+
   return {
     state,
     generatedJson,
+    allFiles,
     bashHistoryNote,
     indentation,
     reset,

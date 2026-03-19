@@ -19,11 +19,19 @@ import PresetsGallery from "./components/presets/PresetsGallery.vue";
 const {
   state,
   generatedJson,
+  allFiles,
   bashHistoryNote,
   indentation,
-  reset,
+  reset: resetGenerator,
   getShareUrl,
 } = useGenerator();
+
+const activeFile = ref("devcontainer.json");
+
+function reset() {
+  resetGenerator();
+  activeFile.value = "devcontainer.json";
+}
 const { currentTheme } = useTheme();
 const { sidebarWidth, startResizing } = useSidebarResize();
 const {
@@ -42,12 +50,20 @@ const activeSection = ref<
   "general" | "features" | "ports" | "history" | "advanced" | "presets"
 >("presets");
 
-function handleApplyPreset(payload: { orchestration: any; config: any }) {
+function handleApplyPreset(payload: any) {
   state.value.orchestration = payload.orchestration;
   state.value.config = {
     ...state.value.config,
     ...JSON.parse(JSON.stringify(payload.config)),
   };
+  
+  // Store additional files if they exist
+  const presetFiles: Record<string, string> = {};
+  if (payload.dockerfile) presetFiles["Dockerfile"] = payload.dockerfile;
+  if (payload.dockerCompose) presetFiles["docker-compose.yml"] = payload.dockerCompose;
+  state.value.presetFiles = presetFiles;
+
+  activeFile.value = "devcontainer.json";
   activeSection.value = "general";
 }
 
@@ -126,6 +142,8 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
         <div class="absolute inset-0 grid-overlay pointer-events-none"></div>
 
         <EditorTabs
+          :files="Object.keys(allFiles)"
+          v-model:active-file="activeFile"
           :copy-status="copyStatus"
           :share-status="shareStatus"
           @copy="copyToClipboard"
@@ -138,8 +156,9 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
           class="flex-1 overflow-auto bg-ide-bg p-4 lg:p-8 font-mono custom-scrollbar z-10 transition-colors duration-300"
         >
           <CodePreview
-            :code="generatedJson"
-            :bash-history-note="bashHistoryNote"
+            :code="allFiles[activeFile]?.content || ''"
+            :language="allFiles[activeFile]?.language || 'json'"
+            :bash-history-note="activeFile === 'devcontainer.json' ? bashHistoryNote : undefined"
             :indentation="indentation"
             @update:cursor="handleCursorUpdate"
           />

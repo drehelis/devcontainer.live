@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import type { OrchestrationType } from "../../types";
 import { usePresets, substituteTemplateOptions } from "../../composables/usePresets";
 import PresetCard from "./PresetCard.vue";
 import SectionHeader from "../SectionHeader.vue";
@@ -18,6 +19,8 @@ const configuring = ref<{
   config: any;
   metadata: any;
   userValues: Record<string, string>;
+  dockerfile: string | null;
+  dockerCompose: string | null;
 } | null>(null);
 
 const filteredTemplates = computed(() => {
@@ -38,7 +41,7 @@ async function handleSelect(template: any) {
 
   loadingTemplate.value = template.id;
   try {
-    const { config, metadata } = await fetchTemplateConfig(template.id);
+    const { config, metadata, dockerfile, dockerCompose } = await fetchTemplateConfig(template.id);
     
     // If there are options, we show the configuration form
     if (metadata?.options && Object.keys(metadata.options).length > 0) {
@@ -51,9 +54,11 @@ async function handleSelect(template: any) {
         config,
         metadata,
         userValues,
+        dockerfile,
+        dockerCompose,
       };
     } else {
-      apply(config, metadata, {});
+      apply(config, metadata, {}, dockerfile, dockerCompose);
     }
   } catch (e) {
     apply({ name: template.name, image: template.image }, null, {});
@@ -62,7 +67,7 @@ async function handleSelect(template: any) {
   }
 }
 
-function apply(config: any, metadata: any, userValues: Record<string, string>) {
+function apply(config: any, metadata: any, userValues: Record<string, string>, dockerfile: string | null = null, dockerCompose: string | null = null) {
   const finalConfig = substituteTemplateOptions(config, metadata, userValues);
   
   // Detect orchestration from the imported config
@@ -79,6 +84,8 @@ function apply(config: any, metadata: any, userValues: Record<string, string>) {
       ...finalConfig,
       name: metadata?.name || finalConfig.name || "devcontainer.live",
     },
+    dockerfile,
+    dockerCompose,
   });
   configuring.value = null;
 }
@@ -209,7 +216,7 @@ function apply(config: any, metadata: any, userValues: Record<string, string>) {
           </div>
 
           <button
-            @click="apply(configuring.config, configuring.metadata, configuring.userValues)"
+            @click="apply(configuring.config, configuring.metadata, configuring.userValues, configuring.dockerfile, configuring.dockerCompose)"
             class="w-full py-2 bg-ide-accent text-ide-bg rounded text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-lg"
           >
             <span>BUILD CONFIGURATION</span>

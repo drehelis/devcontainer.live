@@ -5,6 +5,7 @@ import { useShiki } from "../composables/useShiki";
 
 const props = defineProps<{
   code: string;
+  language: string;
   bashHistoryNote?: string;
   indentation: number;
 }>();
@@ -24,16 +25,16 @@ const highlightedLines = ref<ThemedToken[][]>([]);
 const CHAR_WIDTH = 7.8;
 
 watch(
-  () => props.code,
-  async (newCode) => {
+  [() => props.code, () => props.language],
+  async ([newCode, newLang]) => {
     lines.value = newCode.split("\n");
-    await renderHighlightedCode();
+    await renderHighlightedCode(newCode, newLang);
   },
   { immediate: true },
 );
 
-async function renderHighlightedCode() {
-  const result = await highlightCode(props.code, "json");
+async function renderHighlightedCode(code: string, lang: string) {
+  const result = await highlightCode(code, lang as any);
 
   // Process tokens to remove leading whitespace that we render separately as visualizers
   highlightedLines.value = result.map((lineTokens, i) => {

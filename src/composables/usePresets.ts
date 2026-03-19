@@ -57,31 +57,70 @@ export function usePresets() {
   }
 
   async function fetchTemplateConfig(templateId: string) {
-    const baseUrl = `https://raw.githubusercontent.com/devcontainers/templates/main/src/${templateId}`;
-    
-    const [configRes, metadataRes] = await Promise.all([
-      fetch(`${baseUrl}/.devcontainer/devcontainer.json`).then(r => r.ok ? r : fetch(`${baseUrl}/devcontainer.json`)),
-      fetch(`${baseUrl}/devcontainer-template.json`)
-    ]);
+    const apiBaseUrl = `https://api.github.com/repos/devcontainers/templates/contents/src/${templateId}`;
 
     let config = null;
     let metadata = null;
+    let dockerfile = null;
+    let dockerCompose = null;
 
-    if (configRes.ok) {
-      const text = await configRes.text();
-      // Remove comments if any
-      const rawConfig = JSON.parse(text.replace(/\/\/.*$/gm, ""));
-      
-      // If we have metadata, substitute template options
-      if (metadataRes.ok) {
-        metadata = await metadataRes.json();
-        config = substituteTemplateOptions(rawConfig, metadata);
-      } else {
-        config = rawConfig;
+    try {
+      // 1. List files to avoid 404s
+      const [rootFiles, devContainerFiles] = await Promise.all([
+        fetch(apiBaseUrl).then(r => r.ok ? r.json() : []),
+        fetch(`${apiBaseUrl}/.devcontainer`).then(r => r.ok ? r.json() : []),
+      ]);
+
+      const allFiles = Array.isArray(rootFiles) ? [...rootFiles] : [];
+      if (Array.isArray(devContainerFiles)) allFiles.push(...devContainerFiles);
+
+      const findFile = (name: string) => {
+        // Prioritize .devcontainer versions
+        const inDevContainer = Array.isArray(devContainerFiles) && devContainerFiles.find((f: any) => f.name.toLowerCase() === name.toLowerCase());
+        if (inDevContainer) return inDevContainer;
+        return Array.isArray(rootFiles) && rootFiles.find((f: any) => f.name.toLowerCase() === name.toLowerCase());
+      };
+
+      // 2. Identify which files exist
+      const configEntry = findFile("devcontainer.json");
+      const metadataEntry = findFile("devcontainer-template.json");
+      const dockerfileEntry = findFile("Dockerfile");
+      const composeEntry = findFile("docker-compose.yml") || findFile("docker-compose.yaml");
+
+      // 3. Fetch only existing files using download_url
+      const fetchQueue: Promise<any>[] = [];
+      if (configEntry?.download_url) fetchQueue.push(fetch(configEntry.download_url).then(r => r.text()));
+      else fetchQueue.push(Promise.resolve(null));
+
+      if (metadataEntry?.download_url) fetchQueue.push(fetch(metadataEntry.download_url).then(r => r.json()));
+      else fetchQueue.push(Promise.resolve(null));
+
+      if (dockerfileEntry?.download_url) fetchQueue.push(fetch(dockerfileEntry.download_url).then(r => r.text()));
+      else fetchQueue.push(Promise.resolve(null));
+
+      if (composeEntry?.download_url) fetchQueue.push(fetch(composeEntry.download_url).then(r => r.text()));
+      else fetchQueue.push(Promise.resolve(null));
+
+      const [configText, metadataJson, dockerfileText, composeText] = await Promise.all(fetchQueue);
+
+      if (configText) {
+        try {
+          const rawConfig = JSON.parse(configText.replace(/\/\/.*$/gm, ""));
+          config = metadataJson ? substituteTemplateOptions(rawConfig, metadataJson) : rawConfig;
+          metadata = metadataJson;
+        } catch (e) {
+          console.error("Failed to parse devcontainer.json", e);
+        }
       }
+
+      dockerfile = dockerfileText;
+      dockerCompose = composeText;
+
+    } catch (e) {
+      console.error("Error fetching template config", e);
     }
 
-    return { config, metadata };
+    return { config, metadata, dockerfile, dockerCompose };
   }
 
   onMounted(() => {
