@@ -1,5 +1,5 @@
 import { ref, computed, watch } from "vue";
-import { THEMES, DEFAULT_THEME_ID, type Theme } from "../constants/themes";
+import { THEMES, DEFAULT_THEME_ID } from "../constants/themes";
 import { STORAGE_KEYS } from "../constants/storage";
 
 const currentThemeId = ref(

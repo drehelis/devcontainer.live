@@ -18,7 +18,6 @@ import PresetsGallery from "./components/presets/PresetsGallery.vue";
 
 const {
   state,
-  generatedJson,
   allFiles,
   bashHistoryNote,
   indentation,
