@@ -1,5 +1,6 @@
 import { ref, onMounted } from "vue";
 import type { OrchestrationType } from "../types";
+import { URLS } from "../constants/urls";
 
 export interface OfficialTemplate {
   id: string;
@@ -19,10 +20,16 @@ export function usePresets() {
     error.value = null;
     try {
       // Fetch the src directory contents from the official repo
-      const response = await fetch(
-        "https://api.github.com/repos/devcontainers/templates/contents/src",
-      );
-      if (!response.ok) throw new Error("Failed to fetch official templates catalog.");
+      const response = await fetch(URLS.TEMPLATES_API);
+      
+      if (response.status === 403) {
+        throw new Error("GitHub API rate limit reached. Using fallback templates.");
+      }
+      
+      if (!response.ok) {
+        throw new Error("Failed to fetch official templates catalog.");
+      }
+      
       const data = await response.json();
 
       // Map to our format
@@ -46,18 +53,14 @@ export function usePresets() {
         });
     } catch (e: any) {
       error.value = e.message;
-      // Fallback to minimal sensible list if API fails
-      templates.value = [
-        { id: "javascript-node", name: "Node.js", description: "Official Node.js template.", orchestration: "image", image: "ghcr.io/devcontainers/templates/javascript-node:latest" },
-        { id: "python", name: "Python 3", description: "Official Python 3 template.", orchestration: "image", image: "ghcr.io/devcontainers/templates/python:latest" },
-      ];
+      templates.value = [];
     } finally {
       loading.value = false;
     }
   }
 
   async function fetchTemplateConfig(templateId: string) {
-    const apiBaseUrl = `https://api.github.com/repos/devcontainers/templates/contents/src/${templateId}`;
+    const apiBaseUrl = URLS.TEMPLATE_CONFIG_API(templateId);
 
     let config = null;
     let metadata = null;

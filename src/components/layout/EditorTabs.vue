@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useResponsive } from "../../composables/useResponsive";
+import { URLS } from "../../constants/urls";
 
 defineProps<{
   copyStatus: "idle" | "copied";
@@ -198,7 +199,7 @@ const { isMobile } = useResponsive();
       <div class="w-px h-3 bg-ide-border mx-1"></div>
 
       <a
-        href="https://github.com/drehelis/devcontainer.live"
+        :href="URLS.REPO_URL"
         target="_blank"
         rel="noopener noreferrer"
         class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text group"

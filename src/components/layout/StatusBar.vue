@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useTheme } from "../../composables/useTheme";
+import { URLS } from "../../constants/urls";
 
 defineProps<{
   version: string;
@@ -127,7 +128,7 @@ const currentIndentName = (val: number) => {
 
       <span>UTF-8</span>
       <a
-        href="https://github.com/drehelis/devcontainer.live"
+        :href="URLS.REPO_URL"
         target="_blank"
         rel="noopener noreferrer"
         class="hover:text-ide-accent transition-colors flex items-center gap-1 group"

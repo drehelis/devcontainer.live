@@ -1,4 +1,7 @@
 import { ref, onMounted } from "vue";
+import { URLS } from "../constants/urls";
+import { STORAGE_KEYS } from "../constants/storage";
+import { CACHE_TTL_FEATURES } from "../constants/defaults";
 
 export interface FeatureOption {
   type: "string" | "boolean";
@@ -17,9 +20,6 @@ export interface FeatureMetadata {
   documentationURL?: string;
 }
 
-const CACHE_KEY = "devcontainer_features_cache";
-const CACHE_TTL = 1000 * 60 * 60 * 24; // 24 hours
-
 export function useFeatures() {
   const features = ref<FeatureMetadata[]>([]);
   const loading = ref(false);
@@ -30,10 +30,10 @@ export function useFeatures() {
     error.value = null;
 
     // Check cache
-    const cached = localStorage.getItem(CACHE_KEY);
+    const cached = localStorage.getItem(STORAGE_KEYS.FEATURES);
     if (cached) {
       const { data, timestamp } = JSON.parse(cached);
-      if (Date.now() - timestamp < CACHE_TTL) {
+      if (Date.now() - timestamp < CACHE_TTL_FEATURES) {
         features.value = data;
         loading.value = false;
         return;
@@ -42,9 +42,7 @@ export function useFeatures() {
 
     try {
       // 1. Fetch feature list from GH API
-      const listRes = await fetch(
-        "https://api.github.com/repos/devcontainers/features/contents/src",
-      );
+      const listRes = await fetch(URLS.FEATURES_API);
       if (!listRes.ok) throw new Error("Failed to fetch features list");
 
       const contents = await listRes.json();
@@ -70,9 +68,7 @@ export function useFeatures() {
         await Promise.all(
           chunk.map(async (dirName: string) => {
             try {
-              const metaRes = await fetch(
-                `https://raw.githubusercontent.com/devcontainers/features/main/src/${dirName}/devcontainer-feature.json`,
-              );
+               const metaRes = await fetch(URLS.FEATURE_METADATA_RAW(dirName));
               if (metaRes.ok) {
                 const meta = await metaRes.json();
                 featureData.push({
@@ -95,7 +91,7 @@ export function useFeatures() {
 
       // Cache the result
       localStorage.setItem(
-        CACHE_KEY,
+        STORAGE_KEYS.FEATURES,
         JSON.stringify({
           data: featureData,
           timestamp: Date.now(),

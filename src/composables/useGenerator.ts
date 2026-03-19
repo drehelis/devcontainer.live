@@ -1,40 +1,9 @@
 import { ref, computed, watch } from "vue";
 import LZString from "lz-string";
 import type { DevContainerConfig, OrchestrationType } from "../types";
-
-const STORAGE_KEY = "devcontainer_generator_state";
-
-const DEFAULT_STATE = {
-  orchestration: "image" as OrchestrationType,
-  presetFiles: {} as Record<string, string>,
-  config: {
-    name: "devcontainer.live",
-    image: "mcr.microsoft.com/devcontainers/base:ubuntu",
-    build: {
-      dockerfile: "Dockerfile",
-      context: ".",
-      args: {},
-    },
-    dockerComposeFile: ["docker-compose.yml"],
-    service: "app",
-    features: {},
-    forwardPorts: [],
-    portsAttributes: {},
-    containerEnv: {},
-    remoteEnv: {},
-    postCreateCommand: "",
-    customizations: {
-      vscode: {
-        extensions: [],
-        settings: {},
-      },
-    },
-    privileged: false,
-    init: false,
-    capAdd: [],
-    securityOpt: [],
-  },
-};
+import { URLS } from "../constants/urls";
+import { DEFAULT_STATE } from "../constants/defaults";
+import { STORAGE_KEYS } from "../constants/storage";
 
 export function useGenerator() {
   const getHashState = () => {
@@ -49,7 +18,7 @@ export function useGenerator() {
   };
 
   const initialHash = window.location.hash.slice(1);
-  const savedState = getHashState() || localStorage.getItem(STORAGE_KEY);
+  const savedState = getHashState() || localStorage.getItem(STORAGE_KEYS.STATE);
 
   // Clear hash from URL if present to keep it clean
   if (initialHash) {
@@ -86,7 +55,7 @@ export function useGenerator() {
         indentation: indentation.value,
       };
       const stringified = JSON.stringify(data);
-      localStorage.setItem(STORAGE_KEY, stringified);
+      localStorage.setItem(STORAGE_KEYS.STATE, stringified);
     },
 
     { deep: true, immediate: true },
@@ -139,8 +108,7 @@ export function useGenerator() {
 
     // Filter out empty arrays/objects to keep JSON clean
     const cleanConfig: any = {
-      $schema:
-        "https://raw.githubusercontent.com/devcontainers/spec/main/schemas/devContainer.schema.json",
+      $schema: URLS.SPEC_SCHEMA,
     };
 
     // Core properties

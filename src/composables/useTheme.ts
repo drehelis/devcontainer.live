@@ -1,25 +1,12 @@
 import { ref, computed, watch } from "vue";
+import { THEMES, DEFAULT_THEME_ID, type Theme } from "../constants/themes";
+import { STORAGE_KEYS } from "../constants/storage";
 
-export interface Theme {
-  id: string;
-  name: string;
-  class: string;
-}
-
-export const themes: Theme[] = [
-  { id: "midnight", name: "Midnight", class: "" },
-  { id: "dracula", name: "Dracula", class: "theme-dracula" },
-  { id: "nord", name: "Nord", class: "theme-nord" },
-  { id: "solarized", name: "Solarized Light", class: "theme-solarized-light" },
-];
-
-const THEME_STORAGE_KEY = "devcontainer_theme";
-const savedThemeId = localStorage.getItem(THEME_STORAGE_KEY) || themes[0].id;
-const currentThemeId = ref(savedThemeId);
+const currentThemeId = ref(localStorage.getItem(STORAGE_KEYS.THEME) || DEFAULT_THEME_ID);
 const showThemeMenu = ref(false);
 
 const currentTheme = computed(
-  () => themes.find((t) => t.id === currentThemeId.value) || themes[0],
+  () => THEMES.find((t) => t.id === currentThemeId.value) || THEMES[0],
 );
 
 export function useTheme() {
@@ -33,10 +20,10 @@ export function useTheme() {
     (newTheme) => {
       if (!newTheme) return;
 
-      localStorage.setItem(THEME_STORAGE_KEY, newTheme.id);
+      localStorage.setItem(STORAGE_KEYS.THEME, newTheme.id);
 
       // Remove all theme classes
-      themes.forEach((t) => {
+      THEMES.forEach((t) => {
         if (t.class) document.documentElement.classList.remove(t.class);
       });
 
@@ -48,7 +35,7 @@ export function useTheme() {
   );
 
   return {
-    themes,
+    themes: THEMES,
     currentThemeId,
     currentTheme,
     showThemeMenu,
