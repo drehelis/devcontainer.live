@@ -185,10 +185,10 @@ onMounted(() => {
               >
               <!-- Space handler - only render visualizer for the beginning of an indent block -->
               <span
-                v-else-if="char === ' ' && (indentation > 0 ? (i % indentation === 0) : (i % 2 === 0))"
+                v-else-if="char === ' '"
                 class="inline-block opacity-10 select-none pointer-events-none text-ide-text-bright text-center"
-                :style="{ width: (indentation > 0 ? indentation : 2) * CHAR_WIDTH + 'px' }"
-                >{{ indentation > 0 ? '·' : '·' }}</span
+                :style="{ width: CHAR_WIDTH + 'px' }"
+                >·</span
               >
             </template>
           </div>
