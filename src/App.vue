@@ -41,7 +41,7 @@ const {
   copyToClipboard,
   copyShareLink,
   downloadConfig,
-} = useEditorActions(generatedJson, reset, getShareUrl);
+} = useEditorActions(allFiles, activeFile, reset, getShareUrl);
 
 const { isMobile } = useResponsive();
 const activeView = ref<"config" | "preview">("config");

@@ -1,7 +1,9 @@
-import { ref } from "vue";
+import { ref, type Ref } from "vue";
+import JSZip from "jszip";
 
 export function useEditorActions(
-  generatedJson: { value: string },
+  allFiles: Ref<Record<string, { content: string; language: string }>>,
+  activeFile: Ref<string>,
   reset: () => void,
   getShareUrl: () => string,
 ) {
@@ -11,7 +13,8 @@ export function useEditorActions(
 
   async function copyToClipboard() {
     try {
-      await navigator.clipboard.writeText(generatedJson.value);
+      const content = allFiles.value[activeFile.value]?.content || "";
+      await navigator.clipboard.writeText(content);
       copyStatus.value = "copied";
       setTimeout(() => {
         copyStatus.value = "idle";
@@ -33,16 +36,44 @@ export function useEditorActions(
     }
   }
 
-  function downloadConfig() {
-    const blob = new Blob([generatedJson.value], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "devcontainer.json";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  async function downloadConfig() {
+    const files = allFiles.value;
+    const fileKeys = Object.keys(files);
+
+    if (fileKeys.length === 1) {
+      // Single file download (as before)
+      const fileName = fileKeys[0];
+      const blob = new Blob([files[fileName].content], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } else {
+      // Multiple files - ZIP them
+      const zip = new JSZip();
+      
+      // Create a .devcontainer folder and put everything in it
+      const folder = zip.folder(".devcontainer");
+      if (folder) {
+        fileKeys.forEach((name) => {
+          folder.file(name, files[name].content);
+        });
+
+        const content = await zip.generateAsync({ type: "blob" });
+        const url = URL.createObjectURL(content);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "devcontainer-config.zip";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+    }
   }
 
   return {

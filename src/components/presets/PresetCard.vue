@@ -36,7 +36,7 @@ defineEmits<{
           ></span>
         </div>
         <span class="text-[8px] font-mono text-ide-text-muted truncate">{{
-          preset.id
+          preset.image
         }}</span>
       </div>
 
