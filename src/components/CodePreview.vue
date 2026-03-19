@@ -172,24 +172,23 @@ onMounted(() => {
         >
           <!-- Indentation Visualizers -->
           <div class="flex shrink-0">
-            <template v-if="indentation > 0">
+            <template
+              v-for="(char, i) in getLineStructure(line).leading"
+              :key="i"
+            >
+              <!-- Tab handler -->
               <span
-                v-for="i in Math.floor(
-                  getLineStructure(line).leading.length / indentation,
-                )"
-                :key="i"
-                class="inline-block opacity-10 select-none pointer-events-none text-ide-text-bright"
-                :style="{ width: indentation * CHAR_WIDTH + 'px' }"
-                >·</span
-              >
-            </template>
-            <template v-else-if="indentation === -1">
-              <span
-                v-for="i in getLineStructure(line).leading.length"
-                :key="i"
+                v-if="char === '\t'"
                 class="inline-block opacity-10 select-none pointer-events-none border-l border-ide-text-bright"
                 :style="{ width: 4 * CHAR_WIDTH + 'px' }"
                 >&nbsp;</span
+              >
+              <!-- Space handler - only render visualizer for the beginning of an indent block -->
+              <span
+                v-else-if="char === ' ' && (indentation > 0 ? (i % indentation === 0) : (i % 2 === 0))"
+                class="inline-block opacity-10 select-none pointer-events-none text-ide-text-bright text-center"
+                :style="{ width: (indentation > 0 ? indentation : 2) * CHAR_WIDTH + 'px' }"
+                >{{ indentation > 0 ? '·' : '·' }}</span
               >
             </template>
           </div>
