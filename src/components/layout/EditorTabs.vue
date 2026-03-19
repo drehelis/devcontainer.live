@@ -53,9 +53,21 @@ const { isMobile } = useResponsive();
         :class="{ 'hidden sm:block': !isMobile }"
       >
         <!-- Optional: small chevron hint -->
-        <div class="h-full flex items-center justify-end pr-1 text-ide-accent/40 lg:hidden">
-          <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M9 5l7 7-7 7" />
+        <div
+          class="h-full flex items-center justify-end pr-1 text-ide-accent/40 lg:hidden"
+        >
+          <svg
+            class="w-2.5 h-2.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="4"
+              d="M9 5l7 7-7 7"
+            />
           </svg>
         </div>
       </div>

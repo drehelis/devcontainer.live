@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
 import type { OrchestrationType } from "../../types";
-import { usePresets, substituteTemplateOptions } from "../../composables/usePresets";
+import {
+  usePresets,
+  substituteTemplateOptions,
+} from "../../composables/usePresets";
 import PresetCard from "./PresetCard.vue";
 import SectionHeader from "../SectionHeader.vue";
 import SearchableSelect from "../SearchableSelect.vue";
@@ -10,7 +13,8 @@ const emit = defineEmits<{
   (e: "apply", config: any): void;
 }>();
 
-const { templates, loading, error, refresh, fetchTemplateConfig } = usePresets();
+const { templates, loading, error, refresh, fetchTemplateConfig } =
+  usePresets();
 const searchQuery = ref("");
 const loadingTemplate = ref<string | null>(null);
 
@@ -41,8 +45,9 @@ async function handleSelect(template: any) {
 
   loadingTemplate.value = template.id;
   try {
-    const { config, metadata, dockerfile, dockerCompose } = await fetchTemplateConfig(template.id);
-    
+    const { config, metadata, dockerfile, dockerCompose } =
+      await fetchTemplateConfig(template.id);
+
     // If there are options, we show the configuration form
     if (metadata?.options && Object.keys(metadata.options).length > 0) {
       const userValues: Record<string, string> = {};
@@ -67,9 +72,15 @@ async function handleSelect(template: any) {
   }
 }
 
-function apply(config: any, metadata: any, userValues: Record<string, string>, dockerfile: string | null = null, dockerCompose: string | null = null) {
+function apply(
+  config: any,
+  metadata: any,
+  userValues: Record<string, string>,
+  dockerfile: string | null = null,
+  dockerCompose: string | null = null,
+) {
   const finalConfig = substituteTemplateOptions(config, metadata, userValues);
-  
+
   // Detect orchestration from the imported config
   let orchestration: OrchestrationType = "image";
   if (finalConfig.dockerComposeFile) {
@@ -92,7 +103,9 @@ function apply(config: any, metadata: any, userValues: Record<string, string>, d
 </script>
 
 <template>
-  <div class="space-y-4 flex flex-col h-full animate-in fade-in slide-in-from-left-2 duration-300">
+  <div
+    class="space-y-4 flex flex-col h-full animate-in fade-in slide-in-from-left-2 duration-300"
+  >
     <SectionHeader
       title="Templates"
       tooltip="Official Dev Container templates from ghcr.io."
@@ -152,13 +165,18 @@ function apply(config: any, metadata: any, userValues: Record<string, string>, d
         v-if="filteredTemplates.length > 0"
         class="flex-1 overflow-y-auto custom-scrollbar pr-2 pb-4 flex flex-col gap-2 min-h-0"
       >
-        <div v-for="template in filteredTemplates" :key="template.id" class="flex flex-col">
+        <div
+          v-for="template in filteredTemplates"
+          :key="template.id"
+          class="flex flex-col"
+        >
           <PresetCard
             :preset="template"
             :loading="loadingTemplate === template.id"
             @select="handleSelect"
             :class="{
-              'bg-ide-accent/5 border-ide-accent/40 ring-1 ring-ide-accent/20 shadow-[0_0_12px_rgba(var(--ide-accent-rgb),0.05)]': configuring?.metadata?.id === template.id
+              'bg-ide-accent/5 border-ide-accent/40 ring-1 ring-ide-accent/20 shadow-[0_0_12px_rgba(var(--ide-accent-rgb),0.05)]':
+                configuring?.metadata?.id === template.id,
             }"
           />
 
@@ -169,13 +187,26 @@ function apply(config: any, metadata: any, userValues: Record<string, string>, d
           >
             <!-- (Config form content remains the same) -->
             <div class="grid grid-cols-1 gap-4">
-              <div v-for="(opt, key) in configuring.metadata.options" :key="key" class="space-y-2">
+              <div
+                v-for="(opt, key) in configuring.metadata.options"
+                :key="key"
+                class="space-y-2"
+              >
                 <div class="flex items-center justify-between">
-                  <span class="text-[9px] font-mono text-ide-accent/80 uppercase tracking-tighter">{{ key }}</span>
-                  <span class="text-[7px] text-ide-text-muted/40 italic uppercase">{{ opt.type }}</span>
+                  <span
+                    class="text-[9px] font-mono text-ide-accent/80 uppercase tracking-tighter"
+                    >{{ key }}</span
+                  >
+                  <span
+                    class="text-[7px] text-ide-text-muted/40 italic uppercase"
+                    >{{ opt.type }}</span
+                  >
                 </div>
-                
-                <p v-if="opt.description" class="text-[8px] text-ide-text-muted italic leading-relaxed">
+
+                <p
+                  v-if="opt.description"
+                  class="text-[8px] text-ide-text-muted italic leading-relaxed"
+                >
                   {{ opt.description }}
                 </p>
 
@@ -187,13 +218,20 @@ function apply(config: any, metadata: any, userValues: Record<string, string>, d
                   <input
                     type="checkbox"
                     :checked="configuring.userValues[key] === 'true'"
-                    @change="configuring.userValues[key] = ($event.target as HTMLInputElement).checked ? 'true' : 'false'"
+                    @change="
+                      configuring.userValues[key] = (
+                        $event.target as HTMLInputElement
+                      ).checked
+                        ? 'true'
+                        : 'false'
+                    "
                     class="hidden"
                   />
                   <div
                     class="w-3 h-3 border border-ide-border rounded-sm flex items-center justify-center transition-colors group-hover/opt:border-ide-accent"
                     :class="{
-                      'bg-ide-accent border-ide-accent': configuring.userValues[key] === 'true',
+                      'bg-ide-accent border-ide-accent':
+                        configuring.userValues[key] === 'true',
                     }"
                   >
                     <svg
@@ -218,7 +256,12 @@ function apply(config: any, metadata: any, userValues: Record<string, string>, d
                 <SearchableSelect
                   v-else-if="opt.enum || opt.proposals"
                   v-model="configuring.userValues[key]"
-                  :options="(opt.enum || opt.proposals).map((val: string) => ({ value: String(val), label: String(val) }))"
+                  :options="
+                    (opt.enum || opt.proposals).map((val: string) => ({
+                      value: String(val),
+                      label: String(val),
+                    }))
+                  "
                   class="w-full"
                 />
 
@@ -234,12 +277,30 @@ function apply(config: any, metadata: any, userValues: Record<string, string>, d
             </div>
 
             <button
-              @click="apply(configuring.config, configuring.metadata, configuring.userValues, configuring.dockerfile, configuring.dockerCompose)"
+              @click="
+                apply(
+                  configuring.config,
+                  configuring.metadata,
+                  configuring.userValues,
+                  configuring.dockerfile,
+                  configuring.dockerCompose,
+                )
+              "
               class="w-full py-2 bg-ide-accent text-ide-bg rounded text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-lg"
             >
               <span>BUILD CONFIGURATION</span>
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              <svg
+                class="w-3.5 h-3.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="3"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
+                />
               </svg>
             </button>
           </div>
@@ -250,7 +311,9 @@ function apply(config: any, metadata: any, userValues: Record<string, string>, d
         v-else-if="!loading && !error"
         class="py-12 text-center border border-dashed border-ide-border rounded-lg bg-ide-activity/10"
       >
-        <p class="text-[10px] italic text-ide-text-muted">No templates match search.</p>
+        <p class="text-[10px] italic text-ide-text-muted">
+          No templates match search.
+        </p>
         <button
           @click="searchQuery = ''"
           class="mt-2 text-ide-accent text-[9px] font-bold uppercase hover:underline"

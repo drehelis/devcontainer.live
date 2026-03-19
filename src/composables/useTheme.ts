@@ -2,7 +2,9 @@ import { ref, computed, watch } from "vue";
 import { THEMES, DEFAULT_THEME_ID, type Theme } from "../constants/themes";
 import { STORAGE_KEYS } from "../constants/storage";
 
-const currentThemeId = ref(localStorage.getItem(STORAGE_KEYS.THEME) || DEFAULT_THEME_ID);
+const currentThemeId = ref(
+  localStorage.getItem(STORAGE_KEYS.THEME) || DEFAULT_THEME_ID,
+);
 const showThemeMenu = ref(false);
 
 const currentTheme = computed(

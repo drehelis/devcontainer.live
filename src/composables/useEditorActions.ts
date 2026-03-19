@@ -55,7 +55,7 @@ export function useEditorActions(
     } else {
       // Multiple files - ZIP them
       const zip = new JSZip();
-      
+
       // Create a .devcontainer folder and put everything in it
       const folder = zip.folder(".devcontainer");
       if (folder) {

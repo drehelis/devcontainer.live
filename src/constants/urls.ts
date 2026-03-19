@@ -14,11 +14,13 @@ export const URLS = {
 
   // Templates
   TEMPLATES_API: `${GITHUB_API_BASE}/repos/${REPOS.TEMPLATES}/contents/src`,
-  TEMPLATE_CONFIG_API: (id: string) => `${GITHUB_API_BASE}/repos/${REPOS.TEMPLATES}/contents/src/${id}`,
+  TEMPLATE_CONFIG_API: (id: string) =>
+    `${GITHUB_API_BASE}/repos/${REPOS.TEMPLATES}/contents/src/${id}`,
 
   // Features
   FEATURES_API: `${GITHUB_API_BASE}/repos/${REPOS.FEATURES}/contents/src`,
-  FEATURE_METADATA_RAW: (id: string) => `${GITHUB_RAW_BASE}/${REPOS.FEATURES}/main/src/${id}/devcontainer-feature.json`,
+  FEATURE_METADATA_RAW: (id: string) =>
+    `${GITHUB_RAW_BASE}/${REPOS.FEATURES}/main/src/${id}/devcontainer-feature.json`,
 
   // Spec
   SPEC_SCHEMA: `${GITHUB_RAW_BASE}/${REPOS.SPEC}/main/schemas/devContainer.schema.json`,

@@ -32,7 +32,9 @@ function selectOption(val: number) {
         'bg-ide-accent/5 text-ide-accent font-black': modelValue === opt.value,
       }"
     >
-      <span class="text-[10px] uppercase font-bold tracking-tight">{{ opt.name }}</span>
+      <span class="text-[10px] uppercase font-bold tracking-tight">{{
+        opt.name
+      }}</span>
       <svg
         v-if="modelValue === opt.value"
         class="w-3 h-3 text-ide-accent"

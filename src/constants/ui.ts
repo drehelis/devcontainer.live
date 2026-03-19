@@ -1,4 +1,10 @@
-export type Section = "presets" | "general" | "features" | "ports" | "history" | "advanced";
+export type Section =
+  | "presets"
+  | "general"
+  | "features"
+  | "ports"
+  | "history"
+  | "advanced";
 
 export const CONFIG_SECTIONS: { id: Section; name: string }[] = [
   { id: "presets", name: "Presets" },

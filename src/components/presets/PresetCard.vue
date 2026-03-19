@@ -43,11 +43,19 @@ defineEmits<{
       <!-- Action Indicator -->
       <div
         class="w-4 h-4 border border-ide-border rounded flex items-center justify-center transition-colors group-hover:border-ide-accent"
-        :class="loading ? 'bg-ide-accent border-ide-accent shadow-[0_0_8px_rgba(var(--ide-accent-rgb),0.3)]' : 'bg-ide-sidebar-item'"
+        :class="
+          loading
+            ? 'bg-ide-accent border-ide-accent shadow-[0_0_8px_rgba(var(--ide-accent-rgb),0.3)]'
+            : 'bg-ide-sidebar-item'
+        "
       >
         <svg
           class="w-3 h-3 transition-colors"
-          :class="loading ? 'text-ide-bg' : 'text-ide-text-muted/30 group-hover:text-ide-accent'"
+          :class="
+            loading
+              ? 'text-ide-bg'
+              : 'text-ide-text-muted/30 group-hover:text-ide-accent'
+          "
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"

@@ -45,8 +45,18 @@ defineEmits<{
       class="absolute top-0 right-0 w-12 h-[calc(100%-1px)] pointer-events-none bg-gradient-to-l from-ide-activity to-transparent flex items-center justify-end pr-1"
     >
       <div class="text-ide-accent/40">
-        <svg class="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M9 5l7 7-7 7" />
+        <svg
+          class="w-2.5 h-2.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="4"
+            d="M9 5l7 7-7 7"
+          />
         </svg>
       </div>
     </div>

@@ -68,7 +68,7 @@ export function useFeatures() {
         await Promise.all(
           chunk.map(async (dirName: string) => {
             try {
-               const metaRes = await fetch(URLS.FEATURE_METADATA_RAW(dirName));
+              const metaRes = await fetch(URLS.FEATURE_METADATA_RAW(dirName));
               if (metaRes.ok) {
                 const meta = await metaRes.json();
                 featureData.push({

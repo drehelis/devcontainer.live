@@ -56,18 +56,17 @@ function handleApplyPreset(payload: any) {
     ...state.value.config,
     ...JSON.parse(JSON.stringify(payload.config)),
   };
-  
+
   // Store additional files if they exist
   const presetFiles: Record<string, string> = {};
   if (payload.dockerfile) presetFiles["Dockerfile"] = payload.dockerfile;
-  if (payload.dockerCompose) presetFiles["docker-compose.yml"] = payload.dockerCompose;
+  if (payload.dockerCompose)
+    presetFiles["docker-compose.yml"] = payload.dockerCompose;
   state.value.presetFiles = presetFiles;
 
   activeFile.value = "devcontainer.json";
   activeSection.value = "general";
 }
-
-
 
 onMounted(() => {
   window.addEventListener("click", (e) => {
@@ -110,17 +109,15 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
         >
           Configuration
         </header>
-        <div
-          class="flex-1 overflow-x-hidden flex flex-col custom-scrollbar"
-        >
+        <div class="flex-1 overflow-x-hidden flex flex-col custom-scrollbar">
           <div class="p-4 lg:pt-4 pt-2 flex-1 flex flex-col min-h-0">
-          <PresetsGallery
-            v-if="activeSection === 'presets'"
-            @apply="handleApplyPreset"
-          />
-          <ConfigForm v-else v-model="state" :activeSection="activeSection" />
+            <PresetsGallery
+              v-if="activeSection === 'presets'"
+              @apply="handleApplyPreset"
+            />
+            <ConfigForm v-else v-model="state" :activeSection="activeSection" />
+          </div>
         </div>
-      </div>
 
         <!-- Resize Handle (Hidden on Mobile) -->
         <div
@@ -154,7 +151,9 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
           <CodePreview
             :code="allFiles[activeFile]?.content || ''"
             :language="allFiles[activeFile]?.language || 'json'"
-            :bash-history-note="activeFile === 'devcontainer.json' ? bashHistoryNote : undefined"
+            :bash-history-note="
+              activeFile === 'devcontainer.json' ? bashHistoryNote : undefined
+            "
             :indentation="indentation"
             @update:cursor="handleCursorUpdate"
           />

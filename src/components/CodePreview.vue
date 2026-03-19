@@ -134,7 +134,7 @@ onMounted(() => {
     class="font-mono text-[13px] leading-6 selection:bg-ide-accent/20 h-full w-full outline-none focus:ring-0"
     tabindex="0"
     @keydown="handleKeyDown"
-    style="tab-size: 4;"
+    style="tab-size: 4"
   >
     <div
       v-if="bashHistoryNote"
@@ -202,14 +202,16 @@ onMounted(() => {
                 :style="{ color: token.color }"
                 :class="{
                   'font-bold': token.fontStyle === 1,
-                  'italic': token.fontStyle === 2,
-                  'underline': token.fontStyle === 4,
+                  italic: token.fontStyle === 2,
+                  underline: token.fontStyle === 4,
                 }"
                 >{{ token.content }}</span
               >
             </template>
             <template v-else>
-              <span class="text-ide-text">{{ getLineStructure(line).content }}</span>
+              <span class="text-ide-text">{{
+                getLineStructure(line).content
+              }}</span>
             </template>
           </div>
 
@@ -240,4 +242,3 @@ onMounted(() => {
   --shiki-token-link: var(--theme-accent);
 }
 </style>
-

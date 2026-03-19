@@ -1,5 +1,10 @@
 import { ref, shallowRef } from "vue";
-import { createHighlighter, type Highlighter, type BundledLanguage, type SpecialLanguage } from "shiki";
+import {
+  createHighlighter,
+  type Highlighter,
+  type BundledLanguage,
+  type SpecialLanguage,
+} from "shiki";
 
 // Define a custom theme that uses CSS variables to ensure it is always available in the bundle
 const theme = {
@@ -10,11 +15,21 @@ const theme = {
       settings: { foreground: "var(--shiki-token-string)" },
     },
     {
-      scope: ["constant.numeric", "constant.language", "constant.character", "constant.other"],
+      scope: [
+        "constant.numeric",
+        "constant.language",
+        "constant.character",
+        "constant.other",
+      ],
       settings: { foreground: "var(--shiki-token-constant)" },
     },
     {
-      scope: ["keyword", "storage.type", "storage.modifier", "support.type.property-name"],
+      scope: [
+        "keyword",
+        "storage.type",
+        "storage.modifier",
+        "support.type.property-name",
+      ],
       settings: { foreground: "var(--shiki-token-keyword)" },
     },
     {
@@ -49,7 +64,10 @@ export function useShiki() {
     isReady.value = true;
   }
 
-  async function highlightCode(code: string, lang: BundledLanguage | SpecialLanguage = "json") {
+  async function highlightCode(
+    code: string,
+    lang: BundledLanguage | SpecialLanguage = "json",
+  ) {
     if (!highlighter.value) await init();
     if (!highlighter.value) return [];
 
