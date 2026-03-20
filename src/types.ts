@@ -95,3 +95,36 @@ export interface DevContainerConfig {
 }
 
 export type OrchestrationType = "image" | "dockerfile" | "dockerCompose";
+
+export interface TemplateOption {
+  type: "string" | "boolean" | "enum";
+  default?: string | boolean;
+  description?: string;
+  enum?: string[] | number[];
+  proposals?: string[] | number[];
+}
+
+export interface TemplateMetadata {
+  id: string;
+  name: string;
+  version?: string;
+  options?: Record<string, TemplateOption>;
+  [key: string]: any;
+}
+
+export interface OfficialTemplate {
+  id: string;
+  name: string;
+  description: string;
+  orchestration: OrchestrationType;
+  image: string;
+  icon?: string;
+}
+
+export interface PresetConfigState {
+  config: DevContainerConfig;
+  metadata: TemplateMetadata;
+  userValues: Record<string, string>;
+  dockerfile: string | null;
+  dockerCompose: string | null;
+}

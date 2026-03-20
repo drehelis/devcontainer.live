@@ -108,9 +108,7 @@ function removeItem(path: "capAdd" | "securityOpt", index: number) {
               >
               <InfoTooltip property="privileged" />
             </div>
-            <span class="text-[8px] text-ide-text-muted italic"
-              >Full root access</span
-            >
+            <span class="text-[8px] text-ide-text-muted">Full root access</span>
           </div>
         </label>
         <label
@@ -150,9 +148,7 @@ function removeItem(path: "capAdd" | "securityOpt", index: number) {
               >
               <InfoTooltip property="init" />
             </div>
-            <span class="text-[8px] text-ide-text-muted italic"
-              >Use Tini init</span
-            >
+            <span class="text-[8px] text-ide-text-muted">Use Tini init</span>
           </div>
         </label>
       </div>

@@ -164,7 +164,7 @@ function toggleHostGateway() {
                 >Host Networking</span
               >
             </div>
-            <span class="text-[8px] text-ide-text-muted italic"
+            <span class="text-[8px] text-ide-text-muted"
               >Use the host's network stack directly (--network=host)</span
             >
           </div>
@@ -205,7 +205,7 @@ function toggleHostGateway() {
                 >Resolve host's gateway IP</span
               >
             </div>
-            <span class="text-[8px] text-ide-text-muted italic"
+            <span class="text-[8px] text-ide-text-muted"
               >Access services on host via host.docker.internal</span
             >
           </div>
