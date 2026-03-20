@@ -58,62 +58,56 @@ const onAutoForwardOptions = [
 ];
 
 const isHostNetworkEnabled = computed(() => {
-  return props.config.runArgs?.includes("--network=host") || false;
+  const flag = "--network=host";
+  const inRunArgs = props.config.runArgs?.includes(flag) || false;
+  const inBuildOptions = props.config.build?.options?.includes(flag) || false;
+  return inRunArgs || inBuildOptions;
 });
 
 const isHostGatewayEnabled = computed(() => {
   const flag = "--add-host=host.docker.internal:host-gateway";
-  if (props.orchestration === "image") {
-    return props.config.runArgs?.includes(flag) || false;
-  }
-  if (props.orchestration === "dockerfile") {
-    return props.config.build?.options?.includes(flag) || false;
-  }
-  return false;
+  const inRunArgs = props.config.runArgs?.includes(flag) || false;
+  const inBuildOptions = props.config.build?.options?.includes(flag) || false;
+  return inRunArgs || inBuildOptions;
 });
 
-function toggleHostNetwork() {
-  const currentArgs = [...(props.config.runArgs || [])];
-  const flag = "--network=host";
+function handleFlagToggle(flag: string, isCurrentEnabled: boolean) {
+  const newConfig = JSON.parse(JSON.stringify(props.config));
 
-  if (currentArgs.includes(flag)) {
-    const updated = currentArgs.filter((arg) => arg !== flag);
-    updateConfig("runArgs", updated.length > 0 ? updated : undefined);
-  } else {
-    updateConfig("runArgs", [...currentArgs, flag]);
+  // Remove from everywhere first
+  if (newConfig.runArgs) {
+    newConfig.runArgs = newConfig.runArgs.filter((a: string) => a !== flag);
+    if (newConfig.runArgs.length === 0) delete newConfig.runArgs;
   }
-}
+  if (newConfig.build?.options) {
+    newConfig.build.options = newConfig.build.options.filter(
+      (a: string) => a !== flag,
+    );
+    if (newConfig.build.options.length === 0) delete newConfig.build.options;
+  }
 
-function toggleHostGateway() {
-  const flag = "--add-host=host.docker.internal:host-gateway";
-  const newConfig = { ...props.config };
-
-  if (props.orchestration === "image") {
-    const current = [...(newConfig.runArgs || [])];
-    if (current.includes(flag)) {
-      newConfig.runArgs = current.filter((a) => a !== flag);
-      if (newConfig.runArgs.length === 0) delete newConfig.runArgs;
-    } else {
-      newConfig.runArgs = [...current, flag];
-    }
-  } else if (props.orchestration === "dockerfile") {
-    const build = { ...(newConfig.build || {}) };
-    const options = [...(build.options || [])];
-    if (options.includes(flag)) {
-      build.options = options.filter((a) => a !== flag);
-      if (build.options.length === 0) delete build.options;
-    } else {
-      build.options = [...options, flag];
-    }
-
-    if (Object.keys(build).length === 0) {
-      delete newConfig.build;
-    } else {
-      newConfig.build = build;
+  // If not enabled, add to relevant section
+  if (!isCurrentEnabled) {
+    if (props.orchestration === "image") {
+      newConfig.runArgs = [...(newConfig.runArgs || []), flag];
+    } else if (props.orchestration === "dockerfile") {
+      if (!newConfig.build) newConfig.build = {};
+      newConfig.build.options = [...(newConfig.build.options || []), flag];
     }
   }
 
   emit("update:config", newConfig);
+}
+
+function toggleHostNetwork() {
+  handleFlagToggle("--network=host", isHostNetworkEnabled.value);
+}
+
+function toggleHostGateway() {
+  handleFlagToggle(
+    "--add-host=host.docker.internal:host-gateway",
+    isHostGatewayEnabled.value,
+  );
 }
 </script>
 

@@ -47,17 +47,66 @@ export function useGenerator() {
 
   const indentation = ref(parsed?.indentation ?? -1);
 
+  function syncNetworkFlags(newConfig: any, orchestration: OrchestrationType) {
+    const flags = [
+      "--network=host",
+      "--add-host=host.docker.internal:host-gateway",
+    ];
+
+    if (orchestration === "image") {
+      flags.forEach((flag) => {
+        const inBuild = newConfig.build?.options?.includes(flag);
+        if (inBuild) {
+          newConfig.build.options = newConfig.build.options.filter(
+            (o: string) => o !== flag,
+          );
+          if (!newConfig.runArgs?.includes(flag)) {
+            newConfig.runArgs = [...(newConfig.runArgs || []), flag];
+          }
+        }
+      });
+    } else if (orchestration === "dockerfile") {
+      flags.forEach((flag) => {
+        const inRun = newConfig.runArgs?.includes(flag);
+        if (inRun) {
+          newConfig.runArgs = newConfig.runArgs.filter(
+            (a: string) => a !== flag,
+          );
+          if (!newConfig.build) newConfig.build = {};
+          if (!newConfig.build.options?.includes(flag)) {
+            newConfig.build.options = [
+              ...(newConfig.build.options || []),
+              flag,
+            ];
+          }
+        }
+      });
+    }
+
+    if (newConfig.runArgs?.length === 0) delete newConfig.runArgs;
+    if (newConfig.build?.options?.length === 0) delete newConfig.build.options;
+    if (newConfig.build && Object.keys(newConfig.build).length === 0)
+      delete newConfig.build;
+  }
+
   watch(
     [state, indentation],
-    () => {
+    ([newState], [oldState]) => {
+      if (
+        oldState &&
+        newState.orchestration !== (oldState as typeof newState).orchestration
+      ) {
+        const newConfig = JSON.parse(JSON.stringify(newState.config));
+        syncNetworkFlags(newConfig, newState.orchestration);
+        state.value.config = newConfig;
+      }
+
       const data = {
         state: state.value,
         indentation: indentation.value,
       };
-      const stringified = JSON.stringify(data);
-      localStorage.setItem(STORAGE_KEYS.STATE, stringified);
+      localStorage.setItem(STORAGE_KEYS.STATE, JSON.stringify(data));
     },
-
     { deep: true, immediate: true },
   );
 
@@ -67,33 +116,30 @@ export function useGenerator() {
   }
 
   const generatedJson = computed(() => {
-    const config: any = JSON.parse(
+    const config = JSON.parse(
       JSON.stringify(state.value.config || DEFAULT_STATE.config),
     );
     const orchestration = state.value.orchestration;
 
-    // Grouping Dockerfile properties
     if (orchestration === "dockerfile") {
+      const build = config.build || {};
       const dockerfilePath =
-        config.build?.dockerfile || config.build?.dockerFile || "Dockerfile";
-      const isCamelCase =
-        !!config.build?.dockerFile && !config.build?.dockerfile;
+        build.dockerfile || build.dockerFile || "Dockerfile";
+      const isCamelCase = !!build.dockerFile && !build.dockerfile;
 
       config.build = {
         [isCamelCase ? "dockerFile" : "dockerfile"]: dockerfilePath,
-        context: config.build?.context || ".",
-        ...(config.build?.args && Object.keys(config.build.args).length > 0
-          ? { args: config.build.args }
+        context: build.context || ".",
+        ...(build.args && Object.keys(build.args).length > 0
+          ? { args: build.args }
           : {}),
-        ...(config.build?.target ? { target: config.build.target } : {}),
-        ...(config.build?.cacheFrom
-          ? { cacheFrom: config.build.cacheFrom }
-          : {}),
-        ...(config.build?.options && config.build.options.length > 0
-          ? { options: config.build.options }
+        ...(build.target ? { target: build.target } : {}),
+        ...(build.cacheFrom ? { cacheFrom: build.cacheFrom } : {}),
+        ...(build.options && build.options.length > 0
+          ? { options: build.options }
           : {}),
       };
-      // remove top level if they exist (though they shouldn't)
+
       delete config.image;
       delete config.dockerComposeFile;
       delete config.service;
@@ -257,17 +303,68 @@ export function useGenerator() {
     return JSON.stringify(cleanConfig, null, indent);
   });
 
-  const bashHistoryNote = computed(() => {
+  const extraNotes = computed(() => {
+    const notes: string[] = [];
     const config = state.value.config;
+    const orchestration = state.value.orchestration;
+
+    // Bash History Note
     const hasBashHistory = config.mounts?.some((m: any) => {
       if (typeof m === "string") return m.includes("commandhistory");
       return m?.target === "/commandhistory";
     });
-
     if (hasBashHistory) {
-      return "To persist bash history, add this to your .bashrc: export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history";
+      notes.push(
+        "To persist bash history, add this to your .bashrc:\nexport PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history",
+      );
     }
-    return undefined;
+
+    // Secrets Note
+    if (orchestration === "dockerfile") {
+      const secretOpt = config.build?.options?.find((opt) =>
+        opt.startsWith("--secret"),
+      );
+      if (secretOpt) {
+        const idMatch = secretOpt.match(/id=([^,]+)/);
+        const secretId = idMatch ? idMatch[1] : "";
+
+        if (secretOpt.includes("env=")) {
+          const envMatch = secretOpt.match(/env=([^,]+)/);
+          const envName = envMatch ? envMatch[1] : "MY_SECRET";
+          notes.push(
+            `Use as environment variable:\nRUN --mount=type=secret,id=${secretId},env=${envName} install_command`,
+          );
+        } else {
+          const srcMatch = secretOpt.match(/src=([^,]+)/);
+          const src = srcMatch ? srcMatch[1] : "";
+
+          // Use a default path but replace home alias if present
+          let targetPath = src || `/run/secrets/${secretId}`;
+          if (targetPath.startsWith("~")) {
+            targetPath = targetPath.replace("~", "/root");
+          }
+
+          notes.push(
+            `Add to your Dockerfile:\nRUN --mount=type=secret,id=${secretId},target=${targetPath} install_command`,
+          );
+        }
+      }
+
+      const sshOpt = config.build?.options?.find((opt) =>
+        opt.startsWith("--ssh"),
+      );
+      if (sshOpt) {
+        const content = sshOpt.replace("--ssh=", "");
+        const sshId = content.includes("=") ? content.split("=")[0] : content;
+        const mountFlags = sshId === "default" ? "" : `,id=${sshId}`;
+
+        notes.push(
+          `To use SSH in your Dockerfile:\nRUN --mount=type=ssh${mountFlags} ssh -q -T git@gitlab.com`,
+        );
+      }
+    }
+
+    return notes.length > 0 ? notes : undefined;
   });
 
   function getShareUrl() {
@@ -309,7 +406,7 @@ export function useGenerator() {
     state,
     generatedJson,
     allFiles,
-    bashHistoryNote,
+    extraNotes,
     indentation,
     reset,
     getShareUrl,

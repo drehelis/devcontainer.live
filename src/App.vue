@@ -19,7 +19,7 @@ import PresetsGallery from "./components/presets/PresetsGallery.vue";
 const {
   state,
   allFiles,
-  bashHistoryNote,
+  extraNotes,
   indentation,
   reset: resetGenerator,
   getShareUrl,
@@ -150,8 +150,8 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
           <CodePreview
             :code="allFiles[activeFile]?.content || ''"
             :language="allFiles[activeFile]?.language || 'json'"
-            :bash-history-note="
-              activeFile === 'devcontainer.json' ? bashHistoryNote : undefined
+            :extra-notes="
+              activeFile === 'devcontainer.json' ? extraNotes : undefined
             "
             :indentation="indentation"
             @update:cursor="handleCursorUpdate"

@@ -131,7 +131,7 @@ defineEmits<{
       @click="$emit('update:activeSection', 'history')"
       class="activity-item group"
       :class="{ active: activeSection === 'history' }"
-      title="Storage & History"
+      title="Mounts"
     >
       <svg
         class="w-6 h-6"
