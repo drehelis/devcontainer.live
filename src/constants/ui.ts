@@ -11,7 +11,7 @@ export const CONFIG_SECTIONS: { id: Section; name: string }[] = [
   { id: "general", name: "General" },
   { id: "features", name: "Features" },
   { id: "ports", name: "Network" },
-  { id: "history", name: "Storage" },
+  { id: "history", name: "Mounts" },
   { id: "advanced", name: "Hooks" },
 ];
 

@@ -257,17 +257,68 @@ export function useGenerator() {
     return JSON.stringify(cleanConfig, null, indent);
   });
 
-  const bashHistoryNote = computed(() => {
+  const extraNotes = computed(() => {
+    const notes: string[] = [];
     const config = state.value.config;
+    const orchestration = state.value.orchestration;
+
+    // Bash History Note
     const hasBashHistory = config.mounts?.some((m: any) => {
       if (typeof m === "string") return m.includes("commandhistory");
       return m?.target === "/commandhistory";
     });
-
     if (hasBashHistory) {
-      return "To persist bash history, add this to your .bashrc: export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history";
+      notes.push(
+        "To persist bash history, add this to your .bashrc:\nexport PROMPT_COMMAND='history -a' && export HISTFILE=/commandhistory/.bash_history",
+      );
     }
-    return undefined;
+
+    // Secrets Note
+    if (orchestration === "dockerfile") {
+      const secretOpt = config.build?.options?.find((opt) =>
+        opt.startsWith("--secret"),
+      );
+      if (secretOpt) {
+        const idMatch = secretOpt.match(/id=([^,]+)/);
+        const secretId = idMatch ? idMatch[1] : "";
+
+        if (secretOpt.includes("env=")) {
+          const envMatch = secretOpt.match(/env=([^,]+)/);
+          const envName = envMatch ? envMatch[1] : "MY_SECRET";
+          notes.push(
+            `Use as environment variable:\nRUN --mount=type=secret,id=${secretId},env=${envName} install_command`,
+          );
+        } else {
+          const srcMatch = secretOpt.match(/src=([^,]+)/);
+          const src = srcMatch ? srcMatch[1] : "";
+
+          // Use a default path but replace home alias if present
+          let targetPath = src || `/run/secrets/${secretId}`;
+          if (targetPath.startsWith("~")) {
+            targetPath = targetPath.replace("~", "/root");
+          }
+
+          notes.push(
+            `Add to your Dockerfile:\nRUN --mount=type=secret,id=${secretId},target=${targetPath} install_command`,
+          );
+        }
+      }
+
+      const sshOpt = config.build?.options?.find((opt) =>
+        opt.startsWith("--ssh"),
+      );
+      if (sshOpt) {
+        const content = sshOpt.replace("--ssh=", "");
+        const sshId = content.includes("=") ? content.split("=")[0] : content;
+        const mountFlags = sshId === "default" ? "" : `,id=${sshId}`;
+
+        notes.push(
+          `To use SSH in your Dockerfile:\nRUN --mount=type=ssh${mountFlags} ssh -q -T git@gitlab.com`,
+        );
+      }
+    }
+
+    return notes.length > 0 ? notes : undefined;
   });
 
   function getShareUrl() {
@@ -309,7 +360,7 @@ export function useGenerator() {
     state,
     generatedJson,
     allFiles,
-    bashHistoryNote,
+    extraNotes,
     indentation,
     reset,
     getShareUrl,

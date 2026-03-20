@@ -65,7 +65,11 @@ function handleUpdateOrchestration(val: OrchestrationType) {
       v-if="activeSection === 'history'"
       class="space-y-8 animate-in fade-in slide-in-from-left-2 duration-300"
     >
-      <HistorySection :config="config" @update:config="handleUpdateConfig" />
+      <HistorySection
+        :config="config"
+        :orchestration="orchestration"
+        @update:config="handleUpdateConfig"
+      />
     </div>
 
     <div

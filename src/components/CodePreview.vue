@@ -6,7 +6,7 @@ import { useShiki } from "../composables/useShiki";
 const props = defineProps<{
   code: string;
   language: string;
-  bashHistoryNote?: string;
+  extraNotes?: string[];
   indentation: number;
 }>();
 
@@ -20,6 +20,20 @@ const activeLine = ref(0);
 const activeCol = ref(0);
 const lines = ref<string[]>([]);
 const highlightedLines = ref<ThemedToken[][]>([]);
+
+const copiedNote = ref<number | null>(null);
+
+function copyNote(note: string, index: number) {
+  // Extract just the code part (usually starts after a newline)
+  const lines = note.split("\n");
+  const textToCopy = lines.length > 1 ? lines.slice(1).join("\n") : note;
+
+  navigator.clipboard.writeText(textToCopy);
+  copiedNote.value = index;
+  setTimeout(() => {
+    if (copiedNote.value === index) copiedNote.value = null;
+  }, 2000);
+}
 
 // Rough width of a character in Geist Mono text-[13px]
 const CHAR_WIDTH = 7.8;
@@ -137,10 +151,45 @@ onMounted(() => {
     style="tab-size: 4"
   >
     <div
-      v-if="bashHistoryNote"
-      class="mb-2 p-2 bg-ide-accent/10 border border-ide-accent/30 rounded text-[10px] text-ide-text-muted"
+      v-for="(note, nIdx) in extraNotes"
+      :key="nIdx"
+      class="mb-2 p-2 pr-9 bg-ide-accent/10 border border-ide-accent/30 rounded text-[10px] text-ide-text-muted whitespace-pre-line group/note relative"
     >
-      {{ bashHistoryNote }}
+      {{ note }}
+      <button
+        @click="copyNote(note, nIdx)"
+        class="absolute top-1 right-1 p-1 rounded hover:bg-ide-accent/20 text-ide-text-muted/40 hover:text-ide-accent transition-all opacity-40 hover:opacity-100"
+        :title="copiedNote === nIdx ? 'Copied!' : 'Copy to Clipboard'"
+      >
+        <svg
+          v-if="copiedNote !== nIdx"
+          class="w-3.5 h-3.5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-3 8h3m-3 4h3"
+          />
+        </svg>
+        <svg
+          v-else
+          class="w-3.5 h-3.5 text-ide-green"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="3"
+            d="M5 13l4 4L19 7"
+          />
+        </svg>
+      </button>
     </div>
     <div class="flex flex-col min-h-full">
       <div
