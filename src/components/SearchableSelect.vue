@@ -192,7 +192,7 @@ const isLoading = computed(() => props.loading);
         </div>
         <div
           v-if="filteredOptions.length === 0"
-          class="px-4 py-3 text-[10px] text-ide-text-muted italic"
+          class="px-4 py-3 text-[10px] text-ide-text-muted"
         >
           No options found
         </div>

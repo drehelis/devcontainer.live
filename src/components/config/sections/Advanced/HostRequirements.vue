@@ -64,7 +64,7 @@ function updateSize(
         <div class="space-y-2">
           <div class="flex items-center gap-1.5">
             <label
-              class="text-[9px] font-black uppercase tracking-widest text-ide-text-muted italic"
+              class="text-[9px] font-black uppercase tracking-widest text-ide-text-muted"
               >CPUs</label
             >
             <InfoTooltip property="hostRequirements.cpus" />
@@ -78,7 +78,7 @@ function updateSize(
         <div class="space-y-2">
           <div class="flex items-center gap-1.5">
             <label
-              class="text-[9px] font-black uppercase tracking-widest text-ide-text-muted italic"
+              class="text-[9px] font-black uppercase tracking-widest text-ide-text-muted"
               >Memory</label
             >
             <InfoTooltip property="hostRequirements.memory" />
@@ -115,7 +115,7 @@ function updateSize(
         <div class="space-y-2">
           <div class="flex items-center gap-1.5">
             <label
-              class="text-[9px] font-black uppercase tracking-widest text-ide-text-muted italic"
+              class="text-[9px] font-black uppercase tracking-widest text-ide-text-muted"
               >Storage</label
             >
             <InfoTooltip property="hostRequirements.storage" />
@@ -196,7 +196,7 @@ function updateSize(
               >
               <InfoTooltip property="hostRequirements.gpu" />
             </div>
-            <span class="text-[8px] text-ide-text-muted italic"
+            <span class="text-[8px] text-ide-text-muted"
               >Hardware acceleration</span
             >
           </div>

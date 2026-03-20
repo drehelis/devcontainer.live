@@ -115,7 +115,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
 
     <div
       v-if="error"
-      class="p-3 bg-ide-orange/10 border border-ide-orange/30 rounded text-ide-orange text-[10px] italic shrink-0"
+      class="p-3 bg-ide-orange/10 border border-ide-orange/30 rounded text-ide-orange text-[10px] shrink-0"
     >
       Error fetching features: {{ error }} - Using cached/offline list.
     </div>
@@ -209,7 +209,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
         >
           <p
             v-if="feature.description"
-            class="text-[10px] text-ide-text-muted leading-relaxed mb-3 italic"
+            class="text-[10px] text-ide-text-muted leading-relaxed mb-3"
           >
             {{ feature.description }}
           </p>
@@ -243,7 +243,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
                 >
                 <span
                   v-if="opt.type === 'string' && (opt.proposals || opt.enum)"
-                  class="text-[7px] opacity-40 italic"
+                  class="text-[7px] opacity-40"
                   >Presets available</span
                 >
               </div>
@@ -296,7 +296,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
               <div v-else class="space-y-1">
                 <p
                   v-if="opt.description"
-                  class="text-[8px] text-ide-text-muted/60 italic"
+                  class="text-[8px] text-ide-text-muted/60"
                 >
                   {{ opt.description }}
                 </p>
@@ -411,7 +411,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
       v-if="filteredFeatures.length === 0 && !loading"
       class="py-12 text-center border border-dashed border-ide-border rounded-lg bg-ide-activity/10"
     >
-      <p class="text-[10px] italic text-ide-text-muted">
+      <p class="text-[10px] text-ide-text-muted">
         No features match your search.
       </p>
       <button

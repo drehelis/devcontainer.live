@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import type { OfficialTemplate } from "../../composables/usePresets";
+import { ref } from "vue";
+import type { OfficialTemplate } from "../../types";
+import { URLS } from "../../constants/urls";
 
 defineProps<{
   preset: OfficialTemplate;
@@ -9,6 +11,8 @@ defineProps<{
 defineEmits<{
   (e: "select", preset: OfficialTemplate): void;
 }>();
+
+const iconError = ref(false);
 </script>
 
 <template>
@@ -22,22 +26,51 @@ defineEmits<{
     "
   >
     <div class="flex items-center justify-between p-3 flex-1">
-      <div class="flex flex-col flex-1 min-w-0">
-        <div class="flex items-center gap-2">
-          <span
-            class="text-[11px] font-black uppercase tracking-wider truncate"
-            :class="loading ? 'text-ide-accent' : 'text-ide-text-bright'"
+      <div class="flex items-center gap-3 flex-1 min-w-0">
+        <!-- Tech Icon -->
+        <div
+          class="w-7 h-7 shrink-0 flex items-center justify-center bg-ide-bg/40 rounded border border-ide-border/60 transition-all duration-300 shadow-inner"
+        >
+          <img
+            v-if="preset.icon && !iconError"
+            :src="`${URLS.SIMPLE_ICONS_BASE}/${preset.icon}`"
+            class="w-4 h-4 opacity-80"
+            @error="iconError = true"
+            loading="lazy"
+          />
+          <svg
+            v-else
+            class="w-3.5 h-3.5 text-ide-text-muted/30"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            {{ preset.name }}
-          </span>
-          <span
-            v-if="loading"
-            class="w-2.5 h-2.5 border border-ide-accent border-t-transparent rounded-full animate-spin"
-          ></span>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+            />
+          </svg>
         </div>
-        <span class="text-[8px] font-mono text-ide-text-muted truncate">{{
-          preset.image
-        }}</span>
+
+        <div class="flex flex-col flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <span
+              class="text-[11px] font-black uppercase tracking-wider truncate"
+              :class="loading ? 'text-ide-accent' : 'text-ide-text-bright'"
+            >
+              {{ preset.name }}
+            </span>
+            <span
+              v-if="loading"
+              class="w-2.5 h-2.5 border border-ide-accent border-t-transparent rounded-full animate-spin"
+            ></span>
+          </div>
+          <span class="text-[8px] font-mono text-ide-text-muted truncate">{{
+            preset.image
+          }}</span>
+        </div>
       </div>
 
       <!-- Action Indicator -->

@@ -1,16 +1,29 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import type { OrchestrationType } from "../../types";
+import type {
+  OrchestrationType,
+  OfficialTemplate,
+  PresetConfigState,
+  TemplateOption,
+} from "../../types";
 import {
   usePresets,
   substituteTemplateOptions,
 } from "../../composables/usePresets";
 import PresetCard from "./PresetCard.vue";
+import PresetConfigForm from "./PresetConfigForm.vue";
 import SectionHeader from "../SectionHeader.vue";
-import SearchableSelect from "../SearchableSelect.vue";
 
 const emit = defineEmits<{
-  (e: "apply", config: any): void;
+  (
+    e: "apply",
+    data: {
+      orchestration: OrchestrationType;
+      config: any;
+      dockerfile: string | null;
+      dockerCompose: string | null;
+    },
+  ): void;
 }>();
 
 const { templates, loading, error, refresh, fetchTemplateConfig } =
@@ -18,14 +31,7 @@ const { templates, loading, error, refresh, fetchTemplateConfig } =
 const searchQuery = ref("");
 const loadingTemplate = ref<string | null>(null);
 
-// State for the template being configured
-const configuring = ref<{
-  config: any;
-  metadata: any;
-  userValues: Record<string, string>;
-  dockerfile: string | null;
-  dockerCompose: string | null;
-} | null>(null);
+const configuring = ref<PresetConfigState | null>(null);
 
 const filteredTemplates = computed(() => {
   if (!searchQuery.value) return templates.value;
@@ -37,7 +43,7 @@ const filteredTemplates = computed(() => {
   );
 });
 
-async function handleSelect(template: any) {
+async function handleSelect(template: OfficialTemplate) {
   if (configuring.value?.metadata?.id === template.id) {
     configuring.value = null;
     return;
@@ -48,11 +54,11 @@ async function handleSelect(template: any) {
     const { config, metadata, dockerfile, dockerCompose } =
       await fetchTemplateConfig(template.id);
 
-    // If there are options, we show the configuration form
     if (metadata?.options && Object.keys(metadata.options).length > 0) {
       const userValues: Record<string, string> = {};
-      Object.entries(metadata.options).forEach(([key, opt]: [string, any]) => {
-        userValues[key] = String(userValues[key] ?? opt.default ?? "");
+      Object.entries(metadata.options).forEach(([key, opt]) => {
+        const o = opt as TemplateOption;
+        userValues[key] = String(userValues[key] ?? o.default ?? "");
       });
 
       configuring.value = {
@@ -72,6 +78,16 @@ async function handleSelect(template: any) {
   }
 }
 
+function handleApply(data: PresetConfigState) {
+  apply(
+    data.config,
+    data.metadata,
+    data.userValues,
+    data.dockerfile,
+    data.dockerCompose,
+  );
+}
+
 function apply(
   config: any,
   metadata: any,
@@ -81,7 +97,6 @@ function apply(
 ) {
   const finalConfig = substituteTemplateOptions(config, metadata, userValues);
 
-  // Detect orchestration from the imported config
   let orchestration: OrchestrationType = "image";
   if (finalConfig.dockerComposeFile) {
     orchestration = "dockerCompose";
@@ -112,7 +127,6 @@ function apply(
     />
 
     <div class="space-y-3 flex flex-col flex-1 min-h-0">
-      <!-- Search & Loading -->
       <div
         class="ide-input flex items-center gap-3 px-3 focus-within:border-ide-accent focus-within:ring-1 focus-within:ring-ide-accent/20 transition-all shrink-0"
       >
@@ -143,12 +157,11 @@ function apply(
         </div>
       </div>
 
-      <!-- Error / Status Indicator -->
       <div
         v-if="error"
         class="px-3 py-2 bg-ide-orange/10 border border-ide-orange/30 rounded flex items-center justify-between gap-2 animate-in fade-in slide-in-from-top-1"
       >
-        <p class="text-[9px] text-ide-orange italic leading-none truncate">
+        <p class="text-[9px] text-ide-orange leading-none truncate">
           {{ error }}
         </p>
         <button
@@ -160,7 +173,6 @@ function apply(
         </button>
       </div>
 
-      <!-- Templates List -->
       <div
         v-if="filteredTemplates.length > 0"
         class="flex-1 overflow-y-auto custom-scrollbar pr-2 pb-4 flex flex-col gap-2 min-h-0"
@@ -180,130 +192,12 @@ function apply(
             }"
           />
 
-          <!-- Inline Config Step -->
-          <div
+          <PresetConfigForm
             v-if="configuring?.metadata?.id === template.id"
-            class="mt-2 ml-4 p-4 rounded-lg bg-ide-activity/20 border border-ide-accent/20 animate-in slide-in-from-top-2 duration-300 space-y-4"
-          >
-            <!-- (Config form content remains the same) -->
-            <div class="grid grid-cols-1 gap-4">
-              <div
-                v-for="(opt, key) in configuring.metadata.options"
-                :key="key"
-                class="space-y-2"
-              >
-                <div class="flex items-center justify-between">
-                  <span
-                    class="text-[9px] font-mono text-ide-accent/80 uppercase tracking-tighter"
-                    >{{ key }}</span
-                  >
-                  <span
-                    class="text-[7px] text-ide-text-muted/40 italic uppercase"
-                    >{{ opt.type }}</span
-                  >
-                </div>
-
-                <p
-                  v-if="opt.description"
-                  class="text-[8px] text-ide-text-muted italic leading-relaxed"
-                >
-                  {{ opt.description }}
-                </p>
-
-                <!-- Boolean Option -->
-                <label
-                  v-if="opt.type === 'boolean'"
-                  class="flex items-center gap-2 cursor-pointer group/opt"
-                >
-                  <input
-                    type="checkbox"
-                    :checked="configuring.userValues[key] === 'true'"
-                    @change="
-                      configuring.userValues[key] = (
-                        $event.target as HTMLInputElement
-                      ).checked
-                        ? 'true'
-                        : 'false'
-                    "
-                    class="hidden"
-                  />
-                  <div
-                    class="w-3 h-3 border border-ide-border rounded-sm flex items-center justify-center transition-colors group-hover/opt:border-ide-accent"
-                    :class="{
-                      'bg-ide-accent border-ide-accent':
-                        configuring.userValues[key] === 'true',
-                    }"
-                  >
-                    <svg
-                      v-if="configuring.userValues[key] === 'true'"
-                      class="w-2.5 h-2.5 text-ide-bg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="4"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  </div>
-                  <span class="text-[9px] text-ide-text-muted">Enable</span>
-                </label>
-
-                <!-- Select if enum/proposals -->
-                <SearchableSelect
-                  v-else-if="opt.enum || opt.proposals"
-                  v-model="configuring.userValues[key]"
-                  :options="
-                    (opt.enum || opt.proposals).map((val: string) => ({
-                      value: String(val),
-                      label: String(val),
-                    }))
-                  "
-                  class="w-full"
-                />
-
-                <!-- Default Input -->
-                <input
-                  v-else
-                  v-model="configuring.userValues[key]"
-                  type="text"
-                  class="ide-input w-full py-1 text-[9px] h-auto font-mono bg-ide-bg/80"
-                  :placeholder="String(opt.default || '')"
-                />
-              </div>
-            </div>
-
-            <button
-              @click="
-                apply(
-                  configuring.config,
-                  configuring.metadata,
-                  configuring.userValues,
-                  configuring.dockerfile,
-                  configuring.dockerCompose,
-                )
-              "
-              class="w-full py-2 bg-ide-accent text-ide-bg rounded text-[10px] font-black uppercase tracking-widest hover:opacity-90 transition-opacity flex items-center justify-center gap-2 shadow-lg"
-            >
-              <span>BUILD CONFIGURATION</span>
-              <svg
-                class="w-3.5 h-3.5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="3"
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"
-                />
-              </svg>
-            </button>
-          </div>
+            :template="template"
+            :configuring="configuring"
+            @apply="handleApply"
+          />
         </div>
       </div>
 
@@ -311,7 +205,7 @@ function apply(
         v-else-if="!loading && !error"
         class="py-12 text-center border border-dashed border-ide-border rounded-lg bg-ide-activity/10"
       >
-        <p class="text-[10px] italic text-ide-text-muted">
+        <p class="text-[10px] text-ide-text-muted">
           No templates match search.
         </p>
         <button

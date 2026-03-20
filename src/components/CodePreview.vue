@@ -202,7 +202,6 @@ onMounted(() => {
                 :style="{ color: token.color }"
                 :class="{
                   'font-bold': token.fontStyle === 1,
-                  italic: token.fontStyle === 2,
                   underline: token.fontStyle === 4,
                 }"
                 >{{ token.content }}</span

@@ -130,7 +130,7 @@ function updateConfig(path: string, value: any) {
           >
           <InfoTooltip property="updateRemoteUserUID" />
         </div>
-        <span class="text-[8px] text-ide-text-muted italic"
+        <span class="text-[8px] text-ide-text-muted"
           >Sync local/remote UID</span
         >
       </div>

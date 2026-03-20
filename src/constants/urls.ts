@@ -24,4 +24,7 @@ export const URLS = {
 
   // Spec
   SPEC_SCHEMA: `${GITHUB_RAW_BASE}/${REPOS.SPEC}/main/schemas/devContainer.schema.json`,
+
+  // External
+  SIMPLE_ICONS_BASE: "https://cdn.simpleicons.org",
 };
