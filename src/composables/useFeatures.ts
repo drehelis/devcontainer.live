@@ -31,7 +31,7 @@ export function useFeatures() {
       if (!res.ok) throw new Error("No data found");
 
       features.value = await res.json();
-    } catch (err: any) {
+    } catch {
       error.value = "Features data not available.";
     } finally {
       loading.value = false;

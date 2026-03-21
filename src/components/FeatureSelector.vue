@@ -35,7 +35,7 @@ const filteredFeatures = computed(() => {
     );
   }
 
-  return list.sort((a, b) => {
+  return [...list].sort((a, b) => {
     const aOfficial = a.id.startsWith("ghcr.io/devcontainers/features");
     const bOfficial = b.id.startsWith("ghcr.io/devcontainers/features");
     if (aOfficial && !bOfficial) return -1;
@@ -77,12 +77,16 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
   newFeatures[featureId] = { ...newFeatures[featureId], [optionKey]: value };
   emit("update:selectedFeatures", newFeatures);
 }
+
+const manualFeatures = computed(() => {
+  return Object.keys(props.selectedFeatures).filter(
+    (id) => !featuresList.value.some((f) => f.id === id)
+  );
+});
 </script>
 
 <template>
   <div class="space-y-6 flex flex-col h-full">
-    <!-- Custom Feature Input -->
-    <!-- ... stays same but shrink-0 ... -->
     <div
       class="flex gap-2 p-3 bg-ide-activity/20 border border-dashed border-ide-border rounded-lg group hover:border-ide-accent/30 transition-colors shrink-0"
     >
@@ -101,7 +105,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
       </button>
     </div>
 
-    <!-- Search & Loading -->
+
     <div
       class="ide-input flex items-center gap-3 px-3 focus-within:border-ide-accent focus-within:ring-1 focus-within:ring-ide-accent/20 transition-all shrink-0"
     >
@@ -136,10 +140,10 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
       v-if="error"
       class="p-3 bg-ide-orange/10 border border-ide-orange/30 rounded text-ide-orange text-[10px] shrink-0"
     >
-      Error fetching features: {{ error }} - Using cached/offline list.
+      Error fetching features: {{ error }}
     </div>
 
-    <!-- Category Filter (Rubric) -->
+
     <div
       class="grid grid-cols-1 sm:grid-cols-3 gap-2 shrink-0 border-b border-ide-border/50 pb-4"
     >
@@ -162,7 +166,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
       </button>
     </div>
 
-    <!-- Features List -->
+
     <div
       class="flex-1 overflow-y-auto custom-scrollbar pr-2 pb-4 grid grid-cols-1 gap-3 min-h-0"
     >
@@ -176,7 +180,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
             : 'bg-ide-activity/30 border-ide-border hover:border-ide-accent/30'
         "
       >
-        <!-- Header -->
+      >
         <div
           @click="toggleFeature(feature)"
           class="flex justify-between p-3 cursor-pointer select-none gap-3"
@@ -259,7 +263,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
           </div>
         </div>
 
-        <!-- Details & Options -->
+
         <div
           class="px-3 pb-3 border-t border-ide-accent/10 pt-2"
           v-if="selectedFeatures[feature.id] || searchQuery"
@@ -279,7 +283,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
             </span>
           </div>
 
-          <!-- Options UI -->
+
           <div
             v-if="
               selectedFeatures[feature.id] &&
@@ -305,7 +309,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
                 >
               </div>
 
-              <!-- Boolean Option -->
+
               <label
                 v-if="opt.type === 'boolean'"
                 class="flex items-center gap-2 cursor-pointer group/opt"
@@ -349,7 +353,6 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
                 }}</span>
               </label>
 
-              <!-- String/Select Option -->
               <div v-else class="space-y-1">
                 <p
                   v-if="opt.description"
@@ -358,7 +361,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
                   {{ opt.description }}
                 </p>
 
-                <!-- Select if enum/proposals -->
+
                 <SearchableSelect
                   v-if="opt.enum || opt.proposals"
                   :model-value="
@@ -378,7 +381,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
                   placeholder="Select option..."
                 />
 
-                <!-- Input if generic string -->
+
                 <input
                   v-else
                   type="text"
@@ -399,11 +402,9 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
         </div>
       </div>
 
-      <!-- Handle manually added IDs that don't match the catalog -->
       <div
-        v-for="(options, id) in selectedFeatures"
+        v-for="id in manualFeatures"
         :key="id"
-        v-show="!featuresList.find((f) => f.id === id)"
         class="flex flex-col border rounded-lg bg-ide-accent/5 border-ide-accent/40 ring-1 ring-ide-accent/20 overflow-hidden"
       >
         <div class="flex items-center justify-between p-3">
@@ -443,7 +444,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
             >
             <textarea
               placeholder='{"option": "value"}'
-              :value="JSON.stringify(options)"
+              :value="JSON.stringify(selectedFeatures[id])"
               @input="
                 (e) => {
                   try {
@@ -454,7 +455,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
                       ...selectedFeatures,
                       [id]: parsed,
                     });
-                  } catch (e) {}
+                  } catch {}
                 }
               "
               class="ide-input w-full font-mono text-[9px] bg-ide-bg/50 h-16 resize-none"

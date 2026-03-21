@@ -2,12 +2,12 @@ import { ref, computed, reactive, watch, nextTick } from "vue";
 import { MCR_PREFIX } from "../constants/urls";
 
 export const sharedTagsCache = reactive<Record<string, string[]>>({});
-let sharedTagsFetched = false;
+let fetchPromise: Promise<void> | null = null;
 
 export function ensureSharedTags() {
-  if (sharedTagsFetched) return;
-  sharedTagsFetched = true;
-  fetch("/data/imageTags.json")
+  if (fetchPromise) return fetchPromise;
+
+  fetchPromise = fetch("/data/imageTags.json")
     .then((res) => {
       if (!res.ok) throw new Error();
       return res.json();
@@ -15,9 +15,12 @@ export function ensureSharedTags() {
     .then((data) => {
       Object.assign(sharedTagsCache, data);
     })
-    .catch(() =>
-      console.warn("imageTags.json not found. Using fallback behavior."),
-    );
+    .catch(() => {
+      console.warn("imageTags.json not found. Using fallback behavior.");
+      fetchPromise = null;
+    });
+
+  return fetchPromise;
 }
 
 export function useImageAutocomplete(
