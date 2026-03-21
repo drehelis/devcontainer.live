@@ -66,7 +66,22 @@ jq --arg type "templates" "$JQ_FILTER" "$INDEX_FILE" > "$TEMPLATES_FILE"
 echo "Wrote templates to $TEMPLATES_FILE"
 
 echo "Fetching list of published baseline devcontainer images from MCR..."
-mapfile -t IMAGES < <(curl -sL "https://mcr.microsoft.com/v2/_catalog" | jq -r '.repositories[] | select(startswith("devcontainers/"))')
+CATALOG_JSON=$(curl -sL "https://mcr.microsoft.com/v2/_catalog") || {
+  echo "Failed to fetch MCR catalog."
+  exit 1
+}
+
+IMAGE_NAMES=$(printf '%s\n' "$CATALOG_JSON" | jq -r '.repositories[] | select(startswith("devcontainers/"))') || {
+  echo "Failed to parse MCR catalog JSON."
+  exit 1
+}
+
+mapfile -t IMAGES <<<"$IMAGE_NAMES"
+
+if [ ${#IMAGES[@]} -eq 0 ] || [ -z "${IMAGES[0]}" ]; then
+  echo "No devcontainer images found in MCR catalog; aborting to avoid writing incomplete imageTags.json."
+  exit 1
+fi
 
 echo "Iterating dynamically discovered images: ${IMAGES[*]}"
 
