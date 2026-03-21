@@ -1,5 +1,5 @@
 import { ref, computed, reactive, watch, nextTick } from "vue";
-import { MCR_PREFIX } from "../constants/urls";
+import { MCR_PREFIX, DATA_URLS } from "../constants/urls";
 
 export const sharedTagsCache = reactive<Record<string, string[]>>({});
 let fetchPromise: Promise<void> | null = null;
@@ -7,16 +7,21 @@ let fetchPromise: Promise<void> | null = null;
 export function ensureSharedTags() {
   if (fetchPromise) return fetchPromise;
 
-  fetchPromise = fetch("/data/imageTags.json")
+  fetchPromise = fetch(DATA_URLS.IMAGE_TAGS)
     .then((res) => {
       if (!res.ok) throw new Error();
       return res.json();
     })
     .then((data) => {
+      for (const key in sharedTagsCache) {
+        if (Object.prototype.hasOwnProperty.call(sharedTagsCache, key)) {
+          delete sharedTagsCache[key];
+        }
+      }
       Object.assign(sharedTagsCache, data);
     })
     .catch(() => {
-      console.warn("imageTags.json not found. Using fallback behavior.");
+      console.warn("imageTags.json not found.");
       fetchPromise = null;
     });
 

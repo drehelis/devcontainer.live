@@ -22,3 +22,10 @@ export const URLS = {
   // External
   SIMPLE_ICONS_BASE: "https://cdn.simpleicons.org",
 };
+
+export const BASE_URL = import.meta.env.BASE_URL;
+
+export const DATA_URLS = {
+  FEATURES: `${BASE_URL}data/features.json`,
+  IMAGE_TAGS: `${BASE_URL}data/imageTags.json`,
+};
