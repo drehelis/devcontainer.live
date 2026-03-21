@@ -1,0 +1,3779 @@
+[
+  {
+    "id": "ghcr.io/devcontainers/templates/alpine",
+    "name": "Alpine",
+    "description": "Simple Alpine container with Git installed.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Alpine version:",
+        "proposals": [
+          "3.22",
+          "3.21",
+          "3.20"
+        ],
+        "default": "3.22"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/alpine"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/anaconda",
+    "name": "Anaconda (Python 3)",
+    "description": "Develop Anaconda applications in Python3. Installs dependencies from your environment.yml file and the Python extension.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/anaconda"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/anaconda-postgres",
+    "name": "Anaconda (Python 3) & PostgreSQL",
+    "description": "Develop Anaconda & PostgreSQL applications in Python3. Installs dependencies from your environment.yml file and the Python extension.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/anaconda-postgres"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/cpp",
+    "name": "C++",
+    "description": "Develop C++ applications on Linux. Includes Debian C++ build tools.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian / Ubuntu version (use Debian 13, Debian 12, Ubuntu 24.04, and Ubuntu 22.04 on local arm64/Apple Silicon):",
+        "proposals": [
+          "debian13",
+          "debian12",
+          "ubuntu24.04",
+          "ubuntu22.04"
+        ],
+        "default": "debian13"
+      },
+      "reinstallCmakeVersionFromSource": {
+        "type": "string",
+        "description": "Install CMake version different from what base image has already installed.",
+        "proposals": [
+          "none",
+          "3.21.5",
+          "3.22.2"
+        ],
+        "default": "none"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/cpp"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/cpp-mariadb",
+    "name": "C++ & MariaDB",
+    "description": "Develop C++ applications on Linux. Includes Debian C++ build tools.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian / Ubuntu version (use Debian 13, Debian 12, Ubuntu 24.04, and Ubuntu 22.04 on local arm64/Apple Silicon):",
+        "proposals": [
+          "debian13",
+          "debian12",
+          "ubuntu24.04",
+          "ubuntu22.04"
+        ],
+        "default": "debian13"
+      },
+      "reinstallCmakeVersionFromSource": {
+        "type": "string",
+        "description": "Install CMake version different from what base image has already installed.",
+        "proposals": [
+          "none",
+          "3.21.5",
+          "3.22.2"
+        ],
+        "default": "none"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/cpp-mariadb"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/debian",
+    "name": "Debian",
+    "description": "Simple Debian container with Git installed.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use trixie bookworm or bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "trixie",
+          "bookworm",
+          "bullseye"
+        ],
+        "default": "trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/debian"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/docker-existing-docker-compose",
+    "name": "Existing Docker Compose (Extend)",
+    "description": "Sample illustrating how to extend an existing Docker Compose file for use in a dev container.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-existing-docker-compose"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/docker-existing-dockerfile",
+    "name": "Existing Dockerfile",
+    "description": "Sample illustrating reuse of an existing Dockerfile.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/docker-in-docker",
+    "name": "Docker in Docker",
+    "description": "Create child containers _inside_ a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.",
+    "options": {
+      "installZsh": {
+        "type": "boolean",
+        "description": "Install ZSH!?",
+        "default": "true"
+      },
+      "upgradePackages": {
+        "type": "boolean",
+        "description": "Upgrade OS packages?",
+        "default": "false"
+      },
+      "dockerVersion": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "none",
+          "20.10"
+        ],
+        "default": "latest",
+        "description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+      },
+      "moby": {
+        "type": "boolean",
+        "default": "true",
+        "description": "Install OSS Moby build instead of Docker CE"
+      },
+      "enableNonRootDocker": {
+        "type": "boolean",
+        "description": "Enable non-root user to access Docker in container?",
+        "default": "true"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-in-docker"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/docker-outside-of-docker",
+    "name": "Docker outside of Docker",
+    "description": "Access your host's Docker install from inside a dev container. Installs Docker extension in the container along with needed CLIs.",
+    "options": {
+      "installZsh": {
+        "type": "boolean",
+        "description": "Install ZSH!?",
+        "default": "true"
+      },
+      "upgradePackages": {
+        "type": "boolean",
+        "description": "Upgrade OS packages?",
+        "default": "false"
+      },
+      "dockerVersion": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "none",
+          "20.10"
+        ],
+        "default": "latest",
+        "description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+      },
+      "moby": {
+        "type": "boolean",
+        "default": "true",
+        "description": "Install OSS Moby build instead of Docker CE"
+      },
+      "enableNonRootDocker": {
+        "type": "boolean",
+        "description": "Enable non-root Docker access in container?",
+        "default": "true"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-outside-of-docker"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/docker-outside-of-docker-compose",
+    "name": "Docker outside of Docker Compose",
+    "description": "Access your host's Docker install from inside a container when using Docker Compose. Installs Docker extension in the container along with needed CLIs.",
+    "options": {
+      "installZsh": {
+        "type": "boolean",
+        "description": "Install ZSH?",
+        "default": "true"
+      },
+      "upgradePackages": {
+        "type": "boolean",
+        "description": "Upgrade OS packages?",
+        "default": "false"
+      },
+      "dockerVersion": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "none",
+          "20.10"
+        ],
+        "default": "latest",
+        "description": "Select or enter a Docker/Moby CLI version. (Availability can vary by OS version.)"
+      },
+      "moby": {
+        "type": "boolean",
+        "default": "true",
+        "description": "Install OSS Moby build instead of Docker CE"
+      },
+      "enableNonRootDocker": {
+        "type": "boolean",
+        "description": "Enable non-root Docker access in container?",
+        "default": "true"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/docker-outside-of-docker-compose"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/dotnet",
+    "name": "C# (.NET)",
+    "description": "Develop C# and .NET based applications. Includes all needed SDKs, extensions, and dependencies.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": ".NET version:",
+        "proposals": [
+          "10.0",
+          "9.0",
+          "8.0",
+          "9.0-bookworm",
+          "8.0-bookworm",
+          "10.0-noble",
+          "9.0-noble",
+          "8.0-noble",
+          "8.0-jammy"
+        ],
+        "default": "10.0-noble"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/dotnet"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/dotnet-fsharp",
+    "name": "F# (.NET)",
+    "description": "Develop F# and .NET based applications. Includes all needed SDKs, extensions, and dependencies.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/dotnet-fsharp"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/dotnet-mssql",
+    "name": "C# (.NET) and MS SQL",
+    "description": "Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and an MS SQL container for parallel database development. Adds an additional MS SQL container to the C# (.NET Core) container definition and deploys any .dacpac files from the mssql .devcontainer folder.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": ".NET version:",
+        "proposals": [
+          "10.0",
+          "9.0",
+          "8.0",
+          "9.0-bookworm",
+          "8.0-bookworm",
+          "10.0-noble",
+          "9.0-noble",
+          "8.0-noble",
+          "8.0-jammy"
+        ],
+        "default": "10.0-noble"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/dotnet-mssql"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/dotnet-postgres",
+    "name": "C# (.NET) and PostgreSQL",
+    "description": "Develop C# and .NET Core based applications. Includes all needed SDKs, extensions, dependencies and a PostgreSQL container for parallel database development. Adds an additional PostgreSQL container to the C# (.NET Core) container definition.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": ".NET version:",
+        "proposals": [
+          "10.0",
+          "9.0",
+          "8.0",
+          "9.0-bookworm",
+          "8.0-bookworm",
+          "10.0-noble",
+          "9.0-noble",
+          "8.0-noble",
+          "8.0-jammy"
+        ],
+        "default": "10.0-noble"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/dotnet-postgres"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/go",
+    "name": "Go",
+    "description": "Develop Go based applications. Includes appropriate runtime args, Go, common tools, extensions, and dependencies.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Go version:",
+        "proposals": [
+          "1-trixie",
+          "1.24-trixie",
+          "1.25-trixie",
+          "1.25-bookworm",
+          "1.24-bookworm",
+          "1.24-bullseye"
+        ],
+        "default": "1.25-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/go"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/go-postgres",
+    "name": "Go & PostgreSQL",
+    "description": "Use and develop Go + Postgres applications. Includes appropriate runtime args, Go, common tools, extensions, and dependencies.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Go version:",
+        "proposals": [
+          "1-trixie",
+          "1.25-trixie",
+          "1.24-trixie",
+          "1-bookworm",
+          "1.25-bookworm",
+          "1.24-bookworm",
+          "1-bullseye",
+          "1.24-bullseye"
+        ],
+        "default": "1.25-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/go-postgres"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/java",
+    "name": "Java",
+    "description": "Develop Java applications. Includes the JDK and Java extensions.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Java version (use -trixie, or -bookworm variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "25-trixie",
+          "21-trixie",
+          "17-trixie",
+          "11-trixie",
+          "8-trixie",
+          "25-bookworm",
+          "21-bookworm",
+          "17-bookworm",
+          "11-bookworm",
+          "8-bookworm"
+        ],
+        "default": "25-trixie"
+      },
+      "installMaven": {
+        "type": "boolean",
+        "description": "Install Maven, a management tool for Java",
+        "default": "false"
+      },
+      "installGradle": {
+        "type": "boolean",
+        "description": "Install Gradle, a build automation tool for multi-language software development",
+        "default": "false"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/java"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/java-postgres",
+    "name": "Java & PostgreSQL",
+    "description": "Develop applications with Java and PostgreSQL. Includes a Java application container and PostgreSQL server.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Java version (use -trixie, or -bookworm variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "25-trixie",
+          "21-trixie",
+          "17-trixie",
+          "11-trixie",
+          "8-trixie",
+          "25-bookworm",
+          "21-bookworm",
+          "17-bookworm",
+          "11-bookworm",
+          "8-bookworm"
+        ],
+        "default": "25-trixie"
+      },
+      "installMaven": {
+        "type": "boolean",
+        "description": "Install Maven, a management tool for Java",
+        "default": "false"
+      },
+      "installGradle": {
+        "type": "boolean",
+        "description": "Install Gradle, a build automation tool for multi-language software development",
+        "default": "false"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/java-postgres"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/javascript-node",
+    "name": "Node.js & JavaScript",
+    "description": "Develop Node.js based applications. Includes Node.js, eslint, nvm, and yarn.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Node.js version (use -trixie, -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "24-trixie",
+          "22-trixie",
+          "20-trixie",
+          "24-bookworm",
+          "22-bookworm",
+          "20-bookworm",
+          "24-bullseye",
+          "22-bullseye",
+          "20-bullseye"
+        ],
+        "default": "24-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/javascript-node"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/javascript-node-mongo",
+    "name": "Node.js & Mongo DB",
+    "description": "Develop applications in Node.js and Mongo DB. Includes Node.js, eslint, and yarn in a container linked to a Mongo DB.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Node.js version (use -bookworm or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "24-bookworm",
+          "22-bookworm",
+          "20-bookworm",
+          "24-bullseye",
+          "22-bullseye",
+          "20-bullseye"
+        ],
+        "default": "24-bookworm"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/javascript-node-mongo"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/javascript-node-postgres",
+    "name": "Node.js & PostgreSQL",
+    "description": "Develop applications in Node.js and PostgreSQL. Includes Node.js, eslint, and yarn in a container linked to a Postgres DB container",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Node.js version (use -trixie, -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "24-trixie",
+          "22-trixie",
+          "20-trixie",
+          "24-bookworm",
+          "22-bookworm",
+          "20-bookworm",
+          "24-bullseye",
+          "22-bullseye",
+          "20-bullseye"
+        ],
+        "default": "24-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/javascript-node-postgres"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/jekyll",
+    "name": "Jekyll",
+    "description": "Develop static sites with Jekyll, includes everything you need to get up and running.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian OS version (use bookworm, or bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bookworm",
+          "bullseye"
+        ],
+        "default": "bullseye"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/jekyll"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/kubernetes-helm",
+    "name": "Kubernetes - Local Configuration",
+    "description": "Access a local (or remote) Kubernetes cluster from inside a dev container using your local config. Includes kubectl, Helm, and the Docker CLI.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/kubernetes-helm-minikube",
+    "name": "Kubernetes - Minikube-in-Docker",
+    "description": "Access an embedded minikube instance from inside a dev container. Includes kubectl, Helm, minikube, and the Docker.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm-minikube"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/markdown",
+    "name": "Markdown",
+    "description": "A simple container for editing markdown.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/markdown"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/miniconda",
+    "name": "Miniconda (Python 3)",
+    "description": "Develop Miniconda applications in Python 3. Installs dependencies from your environment.yml file and the Python extension.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/miniconda"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/miniconda-postgres",
+    "name": "Miniconda & PostgreSQL (Python 3)",
+    "description": "Develop Miniconda & PostgreSQL applications in Python 3. Installs dependencies from your environment.yml file and the Python extension.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/miniconda-postgres"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/php",
+    "name": "PHP",
+    "description": "Develop PHP based applications. Includes needed tools, extensions, and dependencies.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "PHP version (use -trixie, -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "8.5-trixie",
+          "8.5-bookworm",
+          "8.4-trixie",
+          "8.4-bookworm",
+          "8.3-trixie",
+          "8.3-bookworm",
+          "8.2-trixie",
+          "8.2-bookworm",
+          "8-bookworm"
+        ],
+        "default": "8.5-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/php"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/php-mariadb",
+    "name": "PHP & MariaDB",
+    "description": "Develop PHP applications with MariaDB (MySQL Compatible).",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "PHP version (use -trixie, -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "8.5-trixie",
+          "8.5-bookworm",
+          "8.4-trixie",
+          "8.4-bookworm",
+          "8.3-trixie",
+          "8.3-bookworm",
+          "8.2-trixie",
+          "8.2-bookworm",
+          "8-trixie"
+        ],
+        "default": "8.5-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/php-mariadb"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/postgres",
+    "name": "Python 3 & PostgreSQL",
+    "description": "Develop applications with Python 3 and PostgreSQL. Includes a Python application container and PostgreSQL server.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version (use -trixie, -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "3.14-trixie",
+          "3.13-trixie",
+          "3.12-trixie",
+          "3.11-trixie",
+          "3.10-trixie",
+          "3.14-bookworm",
+          "3.13-bookworm",
+          "3.12-bookworm",
+          "3.11-bookworm",
+          "3.10-bookworm"
+        ],
+        "default": "3.14-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/postgres"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/powershell",
+    "name": "Powershell",
+    "description": "Develop PowerShell scripts without installing anything locally.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/powershell"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/python",
+    "name": "Python 3",
+    "description": "Develop Python 3 applications.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version (use -trixie, or -bookworm variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "3-trixie",
+          "3.14-trixie",
+          "3.13-trixie",
+          "3.12-trixie",
+          "3.11-trixie",
+          "3.10-trixie",
+          "3-bookworm",
+          "3.14-bookworm",
+          "3.13-bookworm",
+          "3.12-bookworm",
+          "3.11-bookworm",
+          "3.10-bookworm"
+        ],
+        "default": "3.14-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/python"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/ruby",
+    "name": "Ruby",
+    "description": "Develop Ruby based applications. includes everything you need to get up and running.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Ruby version (use -trixie, -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "4-trixie",
+          "3.4-trixie",
+          "3.3-trixie",
+          "3.2-trixie",
+          "4-bookworm",
+          "3.4-bookworm",
+          "3.3-bookworm",
+          "3.2-bookworm",
+          "3.4-bullseye",
+          "3.3-bullseye",
+          "3.2-bullseye"
+        ],
+        "default": "4-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/ruby"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/ruby-rails-postgres",
+    "name": "Ruby on Rails & Postgres",
+    "description": "Develop Ruby on Rails applications with Postgres. Includes a Rails application container and PostgreSQL server.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Ruby version (use - trixie, -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "4-trixie",
+          "3.4-trixie",
+          "3.3-trixie",
+          "3.2-trixie",
+          "4-bookworm",
+          "3.4-bookworm",
+          "3.3-bookworm",
+          "3.2-bookworm",
+          "3.4-bullseye",
+          "3.3-bullseye",
+          "3.2-bullseye"
+        ],
+        "default": "4-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/ruby-rails-postgres"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/rust",
+    "name": "Rust",
+    "description": "Develop Rust based applications. Includes appropriate runtime args and everything you need to get up and running.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian OS version (use trixie, bookworm, or bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "trixie",
+          "bookworm",
+          "bullseye"
+        ],
+        "default": "trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/rust"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/rust-postgres",
+    "name": "Rust & PostgreSQL",
+    "description": "Develop applications with Rust and PostgreSQL. Includes a Rust application container and PostgreSQL server.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian OS version (use bookworm, or bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "trixie",
+          "bookworm",
+          "bullseye"
+        ],
+        "default": "trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/rust-postgres"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/typescript-node",
+    "name": "Node.js & TypeScript",
+    "description": "Develop Node.js based applications in TypeScript. Includes Node.js, eslint, nvm, yarn, and the TypeScript compiler.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Node.js version (use -trixie, -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "24-trixie",
+          "22-trixie",
+          "20-trixie",
+          "24-bookworm",
+          "22-bookworm",
+          "20-bookworm",
+          "24-bullseye",
+          "22-bullseye",
+          "20-bullseye"
+        ],
+        "default": "24-trixie"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/typescript-node"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/ubuntu",
+    "name": "Ubuntu",
+    "description": "A simple Ubuntu container with Git and other common utilities installed.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Ubuntu version (use ubuntu-22.04 or ubuntu-24.04 on local arm64/Apple Silicon):",
+        "proposals": [
+          "noble",
+          "jammy"
+        ],
+        "default": "noble"
+      }
+    },
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/ubuntu"
+  },
+  {
+    "id": "ghcr.io/devcontainers/templates/universal",
+    "name": "Default Linux Universal",
+    "description": "Use or extend the new Ubuntu-based default, large, multi-language universal container for GitHub Codespaces.",
+    "options": null,
+    "category": "Reference Implementation Templates",
+    "documentationURL": "https://github.com/devcontainers/templates/tree/main/src/universal"
+  },
+  {
+    "id": "ghcr.io/microsoft/azuresql-devcontainers/dotnet",
+    "name": ".NET and Azure SQL",
+    "description": "A development environment for .NET and Azure SQL, enabling streamlined local development and testing.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": ".NET version:",
+        "proposals": [
+          "8.0-bookworm",
+          "8.0-jammy"
+        ],
+        "default": "8.0-bookworm"
+      }
+    },
+    "category": "Azure SQL Database Dev Container Templates",
+    "documentationURL": "https://github.com/microsoft/azuresql-devcontainers/tree/main/src/dotnet"
+  },
+  {
+    "id": "ghcr.io/microsoft/azuresql-devcontainers/dotnet-aspire",
+    "name": ".NET with Aspire and Azure SQL",
+    "description": "A development environment for .NET Aspire and Azure SQL, enabling streamlined local development and testing.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": ".NET version:",
+        "proposals": [
+          "8.0-bookworm",
+          "8.0-jammy"
+        ],
+        "default": "8.0-bookworm"
+      }
+    },
+    "category": "Azure SQL Database Dev Container Templates",
+    "documentationURL": "https://github.com/microsoft/azuresql-devcontainers/tree/main/src/dotnet-aspire"
+  },
+  {
+    "id": "ghcr.io/microsoft/azuresql-devcontainers/javascript-node",
+    "name": "Node.js and Azure SQL",
+    "description": "A development environment for Node.js and Azure SQL, enabling streamlined local development and testing.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Node.js version:",
+        "proposals": [
+          "22-bookworm",
+          "22-bullseye",
+          "20-bookworm",
+          "20-bullseye",
+          "18-bookworm",
+          "18-bullseye"
+        ],
+        "default": "22-bullseye"
+      }
+    },
+    "category": "Azure SQL Database Dev Container Templates",
+    "documentationURL": "https://github.com/microsoft/azuresql-devcontainers/tree/main/src/javascript-node"
+  },
+  {
+    "id": "ghcr.io/microsoft/azuresql-devcontainers/python",
+    "name": "Python and Azure SQL",
+    "description": "A development environment for Python and Azure SQL, enabling streamlined local development and testing.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version:",
+        "proposals": [
+          "3.10-bookworm",
+          "3.11-bookworm",
+          "3.12-bookworm",
+          "3.10-bullseye",
+          "3.11-bullseye",
+          "3.12-bullseye"
+        ],
+        "default": "3.12-bullseye"
+      }
+    },
+    "category": "Azure SQL Database Dev Container Templates",
+    "documentationURL": "https://github.com/microsoft/azuresql-devcontainers/tree/main/src/python"
+  },
+  {
+    "id": "ghcr.io/rocker-org/devcontainer-templates/r-ver",
+    "name": "R (rocker/r-ver base)",
+    "description": "A container-based development environment for the R language. Includes many commonly used R packages.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "R version:",
+        "proposals": [
+          "4",
+          "4.4",
+          "4.3"
+        ],
+        "default": "4"
+      },
+      "baseVariant": {
+        "type": "string",
+        "description": "Base image. Minimal (r-ver), tidyverse installed (tidyverse), or full image (geospatial). Only r-ver supports the arm64 platform:",
+        "proposals": [
+          "r-ver",
+          "tidyverse",
+          "geospatial"
+        ],
+        "default": "r-ver"
+      }
+    },
+    "category": "Templates for R",
+    "documentationURL": "https://github.com/rocker-org/devcontainer-templates/tree/main/src/r-ver"
+  },
+  {
+    "id": "ghcr.io/rocker-org/devcontainer-templates/r2u",
+    "name": "R (r2u and bspm configured)",
+    "description": "Install R on Ubuntu and set r2u and bspm.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Ubuntu version:",
+        "proposals": [
+          "noble",
+          "jammy"
+        ],
+        "default": "noble"
+      }
+    },
+    "category": "Templates for R",
+    "documentationURL": "https://github.com/rocker-org/devcontainer-templates/tree/main/src/r2u"
+  },
+  {
+    "id": "ghcr.io/csutter/devcontainer-templates/barebones-nodejs",
+    "name": "Node.js",
+    "description": "A barebones devcontainer for Node.js/Javascript applications",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Upstream 'node' image tag (see hub.docker.com):",
+        "proposals": [
+          "20",
+          "22"
+        ],
+        "default": "20"
+      }
+    },
+    "category": "csutter's devcontainer templates",
+    "documentationURL": "https://github.com/csutter/devcontainer-templates"
+  },
+  {
+    "id": "ghcr.io/csutter/devcontainer-templates/barebones-ruby",
+    "name": "Barebones Ruby",
+    "description": "A barebones devcontainer for Ruby applications",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Upstream 'ruby' image tag (see hub.docker.com):",
+        "proposals": [
+          "3"
+        ],
+        "default": "3"
+      }
+    },
+    "category": "csutter's devcontainer templates",
+    "documentationURL": "https://github.com/csutter/devcontainer-templates"
+  },
+  {
+    "id": "ghcr.io/csutter/devcontainer-templates/basic-ruby",
+    "name": "Basic Ruby application",
+    "description": "A devcontainer for basic Ruby applications",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Upstream 'ruby' image tag (see hub.docker.com):",
+        "proposals": [
+          "3.3"
+        ],
+        "default": "3.3"
+      }
+    },
+    "category": "csutter's devcontainer templates",
+    "documentationURL": "https://github.com/csutter/devcontainer-templates"
+  },
+  {
+    "id": "ghcr.io/pwd9000-ml/devcontainer-templates/azure-pipelines-agent-devcontainer",
+    "name": "Azure Pipelines Agent",
+    "description": "A devcontainer that spins up and runs a self hosted Azure DevOps Pipelines Agent inside a Codespace attached to a DevOps agent pool.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bullseye",
+          "buster"
+        ],
+        "default": "bullseye"
+      },
+      "agentVersion": {
+        "type": "string",
+        "description": "Choose version of ADO Agent to Install",
+        "proposals": [
+          "2.213.2",
+          "2.214.2",
+          "2.218.1",
+          "2.220.0",
+          "3.220.0"
+        ],
+        "default": "2.218.1"
+      }
+    },
+    "category": "Pwd9000-ML devcontainer templates",
+    "documentationURL": "https://github.com/Pwd9000-ML/devcontainer-templates/tree/main/src/azure-pipelines-agent-devcontainer"
+  },
+  {
+    "id": "ghcr.io/pwd9000-ml/devcontainer-templates/github-actions-runner-devcontainer",
+    "name": "GitHub Actions Runner",
+    "description": "A devcontainer that spins up and runs a self hosted GitHub Actions runner inside a Codespace attached to the current repository.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bullseye",
+          "buster"
+        ],
+        "default": "bullseye"
+      },
+      "runnerVersion": {
+        "type": "string",
+        "description": "Choose version of GitHub Runner to Install",
+        "proposals": [
+          "2.299.1",
+          "2.300.2",
+          "2.301.1",
+          "2.302.1",
+          "2.303.0"
+        ],
+        "default": "2.303.0"
+      }
+    },
+    "category": "Pwd9000-ML devcontainer templates",
+    "documentationURL": "https://github.com/Pwd9000-ML/devcontainer-templates/tree/main/src/github-actions-runner-devcontainer"
+  },
+  {
+    "id": "ghcr.io/torbenwetter/iu-latex-container-templates/thesis",
+    "name": "Thesis",
+    "description": "A Template to write a thesis with LaTeX",
+    "options": null,
+    "category": "IU LaTeX Container Templates",
+    "documentationURL": "https://github.com/TorbenWetter/iu-latex-container-templates/tree/main/src/thesis"
+  },
+  {
+    "id": "ghcr.io/standard-io/devcontainers-templates/python3-poetry-pyenv",
+    "name": "python with poetry",
+    "description": "devcontainer with pyenv as main source to get python version and poetry to manage dependencies on the top of  DevContainer official images based on debian ",
+    "options": {
+      "pythonVersion": {
+        "type": "string",
+        "description": "Python version to install with Pyenv",
+        "proposals": [
+          "3",
+          "3.11",
+          "3.10",
+          "3.9",
+          "3.8",
+          "3.7",
+          "3.6"
+        ],
+        "default": "3.10"
+      },
+      "imageVariant": {
+        "type": "string",
+        "description": "Select the os to install",
+        "proposals": [
+          "debian",
+          "bullseye",
+          "buster",
+          "jammy",
+          "focal",
+          "bionic"
+        ],
+        "default": "jammy"
+      }
+    },
+    "category": "Python3 with Pyenv and Poetry",
+    "documentationURL": "https://github.com/Standard-IO/devcontainers/tree/main/src/python3-poetry-pyenv"
+  },
+  {
+    "id": "ghcr.io/ijnek/ros-devcontainer-template/ros",
+    "name": "ROS",
+    "description": "A ROS Template",
+    "options": {
+      "rosDistro": {
+        "type": "string",
+        "description": "ROS Distro",
+        "proposals": [
+          "melodic",
+          "noetic",
+          "foxy",
+          "galactic",
+          "humble",
+          "iron",
+          "jazzy",
+          "kilted",
+          "rolling"
+        ],
+        "default": "rolling"
+      },
+      "installationType": {
+        "type": "string",
+        "description": "ROS Installation Type",
+        "proposals": [
+          "desktop",
+          "desktop-full"
+        ],
+        "default": "desktop"
+      }
+    },
+    "category": "ROS Templates",
+    "documentationURL": "https://github.com/ijnek/ros-devcontainer-template"
+  },
+  {
+    "id": "ghcr.io/brunob81hk/ros2-workspace-devcontainer-template/ros2-workspace",
+    "name": "ROS 2 Workspace",
+    "description": "A template for a ROS 2 workspace.",
+    "options": {
+      "distro": {
+        "type": "string",
+        "description": "ROS 2 distribution.",
+        "enum": [
+          "humble",
+          "iron",
+          "rolling"
+        ],
+        "default": "humble"
+      },
+      "imageVariant": {
+        "type": "string",
+        "description": "Official ROS 2 Docker image variant.",
+        "proposals": [
+          "ros-base",
+          "ros-core",
+          "perception"
+        ],
+        "default": "ros-base"
+      }
+    },
+    "category": "ROS 2 Workspace Templates",
+    "documentationURL": "https://github.com/BrunoB81HK/ros2-workspace-devcontainer-template/tree/main/src/ros2-workspace"
+  },
+  {
+    "id": "ghcr.io/swift-server/swift-devcontainer-template/swift",
+    "name": "Swift",
+    "description": "Develop Swift based applications. Includes everything you need to get up and running.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Swift version:",
+        "proposals": [
+          "6.2",
+          "6.1",
+          "6.0",
+          "5.10",
+          "5.9",
+          "5.8",
+          "5.7",
+          "5.6-focal",
+          "5.5",
+          "5.4",
+          "5.3",
+          "5.2",
+          "5.1"
+        ],
+        "default": "6.2"
+      }
+    },
+    "category": "Swift Container Templates",
+    "documentationURL": "https://github.com/swift-server/swift-devcontainer-template/tree/main/README.md"
+  },
+  {
+    "id": "ghcr.io/hamishwhc/cs3231-devcontainer/cs3231",
+    "name": "UNSW cs3231 OS Development",
+    "description": "A container for developing OS161 in cs3231 at UNSW.",
+    "options": null,
+    "category": "UNSW cs3231 OS Development",
+    "documentationURL": "https://github.com/HamishWHC/cs3231-devcontainer/blob/main/README.md"
+  },
+  {
+    "id": "ghcr.io/multiversx/mx-template-devcontainers/smart-contracts-rust",
+    "name": "MultiversX: Smart Contracts Development (Rust)",
+    "description": "Develop smart contracts for MultiversX. Includes Rust, mxpy, VSCode extensions etc.",
+    "options": {},
+    "category": "MultiversX Dev Container Templates",
+    "documentationURL": "https://github.com/multiversx/mx-template-devcontainers/blob/main/src/smart-contracts-rust"
+  },
+  {
+    "id": "ghcr.io/jmuchovej/templates/latex",
+    "name": "LaTeX Dev Container",
+    "description": "Write your LaTeX documents in a Dev Container! (Choose from xetex, luatex, and pdftex!)",
+    "options": {
+      "texlive": {
+        "type": "string",
+        "description": "Which version of TexLive do you want to use?",
+        "enum": [
+          "2022",
+          "2023",
+          "2024"
+        ],
+        "default": "2024"
+      },
+      "latexEngine": {
+        "type": "string",
+        "description": "Which LaTeX Engine to use",
+        "enum": [
+          "xetex",
+          "luatex",
+          "pdftex"
+        ],
+        "default": "xetex"
+      }
+    },
+    "category": "Templates by John Muchovej",
+    "documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/templates/src/latex/"
+  },
+  {
+    "id": "ghcr.io/jmuchovej/templates/typst",
+    "name": "Typst Dev Container",
+    "description": "Write your Typst documents in a Dev Container!",
+    "options": {
+      "typst": {
+        "type": "string",
+        "description": "Which version of Typst?",
+        "enum": [
+          "0.11.0",
+          "0.11.1",
+          "latest"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Templates by John Muchovej",
+    "documentationURL": "https://github.com/jmuchovej/devcontainers/tree/main/templates/src/typst/"
+  },
+  {
+    "id": "ghcr.io/purton-tech/rust-on-nails/rust-on-nails",
+    "name": "Rust on Nails",
+    "description": "Build full stack web applications in Rust https://rust-on-nails.com",
+    "options": null,
+    "category": "Rust on Nails",
+    "documentationURL": "https://rust-on-nails.com"
+  },
+  {
+    "id": "ghcr.io/cascode-labs/viper-ic-devcontainers/viper-ic",
+    "name": "Viper Integrated Circuit Design Environment",
+    "description": "An integrated circuit design environment",
+    "options": {},
+    "category": "Integrated Circuit Design Environment Templates",
+    "documentationURL": "https://github.com/cascode-labs/viper-ic-devcontainers"
+  },
+  {
+    "id": "ghcr.io/cascode-labs/viper-ic-devcontainers/viper-ic-analog",
+    "name": "Viper Integrated Circuit Design Environment",
+    "description": "An integrated circuit design environment for analog design",
+    "options": {},
+    "category": "Integrated Circuit Design Environment Templates",
+    "documentationURL": "https://github.com/cascode-labs/viper-ic-devcontainers"
+  },
+  {
+    "id": "ghcr.io/devcontainers-community/templates/dart",
+    "name": "Dart",
+    "description": "Develop Dart based applications. Includes the Dart SDK, needed extensions, and dependencies.",
+    "options": {},
+    "category": "Community Templates",
+    "documentationURL": "https://github.com/devcontainers-community/templates/tree/main/src/dart"
+  },
+  {
+    "id": "ghcr.io/devcontainers-community/templates/jupyter-datascience-notebooks",
+    "name": "Jupyter Data Science Notebooks",
+    "description": "Use Jupyter Data Science Notebooks with Python, R, Julia, and more.",
+    "options": {
+      "baseVariant": {
+        "type": "string",
+        "description": "Base image. Check the documentation for details.",
+        "default": "datascience-notebook",
+        "proposals": [
+          "base-notebook",
+          "minimal-notebook",
+          "r-notebook",
+          "scipy-notebook",
+          "tensorflow-notebook",
+          "datascience-notebook",
+          "pyspark-notebook",
+          "all-spark-notebook"
+        ]
+      },
+      "imageVariant": {
+        "type": "string",
+        "description": "Image version (tag).",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ]
+      }
+    },
+    "category": "Community Templates",
+    "documentationURL": "https://github.com/devcontainers-community/templates-jupyter-datascience-notebooks"
+  },
+  {
+    "id": "ghcr.io/vvv-interactive/ibdev/ic",
+    "name": "Internet Computer",
+    "description": "Develop decentralized web3 dapps",
+    "options": {},
+    "category": "Internet Computer Templates",
+    "documentationURL": "https://github.com/vvv-interactive/ibdev/"
+  },
+  {
+    "id": "ghcr.io/jayree/devcontainer-templates/sf-project",
+    "name": "Salesforce DX project",
+    "description": "A template for Salesforce DX projects",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bullseye",
+          "buster"
+        ],
+        "default": "bullseye"
+      },
+      "version": {
+        "default": "latest",
+        "description": "Select the Salesforce CLI version to install:",
+        "proposals": [
+          "latest",
+          "latest-rc",
+          "nightly",
+          "beta"
+        ],
+        "type": "string"
+      }
+    },
+    "category": "Templates by jayree",
+    "documentationURL": "https://github.com/jayree/devcontainer-templates/tree/main/src/sf-project"
+  },
+  {
+    "id": "ghcr.io/nafnix/devcontainers-templates/basic-nodejs",
+    "name": "Basic Node.js",
+    "description": "A basic Node.js development container.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Node.js version and Debian release tag. Optional value reference: https://hub.docker.com/_/node.",
+        "proposals": [
+          "lts-bookworm",
+          "lts-bookworm-slim",
+          "lts-bullseye",
+          "lts-bullseye-slim",
+          "20-bookworm",
+          "20-bookworm-slim",
+          "20-bullseye",
+          "20-bullseye-slim",
+          "18-bookworm",
+          "18-bookworm-slim",
+          "18-bullseye",
+          "18-bullseye-slim",
+          "16-bookworm",
+          "16-bookworm-slim",
+          "16-bullseye",
+          "16-bullseye-slim"
+        ],
+        "default": "lts-bookworm"
+      }
+    },
+    "category": "Python3 with Pyenv and PDM",
+    "documentationURL": "https://github.com/nafnix/devcontainers-templates/tree/main/src/basic-nodejs"
+  },
+  {
+    "id": "ghcr.io/nafnix/devcontainers-templates/basic-python",
+    "name": "Basic Python",
+    "description": "A basic Python development container.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version and OS image tag. Optional value reference: https://hub.docker.com/_/python.",
+        "proposals": [
+          "3.12-bookworm",
+          "3.12-slim-bookworm",
+          "3.12-bullseye",
+          "3.12-slim-bullseye",
+          "3.11-bookworm",
+          "3.11-slim-bookworm",
+          "3.11-bullseye",
+          "3.11-slim-bullseye",
+          "3.10-bookworm",
+          "3.10-slim-bookworm",
+          "3.10-bullseye",
+          "3.10-slim-bullseye",
+          "3.9-bookworm",
+          "3.9-slim-bookworm",
+          "3.9-bullseye",
+          "3.9-slim-bullseye",
+          "3.8-bookworm",
+          "3.8-slim-bookworm",
+          "3.8-bullseye",
+          "3.8-slim-bullseye",
+          "3.7-bookworm",
+          "3.7-slim-bookworm",
+          "3.7-bullseye",
+          "3.7-slim-bullseye"
+        ],
+        "default": "3.11-bookworm"
+      }
+    },
+    "category": "Python3 with Pyenv and PDM",
+    "documentationURL": "https://github.com/nafnix/devcontainers-templates/tree/main/src/python3"
+  },
+  {
+    "id": "ghcr.io/nafnix/devcontainers-templates/gleam",
+    "name": "gleam",
+    "description": "A development container with gleam.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "A Docker image for a Debian-based system",
+        "proposals": [
+          "debian",
+          "debian:latest",
+          "debian:12",
+          "debian:11",
+          "debian:12-slim",
+          "debian:11-slim",
+          "debian:bookworm",
+          "debian:bullseye",
+          "debian:bookworm-slim",
+          "debian:bullseye-slim",
+          "ubuntu",
+          "ubuntu:latest",
+          "ubuntu:plucky",
+          "ubuntu:oracular",
+          "ubuntu:noble",
+          "ubuntu:jammy",
+          "ubuntu:focal"
+        ],
+        "default": "debian"
+      },
+      "gleamVersion": {
+        "type": "string",
+        "description": "The version of gleam to install",
+        "proposals": [
+          "v1.10.0",
+          "v1.9.1",
+          "v1.9.0"
+        ],
+        "default": "v1.10.0"
+      }
+    },
+    "category": "Python3 with Pyenv and PDM",
+    "documentationURL": "https://github.com/nafnix/devcontainers-templates/tree/main/src/gleam"
+  },
+  {
+    "id": "ghcr.io/nafnix/devcontainers-templates/hugo-pnpm",
+    "name": "Hugo & pnpm",
+    "description": "带有 pnpm 的 Hugo 开发容器，默认 pnpm 安装 LTS 版 nodejs",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "系统，可选值参考： https://mcr.microsoft.com/en-us/product/devcontainers/base/about 和 https://mcr.microsoft.com/v2/devcontainers/base/tags/list",
+        "proposals": [
+          "ubuntu",
+          "ubuntu-22.04",
+          "jammy",
+          "ubuntu-20.04",
+          "focal",
+          "debian",
+          "debian-12",
+          "bookworm",
+          "debian-11",
+          "bullseye"
+        ],
+        "default": "ubuntu-22.04"
+      },
+      "hugoVariant": {
+        "type": "string",
+        "description": "Hugo 变体",
+        "proposals": [
+          "hugo",
+          "hugo_extended"
+        ],
+        "default": "hugo_extended"
+      },
+      "hugoVersion": {
+        "type": "string",
+        "description": "Hugo 版本，可选值参考： https://github.com/gohugoio/hugo/releases/",
+        "proposals": [
+          "latest",
+          "0.122.0",
+          "0.121.2",
+          "0.120.4"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Python3 with Pyenv and PDM",
+    "documentationURL": "https://github.com/nafnix/devcontainers-templates/tree/main/src/hugo-pnpm"
+  },
+  {
+    "id": "ghcr.io/nafnix/devcontainers-templates/pure",
+    "name": "pure",
+    "description": "A pure development container.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "A Docker image for a Debian-based system",
+        "proposals": [
+          "debian",
+          "debian:latest",
+          "debian:12",
+          "debian:11",
+          "debian:12-slim",
+          "debian:11-slim",
+          "debian:bookworm",
+          "debian:bullseye",
+          "debian:bookworm-slim",
+          "debian:bullseye-slim",
+          "ubuntu",
+          "ubuntu:latest",
+          "ubuntu:plucky",
+          "ubuntu:oracular",
+          "ubuntu:noble",
+          "ubuntu:jammy",
+          "ubuntu:focal"
+        ],
+        "default": "debian"
+      }
+    },
+    "category": "Python3 with Pyenv and PDM",
+    "documentationURL": "https://github.com/nafnix/devcontainers-templates/tree/main/src/pure"
+  },
+  {
+    "id": "ghcr.io/nafnix/devcontainers-templates/python3-pdm-pyenv",
+    "name": "python3 & pyenv & pdm",
+    "description": "一个基于 debian 的 devcontainer，默认带有通过 pyenv 获取的 python 和 pdm。",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "System:",
+        "proposals": [
+          "ubuntu",
+          "ubuntu-22.04",
+          "jammy",
+          "ubuntu-20.04",
+          "focal",
+          "debian",
+          "bookworm",
+          "debian-11",
+          "bullseye"
+        ],
+        "default": "ubuntu-22.04"
+      },
+      "pythonVersion": {
+        "type": "string",
+        "description": "Python version:",
+        "proposals": [
+          "3",
+          "3.11",
+          "3.10",
+          "3.9",
+          "3.8"
+        ],
+        "default": "3.11"
+      }
+    },
+    "category": "Python3 with Pyenv and PDM",
+    "documentationURL": "https://github.com/nafnix/devcontainers-templates/tree/main/src/python3-pdm-pyenv"
+  },
+  {
+    "id": "ghcr.io/nafnix/devcontainers-templates/uv",
+    "name": "uv",
+    "description": "A development container with uv.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "A Docker image for a Debian-based system",
+        "proposals": [
+          "debian",
+          "debian:latest",
+          "debian:12",
+          "debian:11",
+          "debian:12-slim",
+          "debian:11-slim",
+          "debian:bookworm",
+          "debian:bullseye",
+          "debian:bookworm-slim",
+          "debian:bullseye-slim",
+          "ubuntu",
+          "ubuntu:latest",
+          "ubuntu:plucky",
+          "ubuntu:oracular",
+          "ubuntu:noble",
+          "ubuntu:jammy",
+          "ubuntu:focal"
+        ],
+        "default": "debian"
+      }
+    },
+    "category": "Python3 with Pyenv and PDM",
+    "documentationURL": "https://github.com/nafnix/devcontainers-templates/tree/main/src/uv"
+  },
+  {
+    "id": "ghcr.io/microsoft/datascience-py-r/datascience-python-r",
+    "name": "Data Science with Python and R",
+    "description": "Data science development with Python and R tools. Installs dependencies from requirements.txt file, and the Python, Jupyter, and R extensions.",
+    "options": null,
+    "category": "Data science with Python and R",
+    "documentationURL": "https://github.com/microsoft/datascience-py-r"
+  },
+  {
+    "id": "ghcr.io/wpdevenv/dev_container_templates/wp-mysql",
+    "name": "WP & MySQL",
+    "description": "Develop WP applications with MySQL.",
+    "options": {
+      "phpVersion": {
+        "type": "string",
+        "description": "PHP version:",
+        "proposals": [
+          "7.4"
+        ],
+        "default": "7.4"
+      },
+      "wpVersion": {
+        "type": "string",
+        "description": "WP version:",
+        "proposals": [
+          "6.0"
+        ],
+        "default": "6.0"
+      },
+      "contentPath": {
+        "type": "string",
+        "description": "Content path:",
+        "proposals": [
+          "plugins",
+          "themes"
+        ],
+        "default": "themes"
+      }
+    },
+    "category": "Wpdevenv Templates",
+    "documentationURL": "https://github.com/wpdevenv/dev_container_templates/tree/main/src/wp-mysql"
+  },
+  {
+    "id": "ghcr.io/azure-samples/python-ms-sql-devcontainer/python-mssql",
+    "name": "Python 3 & Microsoft Sql Server",
+    "description": "Develop Python based applications with all required components to interact with MS SQL Server locally and in Azure. Includes all needed SDKs, extensions, dependencies and an MS SQL container for parallel database development. Adds an additional MS SQL container to Python container definition and deploys any .dacpac files from the mssql .devcontainer folder.",
+    "options": {
+      "pythonImageVariant": {
+        "type": "string",
+        "description": "Python version (use -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "3-bookworm",
+          "3.11-bookworm",
+          "3.10-bookworm",
+          "3.9-bookworm",
+          "3.8-bookworm",
+          "3-bullseye",
+          "3.11-bullseye",
+          "3.10-bullseye",
+          "3.9-bullseye",
+          "3.8-bullseye",
+          "3-buster",
+          "3.11-buster",
+          "3.10-buster",
+          "3.9-buster",
+          "3.8-buster"
+        ],
+        "default": "3.11-bullseye"
+      }
+    },
+    "category": "Python+MSSQL+Azure SQL Templates",
+    "documentationURL": "https://github.com/Azure-Samples/python-ms-sql-devcontainer/blob/main/src/python-mssql/"
+  },
+  {
+    "id": "ghcr.io/julialang/devcontainer-templates/julia",
+    "name": "Julia",
+    "description": "Develop Julia applications.",
+    "options": {
+      "channel": {
+        "type": "string",
+        "description": "A Juliaup channel",
+        "default": "release",
+        "proposals": [
+          "release",
+          "lts"
+        ]
+      }
+    },
+    "category": "Julia Language Templates",
+    "documentationURL": "https://github.com/JuliaLang/devcontainer-templates/tree/main/src/julia"
+  },
+  {
+    "id": "ghcr.io/aliuq/devcontainers/typescript-node-mirror",
+    "name": "Node.js & TypeScript & Mirror",
+    "description": "与 Node.js & TypeScript 一致的开发环境，但是使用了国内镜像源，加速安装依赖",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Node.js version (use -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "22-bookworm",
+          "22-bullseye",
+          "20-bookworm",
+          "18-bookworm",
+          "20-bullseye",
+          "18-bullseye",
+          "20-buster",
+          "18-buster"
+        ],
+        "default": "22-bookworm"
+      }
+    },
+    "category": "AliuQ Templates",
+    "documentationURL": "https://github.com/aliuq/devcontainers/tree/main/src/typescript-node-mirror"
+  },
+  {
+    "id": "ghcr.io/cgi-fr/lino-devcontainer/lino",
+    "name": "LINO",
+    "description": "A LINO workspace with all LINO tools",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "version of the lino's toolbox image",
+        "proposals": [
+          "v1.3.0",
+          "v1.4.0"
+        ],
+        "default": "v1.4.0"
+      }
+    },
+    "category": "LINO PIMO SIGO Toolbox",
+    "documentationURL": "https://github.com/CGI-FR/lino-devcontainer/tree/main/src/lino"
+  },
+  {
+    "id": "ghcr.io/lnyousif/plantuml-devcontainer/plantuml",
+    "name": "Plantuml DevContainer",
+    "description": "A Template to allow you to preview and generate diagrams using PlantUML",
+    "options": {
+      "exportFormat": {
+        "type": "string",
+        "description": "Choose your exportFormat.",
+        "proposals": [
+          "png",
+          "svg",
+          "eps",
+          "pdf",
+          "vdx",
+          "xmi",
+          "scxml",
+          "html",
+          "txt",
+          "utxt",
+          "latex",
+          "latex:nopreamble"
+        ],
+        "default": "png"
+      },
+      "diagramsSource": {
+        "type": "string",
+        "description": "Choose your diagrams source folder",
+        "default": "diagrams/src"
+      },
+      "diagramsOutDir": {
+        "type": "string",
+        "description": "Choose your renderd diagrams output folder",
+        "default": "diagrams/out"
+      }
+    },
+    "category": "PlantUml DevContainer",
+    "documentationURL": "https://github.com/lnyousif/plantuml-devcontainer/tree/main/src/plantuml"
+  },
+  {
+    "id": "ghcr.io/mcollier/logic-app-dev-container-template/logic-app-standard",
+    "name": "Logic App Standard",
+    "description": "A template for a Logic App Standard dev container.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon)",
+        "proposals": [
+          "bullseye",
+          "buster"
+        ],
+        "default": "bullseye"
+      }
+    },
+    "category": "Logic App Standard Template",
+    "documentationURL": "https://github.com/mcollier/logic-app-dev-container-template"
+  },
+  {
+    "id": "ghcr.io/prulloac/devcontainer-templates/go_typescript",
+    "name": "Go & Typescript",
+    "description": "A Template to build fullstack applications with both golang and javascript/typescript stacks (contains Bun)",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bullseye",
+          "buster",
+          "bookworm",
+          "ubuntu-24.04",
+          "ubuntu-22.04"
+        ],
+        "default": "bookworm"
+      },
+      "goVersion": {
+        "type": "string",
+        "description": "Golang version to install",
+        "default": "latest"
+      },
+      "golangciLintVersion": {
+        "type": "string",
+        "description": "Golangci-lint version to install",
+        "default": "latest"
+      }
+    },
+    "category": "Additional Dev Container Templates by prulloac",
+    "documentationURL": "https://github.com/prulloac/devcontainer-templates/tree/main/src/go_typescript"
+  },
+  {
+    "id": "ghcr.io/prulloac/devcontainer-templates/java_typescript",
+    "name": "Java & Typescript",
+    "description": "A Template to build fullstack applications with both java and javascript/typescript stacks (contains Bun, Maven and Gradle)",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bullseye",
+          "buster",
+          "bookworm",
+          "ubuntu-24.04",
+          "ubuntu-22.04"
+        ],
+        "default": "bookworm"
+      },
+      "javaVersion": {
+        "type": "string",
+        "description": "Java version to install",
+        "proposals": [
+          "latest",
+          "21",
+          "17"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Additional Dev Container Templates by prulloac",
+    "documentationURL": "https://github.com/prulloac/devcontainer-templates/tree/main/src/java_typescript"
+  },
+  {
+    "id": "ghcr.io/prulloac/devcontainer-templates/python_typescript",
+    "name": "Python & Typescript",
+    "description": "A Template to build fullstack applications with both python and javascript/typescript stacks (contains Bun and Poetry)",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bullseye",
+          "buster",
+          "bookworm",
+          "ubuntu-24.04",
+          "ubuntu-22.04"
+        ],
+        "default": "bookworm"
+      }
+    },
+    "category": "Additional Dev Container Templates by prulloac",
+    "documentationURL": "https://github.com/prulloac/devcontainer-templates/tree/main/src/python_typescript"
+  },
+  {
+    "id": "ghcr.io/prulloac/devcontainer-templates/ruby_typescript",
+    "name": "Ruby & Typescript",
+    "description": "A Template to build fullstack applications with both ruby and javascript/typescript stacks (contains Bun)",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bullseye",
+          "buster",
+          "bookworm",
+          "ubuntu-24.04",
+          "ubuntu-22.04"
+        ],
+        "default": "bookworm"
+      },
+      "rubyVersion": {
+        "type": "string",
+        "description": "Ruby version to install",
+        "default": "latest"
+      }
+    },
+    "category": "Additional Dev Container Templates by prulloac",
+    "documentationURL": "https://github.com/prulloac/devcontainer-templates/tree/main/src/ruby_typescript"
+  },
+  {
+    "id": "ghcr.io/prulloac/devcontainer-templates/rust_typescript",
+    "name": "Rust & Typescript",
+    "description": "A Template to build fullstack applications with both rust and javascript/typescript stacks (contains Bun)",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bullseye",
+          "buster",
+          "bookworm",
+          "ubuntu-24.04",
+          "ubuntu-22.04"
+        ],
+        "default": "bookworm"
+      },
+      "rustVersion": {
+        "type": "string",
+        "description": "Rust version to install",
+        "default": "latest"
+      },
+      "rustProfile": {
+        "type": "string",
+        "description": "Rust profile to install",
+        "proposals": [
+          "minimal",
+          "default",
+          "complete"
+        ],
+        "default": "default"
+      }
+    },
+    "category": "Additional Dev Container Templates by prulloac",
+    "documentationURL": "https://github.com/prulloac/devcontainer-templates/tree/main/src/rust_typescript"
+  },
+  {
+    "id": "ghcr.io/prulloac/devcontainer-templates/zig_typescript",
+    "name": "Zig & Typescript",
+    "description": "A Template to build fullstack applications with both zig and javascript/typescript stacks (contains Bun)",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bullseye",
+          "buster",
+          "bookworm",
+          "ubuntu-24.04",
+          "ubuntu-22.04"
+        ],
+        "default": "bookworm"
+      },
+      "zigVersion": {
+        "type": "string",
+        "description": "Zig version to install",
+        "default": "latest"
+      }
+    },
+    "category": "Additional Dev Container Templates by prulloac",
+    "documentationURL": "https://github.com/prulloac/devcontainer-templates/tree/main/src/zig_typescript"
+  },
+  {
+    "id": "ghcr.io/hsm207/devcontainer-templates/qiskit",
+    "name": "Qiskit",
+    "description": "Learn quantum computing with Qiskit",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version:",
+        "proposals": [
+          "3.12-bookworm",
+          "3.11-bookworm",
+          "3.10-bookworm"
+        ],
+        "default": "3.12-bookworm"
+      }
+    },
+    "category": "Templates by Mohd Shukri Hasan",
+    "documentationURL": "https://github.com/hsm207/devcontainer-templates/tree/main/src/color"
+  },
+  {
+    "id": "ghcr.io/shibayan/devcontainers/azure-functions-dotnet",
+    "name": "Azure Functions (.NET)",
+    "description": "Develop C# and .NET based Azure Functions. Includes all needed SDKs, extensions, and dependencies.",
+    "options": {
+      "dotnetVersion": {
+        "type": "string",
+        "description": ".NET version:",
+        "proposals": [
+          "10.0",
+          "9.0",
+          "8.0"
+        ],
+        "default": "10.0"
+      },
+      "azureFunctionsCliVersion": {
+        "type": "string",
+        "description": "Azure Functions CLI version:",
+        "proposals": [
+          "latest",
+          "4.7.0",
+          "4.6.0",
+          "4.5.0",
+          "4.4.0",
+          "4.3.0"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Azure Functions Dev Container Templates",
+    "documentationURL": "https://github.com/shibayan/devcontainers/tree/master/src/azure-functions-dotnet"
+  },
+  {
+    "id": "ghcr.io/shibayan/devcontainers/azure-functions-java",
+    "name": "Azure Functions (Java)",
+    "description": "Develop Java based Azure Functions. Includes all needed SDKs, extensions, and dependencies.",
+    "options": {
+      "javaVersion": {
+        "type": "string",
+        "description": "Java version:",
+        "proposals": [
+          "25",
+          "21",
+          "17",
+          "11",
+          "8"
+        ],
+        "default": "21"
+      },
+      "azureFunctionsCliVersion": {
+        "type": "string",
+        "description": "Azure Functions CLI version:",
+        "proposals": [
+          "latest",
+          "4.7.0",
+          "4.6.0",
+          "4.5.0",
+          "4.4.0",
+          "4.3.0"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Azure Functions Dev Container Templates",
+    "documentationURL": "https://github.com/shibayan/devcontainers/tree/master/src/azure-functions-java"
+  },
+  {
+    "id": "ghcr.io/shibayan/devcontainers/azure-functions-node",
+    "name": "Azure Functions (Node.js)",
+    "description": "Develop JavaScript and TypeScript based Azure Functions. Includes all needed SDKs, extensions, and dependencies.",
+    "options": {
+      "nodeVersion": {
+        "type": "string",
+        "description": "Node.js version:",
+        "proposals": [
+          "24",
+          "22",
+          "20"
+        ],
+        "default": "24"
+      },
+      "azureFunctionsCliVersion": {
+        "type": "string",
+        "description": "Azure Functions CLI version:",
+        "proposals": [
+          "latest",
+          "4.7.0",
+          "4.6.0",
+          "4.5.0",
+          "4.4.0",
+          "4.3.0"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Azure Functions Dev Container Templates",
+    "documentationURL": "https://github.com/shibayan/devcontainers/tree/master/src/azure-functions-node"
+  },
+  {
+    "id": "ghcr.io/shibayan/devcontainers/azure-functions-powershell",
+    "name": "Azure Functions (PowerShell)",
+    "description": "Develop PowerShell based Azure Functions. Includes all needed SDKs, extensions, and dependencies.",
+    "options": {
+      "powerShellVersion": {
+        "type": "string",
+        "description": "PowerShell version:",
+        "proposals": [
+          "7.4"
+        ],
+        "default": "7.4"
+      },
+      "azureFunctionsCliVersion": {
+        "type": "string",
+        "description": "Azure Functions CLI version:",
+        "proposals": [
+          "latest",
+          "4.7.0",
+          "4.6.0",
+          "4.5.0",
+          "4.4.0",
+          "4.3.0"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Azure Functions Dev Container Templates",
+    "documentationURL": "https://github.com/shibayan/devcontainers/tree/master/src/azure-functions-powershell"
+  },
+  {
+    "id": "ghcr.io/shibayan/devcontainers/azure-functions-python",
+    "name": "Azure Functions (Python)",
+    "description": "Develop Python based Azure Functions. Includes all needed SDKs, extensions, and dependencies.",
+    "options": {
+      "pythonVersion": {
+        "type": "string",
+        "description": "Python version:",
+        "proposals": [
+          "3.14",
+          "3.13",
+          "3.12",
+          "3.11",
+          "3.10"
+        ],
+        "default": "3.13"
+      },
+      "azureFunctionsCliVersion": {
+        "type": "string",
+        "description": "Azure Functions CLI version:",
+        "proposals": [
+          "latest",
+          "4.7.0",
+          "4.6.0",
+          "4.5.0",
+          "4.4.0",
+          "4.3.0"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Azure Functions Dev Container Templates",
+    "documentationURL": "https://github.com/shibayan/devcontainers/tree/master/src/azure-functions-python"
+  },
+  {
+    "id": "ghcr.io/rsm-hcd/devcontainer-templates/deno",
+    "name": "Deno",
+    "description": "Develop Deno based applications. Includes Deno, Node.js, npm, etc.",
+    "options": {
+      "denoVersion": {
+        "type": "string",
+        "description": "Deno version:",
+        "proposals": [
+          "2.4.3",
+          "1.46.3"
+        ],
+        "default": "2.4.3"
+      }
+    },
+    "category": "Dev Container Templates by RSM HCD Engineering",
+    "documentationURL": "https://github.com/rsm-hcd/devcontainer-templates/tree/main/src/deno"
+  },
+  {
+    "id": "ghcr.io/rsm-hcd/devcontainer-templates/deno-postgres",
+    "name": "Deno & PostgreSQL",
+    "description": "Develop Deno+Postgres based applications. Includes Deno, PostgreSQL, Node.js, npm, etc.",
+    "options": {
+      "denoVersion": {
+        "type": "string",
+        "description": "Deno version:",
+        "proposals": [
+          "2.4.3",
+          "1.46.3"
+        ],
+        "default": "2.4.3"
+      },
+      "postgresVersion": {
+        "type": "string",
+        "description": "Postgres version:",
+        "proposals": [
+          "17",
+          "16",
+          "15"
+        ],
+        "default": "17"
+      }
+    },
+    "category": "Dev Container Templates by RSM HCD Engineering",
+    "documentationURL": "https://github.com/rsm-hcd/devcontainer-templates/tree/main/src/deno-postgres"
+  },
+  {
+    "id": "ghcr.io/rsm-hcd/devcontainer-templates/dotnet-node-mssql",
+    "name": ".NET (C#), Node.js (TypeScript) & MS SQL",
+    "description": "Develop fullstack applications with .NET(backend) and TypeScript(frontend) based applications. Includes .NET (C#), Node.js, TypeScript, MS SQL, nvm, npm, etc.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": ".NET version:",
+        "proposals": [
+          "8.0",
+          "7.0",
+          "6.0",
+          "8.0-bookworm",
+          "7.0-bookworm",
+          "6.0-bookworm",
+          "7.0-bullseye",
+          "6.0-bullseye",
+          "8.0-jammy",
+          "7.0-jammy",
+          "6.0-jammy",
+          "6.0-focal"
+        ],
+        "default": "8.0-bookworm"
+      },
+      "nodeVersion": {
+        "type": "string",
+        "description": "Node.js version:",
+        "proposals": [
+          "--lts",
+          "21",
+          "20",
+          "18",
+          "16"
+        ],
+        "default": "--lts"
+      }
+    },
+    "category": "Dev Container Templates by RSM HCD Engineering",
+    "documentationURL": "https://github.com/rsm-hcd/devcontainer-templates/tree/main/src/dotnet-node-mssql"
+  },
+  {
+    "id": "ghcr.io/marcosgomesneto/bun-devcontainers/basic-bun",
+    "name": "Bun",
+    "description": "A basic Bun Runtime development container.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Choose your Bun version.",
+        "proposals": [
+          "debian",
+          "slim",
+          "alpine",
+          "distroless"
+        ],
+        "default": "debian"
+      }
+    },
+    "category": "Bun.sh Runtime Dev Container Templates",
+    "documentationURL": "https://github.com/marcosgomesneto/bun-devcontainers/tree/main/src/basic-bun"
+  },
+  {
+    "id": "ghcr.io/marcosgomesneto/bun-devcontainers/bun-mariadb",
+    "name": "Bun & MariaDB",
+    "description": "Develop applications in Bun and MariaDB.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Choose your Bun image tag.",
+        "proposals": [
+          "debian",
+          "slim",
+          "alpine",
+          "distroless"
+        ],
+        "default": "debian"
+      }
+    },
+    "category": "Bun.sh Runtime Dev Container Templates",
+    "documentationURL": "https://github.com/marcosgomesneto/bun-devcontainers/tree/main/src/bun-mariadb"
+  },
+  {
+    "id": "ghcr.io/marcosgomesneto/bun-devcontainers/bun-postgresql",
+    "name": "Bun & PostgreSQL",
+    "description": "Develop applications in Bun and PostgreSQL.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Choose your Bun image tag.",
+        "proposals": [
+          "debian",
+          "slim",
+          "alpine",
+          "distroless"
+        ],
+        "default": "debian"
+      }
+    },
+    "category": "Bun.sh Runtime Dev Container Templates",
+    "documentationURL": "https://github.com/marcosgomesneto/bun-devcontainers/tree/main/src/bun-postgresql"
+  },
+  {
+    "id": "ghcr.io/weikio/devcontainer-templates/weikio-integration-developer",
+    "name": "Weik.io Integration Developer",
+    "description": "A template for architects and developers building integrations using Weik.io platform",
+    "options": {},
+    "category": "Weik.io Dev Container Templates",
+    "documentationURL": "https://weikio.com"
+  },
+  {
+    "id": "ghcr.io/johnluicn/devcontainer-templates/esp-idf",
+    "name": "ESP-IDF",
+    "description": "Esp-IDF Develop Container",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "ESP-IDF version:",
+        "proposals": [
+          "latest",
+          "release-v5.4",
+          "release-v5.3",
+          "release-v5.2",
+          "release-v5.1",
+          "release-v5.0",
+          "release-v4.4",
+          "release-v4.3",
+          "release-v4.2",
+          "release-v4.1",
+          "release-v4.0",
+          "release-v3.3"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Dev Container Templates by johnluicn",
+    "documentationURL": "https://github.com/johnluicn/devcontainer-templates/tree/main/src/esp-idf"
+  },
+  {
+    "id": "ghcr.io/joshuanianji/devcontainer-templates/idris2",
+    "name": "Idris 2",
+    "description": "Develop Idris2 Applications",
+    "options": {
+      "idris2Version": {
+        "type": "string",
+        "description": "Idris 2 version:",
+        "enum": [
+          "latest",
+          "v0.7.0",
+          "v0.6.0",
+          "v0.5.1"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Dev Container Templates by joshuanianji",
+    "documentationURL": "https://github.com/joshuanianji/devcontainer-templates/tree/main/src/idris2"
+  },
+  {
+    "id": "ghcr.io/joshuanianji/devcontainer-templates/javascript-node-edgedb",
+    "name": "Node.js & EdgeDB",
+    "description": "Develop applications in Node.js and EdgeDB, a next-generation graph-relational database. Includes Node.js, eslint, and yarn in a container linked to an EdgeDB Container",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Node.js version (use -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "22-bookworm",
+          "22-bullseye",
+          "20-bookworm",
+          "20-bullseye"
+        ],
+        "default": "22-bookworm"
+      }
+    },
+    "category": "Dev Container Templates by joshuanianji",
+    "documentationURL": "https://github.com/joshuanianji/devcontainer-templates/tree/main/src/javascript-node-edgedb"
+  },
+  {
+    "id": "ghcr.io/joshuanianji/devcontainer-templates/rust-edgedb",
+    "name": "Rust & EdgeDB",
+    "description": "Develop applications with Rust and EdgeDB, a next-generation graph-relational database. Includes a Rust application container linked to an EdgeDB Container",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian OS version (use bookworm, or bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bookworm",
+          "bullseye"
+        ],
+        "default": "bullseye"
+      }
+    },
+    "category": "Dev Container Templates by joshuanianji",
+    "documentationURL": "https://github.com/joshuanianji/devcontainer-templates/tree/main/src/rust-edgedb"
+  },
+  {
+    "id": "ghcr.io/heathprovost/alloy-devcontainer-template/alloy",
+    "name": "Alloy",
+    "description": "A dev container template for Alloy development",
+    "options": null,
+    "category": "Alloy Dev Container Template",
+    "documentationURL": "https://github.com/heathprovost/alloy-devcontainer-template/tree/main/src/alloy"
+  },
+  {
+    "id": "ghcr.io/tpalacino/spfx-dev-container/spfx-dev-container",
+    "name": "SPFx",
+    "description": "A template for SharePoint Framework development.",
+    "options": {
+      "name": {
+        "type": "string",
+        "description": "The name of the container",
+        "default": "SPFx"
+      },
+      "version": {
+        "type": "string",
+        "description": "The version of SharePoint Framework the project will use",
+        "proposals": [
+          "latest",
+          "online",
+          "1.20.0",
+          "1.19.0",
+          "1.18.2",
+          "1.18.1",
+          "1.18.0",
+          "1.17.4",
+          "1.17.3",
+          "1.17.2",
+          "1.17.1",
+          "1.17.0"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "SPFx Dev Container",
+    "documentationURL": "https://github.com/tpalacino/SPFx-dev-container/tree/main/src/spfx-dev-container"
+  },
+  {
+    "id": "ghcr.io/e-gineering/devcontainer-templates/fabric-runtime",
+    "name": "Fabric Runtime",
+    "description": "Mimics the Microsoft Fabric Runtime for local development of PySpark notebooks.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Version of the Fabric Runtime to use",
+        "proposals": [
+          "1.1",
+          "1.2",
+          "1.3"
+        ],
+        "default": "1.2"
+      }
+    },
+    "category": "Dev Container Templates by E-gineering",
+    "documentationURL": "https://github.com/e-gineering/devcontainer-templates/tree/main/src/fabric-runtime"
+  },
+  {
+    "id": "ghcr.io/tonynajjar/ros2_devcontainer_template/ros2",
+    "name": "ros2 devcontainer template",
+    "description": "A ros2 devcontainer template",
+    "options": {
+      "rosImage": {
+        "type": "string",
+        "description": "Which ROS2 distro to use. See https://hub.docker.com/r/osrf/ros/tags for all available tags.",
+        "proposals": [
+          "osrf/ros:rolling-desktop-full",
+          "osrf/ros:jazzy-desktop-full",
+          "osrf/ros:iron-desktop-full",
+          "osrf/ros:humble-desktop-full"
+        ],
+        "default": "osrf/ros:jazzy-desktop-full"
+      }
+    },
+    "category": "ROS2 devcontainer Template",
+    "documentationURL": "https://github.com/tonynajjar/ros2_devcontainer_template/tree/main/src/ros2"
+  },
+  {
+    "id": "ghcr.io/scicloj/devcontainer-templates/basecloj",
+    "name": "Minimal devcontainer with LTS JAVA, official Clojure and clj tools",
+    "description": "This template set up a minimal devcontainer environment for new Clojure projects.",
+    "options": {
+      "imageTag": {
+        "type": "string",
+        "description": "Tag of official Clojure image",
+        "proposals": [
+          "temurin-8-tools-deps-jammy",
+          "temurin-11-tools-deps-jammy",
+          "temurin-17-tools-deps-jammy",
+          "temurin-21-tools-deps-jammy"
+        ],
+        "default": "temurin-21-tools-deps-jammy"
+      }
+    },
+    "category": "Clojure devcontainer templates",
+    "documentationURL": "https://github.com/scicloj/devcontainer-templates/tree/main/src/basecloj/NOTES.md"
+  },
+  {
+    "id": "ghcr.io/scicloj/devcontainer-templates/scicloj",
+    "name": "scicloj datascience devcontainer template",
+    "description": "A devcontainer template supporting Clojure datascience with R and python interop",
+    "options": {
+      "imageTag": {
+        "type": "string",
+        "description": "Tag of official Clojure image",
+        "proposals": [
+          "temurin-8-tools-deps-1.12.2.1565-jammy",
+          "temurin-11-tools-deps-1.12.2.1565-jammy",
+          "temurin-17-tools-deps-1.12.2.1565-jammy",
+          "temurin-21-tools-deps-1.12.2.1565-jammy"
+        ],
+        "default": "temurin-21-tools-deps-1.12.2.1565-jammy"
+      }
+    },
+    "category": "Clojure devcontainer templates",
+    "documentationURL": "https://github.com/scicloj/devcontainer-templates/tree/main/src/scicloj"
+  },
+  {
+    "id": "ghcr.io/thephaseless/devcontainer-templates/flutter",
+    "name": "Flutter",
+    "description": "Fully featured Linux/Web/Android Flutter development environment",
+    "options": null,
+    "category": "Dev Container Templates by ThePhaseless",
+    "documentationURL": "https://github.com/ThePhaseless/devcontainer-templates/tree/main/src/flutter"
+  },
+  {
+    "id": "ghcr.io/matheusfvesco/devcontainer-templates/local-colab",
+    "name": "Local Colab (Google Colab Image)",
+    "description": "The official Google Colab runtime image, adapted to be run using Dev Containers.",
+    "options": {},
+    "category": "Dev Container Templates by matheusfvesco",
+    "documentationURL": "https://github.com/matheusfvesco/devcontainer-templates/tree/main/src/local-colab"
+  },
+  {
+    "id": "ghcr.io/matheusfvesco/devcontainer-templates/miniforge",
+    "name": "Miniforge3 (GPU)",
+    "description": "A Python template with miniforge3 installed and --gpus all passed to the container, making it easy to develop any project.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "The miniforge version (MAJOR.MINOR.PATCHES):",
+        "proposals": [
+          "latest",
+          "24.3.0-0",
+          "24.1.2-0",
+          "23.11.0-0",
+          "23.3.1-1",
+          "23.3.1-0",
+          "23.1.0-4",
+          "23.1.0-3",
+          "23.1.0-2",
+          "23.1.0-1",
+          "22.11.1-4",
+          "22.9.0-3",
+          "22.9.0-2",
+          "22.9.0-1",
+          "22.9.0-0"
+        ],
+        "default": "24.3.0-0"
+      }
+    },
+    "category": "Dev Container Templates by matheusfvesco",
+    "documentationURL": "https://github.com/matheusfvesco/devcontainer-templates/tree/main/src/miniforge"
+  },
+  {
+    "id": "ghcr.io/matheusfvesco/devcontainer-templates/miniforge-dind",
+    "name": "Miniforge3 Docker (DinD and GPU)",
+    "description": "A Python template with miniforge3 installed and --gpus all passed to the container, making it easy to develop any project.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "The miniforge version (MAJOR.MINOR.PATCHES):",
+        "proposals": [
+          "latest",
+          "24.3.0-0",
+          "24.1.2-0",
+          "23.11.0-0",
+          "23.3.1-1",
+          "23.3.1-0",
+          "23.1.0-4",
+          "23.1.0-3",
+          "23.1.0-2",
+          "23.1.0-1",
+          "22.11.1-4",
+          "22.9.0-3",
+          "22.9.0-2",
+          "22.9.0-1",
+          "22.9.0-0"
+        ],
+        "default": "24.3.0-0"
+      }
+    },
+    "category": "Dev Container Templates by matheusfvesco",
+    "documentationURL": "https://github.com/matheusfvesco/devcontainer-templates/tree/main/src/miniforge-dind"
+  },
+  {
+    "id": "ghcr.io/matheusfvesco/devcontainer-templates/python-dind",
+    "name": "Python Docker (DinD)",
+    "description": "A Python template with pipx, some tools, and Docker in Docker",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version (use -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "3-bookworm",
+          "3.12-bookworm",
+          "3.11-bookworm",
+          "3.10-bookworm",
+          "3.9-bookworm",
+          "3.8-bookworm",
+          "3-bullseye",
+          "3.12-bullseye",
+          "3.11-bullseye",
+          "3.10-bullseye",
+          "3.9-bullseye",
+          "3.8-bullseye",
+          "3-buster",
+          "3.11-buster",
+          "3.10-buster",
+          "3.9-buster",
+          "3.8-buster"
+        ],
+        "default": "3.12-bookworm"
+      }
+    },
+    "category": "Dev Container Templates by matheusfvesco",
+    "documentationURL": "https://github.com/matheusfvesco/devcontainer-templates/tree/main/src/python-dind"
+  },
+  {
+    "id": "ghcr.io/matheusfvesco/devcontainer-templates/python-kaggle",
+    "name": "Python (Kagle Image)",
+    "description": "The official Kaggle Python image.",
+    "options": {
+      "imageVersion": {
+        "type": "string",
+        "description": "The version of the Kaggle container (see https://gcr.io/kaggle-gpu-images/python):",
+        "proposals": [
+          "latest",
+          "v149",
+          "v148",
+          "v147",
+          "v146",
+          "v145",
+          "v144",
+          "v143",
+          "v142",
+          "v141"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Dev Container Templates by matheusfvesco",
+    "documentationURL": "https://github.com/matheusfvesco/devcontainer-templates/tree/main/src/python-kaggle"
+  },
+  {
+    "id": "ghcr.io/matheusfvesco/devcontainer-templates/python-utils",
+    "name": "Python Utils (Pipx Tools)",
+    "description": "A Python template with pipx and some tools",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version (use -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "3-bookworm",
+          "3.12-bookworm",
+          "3.11-bookworm",
+          "3.10-bookworm",
+          "3.9-bookworm",
+          "3.8-bookworm",
+          "3-bullseye",
+          "3.12-bullseye",
+          "3.11-bullseye",
+          "3.10-bullseye",
+          "3.9-bullseye",
+          "3.8-bullseye",
+          "3-buster",
+          "3.11-buster",
+          "3.10-buster",
+          "3.9-buster",
+          "3.8-buster"
+        ],
+        "default": "3.12-bookworm"
+      }
+    },
+    "category": "Dev Container Templates by matheusfvesco",
+    "documentationURL": "https://github.com/matheusfvesco/devcontainer-templates/tree/main/src/python-utils"
+  },
+  {
+    "id": "ghcr.io/matheusfvesco/devcontainer-templates/pytorch-gpu",
+    "name": "Pytorch GPU (NGC and pipx)",
+    "description": "A Python template with access to the host GPU (NVIDIA NGC Catalog), pipx and a few utilities",
+    "options": {
+      "containerVersion": {
+        "type": "string",
+        "description": "Defines the NVIDIA Pytorch container version (year.month): ",
+        "proposals": [
+          "24.05",
+          "24.04",
+          "24.03",
+          "24.02",
+          "24.01",
+          "23.12",
+          "23.11",
+          "23.10",
+          "23.09",
+          "23.08",
+          "23.07",
+          "23.06",
+          "23.05",
+          "23.04",
+          "23.03",
+          "23.02",
+          "23.01",
+          "22.12",
+          "22.11",
+          "22.10",
+          "22.09",
+          "22.08",
+          "22.07",
+          "22.06",
+          "22.05",
+          "22.04",
+          "22.03",
+          "22.02",
+          "22.01"
+        ],
+        "default": "23.07"
+      },
+      "igpuVersion": {
+        "type": "string",
+        "description": "If image is for NVIDIA Developer Kits with igpu:",
+        "proposals": [
+          "py3-igpu",
+          "py3"
+        ],
+        "default": "py3"
+      }
+    },
+    "category": "Dev Container Templates by matheusfvesco",
+    "documentationURL": "https://github.com/matheusfvesco/devcontainer-templates/tree/main/src/pythorch-gpu"
+  },
+  {
+    "id": "ghcr.io/matheusfvesco/devcontainer-templates/tensorflow-gpu",
+    "name": "Tensorflow GPU (NGC and pipx)",
+    "description": "A Python template with access to the host GPU (NVIDIA NGC Catalog), pipx and a few utilities",
+    "options": {
+      "containerVersion": {
+        "type": "string",
+        "description": "Defines the NVIDIA Tensorflow container version (year.month): ",
+        "proposals": [
+          "24.05",
+          "24.04",
+          "24.03",
+          "24.02",
+          "24.01",
+          "23.12",
+          "23.11",
+          "23.10",
+          "23.09",
+          "23.08",
+          "23.07",
+          "23.06",
+          "23.05",
+          "23.04",
+          "23.03",
+          "23.02",
+          "23.01",
+          "22.12",
+          "22.11",
+          "22.10",
+          "22.09",
+          "22.08",
+          "22.07",
+          "22.06",
+          "22.05",
+          "22.04",
+          "22.03",
+          "22.02",
+          "22.01"
+        ],
+        "default": "23.07"
+      },
+      "tensorflowVersion": {
+        "type": "string",
+        "description": "Tensorflow version (only tf2 from 23.04 and above):",
+        "proposals": [
+          "tf2",
+          "tf1"
+        ],
+        "default": "tf2"
+      },
+      "igpuVersion": {
+        "type": "string",
+        "description": "If image is for NVIDIA Developer Kits with igpu (contaiver version 23.11 and above):",
+        "proposals": [
+          "py3-igpu",
+          "py3"
+        ],
+        "default": "py3"
+      }
+    },
+    "category": "Dev Container Templates by matheusfvesco",
+    "documentationURL": "https://github.com/matheusfvesco/devcontainer-templates/tree/main/src/tensorflow-gpu"
+  },
+  {
+    "id": "ghcr.io/sleter/mojo-devcontainer/mojo",
+    "name": "Mojo",
+    "description": "Installs Mojo programming language on Ubuntu using default SDK setup from Mojo repository.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Ubuntu version to use as base image.",
+        "proposals": [
+          "focal",
+          "jammy",
+          "mantic",
+          "noble"
+        ],
+        "default": "focal"
+      }
+    },
+    "category": "Dev Container Templates by sleter",
+    "documentationURL": "https://github.com/sleter/mojo-devcontainer/blob/main/src/mojo"
+  },
+  {
+    "id": "ghcr.io/juan-ayala/devcontainer-templates/aem",
+    "name": "Adobe Experience Manager",
+    "description": "Develop AEM applications.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Container image variant",
+        "proposals": [
+          "debian",
+          "ubuntu"
+        ],
+        "default": "debian"
+      },
+      "nodeJsVersion": {
+        "type": "string",
+        "description": "Node.js version to install.",
+        "default": "12.22.7"
+      }
+    },
+    "category": "Devcontainer templates by Juan Ayala",
+    "documentationURL": "https://github.com/juan-ayala/devcontainer-templates/tree/main/src/aem"
+  },
+  {
+    "id": "ghcr.io/localstack/devcontainer-template/localstack-dind",
+    "name": "LocalStack Docker-in-Docker",
+    "description": "A template to manage LocalStack in DinD via CLI",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye or jammy on local arm64/Apple Silicon):",
+        "proposals": [
+          "jammy",
+          "focal",
+          "bullseye",
+          "bookworm"
+        ],
+        "default": "jammy"
+      },
+      "awslocal": {
+        "type": "boolean",
+        "description": "Install LocalStack wrapper for AWS CLI:",
+        "default": "false"
+      },
+      "cdklocal": {
+        "type": "boolean",
+        "description": "Install LocalStack wrapper for CDK:",
+        "default": "false"
+      },
+      "pulumilocal": {
+        "type": "boolean",
+        "description": "Install LocalStack wrapper for Pulumi:",
+        "default": "false"
+      },
+      "samlocal": {
+        "type": "boolean",
+        "description": "Install LocalStack wrapper for AWS SAM CLI:",
+        "default": "false"
+      },
+      "tflocal": {
+        "type": "boolean",
+        "description": "Install LocalStack wrapper for Terraform:",
+        "default": "false"
+      },
+      "logLevel": {
+        "type": "string",
+        "description": "Set LocalStack log level:",
+        "enum": [
+          "trace",
+          "trace-internal",
+          "debug",
+          "info",
+          "warn",
+          "error",
+          "warning"
+        ],
+        "default": "info"
+      },
+      "debug": {
+        "type": "boolean",
+        "descripiton": "Enable LocalStack debugging:",
+        "default": "false"
+      },
+      "persistence": {
+        "type": "boolean",
+        "descripiton": "Enable persistence in LocalStack:",
+        "default": "false"
+      },
+      "usePro": {
+        "type": "boolean",
+        "descripiton": "Enable LocalStack Pro:",
+        "default": "false"
+      },
+      "version": {
+        "type": "string",
+        "descripiton": "Use LocalStack version:",
+        "proposals": [
+          "latest",
+          "3.6.0",
+          "3.5.0",
+          "3.4.0",
+          "3.3.0",
+          "3.2.0",
+          "3.1.0",
+          "3.0.2",
+          "3.0.1"
+        ],
+        "default": "latest"
+      },
+      "loadPods": {
+        "type": "string",
+        "descripiton": "Load Cloud Pods at start-up (comma-separated list):",
+        "default": " "
+      },
+      "volumePath": {
+        "type": "string",
+        "descripiton": "LocalStack volume location on the host (currently only local (bind) mounts recommended):",
+        "default": "./.volume"
+      },
+      "enforceIam": {
+        "type": "boolean",
+        "descripiton": "Enforce IAM:",
+        "default": "false"
+      },
+      "defaultRegion": {
+        "type": "string",
+        "descripiton": "Default AWS region:",
+        "proposals": [
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2",
+          "af-south-1",
+          "ap-east-1",
+          "ap-south-1",
+          "ap-south-2",
+          "ap-southeast-1",
+          "ap-southeast-2",
+          "ap-southeast-3",
+          "ap-southeast-4",
+          "ap-northeast-1",
+          "ap-northeast-2",
+          "ap-northeast-3",
+          "ca-central-1",
+          "ca-west-1",
+          "eu-central-1",
+          "eu-central-2",
+          "eu-west-1",
+          "eu-west-2",
+          "eu-west-3",
+          "eu-south-1",
+          "eu-south-2",
+          "eu-north-1",
+          "il-central-1",
+          "me-south-1",
+          "me-central-1",
+          "sa-east-1"
+        ],
+        "default": "us-east-1"
+      },
+      "startup": {
+        "type": "boolean",
+        "description": "Start up LocalStack:",
+        "default": "true"
+      }
+    },
+    "category": "LocalStack DevContainer Template",
+    "documentationURL": "https://github.com/localstack/devcontainer-template/tree/main/src/localstack-dind"
+  },
+  {
+    "id": "ghcr.io/localstack/devcontainer-template/localstack-dood",
+    "name": "LocalStack Docker-outside-of-Docker",
+    "description": "A template to manage LocalStack in DooD",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye or jammy on local arm64/Apple Silicon):",
+        "proposals": [
+          "jammy",
+          "focal",
+          "bullseye",
+          "bookworm"
+        ],
+        "default": "jammy"
+      },
+      "awslocal": {
+        "type": "boolean",
+        "description": "Install LocalStack wrapper for AWS CLI:",
+        "default": "false"
+      },
+      "cdklocal": {
+        "type": "boolean",
+        "description": "Install LocalStack wrapper for CDK:",
+        "default": "false"
+      },
+      "pulumilocal": {
+        "type": "boolean",
+        "description": "Install LocalStack wrapper for Pulumi:",
+        "default": "false"
+      },
+      "samlocal": {
+        "type": "boolean",
+        "description": "Install LocalStack wrapper for AWS SAM CLI:",
+        "default": "false"
+      },
+      "tflocal": {
+        "type": "boolean",
+        "description": "Install LocalStack wrapper for Terraform:",
+        "default": "false"
+      },
+      "logLevel": {
+        "type": "string",
+        "description": "Set LocalStack log level:",
+        "enum": [
+          "trace",
+          "trace-internal",
+          "debug",
+          "info",
+          "warn",
+          "error",
+          "warning"
+        ],
+        "default": "info"
+      },
+      "networkName": {
+        "type": "string",
+        "descripiton": "LocalStack network name:",
+        "default": "ls"
+      },
+      "networkCidr": {
+        "type": "string",
+        "descripiton": "LocalStack network CIDR:",
+        "default": "10.0.2.0/24"
+      },
+      "ipAddress": {
+        "type": "string",
+        "descripiton": "LocalStack IP:",
+        "default": "10.0.2.20"
+      },
+      "host": {
+        "type": "string",
+        "descripiton": "LocalStack hostname:",
+        "proposals": [
+          "localhost.localstack.cloud:4566"
+        ],
+        "default": "localhost.localstack.cloud:4566"
+      },
+      "debug": {
+        "type": "boolean",
+        "descripiton": "Enable LocalStack debugging:",
+        "default": "false"
+      },
+      "persistence": {
+        "type": "boolean",
+        "descripiton": "Enable persistence in LocalStack:",
+        "default": "false"
+      },
+      "usePro": {
+        "type": "boolean",
+        "descripiton": "Enable LocalStack Pro:",
+        "default": "false"
+      },
+      "version": {
+        "type": "string",
+        "descripiton": "Use LocalStack version:",
+        "proposals": [
+          "latest",
+          "3.6.0",
+          "3.5.0",
+          "3.4.0",
+          "3.3.0",
+          "3.2.0",
+          "3.1.0",
+          "3.0.2",
+          "3.0.1"
+        ],
+        "default": "latest"
+      },
+      "loadPods": {
+        "type": "string",
+        "descripiton": "Load Cloud Pods at start-up (comma-separated list):",
+        "default": " "
+      },
+      "volumePath": {
+        "type": "string",
+        "descripiton": "LocalStack volume location on the host (currently only local (bind) mounts recommended):",
+        "default": "./.volume"
+      },
+      "enforceIam": {
+        "type": "boolean",
+        "descripiton": "Enforce IAM:",
+        "default": "false"
+      },
+      "defaultRegion": {
+        "type": "string",
+        "descripiton": "Default AWS region:",
+        "proposals": [
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2",
+          "af-south-1",
+          "ap-east-1",
+          "ap-south-1",
+          "ap-south-2",
+          "ap-southeast-1",
+          "ap-southeast-2",
+          "ap-southeast-3",
+          "ap-southeast-4",
+          "ap-northeast-1",
+          "ap-northeast-2",
+          "ap-northeast-3",
+          "ca-central-1",
+          "ca-west-1",
+          "eu-central-1",
+          "eu-central-2",
+          "eu-west-1",
+          "eu-west-2",
+          "eu-west-3",
+          "eu-south-1",
+          "eu-south-2",
+          "eu-north-1",
+          "il-central-1",
+          "me-south-1",
+          "me-central-1",
+          "sa-east-1"
+        ],
+        "default": "us-east-1"
+      }
+    },
+    "category": "LocalStack DevContainer Template",
+    "documentationURL": "https://github.com/localstack/devcontainer-template/tree/main/src/localstack-dood"
+  },
+  {
+    "id": "ghcr.io/lx-0/devcontainer-templates/universal-arm64",
+    "name": "Universal for arm64",
+    "description": "A modified version of the universal template for arm64",
+    "options": {},
+    "category": "Dev Container Templates by Alex Wegener",
+    "documentationURL": "https://github.com/lx-0/devcontainer-templates/tree/main/src/universal-arm64"
+  },
+  {
+    "id": "ghcr.io/the-nefarious-developer/devcontainer-templates/sap-cap-javascript-node",
+    "name": "SAP CAP",
+    "description": "Develop CAP based projects with Node.js for SAP BTP Cloud Foundry.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Upstream Node version (use -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "22-bookworm",
+          "22-bullseye",
+          "20-bookworm",
+          "20-bullseye",
+          "18-bookworm",
+          "20-bullseye",
+          "18-bullseye"
+        ],
+        "default": "22-bookworm"
+      }
+    },
+    "category": "Nefarious Development Containers",
+    "documentationURL": "https://github.com/The-Nefarious-Developer/devcontainer-templates/tree/main/src/sap-cap-javascript-node"
+  },
+  {
+    "id": "ghcr.io/the-nefarious-developer/devcontainer-templates/sap-cap-typescript-node",
+    "name": "SAP CAP",
+    "description": "Develop CAP based projects with Typescript for SAP BTP Cloud Foundry.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Upstream Node version (use -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "22-bookworm",
+          "22-bullseye",
+          "20-bookworm",
+          "20-bullseye",
+          "18-bookworm",
+          "20-bullseye",
+          "18-bullseye"
+        ],
+        "default": "22-bookworm"
+      }
+    },
+    "category": "Nefarious Development Containers",
+    "documentationURL": "https://github.com/The-Nefarious-Developer/devcontainer-templates/tree/main/src/sap-cap-typescript-node"
+  },
+  {
+    "id": "ghcr.io/irfansofyana/devcontainer-templates/go-toolkit",
+    "name": "Go Development Toolkit",
+    "description": "This is a devcontainer template for some of the typical stacks used in Go development such as MySQL, Redis, Kafka, etc.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Go version to use:",
+        "proposals": [
+          "1.23",
+          "1.22"
+        ],
+        "default": "1.23"
+      }
+    },
+    "category": "devcontainer templates by irfansofyana",
+    "documentationURL": "https://github.com/irfansofyana/devcontainer-templates/tree/main/src/go-toolkit"
+  },
+  {
+    "id": "ghcr.io/techiro/devcontainer-template/flutter",
+    "name": "Flutter",
+    "description": "Instant Flutter development environment — just launch and start coding!",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Flutter version to use",
+        "proposals": [
+          "latest"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "devcontainer templates by techiro",
+    "documentationURL": "https://github.com/techiro/devcontainer-template/blob/main/src/flutter/README.md"
+  },
+  {
+    "id": "ghcr.io/blooop/devcontainer-templates/pixi",
+    "name": "Pixi",
+    "description": "A development container with Pixi pre-installed, perfect for Python, C, C++, and other workflows that can benefit from Pixi's package management.",
+    "options": {
+      "pixiVersion": {
+        "type": "string",
+        "default": "v0.41.4",
+        "description": "The version of Pixi to install."
+      },
+      "projectName": {
+        "type": "string",
+        "default": "pixi-project",
+        "description": "The name of your project."
+      }
+    },
+    "category": "devcontainer templates by blooop",
+    "documentationURL": "https://github.com/prefix-dev/pixi"
+  },
+  {
+    "id": "ghcr.io/fardragon/devcontainers-zig-template/ziglang",
+    "name": "Devcontainers Ziglang template",
+    "description": "Devcontainers template for Ziglang. Contains ZLS and Zig extensions for VSCode",
+    "options": {
+      "zigVersion": {
+        "type": "string",
+        "description": "Zig compiler version",
+        "proposals": [
+          "nightly",
+          "0.13.0",
+          "0.14.0",
+          "0.14.1",
+          "0.15.1",
+          "0.15.2"
+        ],
+        "default": "0.15.2"
+      }
+    },
+    "category": "Ziglang devcontainer Template",
+    "documentationURL": "https://github.com/fardragon/devcontainers-zig-template/tree/main/src/ziglang"
+  },
+  {
+    "id": "ghcr.io/axonivy/devcontainer-templates/axonivy",
+    "name": "Axon Ivy",
+    "description": "Develop Axon Ivy projects. Includes JDK, Axon Ivy Engine, Java Extensions and Axon Ivy Extension.",
+    "options": null,
+    "category": "Axon Ivy devcontainer template",
+    "documentationURL": "https://github.com/axonivy/devcontainer-templates/tree/master/src/axonivy"
+  },
+  {
+    "id": "ghcr.io/ymasaoka/devcontainer-templates/aws-lambda-dotnet",
+    "name": "AWS Lambda (.NET)",
+    "description": "Develop C# and .NET based AWS Lambda. Includes all needed SDKs, extensions, and dependencies.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": ".NET Version:",
+        "proposals": [
+          "8.0-bookworm",
+          "6.0-bookworm",
+          "6.0-bullseye"
+        ],
+        "default": "8.0-bookworm"
+      }
+    },
+    "category": "AWS Lambda Dev Container",
+    "documentationURL": "https://github.com/ymasaoka/devcontainers-templates/tree/main/src/aws-lambda-dotnet"
+  },
+  {
+    "id": "ghcr.io/ryanlua/templates/roblox",
+    "name": "Roblox",
+    "description": "Develop on Roblox using Rojo. Includes a toolchain manager, extensions, CLI, and dependencies.",
+    "options": {
+      "rojoVersion": {
+        "type": "string",
+        "description": "Select a Rojo version to install",
+        "proposals": [
+          "latest",
+          "7.5.1",
+          "7.5.0",
+          "7.4.4",
+          "7.4.3",
+          "7.4.2",
+          "7.4.0",
+          "7.2.1",
+          "7.2.0",
+          "7.1.1",
+          "7.1.0",
+          "7.0.0",
+          "6.2.0",
+          "0.5.4",
+          "0.4.13",
+          "0.3.2",
+          "0.2.0",
+          "0.1.0"
+        ],
+        "default": "latest"
+      },
+      "toolchainManager": {
+        "type": "string",
+        "enum": [
+          "aftman",
+          "foreman",
+          "rokit",
+          "none"
+        ],
+        "default": "rokit",
+        "description": "Select a toolchain manager to install."
+      }
+    },
+    "category": "Roblox Template",
+    "documentationURL": "https://github.com/ryanlua/templates/tree/main/src/roblox"
+  },
+  {
+    "id": "ghcr.io/pirpedro/devcontainers/dev-tools",
+    "name": "Dev Container Tools (base)",
+    "description": "Base template with common-utils, git, antidote, chezmoi and dev-gadgets features, SSH agent forwarding and Chezmoi workspace layout.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "alpine",
+          "debian",
+          "ubuntu"
+        ],
+        "default": "ubuntu"
+      }
+    },
+    "category": "Dev Container Templates by pirpedro",
+    "documentationURL": "https://github.com/pirpedro/devcontainers/tree/main/src/dev-tools"
+  },
+  {
+    "id": "ghcr.io/mattmazzola/devcontainers/color",
+    "name": "My Favorite Color",
+    "description": "A Template to remind you of your favorite color",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (use bullseye on local arm64/Apple Silicon):",
+        "proposals": [
+          "bullseye",
+          "buster"
+        ],
+        "default": "bullseye"
+      },
+      "favorite": {
+        "type": "string",
+        "description": "Choose your favorite color.",
+        "proposals": [
+          "red",
+          "gold",
+          "green"
+        ],
+        "default": "red"
+      }
+    },
+    "category": "Matt Mazzola Dev Containers",
+    "documentationURL": "https://github.com/devcontainers/template-starter/tree/main/src/color"
+  },
+  {
+    "id": "ghcr.io/mattmazzola/devcontainers/hello",
+    "name": "Hello, World",
+    "description": "A hello world Template",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Ubuntu version (use ubuntu-22.04 or ubuntu-18.04 on local arm64/Apple Silicon):",
+        "proposals": [
+          "jammy",
+          "focal",
+          "bionic"
+        ],
+        "default": "jammy"
+      },
+      "greeting": {
+        "type": "string",
+        "description": "Select a pre-made greeting, or enter your own",
+        "proposals": [
+          "hey",
+          "hello",
+          "hi",
+          "howdy"
+        ],
+        "default": "hey"
+      }
+    },
+    "category": "Matt Mazzola Dev Containers",
+    "documentationURL": "https://github.com/devcontainers/template-starter/tree/main/src/hello"
+  },
+  {
+    "id": "ghcr.io/mattmazzola/devcontainers/uv",
+    "name": "uv",
+    "description": "A .devcontainer template for UV python projects",
+    "options": null,
+    "category": "Matt Mazzola Dev Containers",
+    "documentationURL": "https://github.com/mattmazzola/devcontainers"
+  },
+  {
+    "id": "ghcr.io/rferrali/devcontainer-templates/academic-docker",
+    "name": "AcademicDocker template",
+    "description": "A template with R, Latex and Stata for scientific publishing",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Image version (sets the R version; we recommend pinning the version):",
+        "proposals": [
+          "latest",
+          "4.5.1",
+          "4.5.0",
+          "4.4.3",
+          "4.4.2",
+          "4.4.1",
+          "4.4.0"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "AcademicDocker template (R, Stata, LaTeX)",
+    "documentationURL": "https://github.com/rferrali/devcontainer-templates/tree/main/src/academic-docker"
+  },
+  {
+    "id": "ghcr.io/jhoareaumarion/devcontainers/ansible",
+    "name": "Ansible",
+    "description": "Develop applications using Ansible",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version (use -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "3-bookworm",
+          "3.12-bookworm",
+          "3.11-bookworm",
+          "3.10-bookworm",
+          "3.9-bookworm",
+          "3-bullseye",
+          "3.12-bullseye",
+          "3.11-bullseye",
+          "3.10-bullseye",
+          "3.9-bullseye"
+        ],
+        "default": "3.12-bullseye"
+      },
+      "additionalPythonPackages": {
+        "type": "string",
+        "description": "A comma-separated list of python packages you want to include in the devcontainer. Example: `requests,pytest,flask`",
+        "default": ""
+      },
+      "additionnalAnsibleCollections": {
+        "type": "string",
+        "description": "A comma-separated list of ansible collections you want to include in the devcontainer. Example: `community.docker,ansible.posix,kubernetes.core`",
+        "default": ""
+      }
+    },
+    "category": "Devcontainers templates by jhoareaumarion",
+    "documentationURL": "https://github.com/jhoareaumarion/devcontainers/blob/main/src/ansible/README.md"
+  },
+  {
+    "id": "ghcr.io/jhoareaumarion/devcontainers/ansible-bitwarden-kubernetes-tofu",
+    "name": "Ansible + Bitwarden CLI + Kubernetes + OpenTofu",
+    "description": "Develop applications using Ansible, Bitwarden CLI, Kubernetes and OpenTofu",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version (use -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "3-bookworm",
+          "3.12-bookworm",
+          "3.11-bookworm",
+          "3.10-bookworm",
+          "3.9-bookworm",
+          "3-bullseye",
+          "3.12-bullseye",
+          "3.11-bullseye",
+          "3.10-bullseye",
+          "3.9-bullseye"
+        ],
+        "default": "3.12-bookworm"
+      },
+      "additionalPythonPackages": {
+        "type": "string",
+        "description": "A comma-separated list of python packages you want to include in the devcontainer. Example: `requests,pytest,flask`",
+        "default": ""
+      },
+      "additionnalAnsibleCollections": {
+        "type": "string",
+        "description": "A comma-separated list of ansible collections you want to include in the devcontainer. Example: `community.docker,ansible.posix,kubernetes.core`",
+        "default": ""
+      }
+    },
+    "category": "Devcontainers templates by jhoareaumarion",
+    "documentationURL": "https://github.com/jhoareaumarion/devcontainers/blob/main/src/ansible-kubernetes-tofu/README.md"
+  },
+  {
+    "id": "ghcr.io/jhoareaumarion/devcontainers/kubernetes",
+    "name": "kubernetes",
+    "description": "Develop applications using kubectl",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version (use -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "3-bookworm",
+          "3.12-bookworm",
+          "3.11-bookworm",
+          "3.10-bookworm",
+          "3.9-bookworm",
+          "3-bullseye",
+          "3.12-bullseye",
+          "3.11-bullseye",
+          "3.10-bullseye",
+          "3.9-bullseye"
+        ],
+        "default": "3.12-bullseye"
+      }
+    },
+    "category": "Devcontainers templates by jhoareaumarion",
+    "documentationURL": "https://github.com/jhoareaumarion/devcontainers/blob/main/src/kubectl/README.md"
+  },
+  {
+    "id": "ghcr.io/jhoareaumarion/devcontainers/tofu",
+    "name": "OpenTofu",
+    "description": "Develop applications using kubectl",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version (use -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "proposals": [
+          "3-bookworm",
+          "3.12-bookworm",
+          "3.11-bookworm",
+          "3.10-bookworm",
+          "3.9-bookworm",
+          "3-bullseye",
+          "3.12-bullseye",
+          "3.11-bullseye",
+          "3.10-bullseye",
+          "3.9-bullseye"
+        ],
+        "default": "3.12-bullseye"
+      }
+    },
+    "category": "Devcontainers templates by jhoareaumarion",
+    "documentationURL": "https://github.com/jhoareaumarion/devcontainers/blob/main/src/tofu/README.md"
+  },
+  {
+    "id": "ghcr.io/navinkrishnan/devcontainer-templates-btp/btp-cap-dev-stack",
+    "name": "SAP BTP CAP Dev Stack",
+    "description": "A development container for SAP BTP CAP applications.",
+    "options": {
+      "cds-dk": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest",
+          "none"
+        ],
+        "description": "The version of the CAP cds-dk to install."
+      },
+      "cf": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest",
+          "none"
+        ],
+        "description": "The version of the Cloud Foundry CLI to install."
+      },
+      "mbt": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest",
+          "none"
+        ],
+        "description": "The version of the SAP Cloud MTA Build Tool (mbt) to install."
+      },
+      "helm": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest",
+          "none"
+        ],
+        "description": "The version of Helm to install."
+      },
+      "pack": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest",
+          "none"
+        ],
+        "description": "The version of the Pack CLI to install."
+      },
+      "kubectl": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest",
+          "none"
+        ],
+        "description": "The version of the Kubernetes CLI (kubectl) to install."
+      }
+    },
+    "category": "BTP CAP (Cloud Application Programming) Model Dev Templates",
+    "documentationURL": "https://github.com/navinkrishnan/devcontainer-features-btp/tree/main/src/btp-cap-dev-stack"
+  },
+  {
+    "id": "ghcr.io/Azure/edgeactions-devcontainers/edgeactions",
+    "name": "EdgeActions Development Container",
+    "description": "A development container for EdgeActions projects, providing tools and dependencies for building, testing, and deploying EdgeActions.",
+    "options": null,
+    "category": "EdgeActions Dev Container Templates",
+    "documentationURL": "https://github.com/microsoft/edgeactions-devcontainers/tree/main/src/edgeactions"
+  },
+  {
+    "id": "ghcr.io/estebenr/devcontainers/nevermore",
+    "name": "Nevermore Roblox",
+    "description": "A container for easy Nevermore setup with Luau LSP included",
+    "options": {},
+    "category": "EstebenR Devcontainers",
+    "documentationURL": "https://github.com/EstebenR/devcontainers/tree/main/src/nevermore"
+  },
+  {
+    "id": "ghcr.io/philips-software/amp-devcontainer/cpp",
+    "name": "C++",
+    "description": "A modern, batteries-included software development environment for C++",
+    "options": {
+      "imageVersion": {
+        "type": "string",
+        "description": "amp-devcontainer version",
+        "default": "6.9.0"
+      }
+    },
+    "category": "Philips Software Dev Container Templates",
+    "documentationURL": "https://github.com/philips-software/amp-devcontainer/blob/main/README.md"
+  },
+  {
+    "id": "ghcr.io/philips-software/amp-devcontainer/rust",
+    "name": "Rust",
+    "description": "A modern, batteries-included software development environment for Rust",
+    "options": {
+      "imageVersion": {
+        "type": "string",
+        "description": "amp-devcontainer version",
+        "default": "6.9.0"
+      }
+    },
+    "category": "Philips Software Dev Container Templates",
+    "documentationURL": "https://github.com/philips-software/amp-devcontainer/blob/main/README.md"
+  },
+  {
+    "id": "ghcr.io/metinsenturk/devcontainer-templates/python",
+    "name": "Python",
+    "description": "A Python development environment powered by the simple-python custom image.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Python version:",
+        "proposals": [
+          "3.13",
+          "latest"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Metin's Dev Containers",
+    "documentationURL": "https://github.com/metinsenturk/devcontainer-templates/tree/main/src/python"
+  },
+  {
+    "id": "ghcr.io/metinsenturk/devcontainer-templates/python-uv",
+    "name": "Python + uv",
+    "description": "Python development environment with uv package manager (via devcontainers-extra feature).",
+    "options": {
+      "projectName": {
+        "type": "string",
+        "description": "Name for this project/workspace:",
+        "default": "Python + uv"
+      },
+      "imageName": {
+        "type": "string",
+        "description": "Docker image name:",
+        "default": "python_playground"
+      },
+      "pythonVersion": {
+        "type": "string",
+        "description": "Python version to install via uv:",
+        "proposals": [
+          "3.14",
+          "3.13",
+          "3.12",
+          "3.11"
+        ],
+        "default": "3.13"
+      },
+      "bare": {
+        "type": "boolean",
+        "description": "Use --bare mode for uv init (minimal pyproject.toml only):",
+        "default": true
+      },
+      "useJupyter": {
+        "type": "boolean",
+        "description": "Enable Jupyter notebooks (installs ipykernel on post-create):",
+        "default": true
+      }
+    },
+    "category": "Metin's Dev Containers",
+    "documentationURL": "https://github.com/metinsenturk/devcontainer-templates/tree/main/src/python-uv"
+  }
+]
