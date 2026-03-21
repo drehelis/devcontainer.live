@@ -32,7 +32,7 @@ export function useFeatures() {
 
       features.value = await res.json();
     } catch (err: any) {
-      error.value = "Features data not available. Please run ./scripts/update-data.sh";
+      error.value = "Features data not available.";
     } finally {
       loading.value = false;
     }

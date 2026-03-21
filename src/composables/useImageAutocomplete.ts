@@ -9,7 +9,7 @@ export function ensureSharedTags() {
   fetch("/data/imageTags.json")
     .then((res) => { if (!res.ok) throw new Error(); return res.json(); })
     .then((data) => { Object.assign(sharedTagsCache, data); })
-    .catch(() => console.warn("imageTags.json not found. Please run ./scripts/update-data.sh"));
+    .catch(() => console.warn("imageTags.json not found. Using fallback behavior."));
 }
 
 const commonImages = [
