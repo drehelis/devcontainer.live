@@ -4,19 +4,30 @@ set -eo pipefail
 readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly ROOT_DIR="$(dirname "$DIR")"
 mkdir -p "$ROOT_DIR/public/data"
+
 readonly FEATURES_FILE="$ROOT_DIR/public/data/features.json"
 readonly TEMPLATES_FILE="$ROOT_DIR/public/data/templates.json"
 readonly IMAGE_TAGS_FILE="$ROOT_DIR/public/data/imageTags.json"
 
-deploy_skopeo() {
-    echo "Skopeo could not be found. Installing via apt-get..."
+ensure_installed() {
+    local pkg="$1"
+    command -v "$pkg" &> /dev/null && return
+    echo "$pkg could not be found. Installing via apt-get..."
     local apt_cmd="apt-get"
     command -v sudo &> /dev/null && apt_cmd="sudo apt-get"
-    DEBIAN_FRONTEND=noninteractive $apt_cmd update && $apt_cmd install -y skopeo
+    DEBIAN_FRONTEND=noninteractive $apt_cmd update && $apt_cmd install -y "$pkg"
 }
 
 if ! command -v skopeo &> /dev/null; then
-    deploy_skopeo
+    ensure_installed skopeo
+fi
+
+if ! command -v jq &> /dev/null; then
+    ensure_installed jq
+fi
+
+if ! command -v curl &> /dev/null; then
+    ensure_installed jq
 fi
 
 readonly TMP_DIR=$(mktemp -d)
