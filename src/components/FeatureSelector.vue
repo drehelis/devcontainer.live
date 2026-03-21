@@ -80,7 +80,7 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
 
 const manualFeatures = computed(() => {
   return Object.keys(props.selectedFeatures).filter(
-    (id) => !featuresList.value.some((f) => f.id === id)
+    (id) => !featuresList.value.some((f) => f.id === id),
   );
 });
 </script>
@@ -104,7 +104,6 @@ const manualFeatures = computed(() => {
         APPEND
       </button>
     </div>
-
 
     <div
       class="ide-input flex items-center gap-3 px-3 focus-within:border-ide-accent focus-within:ring-1 focus-within:ring-ide-accent/20 transition-all shrink-0"
@@ -143,7 +142,6 @@ const manualFeatures = computed(() => {
       Error fetching features: {{ error }}
     </div>
 
-
     <div
       class="grid grid-cols-1 sm:grid-cols-3 gap-2 shrink-0 border-b border-ide-border/50 pb-4"
     >
@@ -166,7 +164,6 @@ const manualFeatures = computed(() => {
       </button>
     </div>
 
-
     <div
       class="flex-1 overflow-y-auto custom-scrollbar pr-2 pb-4 grid grid-cols-1 gap-3 min-h-0"
     >
@@ -180,7 +177,7 @@ const manualFeatures = computed(() => {
             : 'bg-ide-activity/30 border-ide-border hover:border-ide-accent/30'
         "
       >
-      >
+        >
         <div
           @click="toggleFeature(feature)"
           class="flex justify-between p-3 cursor-pointer select-none gap-3"
@@ -263,7 +260,6 @@ const manualFeatures = computed(() => {
           </div>
         </div>
 
-
         <div
           class="px-3 pb-3 border-t border-ide-accent/10 pt-2"
           v-if="selectedFeatures[feature.id] || searchQuery"
@@ -282,7 +278,6 @@ const manualFeatures = computed(() => {
               {{ feature.category }}
             </span>
           </div>
-
 
           <div
             v-if="
@@ -308,7 +303,6 @@ const manualFeatures = computed(() => {
                   >Presets available</span
                 >
               </div>
-
 
               <label
                 v-if="opt.type === 'boolean'"
@@ -361,7 +355,6 @@ const manualFeatures = computed(() => {
                   {{ opt.description }}
                 </p>
 
-
                 <SearchableSelect
                   v-if="opt.enum || opt.proposals"
                   :model-value="
@@ -380,7 +373,6 @@ const manualFeatures = computed(() => {
                   "
                   placeholder="Select option..."
                 />
-
 
                 <input
                   v-else

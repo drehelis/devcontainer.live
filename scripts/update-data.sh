@@ -76,11 +76,8 @@ echo "Iterating dynamically discovered images: ${IMAGES[*]}"
     img="${IMAGES[$i]}"
     echo -n "  \"$img\": "
     
-    # Fetch tags, parse them, extract the tags array, reverse and take first 50
-    # Temporarily disable pipefail if curl fails or returns no tags
-    set +o pipefail
-    TAGS_JSON=$(curl -sL "https://mcr.microsoft.com/v2/$img/tags/list" | jq -c '.tags | reverse | .[0:50]')
-    set -o pipefail
+    # Fetch tags, parse them, extract the tags array, reverse and take first 50.
+    TAGS_JSON=$(curl -sL "https://mcr.microsoft.com/v2/$img/tags/list" | jq -c '.tags | reverse | .[0:50]' 2>/dev/null || echo "[]")
     
     if [ -z "$TAGS_JSON" ] || [ "$TAGS_JSON" == "null" ]; then
         TAGS_JSON="[]"
