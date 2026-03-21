@@ -1,31 +1,10 @@
-import { ref, computed, reactive, watch, nextTick } from "vue";
-import imageTags from "../data/imageTags.json";
-
-export const COMMON_IMAGES = [
-  "devcontainers/python",
-  "devcontainers/ruby",
-  "devcontainers/cpp",
-  "devcontainers/go",
-  "devcontainers/base",
-  "devcontainers/php",
-  "devcontainers/typescript-node",
-  "devcontainers/javascript-node",
-  "devcontainers/jekyll",
-  "devcontainers/universal",
-  "devcontainers/anaconda",
-  "devcontainers/miniconda",
-  "devcontainers/rust",
-  "devcontainers/dotnet",
-  "devcontainers/java",
-] as const;
-
-export type CommonImage = (typeof COMMON_IMAGES)[number];
+import { ref, computed, watch, nextTick } from "vue";
+import { sharedTagsCache, ensureSharedTags } from "./useImageAutocomplete";
+import { MCR_PREFIX } from "../constants/urls";
 
 export function useCommonImages(imageValue: () => string | undefined) {
-  const MCR_PREFIX = "mcr.microsoft.com/";
-
-  const tagsCache = reactive<Record<string, string[]>>({ ...imageTags });
-  const isLoadingTags = ref(false);
+  ensureSharedTags();
+  const tagsCache = sharedTagsCache;
   const showSuggestions = ref(false);
   const selectedIndex = ref(-1);
   const suggestionItems = ref<HTMLElement[]>([]);
@@ -52,36 +31,20 @@ export function useCommonImages(imageValue: () => string | undefined) {
           .slice(0, 100);
       }
 
-      return COMMON_IMAGES.filter((img) =>
-        img.toLowerCase().includes(withoutPrefix.toLowerCase()),
-      ).map((img) => `${MCR_PREFIX}${img}`);
+      return Object.keys(tagsCache)
+        .filter((img) =>
+          img.toLowerCase().includes(withoutPrefix.toLowerCase()),
+        )
+        .map((img) => `${MCR_PREFIX}${img}`);
     }
 
-    if (!search) return COMMON_IMAGES.map((img) => `${MCR_PREFIX}${img}`);
+    if (!search)
+      return Object.keys(tagsCache).map((img) => `${MCR_PREFIX}${img}`);
 
-    return COMMON_IMAGES.map((img) => `${MCR_PREFIX}${img}`).filter((img) =>
-      img.toLowerCase().includes(search),
-    );
+    return Object.keys(tagsCache)
+      .map((img) => `${MCR_PREFIX}${img}`)
+      .filter((img) => img.toLowerCase().includes(search));
   });
-
-  async function fetchTags(_baseImage: string) {}
-
-  watch(
-    () => imageValue(),
-    (newVal) => {
-      if (!newVal) return;
-      if (newVal.startsWith(MCR_PREFIX)) {
-        const withoutPrefix = newVal.substring(MCR_PREFIX.length);
-        const [baseImage] = withoutPrefix.split(":");
-        if (
-          COMMON_IMAGES.includes(baseImage as CommonImage) ||
-          withoutPrefix.includes(":")
-        ) {
-          // Tags are loaded from local cache
-        }
-      }
-    },
-  );
 
   watch(filteredImages, () => {
     selectedIndex.value = -1;
@@ -141,13 +104,11 @@ export function useCommonImages(imageValue: () => string | undefined) {
   return {
     MCR_PREFIX,
     filteredImages,
-    isLoadingTags,
     showSuggestions,
     selectedIndex,
     suggestionItems,
     dropdownRef,
     setItemRef,
-    fetchTags,
     handleKeyDown,
   };
 }

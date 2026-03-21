@@ -1,7 +1,5 @@
 import type { DevContainerConfig, OrchestrationType } from "../types";
 
-export const CACHE_TTL_FEATURES = 1000 * 60 * 60 * 24; // 24 hours
-
 export const DEFAULT_CONFIG: DevContainerConfig = {
   name: "devcontainer.live",
   image: "mcr.microsoft.com/devcontainers/base:ubuntu",

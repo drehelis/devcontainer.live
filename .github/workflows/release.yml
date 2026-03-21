@@ -38,6 +38,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: "Update Dev Container Index"
+        run: bash ./scripts/update-data.sh
+
       - name: "Bump to new version"
         id: bump
         run: |

@@ -19,7 +19,6 @@ const autocomplete = useImageAutocomplete(imageRef, (img) => {
 
 const {
   filteredImages,
-  isLoadingTags,
   showImageSuggestions,
   selectedIndex,
   dropdownRef,
@@ -55,18 +54,10 @@ dropdownRef;
         placeholder="mcr.microsoft.com/devcontainers/..."
       />
       <div
-        v-if="
-          showImageSuggestions && (filteredImages.length > 0 || isLoadingTags)
-        "
+        v-if="showImageSuggestions && filteredImages.length > 0"
         ref="dropdownRef"
         class="absolute top-full left-0 right-0 mt-1 bg-ide-activity border border-ide-border rounded-lg shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar transition-all"
       >
-        <div
-          v-if="isLoadingTags"
-          class="px-4 py-2 text-[8px] font-black uppercase tracking-widest text-ide-accent animate-pulse"
-        >
-          Fetching_Tags...
-        </div>
         <div
           v-for="(img, i) in filteredImages"
           :key="img"

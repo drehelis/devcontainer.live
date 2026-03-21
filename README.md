@@ -26,6 +26,9 @@ bun install
 
 Run the development server:
 ```bash
+# pull from the official Dev Container Index and Microsoft Container Registry (requires `skopeo`, `curl` and `jq`)
+./scripts/update-data.sh
+
 bun run dev
 ```
 
