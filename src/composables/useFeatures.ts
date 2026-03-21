@@ -1,4 +1,5 @@
 import { ref, onMounted } from "vue";
+import { DATA_URLS } from "../constants/urls";
 
 export interface FeatureOption {
   type: "string" | "boolean";
@@ -27,7 +28,7 @@ export function useFeatures() {
     error.value = null;
 
     try {
-      const res = await fetch("/data/features.json");
+      const res = await fetch(DATA_URLS.FEATURES);
       if (!res.ok) throw new Error("No data found");
 
       features.value = await res.json();

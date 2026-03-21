@@ -170,11 +170,11 @@ const manualFeatures = computed(() => {
       <div
         v-for="feature in filteredFeatures"
         :key="feature.id"
-        class="flex flex-col border rounded-lg transition-all group overflow-hidden"
+        class="flex flex-col border rounded-lg transition-all group relative focus-within:z-20"
         :class="
           selectedFeatures[feature.id]
-            ? 'bg-ide-accent/5 border-ide-accent/40 ring-1 ring-ide-accent/20'
-            : 'bg-ide-activity/30 border-ide-border hover:border-ide-accent/30'
+            ? 'bg-ide-accent/5 border-ide-accent/40 ring-1 ring-ide-accent/20 z-10'
+            : 'bg-ide-activity/30 border-ide-border hover:border-ide-accent/30 z-0'
         "
       >
         <div
@@ -396,7 +396,7 @@ const manualFeatures = computed(() => {
       <div
         v-for="id in manualFeatures"
         :key="id"
-        class="flex flex-col border rounded-lg bg-ide-accent/5 border-ide-accent/40 ring-1 ring-ide-accent/20 overflow-hidden"
+        class="flex flex-col border rounded-lg bg-ide-accent/5 border-ide-accent/40 ring-1 ring-ide-accent/20 relative focus-within:z-20"
       >
         <div class="flex items-center justify-between p-3">
           <div class="flex flex-col flex-1 min-w-0">

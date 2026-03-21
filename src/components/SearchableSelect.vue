@@ -145,7 +145,7 @@ const isLoading = computed(() => props.loading);
     </div>
     <div
       v-if="showDropdown"
-      class="absolute top-full left-0 right-0 mt-1 bg-ide-activity border border-ide-border rounded-lg shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar"
+      class="absolute top-full left-0 right-0 mt-1 bg-ide-sidebar/95 backdrop-blur-md border border-ide-border rounded-lg shadow-2xl z-50 max-h-60 overflow-y-auto custom-scrollbar"
     >
       <div v-if="searchable" class="p-2 border-b border-ide-border/50">
         <input

@@ -56,7 +56,7 @@ dropdownRef;
       <div
         v-if="showImageSuggestions && filteredImages.length > 0"
         ref="dropdownRef"
-        class="absolute top-full left-0 right-0 mt-1 bg-ide-activity border border-ide-border rounded-lg shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar transition-all"
+        class="absolute top-full left-0 right-0 mt-1 bg-ide-sidebar/95 backdrop-blur-md border border-ide-border rounded-lg shadow-2xl z-50 max-h-60 overflow-y-auto custom-scrollbar transition-all"
       >
         <div
           v-for="(img, i) in filteredImages"
