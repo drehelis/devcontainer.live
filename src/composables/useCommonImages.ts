@@ -1,29 +1,8 @@
 import { ref, computed, watch, nextTick } from "vue";
 import { sharedTagsCache, ensureSharedTags } from "./useImageAutocomplete";
-
-export const COMMON_IMAGES = [
-  "devcontainers/python",
-  "devcontainers/ruby",
-  "devcontainers/cpp",
-  "devcontainers/go",
-  "devcontainers/base",
-  "devcontainers/php",
-  "devcontainers/typescript-node",
-  "devcontainers/javascript-node",
-  "devcontainers/jekyll",
-  "devcontainers/universal",
-  "devcontainers/anaconda",
-  "devcontainers/miniconda",
-  "devcontainers/rust",
-  "devcontainers/dotnet",
-  "devcontainers/java",
-] as const;
-
-export type CommonImage = (typeof COMMON_IMAGES)[number];
+import { MCR_PREFIX } from "../constants/urls";
 
 export function useCommonImages(imageValue: () => string | undefined) {
-  const MCR_PREFIX = "mcr.microsoft.com/";
-
   ensureSharedTags();
   const tagsCache = sharedTagsCache;
   const showSuggestions = ref(false);
@@ -52,16 +31,19 @@ export function useCommonImages(imageValue: () => string | undefined) {
           .slice(0, 100);
       }
 
-      return COMMON_IMAGES.filter((img) =>
-        img.toLowerCase().includes(withoutPrefix.toLowerCase()),
-      ).map((img) => `${MCR_PREFIX}${img}`);
+      return Object.keys(tagsCache)
+        .filter((img) =>
+          img.toLowerCase().includes(withoutPrefix.toLowerCase()),
+        )
+        .map((img) => `${MCR_PREFIX}${img}`);
     }
 
-    if (!search) return COMMON_IMAGES.map((img) => `${MCR_PREFIX}${img}`);
+    if (!search)
+      return Object.keys(tagsCache).map((img) => `${MCR_PREFIX}${img}`);
 
-    return COMMON_IMAGES.map((img) => `${MCR_PREFIX}${img}`).filter((img) =>
-      img.toLowerCase().includes(search),
-    );
+    return Object.keys(tagsCache)
+      .map((img) => `${MCR_PREFIX}${img}`)
+      .filter((img) => img.toLowerCase().includes(search));
   });
 
   watch(filteredImages, () => {

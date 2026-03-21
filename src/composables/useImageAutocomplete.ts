@@ -1,4 +1,5 @@
 import { ref, computed, reactive, watch, nextTick } from "vue";
+import { MCR_PREFIX } from "../constants/urls";
 
 export const sharedTagsCache = reactive<Record<string, string[]>>({});
 let sharedTagsFetched = false;
@@ -7,30 +8,17 @@ export function ensureSharedTags() {
   if (sharedTagsFetched) return;
   sharedTagsFetched = true;
   fetch("/data/imageTags.json")
-    .then((res) => { if (!res.ok) throw new Error(); return res.json(); })
-    .then((data) => { Object.assign(sharedTagsCache, data); })
-    .catch(() => console.warn("imageTags.json not found. Using fallback behavior."));
+    .then((res) => {
+      if (!res.ok) throw new Error();
+      return res.json();
+    })
+    .then((data) => {
+      Object.assign(sharedTagsCache, data);
+    })
+    .catch(() =>
+      console.warn("imageTags.json not found. Using fallback behavior."),
+    );
 }
-
-const commonImages = [
-  "devcontainers/python",
-  "devcontainers/ruby",
-  "devcontainers/cpp",
-  "devcontainers/go",
-  "devcontainers/base",
-  "devcontainers/php",
-  "devcontainers/typescript-node",
-  "devcontainers/javascript-node",
-  "devcontainers/jekyll",
-  "devcontainers/universal",
-  "devcontainers/anaconda",
-  "devcontainers/miniconda",
-  "devcontainers/rust",
-  "devcontainers/dotnet",
-  "devcontainers/java",
-];
-
-const MCR_PREFIX = "mcr.microsoft.com/";
 
 export function useImageAutocomplete(
   imageRef: { value: string | undefined },
@@ -60,16 +48,17 @@ export function useImageAutocomplete(
           .slice(0, 100);
       }
 
-      return commonImages
+      return Object.keys(tagsCache)
         .filter((img) =>
           img.toLowerCase().includes(withoutPrefix.toLowerCase()),
         )
         .map((img) => `${MCR_PREFIX}${img}`);
     }
 
-    if (!search) return commonImages.map((img) => `${MCR_PREFIX}${img}`);
+    if (!search)
+      return Object.keys(tagsCache).map((img) => `${MCR_PREFIX}${img}`);
 
-    return commonImages
+    return Object.keys(tagsCache)
       .map((img) => `${MCR_PREFIX}${img}`)
       .filter((img) => img.toLowerCase().includes(search));
   });

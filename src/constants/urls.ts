@@ -1,5 +1,6 @@
 export const GITHUB_API_BASE = "https://api.github.com";
 export const GITHUB_RAW_BASE = "https://raw.githubusercontent.com";
+export const MCR_PREFIX = "mcr.microsoft.com/";
 
 export const REPOS = {
   TEMPLATES: "devcontainers/templates",

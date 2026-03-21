@@ -58,7 +58,6 @@ dropdownRef;
         ref="dropdownRef"
         class="absolute top-full left-0 right-0 mt-1 bg-ide-activity border border-ide-border rounded-lg shadow-xl z-50 max-h-60 overflow-y-auto custom-scrollbar transition-all"
       >
-
         <div
           v-for="(img, i) in filteredImages"
           :key="img"

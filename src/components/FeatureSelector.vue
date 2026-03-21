@@ -16,10 +16,12 @@ const filterType = ref<"all" | "official" | "community">("all");
 
 const filteredFeatures = computed(() => {
   let list = featuresList.value;
-  
+
   if (filterType.value !== "all") {
     const isOfficial = filterType.value === "official";
-    list = list.filter((f) => f.id.startsWith("ghcr.io/devcontainers/features") === isOfficial);
+    list = list.filter(
+      (f) => f.id.startsWith("ghcr.io/devcontainers/features") === isOfficial,
+    );
   }
 
   if (searchQuery.value) {
@@ -32,7 +34,7 @@ const filteredFeatures = computed(() => {
         f.id.toLowerCase().includes(query),
     );
   }
-  
+
   return list.sort((a, b) => {
     const aOfficial = a.id.startsWith("ghcr.io/devcontainers/features");
     const bOfficial = b.id.startsWith("ghcr.io/devcontainers/features");
@@ -138,12 +140,14 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
     </div>
 
     <!-- Category Filter (Rubric) -->
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 shrink-0 border-b border-ide-border/50 pb-4">
+    <div
+      class="grid grid-cols-1 sm:grid-cols-3 gap-2 shrink-0 border-b border-ide-border/50 pb-4"
+    >
       <button
         v-for="opt in [
           { value: 'all', label: 'All' },
           { value: 'official', label: 'Official' },
-          { value: 'community', label: 'Community' }
+          { value: 'community', label: 'Community' },
         ]"
         :key="opt.value"
         @click="filterType = opt.value as 'all' | 'official' | 'community'"
@@ -191,10 +195,18 @@ function updateFeatureOption(featureId: string, optionKey: string, value: any) {
               </span>
               <span
                 class="px-1.5 rounded-full text-[6px] font-black uppercase tracking-widest border whitespace-nowrap"
-                style="padding-top: 0.125rem; padding-bottom: 0.125rem;"
-                :class="feature.id.startsWith('ghcr.io/devcontainers/features') ? 'text-ide-accent/80 border-ide-accent/30 bg-ide-accent/5' : 'text-[#a78bfa] border-[#a78bfa]/30 bg-[#a78bfa]/10'"
+                style="padding-top: 0.125rem; padding-bottom: 0.125rem"
+                :class="
+                  feature.id.startsWith('ghcr.io/devcontainers/features')
+                    ? 'text-ide-accent/80 border-ide-accent/30 bg-ide-accent/5'
+                    : 'text-[#a78bfa] border-[#a78bfa]/30 bg-[#a78bfa]/10'
+                "
               >
-                {{ feature.id.startsWith('ghcr.io/devcontainers/features') ? 'Official' : 'Community' }}
+                {{
+                  feature.id.startsWith("ghcr.io/devcontainers/features")
+                    ? "Official"
+                    : "Community"
+                }}
               </span>
               <a
                 v-if="feature.documentationURL"

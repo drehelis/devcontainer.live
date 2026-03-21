@@ -65,8 +65,10 @@ echo "Extracting templates..."
 jq --arg type "templates" "$JQ_FILTER" "$INDEX_FILE" > "$TEMPLATES_FILE"
 echo "Wrote templates to $TEMPLATES_FILE"
 
-echo "Fetching image tags..."
-IMAGES=("devcontainers/python" "devcontainers/ruby" "devcontainers/cpp" "devcontainers/go" "devcontainers/base" "devcontainers/php" "devcontainers/typescript-node" "devcontainers/javascript-node" "devcontainers/jekyll" "devcontainers/universal" "devcontainers/anaconda" "devcontainers/miniconda" "devcontainers/rust" "devcontainers/dotnet" "devcontainers/java")
+echo "Fetching list of published baseline devcontainer images from MCR..."
+mapfile -t IMAGES < <(curl -sL "https://mcr.microsoft.com/v2/_catalog" | jq -r '.repositories[] | select(startswith("devcontainers/"))')
+
+echo "Iterating dynamically discovered images: ${IMAGES[*]}"
 
 {
   echo "{"
