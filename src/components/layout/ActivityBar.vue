@@ -1,11 +1,5 @@
 <script setup lang="ts">
-type Section =
-  | "general"
-  | "features"
-  | "ports"
-  | "mounts"
-  | "advanced"
-  | "presets";
+import type { Section } from "../../constants/ui";
 
 defineProps<{
   activeSection: Section;
