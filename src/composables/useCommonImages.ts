@@ -1,5 +1,5 @@
-import { ref, computed, reactive, watch, nextTick } from "vue";
-import imageTags from "../data/imageTags.json";
+import { ref, computed, watch, nextTick } from "vue";
+import { sharedTagsCache, ensureSharedTags } from "./useImageAutocomplete";
 
 export const COMMON_IMAGES = [
   "devcontainers/python",
@@ -24,8 +24,8 @@ export type CommonImage = (typeof COMMON_IMAGES)[number];
 export function useCommonImages(imageValue: () => string | undefined) {
   const MCR_PREFIX = "mcr.microsoft.com/";
 
-  const tagsCache = reactive<Record<string, string[]>>({ ...imageTags });
-  const isLoadingTags = ref(false);
+  ensureSharedTags();
+  const tagsCache = sharedTagsCache;
   const showSuggestions = ref(false);
   const selectedIndex = ref(-1);
   const suggestionItems = ref<HTMLElement[]>([]);
@@ -63,25 +63,6 @@ export function useCommonImages(imageValue: () => string | undefined) {
       img.toLowerCase().includes(search),
     );
   });
-
-  async function fetchTags(_baseImage: string) {}
-
-  watch(
-    () => imageValue(),
-    (newVal) => {
-      if (!newVal) return;
-      if (newVal.startsWith(MCR_PREFIX)) {
-        const withoutPrefix = newVal.substring(MCR_PREFIX.length);
-        const [baseImage] = withoutPrefix.split(":");
-        if (
-          COMMON_IMAGES.includes(baseImage as CommonImage) ||
-          withoutPrefix.includes(":")
-        ) {
-          // Tags are loaded from local cache
-        }
-      }
-    },
-  );
 
   watch(filteredImages, () => {
     selectedIndex.value = -1;
@@ -141,13 +122,11 @@ export function useCommonImages(imageValue: () => string | undefined) {
   return {
     MCR_PREFIX,
     filteredImages,
-    isLoadingTags,
     showSuggestions,
     selectedIndex,
     suggestionItems,
     dropdownRef,
     setItemRef,
-    fetchTags,
     handleKeyDown,
   };
 }

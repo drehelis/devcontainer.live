@@ -1,7 +1,16 @@
 import { ref, computed, reactive, watch, nextTick } from "vue";
-import imageTagsJson from "../data/imageTags.json";
 
-const imageTags = imageTagsJson as Record<string, string[]>;
+export const sharedTagsCache = reactive<Record<string, string[]>>({});
+let sharedTagsFetched = false;
+
+export function ensureSharedTags() {
+  if (sharedTagsFetched) return;
+  sharedTagsFetched = true;
+  fetch("/data/imageTags.json")
+    .then((res) => { if (!res.ok) throw new Error(); return res.json(); })
+    .then((data) => { Object.assign(sharedTagsCache, data); })
+    .catch(() => console.warn("imageTags.json not found. Please run ./scripts/update-data.sh"));
+}
 
 const commonImages = [
   "devcontainers/python",
@@ -27,8 +36,8 @@ export function useImageAutocomplete(
   imageRef: { value: string | undefined },
   onSelect: (img: string) => void,
 ) {
-  const tagsCache = reactive<Record<string, string[]>>({ ...imageTags });
-  const isLoadingTags = ref(false);
+  ensureSharedTags();
+  const tagsCache = sharedTagsCache;
   const showImageSuggestions = ref(false);
   const selectedIndex = ref(-1);
   const dropdownRef = ref<HTMLElement | null>(null);
@@ -64,43 +73,6 @@ export function useImageAutocomplete(
       .map((img) => `${MCR_PREFIX}${img}`)
       .filter((img) => img.toLowerCase().includes(search));
   });
-
-  async function fetchTags(baseImage: string) {
-    if (tagsCache[baseImage] || isLoadingTags.value) return;
-
-    isLoadingTags.value = true;
-    try {
-      const response = await fetch(
-        `https://mcr.microsoft.com/v2/${baseImage}/tags/list`,
-      );
-      if (response.ok) {
-        const data = await response.json();
-        tagsCache[baseImage] = data.tags.reverse();
-      }
-    } catch (err) {
-      console.error(`Failed to fetch tags for ${baseImage}`, err);
-    } finally {
-      isLoadingTags.value = false;
-    }
-  }
-
-  watch(
-    () => imageRef.value,
-    (newVal) => {
-      if (!newVal) return;
-      if (newVal.startsWith(MCR_PREFIX)) {
-        const withoutPrefix = newVal.substring(MCR_PREFIX.length);
-        const [baseImage] = withoutPrefix.split(":");
-        if (
-          commonImages.includes(baseImage) ||
-          (withoutPrefix.includes(":") && !tagsCache[baseImage])
-        ) {
-          fetchTags(baseImage);
-        }
-      }
-    },
-    { immediate: true },
-  );
 
   watch(filteredImages, () => {
     selectedIndex.value = -1;
@@ -179,7 +151,6 @@ export function useImageAutocomplete(
 
   return {
     filteredImages,
-    isLoadingTags,
     showImageSuggestions,
     selectedIndex,
     dropdownRef,
