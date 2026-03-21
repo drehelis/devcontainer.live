@@ -3,9 +3,16 @@ import { ref, onUnmounted } from "vue";
 const SIDEBAR_WIDTH_KEY = "devcontainer_sidebar_width";
 
 export function useSidebarResize(minWidth = 250, maxWidth = 800) {
-  const sidebarWidth = ref(
-    parseInt(localStorage.getItem(SIDEBAR_WIDTH_KEY) || "500"),
-  );
+  const getInitialWidth = () => {
+    const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
+    if (!saved) return 500;
+    const parsed = parseInt(saved, 10);
+    return isNaN(parsed)
+      ? 500
+      : Math.min(Math.max(parsed, minWidth), maxWidth);
+  };
+
+  const sidebarWidth = ref(getInitialWidth());
   const isResizing = ref(false);
 
   const startResizing = () => {
