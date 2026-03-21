@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { useFeatures, type FeatureMetadata } from "../composables/useFeatures";
+import { useFeatures } from "../composables/useFeatures";
+import type { FeatureMetadata, FeatureOption } from "../types";
 import SearchableSelect from "./SearchableSelect.vue";
 
 const props = defineProps<{
@@ -53,7 +54,8 @@ function toggleFeature(feature: FeatureMetadata) {
     const defaults: Record<string, any> = {};
     if (feature.options) {
       Object.entries(feature.options).forEach(([key, opt]) => {
-        if (opt.default !== undefined) defaults[key] = opt.default;
+        const option = opt as FeatureOption;
+        if (option.default !== undefined) defaults[key] = option.default;
       });
     }
     newFeatures[feature.id] = defaults;
