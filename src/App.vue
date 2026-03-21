@@ -15,8 +15,7 @@ import EditorTabs from "./components/layout/EditorTabs.vue";
 import { useResponsive } from "./composables/useResponsive";
 import IndentationPicker from "./components/layout/IndentationPicker.vue";
 import PresetsGallery from "./components/presets/PresetsGallery.vue";
-import type { PresetApplyPayload } from "./types";
-import type { Section } from "./constants/ui";
+import type { PresetApplyPayload, Section } from "./types";
 
 const {
   state,

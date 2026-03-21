@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { DevContainerConfig, OrchestrationType } from "../types";
+import type { DevContainerConfig, OrchestrationType, Section } from "../types";
 import GeneralSection from "./GeneralSection.vue";
 import FeaturesSection from "./FeaturesSection.vue";
 import PortsSection from "./PortsSection.vue";
@@ -12,7 +12,7 @@ const props = defineProps<{
     orchestration: OrchestrationType;
     config: DevContainerConfig;
   };
-  activeSection: string;
+  activeSection: Section;
 }>();
 
 const emit = defineEmits(["update:modelValue"]);

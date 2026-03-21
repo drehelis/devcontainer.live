@@ -1,5 +1,5 @@
-<script setup lang="ts">
-import { CONFIG_SECTIONS, type Section } from "../../constants/ui";
+import { CONFIG_SECTIONS } from "../../constants/ui";
+import type { Section } from "../../types";
 
 defineProps<{
   activeSection: Section;

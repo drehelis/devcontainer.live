@@ -1,10 +1,4 @@
-export type Section =
-  | "presets"
-  | "general"
-  | "features"
-  | "ports"
-  | "mounts"
-  | "advanced";
+import type { Section } from "../types";
 
 export const CONFIG_SECTIONS: { id: Section; name: string }[] = [
   { id: "presets", name: "Presets" },

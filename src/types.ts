@@ -32,6 +32,14 @@ export interface EditorFile {
   language: string;
 }
 
+export type Section =
+  | "presets"
+  | "general"
+  | "features"
+  | "ports"
+  | "mounts"
+  | "advanced";
+
 export interface DevContainerConfig {
   name: string;
   image?: string;
