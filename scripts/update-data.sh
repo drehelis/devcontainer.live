@@ -27,7 +27,7 @@ if ! command -v jq &> /dev/null; then
 fi
 
 if ! command -v curl &> /dev/null; then
-    ensure_installed jq
+    ensure_installed curl
 fi
 
 readonly TMP_DIR=$(mktemp -d)
