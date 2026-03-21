@@ -177,7 +177,6 @@ const manualFeatures = computed(() => {
             : 'bg-ide-activity/30 border-ide-border hover:border-ide-accent/30'
         "
       >
-        >
         <div
           @click="toggleFeature(feature)"
           class="flex justify-between p-3 cursor-pointer select-none gap-3"
