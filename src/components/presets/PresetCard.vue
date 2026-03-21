@@ -58,6 +58,7 @@ const iconError = ref(false);
           <div class="flex items-center gap-2">
             <span
               class="text-[11px] font-black uppercase tracking-wider truncate"
+              :title="preset.name"
               :class="loading ? 'text-ide-accent' : 'text-ide-text-bright'"
             >
               {{ preset.name }}
@@ -67,9 +68,11 @@ const iconError = ref(false);
               class="w-2.5 h-2.5 border border-ide-accent border-t-transparent rounded-full animate-spin"
             ></span>
           </div>
-          <span class="text-[8px] font-mono text-ide-text-muted truncate">{{
-            preset.image
-          }}</span>
+          <span
+            class="text-[8px] font-mono text-ide-text-muted truncate"
+            :title="preset.image"
+            >{{ preset.image }}</span
+          >
         </div>
       </div>
 

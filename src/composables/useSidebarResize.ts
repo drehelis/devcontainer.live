@@ -4,7 +4,7 @@ const SIDEBAR_WIDTH_KEY = "devcontainer_sidebar_width";
 
 export function useSidebarResize(minWidth = 250, maxWidth = 800) {
   const sidebarWidth = ref(
-    parseInt(localStorage.getItem(SIDEBAR_WIDTH_KEY) || "400"),
+    parseInt(localStorage.getItem(SIDEBAR_WIDTH_KEY) || "500"),
   );
   const isResizing = ref(false);
 

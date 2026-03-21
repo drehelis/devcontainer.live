@@ -1,8 +1,9 @@
 import { ref, type Ref } from "vue";
 import JSZip from "jszip";
+import type { EditorFile } from "../types";
 
 export function useEditorActions(
-  allFiles: Ref<Record<string, { content: string; language: string }>>,
+  allFiles: Ref<Record<string, EditorFile>>,
   activeFile: Ref<string>,
   reset: () => void,
   getShareUrl: () => string,

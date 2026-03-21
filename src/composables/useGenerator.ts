@@ -1,6 +1,6 @@
 import { ref, computed, watch } from "vue";
 import LZString from "lz-string";
-import type { DevContainerConfig, OrchestrationType } from "../types";
+import type { OrchestrationType, GeneratorState, EditorFile } from "../types";
 import { URLS } from "../constants/urls";
 import { DEFAULT_STATE } from "../constants/defaults";
 import { STORAGE_KEYS } from "../constants/storage";
@@ -35,11 +35,7 @@ export function useGenerator() {
     parsed = null;
   }
 
-  const state = ref<{
-    orchestration: OrchestrationType;
-    presetFiles: Record<string, string>;
-    config: DevContainerConfig;
-  }>(
+  const state = ref<GeneratorState>(
     JSON.parse(
       JSON.stringify(parsed?.state?.config ? parsed.state : DEFAULT_STATE),
     ),
@@ -380,7 +376,7 @@ export function useGenerator() {
   }
 
   const allFiles = computed(() => {
-    const files: Record<string, { content: string; language: string }> = {
+    const files: Record<string, EditorFile> = {
       "devcontainer.json": {
         content: generatedJson.value,
         language: "json",

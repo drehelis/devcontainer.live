@@ -182,9 +182,10 @@ const manualFeatures = computed(() => {
           class="flex justify-between p-3 cursor-pointer select-none gap-3"
         >
           <div class="flex flex-col flex-1 min-w-0 gap-1.5">
-            <div class="flex flex-wrap items-center gap-2">
+            <div class="flex items-center gap-2 min-w-0">
               <span
-                class="text-[11px] font-black uppercase tracking-wider truncate shrink-0"
+                class="text-[11px] font-black uppercase tracking-wider truncate flex-1 min-w-0"
+                :title="feature.name"
                 :class="
                   selectedFeatures[feature.id]
                     ? 'text-ide-accent'
@@ -194,7 +195,7 @@ const manualFeatures = computed(() => {
                 {{ feature.name }}
               </span>
               <span
-                class="px-1.5 rounded-full text-[6px] font-black uppercase tracking-widest border whitespace-nowrap"
+                class="px-1.5 rounded-full text-[6px] font-black uppercase tracking-widest border whitespace-nowrap shrink-0"
                 style="padding-top: 0.125rem; padding-bottom: 0.125rem"
                 :class="
                   feature.id.startsWith('ghcr.io/devcontainers/features')
@@ -230,9 +231,11 @@ const manualFeatures = computed(() => {
                 </svg>
               </a>
             </div>
-            <span class="text-[8px] font-mono text-ide-text-muted truncate">{{
-              feature.id
-            }}</span>
+            <span
+              class="text-[8px] font-mono text-ide-text-muted truncate block"
+              :title="feature.id"
+              >{{ feature.id }}</span
+            >
           </div>
           <div
             class="w-4 h-4 border border-ide-border rounded flex items-center justify-center transition-colors"
@@ -405,7 +408,8 @@ const manualFeatures = computed(() => {
               >Manual Reference</span
             >
             <span
-              class="text-[8px] font-mono text-ide-text-muted truncate pr-4"
+              class="text-[8px] font-mono text-ide-text-muted truncate block pr-4"
+              :title="String(id)"
               >{{ id }}</span
             >
           </div>

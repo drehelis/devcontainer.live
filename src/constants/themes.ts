@@ -1,8 +1,4 @@
-export interface Theme {
-  id: string;
-  name: string;
-  class: string;
-}
+import type { Theme } from "../types";
 
 export const THEMES: Theme[] = [
   { id: "midnight", name: "Midnight", class: "" },

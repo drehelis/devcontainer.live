@@ -1,3 +1,37 @@
+export interface Theme {
+  id: string;
+  name: string;
+  class: string;
+}
+
+export interface FeatureOption {
+  type: "string" | "boolean";
+  description?: string;
+  default?: any;
+  proposals?: any[];
+  enum?: any[];
+}
+
+export interface FeatureMetadata {
+  id: string;
+  name: string;
+  description?: string;
+  options?: Record<string, FeatureOption>;
+  category?: string;
+  documentationURL?: string;
+}
+
+export interface GeneratorState {
+  orchestration: OrchestrationType;
+  presetFiles: Record<string, string>;
+  config: DevContainerConfig;
+}
+
+export interface EditorFile {
+  content: string;
+  language: string;
+}
+
 export interface DevContainerConfig {
   name: string;
   image?: string;
@@ -119,6 +153,13 @@ export interface OfficialTemplate {
   orchestration: OrchestrationType;
   image: string;
   icon?: string;
+}
+
+export interface PresetApplyPayload {
+  orchestration: OrchestrationType;
+  config: DevContainerConfig;
+  dockerfile: string | null;
+  dockerCompose: string | null;
 }
 
 export interface PresetConfigState {

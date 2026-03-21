@@ -3,7 +3,7 @@ export type Section =
   | "general"
   | "features"
   | "ports"
-  | "history"
+  | "mounts"
   | "advanced";
 
 export const CONFIG_SECTIONS: { id: Section; name: string }[] = [
@@ -11,7 +11,7 @@ export const CONFIG_SECTIONS: { id: Section; name: string }[] = [
   { id: "general", name: "General" },
   { id: "features", name: "Features" },
   { id: "ports", name: "Network" },
-  { id: "history", name: "Mounts" },
+  { id: "mounts", name: "Mounts" },
   { id: "advanced", name: "Hooks" },
 ];
 

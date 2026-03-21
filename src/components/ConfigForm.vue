@@ -4,7 +4,7 @@ import type { DevContainerConfig, OrchestrationType } from "../types";
 import GeneralSection from "./GeneralSection.vue";
 import FeaturesSection from "./FeaturesSection.vue";
 import PortsSection from "./PortsSection.vue";
-import HistorySection from "./HistorySection.vue";
+import MountsSection from "./MountsSection.vue";
 import AdvancedSection from "./AdvancedSection.vue";
 
 const props = defineProps<{
@@ -62,10 +62,10 @@ function handleUpdateOrchestration(val: OrchestrationType) {
     </div>
 
     <div
-      v-if="activeSection === 'history'"
+      v-if="activeSection === 'mounts'"
       class="space-y-8 animate-in fade-in slide-in-from-left-2 duration-300"
     >
-      <HistorySection
+      <MountsSection
         :config="config"
         :orchestration="orchestration"
         @update:config="handleUpdateConfig"

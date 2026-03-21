@@ -1,22 +1,6 @@
 import { ref, onMounted } from "vue";
 import { DATA_URLS } from "../constants/urls";
-
-export interface FeatureOption {
-  type: "string" | "boolean";
-  description?: string;
-  default?: any;
-  proposals?: any[];
-  enum?: any[];
-}
-
-export interface FeatureMetadata {
-  id: string;
-  name: string;
-  description?: string;
-  options?: Record<string, FeatureOption>;
-  category?: string;
-  documentationURL?: string;
-}
+import type { FeatureMetadata } from "../types";
 
 export function useFeatures() {
   const features = ref<FeatureMetadata[]>([]);

@@ -5,6 +5,7 @@ import type {
   OfficialTemplate,
   PresetConfigState,
   TemplateOption,
+  PresetApplyPayload,
 } from "../../types";
 import {
   usePresets,
@@ -15,15 +16,7 @@ import PresetConfigForm from "./PresetConfigForm.vue";
 import SectionHeader from "../SectionHeader.vue";
 
 const emit = defineEmits<{
-  (
-    e: "apply",
-    data: {
-      orchestration: OrchestrationType;
-      config: any;
-      dockerfile: string | null;
-      dockerCompose: string | null;
-    },
-  ): void;
+  (e: "apply", data: PresetApplyPayload): void;
 }>();
 
 const { templates, loading, error, refresh, fetchTemplateConfig } =

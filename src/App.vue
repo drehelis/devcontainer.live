@@ -15,6 +15,7 @@ import EditorTabs from "./components/layout/EditorTabs.vue";
 import { useResponsive } from "./composables/useResponsive";
 import IndentationPicker from "./components/layout/IndentationPicker.vue";
 import PresetsGallery from "./components/presets/PresetsGallery.vue";
+import type { PresetApplyPayload } from "./types";
 
 const {
   state,
@@ -46,10 +47,10 @@ const { isMobile } = useResponsive();
 const activeView = ref<"config" | "preview">("config");
 
 const activeSection = ref<
-  "general" | "features" | "ports" | "history" | "advanced" | "presets"
+  "general" | "features" | "ports" | "mounts" | "advanced" | "presets"
 >("presets");
 
-function handleApplyPreset(payload: any) {
+function handleApplyPreset(payload: PresetApplyPayload) {
   state.value.orchestration = payload.orchestration;
   state.value.config = {
     ...state.value.config,
