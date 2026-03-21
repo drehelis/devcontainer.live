@@ -7,9 +7,7 @@ export function useSidebarResize(minWidth = 250, maxWidth = 800) {
     const saved = localStorage.getItem(SIDEBAR_WIDTH_KEY);
     if (!saved) return 500;
     const parsed = parseInt(saved, 10);
-    return isNaN(parsed)
-      ? 500
-      : Math.min(Math.max(parsed, minWidth), maxWidth);
+    return isNaN(parsed) ? 500 : Math.min(Math.max(parsed, minWidth), maxWidth);
   };
 
   const sidebarWidth = ref(getInitialWidth());
