@@ -1,3 +1,4 @@
+<script setup lang="ts">
 import { CONFIG_SECTIONS } from "../../constants/ui";
 import type { Section } from "../../types";
 
