@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { version as pkgVersion } from "../package.json";
 import { useGenerator } from "./composables/useGenerator";
 import { useTheme } from "./composables/useTheme";
@@ -103,21 +103,24 @@ function handleApplyPreset(payload: PresetApplyPayload) {
   activeSection.value = "general";
 }
 
-onMounted(() => {
-  window.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
-    if (showIndentMenu.value && !target.closest(".indent-selector")) {
-      showIndentMenu.value = false;
-    }
-  });
+function handleClick(e: MouseEvent) {
+  const target = e.target as HTMLElement;
+  if (showIndentMenu.value && !target.closest(".indent-selector")) {
+    showIndentMenu.value = false;
+  }
+}
 
-  window.addEventListener("keydown", (e) => {
-    const isP = e.key.toLowerCase() === "p";
-    if ((e.metaKey || e.ctrlKey) && e.shiftKey && isP) {
-      e.preventDefault();
-      togglePalette();
-    }
-  });
+function handleKeydown(e: KeyboardEvent) {
+  const isP = e.key.toLowerCase() === "p";
+  if ((e.metaKey || e.ctrlKey) && e.shiftKey && isP) {
+    e.preventDefault();
+    togglePalette();
+  }
+}
+
+onMounted(() => {
+  window.addEventListener("click", handleClick);
+  window.addEventListener("keydown", handleKeydown);
 
   register([
     // ── Navigate
@@ -167,11 +170,16 @@ onMounted(() => {
     ...themes.map((t) => ({
       id: `theme:${t.id}`,
       label: `Theme: ${t.name}`,
-      description: `Switch to the ${t.name} colour theme`,
+      description: `Switch to the ${t.name} color theme`,
       category: "Theme",
       action: () => setTheme(t.id),
     })),
   ]);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("click", handleClick);
+  window.removeEventListener("keydown", handleKeydown);
 });
 
 const cursorPos = ref({ line: 1, col: 1 });
