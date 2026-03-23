@@ -24,32 +24,132 @@ function updateConfig(path: string, value: any) {
   emit("update:config", newConfig);
 }
 
-const hasBashHistoryMount = computed(() => {
-  return (props.config.mounts || []).some((m: any) => {
-    const mount = typeof m === "string" ? m : m.target;
-    return mount === "/commandhistory";
-  });
-});
+const TOOL_MOUNTS = [
+  {
+    id: "bash-history",
+    name: "Persist Bash History",
+    desc: "Keep command history across rebuilds",
+    mounts: [
+      {
+        source: "bash-history",
+        target: "/commandhistory",
+        type: "volume",
+      },
+    ],
+  },
+  {
+    id: "gcloud",
+    name: "Gcloud",
+    desc: "Auth and config",
+    mounts: [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/gcloud,target=/host/.config/gcloud,type=bind,consistency=cached",
+    ],
+    remoteEnv: { CLOUDSDK_CONFIG: "/host/.config/gcloud" },
+  },
+  {
+    id: "aws",
+    name: "AWS",
+    desc: "Credentials and config",
+    mounts: [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.aws,target=/host/.aws,type=bind,consistency=cached",
+    ],
+    remoteEnv: {
+      AWS_CONFIG_FILE: "/host/.aws/config",
+      AWS_SHARED_CREDENTIALS_FILE: "/host/.aws/credentials",
+    },
+  },
+  {
+    id: "kube",
+    name: "Kubeconfig",
+    desc: "Kubernetes context",
+    mounts: [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.kube,target=/host/.kube,type=bind,consistency=cached",
+    ],
+    remoteEnv: { KUBECONFIG: "/host/.kube/config" },
+  },
+  {
+    id: "docker",
+    name: "Docker",
+    desc: "Auth and config",
+    mounts: [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.docker/config.json,target=/host/.docker/config.json,type=bind,consistency=cached",
+    ],
+    remoteEnv: { DOCKER_CONFIG: "/host/.docker" },
+  },
+  {
+    id: "helm",
+    name: "Helm",
+    desc: "Config and charts",
+    mounts: [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/helm,target=/host/.config/helm,type=bind,consistency=cached",
+    ],
+    remoteEnv: { HELM_CONFIG_HOME: "/host/.config/helm" },
+  },
+  {
+    id: "azure",
+    name: "Azure",
+    desc: "CLI config",
+    mounts: [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.azure,target=/host/.azure,type=bind,consistency=cached",
+    ],
+    remoteEnv: { AZURE_CONFIG_DIR: "/host/.azure" },
+  },
+];
 
-function toggleBashHistory() {
-  const existing = props.config.mounts || [];
-  const bashHistoryMount = {
-    source: "bash-history",
-    target: "/commandhistory",
-    type: "volume",
-  };
+/**
+ * Helper to get the target path from a mount (string or object)
+ */
+function getMountTarget(m: any): string | undefined {
+  if (typeof m !== "string") return m.target;
+  return m
+    .split(",")
+    .find((p) => p.startsWith("target="))
+    ?.split("=")[1];
+}
 
-  if (hasBashHistoryMount.value) {
-    updateConfig(
-      "mounts",
-      existing.filter((m: any) => {
-        const mount = typeof m === "string" ? m : m.target;
-        return mount !== "/commandhistory";
-      }),
+function isToolActive(toolId: string) {
+  const tool = TOOL_MOUNTS.find((t) => t.id === toolId);
+  if (!tool) return false;
+
+  const toolTargets = tool.mounts.map(getMountTarget);
+  return (props.config.mounts || []).some((m: any) =>
+    toolTargets.includes(getMountTarget(m)),
+  );
+}
+
+function toggleTool(toolId: string) {
+  const tool = TOOL_MOUNTS.find((t) => t.id === toolId);
+  if (!tool) return;
+
+  const isActive = isToolActive(toolId);
+  const newConfig = JSON.parse(JSON.stringify(props.config));
+
+  if (isActive) {
+    // Remove tool mounts
+    const toolTargets = tool.mounts.map(getMountTarget);
+    newConfig.mounts = (newConfig.mounts || []).filter(
+      (m: any) => !toolTargets.includes(getMountTarget(m)),
     );
+
+    // Remove tool env vars
+    if (tool.remoteEnv) {
+      Object.keys(tool.remoteEnv).forEach((key) => {
+        if (newConfig.remoteEnv) delete newConfig.remoteEnv[key];
+      });
+    }
   } else {
-    updateConfig("mounts", [...existing, bashHistoryMount]);
+    // Add tool mounts and env vars
+    newConfig.mounts = [...(newConfig.mounts || []), ...tool.mounts];
+
+    if (tool.remoteEnv) {
+      newConfig.remoteEnv = {
+        ...(newConfig.remoteEnv || {}),
+        ...tool.remoteEnv,
+      };
+    }
   }
+
+  emit("update:config", newConfig);
 }
 
 const hasSecret = computed(() => {
@@ -162,16 +262,18 @@ function toggleSSH() {
       >
         <input
           type="checkbox"
-          :checked="hasBashHistoryMount"
-          @change="toggleBashHistory"
+          :checked="isToolActive('bash-history')"
+          @change="toggleTool('bash-history')"
           class="hidden"
         />
         <div
           class="w-4 h-4 border-2 border-ide-border rounded flex items-center justify-center group-hover:border-ide-accent transition-colors"
-          :class="{ 'bg-ide-accent border-ide-accent': hasBashHistoryMount }"
+          :class="{
+            'bg-ide-accent border-ide-accent': isToolActive('bash-history'),
+          }"
         >
           <svg
-            v-if="hasBashHistoryMount"
+            v-if="isToolActive('bash-history')"
             class="w-3 h-3 text-ide-bg"
             fill="none"
             viewBox="0 0 24 24"
@@ -450,6 +552,55 @@ function toggleSSH() {
             </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="space-y-4">
+      <SectionHeader title="Tooling Mounts" />
+      <div class="grid grid-cols-2 gap-3">
+        <template v-for="tool in TOOL_MOUNTS" :key="tool.id">
+          <label
+            v-if="tool.id !== 'bash-history'"
+            class="flex items-center gap-3 p-3 bg-ide-activity/50 border border-ide-border rounded-lg cursor-pointer group hover:border-ide-accent/50 transition-colors"
+          >
+            <input
+              type="checkbox"
+              :checked="isToolActive(tool.id)"
+              @change="toggleTool(tool.id)"
+              class="hidden"
+            />
+            <div
+              class="w-4 h-4 border-2 border-ide-border rounded flex items-center justify-center group-hover:border-ide-accent transition-colors shrink-0"
+              :class="{
+                'bg-ide-accent border-ide-accent': isToolActive(tool.id),
+              }"
+            >
+              <svg
+                v-if="isToolActive(tool.id)"
+                class="w-3 h-3 text-ide-bg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="4"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <span
+                class="text-[10px] font-black uppercase tracking-widest truncate"
+                >{{ tool.name }}</span
+              >
+              <span class="text-[8px] text-ide-text-muted truncate">{{
+                tool.desc
+              }}</span>
+            </div>
+          </label>
+        </template>
       </div>
     </div>
 
