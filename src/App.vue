@@ -1,13 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { version as pkgVersion } from "../package.json";
 import { useGenerator } from "./composables/useGenerator";
 import { useTheme } from "./composables/useTheme";
 import { useSidebarResize } from "./composables/useSidebarResize";
 import { useEditorActions } from "./composables/useEditorActions";
+import { useCommandPalette } from "./composables/useCommandPalette";
 import ConfigForm from "./components/ConfigForm.vue";
 import CodePreview from "./components/CodePreview.vue";
 import ActivityBar from "./components/layout/ActivityBar.vue";
+import CommandPalette from "./components/layout/CommandPalette.vue";
 import MobileNav from "./components/layout/MobileNav.vue";
 import MobileSectionNav from "./components/layout/MobileSectionNav.vue";
 import StatusBar from "./components/layout/StatusBar.vue";
@@ -32,7 +34,7 @@ function reset() {
   resetGenerator();
   activeFile.value = "devcontainer.json";
 }
-const { currentTheme } = useTheme();
+const { currentTheme, themes, setTheme } = useTheme();
 const { sidebarWidth, startResizing } = useSidebarResize();
 const {
   copyStatus,
@@ -47,6 +49,41 @@ const { isMobile } = useResponsive();
 const activeView = ref<"config" | "preview">("config");
 
 const activeSection = ref<Section>("presets");
+
+const { register, toggle: togglePalette } = useCommandPalette();
+
+const SECTIONS: { id: Section; label: string; description: string }[] = [
+  {
+    id: "presets",
+    label: "Templates",
+    description: "Browse official dev container templates",
+  },
+  {
+    id: "general",
+    label: "General Settings",
+    description: "Configure image, orchestration, workspace",
+  },
+  {
+    id: "features",
+    label: "Features",
+    description: "Add dev container features and VS Code extensions",
+  },
+  {
+    id: "ports",
+    label: "Network & Ports",
+    description: "Forward ports and configure networking",
+  },
+  {
+    id: "mounts",
+    label: "Mounts & Volumes",
+    description: "Bind mounts, volumes, secrets, SSH",
+  },
+  {
+    id: "advanced",
+    label: "Advanced & Hooks",
+    description: "Lifecycle hooks, security, environment",
+  },
+];
 
 function handleApplyPreset(payload: PresetApplyPayload) {
   state.value.orchestration = payload.orchestration;
@@ -66,13 +103,83 @@ function handleApplyPreset(payload: PresetApplyPayload) {
   activeSection.value = "general";
 }
 
+function handleClick(e: MouseEvent) {
+  const target = e.target as HTMLElement;
+  if (showIndentMenu.value && !target.closest(".indent-selector")) {
+    showIndentMenu.value = false;
+  }
+}
+
+function handleKeydown(e: KeyboardEvent) {
+  const isP = e.key.toLowerCase() === "p";
+  if ((e.metaKey || e.ctrlKey) && e.shiftKey && isP) {
+    e.preventDefault();
+    togglePalette();
+  }
+}
+
 onMounted(() => {
-  window.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
-    if (showIndentMenu.value && !target.closest(".indent-selector")) {
-      showIndentMenu.value = false;
-    }
-  });
+  window.addEventListener("click", handleClick);
+  window.addEventListener("keydown", handleKeydown);
+
+  register([
+    // ── Navigate
+    ...SECTIONS.map((s) => ({
+      id: `nav:${s.id}`,
+      label: `Go to: ${s.label}`,
+      description: s.description,
+      category: "Navigate",
+      action: () => {
+        activeSection.value = s.id;
+      },
+    })),
+
+    // ── Actions
+    {
+      id: "action:copy",
+      label: "Copy Config",
+      description: "Copy the active file content to clipboard",
+      shortcut: "⌘C",
+      category: "Actions",
+      action: copyToClipboard,
+    },
+    {
+      id: "action:share",
+      label: "Copy Share Link",
+      description: "Generate and copy a shareable URL",
+      shortcut: "⌘S",
+      category: "Actions",
+      action: copyShareLink,
+    },
+    {
+      id: "action:download",
+      label: "Download Config",
+      description: "Download devcontainer.json (or ZIP for multi-file)",
+      category: "Actions",
+      action: downloadConfig,
+    },
+    {
+      id: "action:reset",
+      label: "Reset to Default",
+      description: "Clear all settings and start fresh",
+      category: "Actions",
+      action: reset,
+    },
+
+    // ── Theme
+    ...themes.map((t) => ({
+      id: `theme:${t.id}`,
+      label: `Theme: ${t.name}`,
+      description: `Switch to the ${t.name} color theme`,
+      category: "Theme",
+      action: () => setTheme(t.id),
+    })),
+  ]);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("click", handleClick);
+  window.removeEventListener("keydown", handleKeydown);
 });
 
 const cursorPos = ref({ line: 1, col: 1 });
@@ -86,6 +193,9 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
     :class="currentTheme.class"
     class="h-[100dvh] w-screen flex flex-col bg-ide-bg overflow-hidden text-[13px] transition-colors duration-300"
   >
+    <!-- Command Palette (global, Teleported to body) -->
+    <CommandPalette />
+
     <!-- Main Layout -->
     <div class="flex-1 flex overflow-hidden">
       <ActivityBar
