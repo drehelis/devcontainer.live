@@ -2035,11 +2035,11 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.8.0",
           "4.7.0",
           "4.6.0",
           "4.5.0",
-          "4.4.0",
-          "4.3.0"
+          "4.4.1"
         ],
         "default": "latest"
       }
@@ -2069,11 +2069,11 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.8.0",
           "4.7.0",
           "4.6.0",
           "4.5.0",
-          "4.4.0",
-          "4.3.0"
+          "4.4.1"
         ],
         "default": "latest"
       }
@@ -2101,11 +2101,11 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.8.0",
           "4.7.0",
           "4.6.0",
           "4.5.0",
-          "4.4.0",
-          "4.3.0"
+          "4.4.1"
         ],
         "default": "latest"
       }
@@ -2131,11 +2131,11 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.8.0",
           "4.7.0",
           "4.6.0",
           "4.5.0",
-          "4.4.0",
-          "4.3.0"
+          "4.4.1"
         ],
         "default": "latest"
       }
@@ -2165,11 +2165,11 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.8.0",
           "4.7.0",
           "4.6.0",
           "4.5.0",
-          "4.4.0",
-          "4.3.0"
+          "4.4.1"
         ],
         "default": "latest"
       }
