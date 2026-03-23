@@ -19502,6 +19502,23 @@
     "documentationURL": "https://github.com/ChaosWars/vscode-features"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/alexpasmantier-television:1",
+    "name": "alexpasmantier-television",
+    "description": "Install \"tv\" (television) binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"tv\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/alexpasmantier-television"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/asdf-vm.com:1",
     "name": "asdf-vm.com",
     "description": "Install \"asdf\" binary to the HOME folder of the REMOTE user",
@@ -19575,6 +19592,23 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainers/features/tree/main/src/aws-cli"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/basecamp-fizzy-cli:1",
+    "name": "basecamp-fizzy-cli",
+    "description": "Install \"fizzy\" CLI binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"fizzy\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/basecamp-fizzy-cli"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/bat:1",
@@ -19696,6 +19730,23 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/cloudflare.com-warp-cli"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/critique.work:1",
+    "name": "critique.work",
+    "description": "Install \"critique\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"critique\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/critique.work"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/delta:1",
     "name": "delta",
     "description": "Install \"delta\" binary",
@@ -19745,6 +19796,23 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/devenv.sh"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/diffity.com:1",
+    "name": "diffity.com",
+    "description": "Install \"diffity\" CLI",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"diffity\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/diffity.com"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/dozzle.dev:1",
@@ -19849,6 +19917,23 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/helix-editor.com"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/icholy-ttygif:1",
+    "name": "icholy/ttygif",
+    "description": "Install \"ttygif\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"ttygif\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/icholy-ttygif"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/jj-vcs.dev:1",
     "name": "jj-vcs.dev",
     "description": "Install \"jj\" binary",
@@ -19864,6 +19949,40 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/jj-vcs.dev"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/jnsahaj-lumen:1",
+    "name": "jnsahaj/lumen",
+    "description": "Install \"lumen\" binary - AI-powered git diff viewer and commit message generator",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"lumen\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/jnsahaj-lumen"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/joelhooks-agent-secrets:1",
+    "name": "joelhooks-agent-secrets",
+    "description": "Install \"secrets\" (agent-secrets) binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"secrets\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/joelhooks-agent-secrets"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/jq:1",
@@ -19932,6 +20051,23 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/lazygit"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/memvid.com:1",
+    "name": "memvid.com",
+    "description": "Install \"memvid\" CLI",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"memvid\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/memvid.com"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/mosh.org:1",
@@ -20125,6 +20261,23 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/ripgrep"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/schpet-linear-cli:1",
+    "name": "schpet-linear-cli",
+    "description": "Install \"linear\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"linear\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/schpet-linear-cli"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/smallstep.com:1",
     "name": "smallstep.com",
     "description": "Install \"step\" cli binary",
@@ -20226,6 +20379,23 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/webinstall.dev"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/yakitrak-notesmd-cli:1",
+    "name": "yakitrak/notesmd-cli",
+    "description": "Install \"notesmd-cli\" binary - Interact with Obsidian vaults from the terminal",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"notesmd-cli\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/yakitrak-notesmd-cli"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/yq:1",
