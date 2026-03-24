@@ -80,10 +80,15 @@ function selectMountToEdit(mount: any, index: number) {
     const typePart = parts.find((p) => p.startsWith("type="));
     const isRO = parts.includes("readonly");
 
+    const rawType = typePart ? typePart.split("=")[1] : "bind";
+    const type = ["bind", "volume"].includes(rawType)
+      ? (rawType as "bind" | "volume")
+      : ("bind" as const);
+
     newMount.value = {
       source: sourcePart ? sourcePart.split("=")[1] : "",
       target: targetPart ? targetPart.split("=")[1] : "",
-      type: (typePart ? typePart.split("=")[1] : "bind") as any,
+      type,
       options: parts
         .filter((p) => {
           const [k] = p.split("=");
@@ -93,10 +98,15 @@ function selectMountToEdit(mount: any, index: number) {
       readonly: isRO,
     };
   } else {
+    const rawType = (mount as any).type || "bind";
+    const type = ["bind", "volume"].includes(rawType)
+      ? (rawType as "bind" | "volume")
+      : ("bind" as const);
+
     newMount.value = {
       source: mount.source,
       target: mount.target,
-      type: mount.type || "bind",
+      type,
       options: mount.options || "",
       readonly: !!mount.readonly,
     };

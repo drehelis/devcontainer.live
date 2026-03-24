@@ -38,15 +38,6 @@ const TOOL_MOUNTS = [
     ],
   },
   {
-    id: "gcloud",
-    name: "Gcloud",
-    desc: "Auth and config",
-    mounts: [
-      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/gcloud,target=/host/.config/gcloud,type=bind,consistency=cached",
-    ],
-    remoteEnv: { CLOUDSDK_CONFIG: "/host/.config/gcloud" },
-  },
-  {
     id: "aws",
     name: "AWS",
     desc: "Credentials and config",
@@ -59,13 +50,13 @@ const TOOL_MOUNTS = [
     },
   },
   {
-    id: "kube",
-    name: "Kubeconfig",
-    desc: "Kubernetes context",
+    id: "azure",
+    name: "Azure",
+    desc: "CLI config",
     mounts: [
-      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.kube,target=/host/.kube,type=bind,consistency=cached",
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.azure,target=/host/.azure,type=bind,consistency=cached",
     ],
-    remoteEnv: { KUBECONFIG: "/host/.kube/config" },
+    remoteEnv: { AZURE_CONFIG_DIR: "/host/.azure" },
   },
   {
     id: "docker",
@@ -77,6 +68,15 @@ const TOOL_MOUNTS = [
     remoteEnv: { DOCKER_CONFIG: "/host/.docker" },
   },
   {
+    id: "gcloud",
+    name: "Gcloud",
+    desc: "Auth and config",
+    mounts: [
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.config/gcloud,target=/host/.config/gcloud,type=bind,consistency=cached",
+    ],
+    remoteEnv: { CLOUDSDK_CONFIG: "/host/.config/gcloud" },
+  },
+  {
     id: "helm",
     name: "Helm",
     desc: "Config and charts",
@@ -86,35 +86,53 @@ const TOOL_MOUNTS = [
     remoteEnv: { HELM_CONFIG_HOME: "/host/.config/helm" },
   },
   {
-    id: "azure",
-    name: "Azure",
-    desc: "CLI config",
+    id: "kube",
+    name: "Kubeconfig",
+    desc: "Kubernetes context",
     mounts: [
-      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.azure,target=/host/.azure,type=bind,consistency=cached",
+      "source=${localEnv:HOME}${localEnv:USERPROFILE}/.kube,target=/host/.kube,type=bind,consistency=cached",
     ],
-    remoteEnv: { AZURE_CONFIG_DIR: "/host/.azure" },
+    remoteEnv: { KUBECONFIG: "/host/.kube/config" },
   },
 ];
 
 /**
- * Helper to get the target path from a mount (string or object)
+ * Normalizes a mount (string or object) into a consistent string signature for comparison.
  */
-function getMountTarget(m: any): string | undefined {
-  if (typeof m !== "string") return m.target;
-  return m
-    .split(",")
-    .find((p) => p.startsWith("target="))
-    ?.split("=")[1];
+function getMountSignature(m: any): string {
+  if (typeof m !== "string") {
+    // For objects, create a sorted signature of key properties
+    const props = {
+      source: m.source,
+      target: m.target,
+      type: m.type || "bind",
+      readonly: !!m.readonly,
+    };
+    return JSON.stringify(props);
+  }
+
+  // For strings, normalize by parsing and re-serializing core parts
+  const parts = m.split(",");
+  const getPart = (key: string) =>
+    parts.find((p) => p.startsWith(`${key}=`))?.split("=")[1] || "";
+
+  return JSON.stringify({
+    source: getPart("source"),
+    target: getPart("target"),
+    type: getPart("type") || "bind",
+    readonly: parts.includes("readonly"),
+  });
 }
 
 function isToolActive(toolId: string) {
   const tool = TOOL_MOUNTS.find((t) => t.id === toolId);
   if (!tool) return false;
 
-  const toolTargets = tool.mounts.map(getMountTarget);
-  return (props.config.mounts || []).some((m: any) =>
-    toolTargets.includes(getMountTarget(m)),
-  );
+  const toolSignatures = tool.mounts.map(getMountSignature);
+  const currentSignatures = (props.config.mounts || []).map(getMountSignature);
+
+  // A tool is active if ALL its defined mounts are present exactly
+  return toolSignatures.every((sig) => currentSignatures.includes(sig));
 }
 
 function toggleTool(toolId: string) {
@@ -125,16 +143,18 @@ function toggleTool(toolId: string) {
   const newConfig = JSON.parse(JSON.stringify(props.config));
 
   if (isActive) {
-    // Remove tool mounts
-    const toolTargets = tool.mounts.map(getMountTarget);
+    // Remove tool mounts by exact signature match
+    const toolSignatures = tool.mounts.map(getMountSignature);
     newConfig.mounts = (newConfig.mounts || []).filter(
-      (m: any) => !toolTargets.includes(getMountTarget(m)),
+      (m: any) => !toolSignatures.includes(getMountSignature(m)),
     );
 
     // Remove tool env vars
-    if (tool.remoteEnv) {
+    if (tool.remoteEnv && newConfig.remoteEnv) {
       Object.keys(tool.remoteEnv).forEach((key) => {
-        if (newConfig.remoteEnv) delete newConfig.remoteEnv[key];
+        if (newConfig.remoteEnv[key] === tool.remoteEnv[key]) {
+          delete newConfig.remoteEnv[key];
+        }
       });
     }
   } else {
