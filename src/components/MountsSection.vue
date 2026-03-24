@@ -24,7 +24,18 @@ function updateConfig(path: string, value: any) {
   emit("update:config", newConfig);
 }
 
-const TOOL_MOUNTS = [
+interface ToolDefinition {
+  id: string;
+  name: string;
+  desc: string;
+  mounts: (
+    | string
+    | { source: string; target: string; type: string; [k: string]: any }
+  )[];
+  remoteEnv?: Record<string, string>;
+}
+
+const TOOL_MOUNTS: ToolDefinition[] = [
   {
     id: "bash-history",
     name: "Persist Bash History",
