@@ -873,7 +873,7 @@
     "documentationURL": "https://github.com/devcontainers/features/tree/main/src/nvidia-cuda"
   },
   {
-    "id": "ghcr.io/devcontainers/features/oryx:1",
+    "id": "ghcr.io/devcontainers/features/oryx:2",
     "name": "Oryx",
     "description": "Installs the oryx CLI",
     "options": null,
@@ -19883,6 +19883,23 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/fzf"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/getdnote.com:1",
+    "name": "getdnote.com",
+    "description": "Install \"dnote\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"dnote\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/getdnote.com"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/github.com-cli:1",
     "name": "github.com-cli",
     "description": "Install \"gh\" (GitHub CLI) binary",
@@ -19915,6 +19932,23 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/helix-editor.com"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/hermes-agent.nousresearch.com:1",
+    "name": "hermes-agent.nousresearch.com",
+    "description": "Install \"hermes\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Currently unused."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/hermes-agent.nousresearch.com"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/icholy-ttygif:1",
@@ -20330,6 +20364,23 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/starship.rs"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/steveyegge-beads:1",
+    "name": "steveyegge/beads",
+    "description": "Install \"bd\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"beads\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/steveyegge-beads"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/swc.rs:1",
     "name": "swc.rs",
     "description": "Install \"swc\" binary",
@@ -20362,6 +20413,23 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/tailscale.com"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/taskwarrior.org:1",
+    "name": "taskwarrior.org",
+    "description": "Install \"task\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Currently unused. taskwarrior is installed via the system package manager."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/taskwarrior.org"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/webinstall.dev:1",
@@ -21545,6 +21613,23 @@
     "options": null,
     "category": "Dev Container Features by John Ajera",
     "documentationURL": "https://linux.die.net/man/1/zip"
+  },
+  {
+    "id": "ghcr.io/mrsimonemms/devcontainers/air:1",
+    "name": "Air",
+    "description": "Live reload for Go apps",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest"
+        ],
+        "default": "latest",
+        "description": "Select the version you would like to install"
+      }
+    },
+    "category": "MrSimonEmms Dev Container Features",
+    "documentationURL": "https://github.com/mrsimonemms/devcontainers"
   },
   {
     "id": "ghcr.io/mrsimonemms/devcontainers/buf:1",
