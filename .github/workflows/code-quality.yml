@@ -1,5 +1,10 @@
 name: Code Quality
 
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
 jobs:
   check:
     uses: drehelis/improved-chainsaw/.github/workflows/code-quality.yml@main
