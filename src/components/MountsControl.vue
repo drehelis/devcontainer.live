@@ -211,8 +211,12 @@ function isReadonly(mount: any) {
       <div
         v-for="(mount, index) in mounts"
         :key="index"
+        role="button"
+        tabindex="0"
+        aria-label="Select mount to edit"
         @click="selectMountToEdit(mount, index)"
-        class="flex items-center justify-between p-2 pl-3 bg-ide-activity/30 border border-ide-border/50 rounded group hover:border-ide-accent/30 transition-all cursor-pointer"
+        @keydown.enter.space.prevent="selectMountToEdit(mount, index)"
+        class="flex items-center justify-between p-2 pl-3 bg-ide-activity/30 border border-ide-border/50 rounded group hover:border-ide-accent/30 transition-all cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-ide-accent"
         :class="{
           'border-ide-accent/60 bg-ide-accent/5 ring-1 ring-ide-accent/20':
             editingIndex === index,

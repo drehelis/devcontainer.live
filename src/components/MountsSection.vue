@@ -98,48 +98,68 @@ const TOOL_MOUNTS = [
 
 /**
  * Normalizes a mount (string or object) into a consistent string signature for comparison.
+ * This ensures that differences in key order or string formatting don't affect tool detection.
  */
 function getMountSignature(m: any): string {
   if (typeof m !== "string") {
-    // For objects, create a sorted signature of key properties
-    const props = {
-      source: m.source,
-      target: m.target,
-      type: m.type || "bind",
-      readonly: !!m.readonly,
-    };
-    return JSON.stringify(props);
+    // For objects, include all enumerable properties with sorted keys
+    const normalized: Record<string, unknown> = {};
+    Object.keys(m || {})
+      .sort()
+      .forEach((key) => {
+        normalized[key] = m[key];
+      });
+    return JSON.stringify(normalized);
   }
 
-  // For strings, normalize by parsing and re-serializing core parts
-  const parts = m.split(",");
-  const getPart = (key: string) =>
-    parts.find((p) => p.startsWith(`${key}=`))?.split("=")[1] || "";
+  // For strings, normalize by parsing all options and serializing with sorted keys
+  const parts = m
+    .split(",")
+    .map((p) => p.trim())
+    .filter((p) => p.length > 0);
+  const options: Record<string, unknown> = {};
+  for (const part of parts) {
+    if (part.includes("=")) {
+      const [rawKey, ...rest] = part.split("=");
+      const key = rawKey.trim();
+      const value = rest.join("=").trim();
+      if (key) {
+        options[key] = value;
+      }
+    } else {
+      // Treat bare options (e.g. "readonly") as boolean flags
+      options[part] = true;
+    }
+  }
 
-  return JSON.stringify({
-    source: getPart("source"),
-    target: getPart("target"),
-    type: getPart("type") || "bind",
-    readonly: parts.includes("readonly"),
-  });
+  const sortedOptions: Record<string, unknown> = {};
+  Object.keys(options)
+    .sort()
+    .forEach((key) => {
+      sortedOptions[key] = options[key];
+    });
+  return JSON.stringify(sortedOptions);
 }
 
-function isToolActive(toolId: string) {
-  const tool = TOOL_MOUNTS.find((t) => t.id === toolId);
-  if (!tool) return false;
-
-  const toolSignatures = tool.mounts.map(getMountSignature);
+const activeToolIds = computed(() => {
   const currentSignatures = (props.config.mounts || []).map(getMountSignature);
+  const activeIds = new Set<string>();
 
-  // A tool is active if ALL its defined mounts are present exactly
-  return toolSignatures.every((sig) => currentSignatures.includes(sig));
-}
+  TOOL_MOUNTS.forEach((tool) => {
+    const toolSignatures = tool.mounts.map(getMountSignature);
+    if (toolSignatures.every((sig) => currentSignatures.includes(sig))) {
+      activeIds.add(tool.id);
+    }
+  });
+
+  return activeIds;
+});
 
 function toggleTool(toolId: string) {
   const tool = TOOL_MOUNTS.find((t) => t.id === toolId);
   if (!tool) return;
 
-  const isActive = isToolActive(toolId);
+  const isActive = activeToolIds.value.has(toolId);
   const newConfig = JSON.parse(JSON.stringify(props.config));
 
   if (isActive) {
@@ -152,8 +172,8 @@ function toggleTool(toolId: string) {
     // Remove tool env vars
     if (tool.remoteEnv && newConfig.remoteEnv) {
       Object.keys(tool.remoteEnv).forEach((key) => {
-        if (newConfig.remoteEnv[key] === tool.remoteEnv[key]) {
-          delete newConfig.remoteEnv[key];
+        if (newConfig.remoteEnv![key] === tool.remoteEnv![key]) {
+          delete newConfig.remoteEnv![key];
         }
       });
     }
@@ -282,18 +302,18 @@ function toggleSSH() {
       >
         <input
           type="checkbox"
-          :checked="isToolActive('bash-history')"
+          :checked="activeToolIds.has('bash-history')"
           @change="toggleTool('bash-history')"
           class="hidden"
         />
         <div
           class="w-4 h-4 border-2 border-ide-border rounded flex items-center justify-center group-hover:border-ide-accent transition-colors"
           :class="{
-            'bg-ide-accent border-ide-accent': isToolActive('bash-history'),
+            'bg-ide-accent border-ide-accent': activeToolIds.has('bash-history'),
           }"
         >
           <svg
-            v-if="isToolActive('bash-history')"
+            v-if="activeToolIds.has('bash-history')"
             class="w-3 h-3 text-ide-bg"
             fill="none"
             viewBox="0 0 24 24"
@@ -585,18 +605,18 @@ function toggleSSH() {
           >
             <input
               type="checkbox"
-              :checked="isToolActive(tool.id)"
+              :checked="activeToolIds.has(tool.id)"
               @change="toggleTool(tool.id)"
               class="hidden"
             />
             <div
               class="w-4 h-4 border-2 border-ide-border rounded flex items-center justify-center group-hover:border-ide-accent transition-colors shrink-0"
               :class="{
-                'bg-ide-accent border-ide-accent': isToolActive(tool.id),
+                'bg-ide-accent border-ide-accent': activeToolIds.has(tool.id),
               }"
             >
               <svg
-                v-if="isToolActive(tool.id)"
+                v-if="activeToolIds.has(tool.id)"
                 class="w-3 h-3 text-ide-bg"
                 fill="none"
                 viewBox="0 0 24 24"
