@@ -309,7 +309,8 @@ function toggleSSH() {
         <div
           class="w-4 h-4 border-2 border-ide-border rounded flex items-center justify-center group-hover:border-ide-accent transition-colors"
           :class="{
-            'bg-ide-accent border-ide-accent': activeToolIds.has('bash-history'),
+            'bg-ide-accent border-ide-accent':
+              activeToolIds.has('bash-history'),
           }"
         >
           <svg
