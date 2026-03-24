@@ -29,6 +29,8 @@ const newMount = ref({
   readonly: false,
 });
 
+const editingIndex = ref<number | null>(null);
+
 function addMount() {
   if (!newMount.value.source || !newMount.value.target) return;
 
@@ -40,7 +42,15 @@ function addMount() {
     ...(newMount.value.readonly ? { readonly: true } : {}),
   };
 
-  emit("update:mounts", [...props.mounts, mount]);
+  const updatedMounts = [...props.mounts];
+  if (editingIndex.value !== null) {
+    updatedMounts[editingIndex.value] = mount;
+    editingIndex.value = null;
+  } else {
+    updatedMounts.push(mount);
+  }
+
+  emit("update:mounts", updatedMounts);
 
   newMount.value = {
     source: "",
@@ -51,15 +61,80 @@ function addMount() {
   };
 }
 
-function removeMount(index: number) {
+function removeMount(index: number, event?: Event) {
+  if (event) event.stopPropagation();
   const updated = [...props.mounts];
   updated.splice(index, 1);
+  if (editingIndex.value === index) editingIndex.value = null;
+  else if (editingIndex.value !== null && editingIndex.value > index)
+    editingIndex.value--;
   emit("update:mounts", updated.length > 0 ? updated : undefined);
 }
 
+function selectMountToEdit(mount: any, index: number) {
+  editingIndex.value = index;
+  if (typeof mount === "string") {
+    const parts = mount.split(",");
+    const sourcePart = parts.find((p) => p.startsWith("source="));
+    const targetPart = parts.find((p) => p.startsWith("target="));
+    const typePart = parts.find((p) => p.startsWith("type="));
+    const isRO = parts.includes("readonly");
+
+    const rawType = typePart ? typePart.split("=")[1] : "bind";
+    const type = ["bind", "volume"].includes(rawType)
+      ? (rawType as "bind" | "volume")
+      : ("bind" as const);
+
+    newMount.value = {
+      source: sourcePart ? sourcePart.split("=")[1] : "",
+      target: targetPart ? targetPart.split("=")[1] : "",
+      type,
+      options: parts
+        .filter((p) => {
+          const [k] = p.split("=");
+          return !["source", "target", "type", "readonly"].includes(k);
+        })
+        .join(","),
+      readonly: isRO,
+    };
+  } else {
+    const rawType = (mount as any).type || "bind";
+    const type = ["bind", "volume"].includes(rawType)
+      ? (rawType as "bind" | "volume")
+      : ("bind" as const);
+
+    newMount.value = {
+      source: mount.source,
+      target: mount.target,
+      type,
+      options: mount.options || "",
+      readonly: !!mount.readonly,
+    };
+  }
+}
+
 function getMountLabel(mount: any) {
-  if (typeof mount === "string") return mount;
-  return `${mount.source} ➔ ${mount.target}`;
+  if (typeof mount !== "string") return `${mount.source} ➔ ${mount.target}`;
+
+  const parts = mount.split(",");
+  const sourcePart = parts.find((p) => p.startsWith("source="));
+  const targetPart = parts.find((p) => p.startsWith("target="));
+
+  if (sourcePart && targetPart) {
+    return `${sourcePart.split("=")[1]} ➔ ${targetPart.split("=")[1]}`;
+  }
+  return mount;
+}
+
+function getMountType(mount: any) {
+  if (typeof mount !== "string") return mount.type;
+  const typePart = mount.split(",").find((p) => p.startsWith("type="));
+  return typePart ? typePart.split("=")[1] : "RAW";
+}
+
+function isReadonly(mount: any) {
+  if (typeof mount !== "string") return !!mount.readonly;
+  return mount.split(",").includes("readonly");
 }
 </script>
 
@@ -120,9 +195,14 @@ function getMountLabel(mount: any) {
       <div class="flex items-end col-span-2 lg:col-span-1">
         <button
           @click="addMount"
-          class="bg-ide-accent text-ide-bg px-3 py-1.5 rounded-sm text-[9px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg shadow-ide-accent/10 h-[28px] w-full"
+          class="text-ide-bg px-3 py-1.5 rounded-sm text-[9px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg shadow-ide-accent/10 h-[28px] w-full"
+          :class="
+            editingIndex !== null
+              ? 'bg-ide-orange shadow-ide-orange/10'
+              : 'bg-ide-accent'
+          "
         >
-          Add
+          {{ editingIndex !== null ? "Update" : "Add" }}
         </button>
       </div>
     </div>
@@ -131,7 +211,16 @@ function getMountLabel(mount: any) {
       <div
         v-for="(mount, index) in mounts"
         :key="index"
-        class="flex items-center justify-between p-2 pl-3 bg-ide-activity/30 border border-ide-border/50 rounded group hover:border-ide-accent/30 transition-colors"
+        role="button"
+        tabindex="0"
+        aria-label="Select mount to edit"
+        @click="selectMountToEdit(mount, index)"
+        @keydown.enter.space.prevent="selectMountToEdit(mount, index)"
+        class="flex items-center justify-between p-2 pl-3 bg-ide-activity/30 border border-ide-border/50 rounded group hover:border-ide-accent/30 transition-all cursor-pointer outline-none focus-visible:ring-1 focus-visible:ring-ide-accent"
+        :class="{
+          'border-ide-accent/60 bg-ide-accent/5 ring-1 ring-ide-accent/20':
+            editingIndex === index,
+        }"
       >
         <div class="flex flex-col gap-0.5">
           <div class="flex items-center gap-2">
@@ -139,7 +228,7 @@ function getMountLabel(mount: any) {
               getMountLabel(mount)
             }}</span>
             <span
-              v-if="typeof mount !== 'string' && mount.readonly"
+              v-if="isReadonly(mount)"
               class="px-1 py-0.5 bg-ide-orange/20 text-ide-orange text-[6px] font-black rounded-sm uppercase tracking-tighter"
               >Read Only</span
             >
@@ -149,7 +238,7 @@ function getMountLabel(mount: any) {
           >
             <span
               class="text-[7px] font-black uppercase tracking-widest bg-ide-border px-1 rounded-sm"
-              >{{ typeof mount === "string" ? "RAW" : mount.type }}</span
+              >{{ getMountType(mount) }}</span
             >
             <span
               v-if="typeof mount !== 'string' && mount.options"
@@ -159,7 +248,7 @@ function getMountLabel(mount: any) {
           </div>
         </div>
         <button
-          @click="removeMount(index)"
+          @click="removeMount(index, $event)"
           class="p-1.5 text-ide-text-muted hover:text-ide-orange transition-colors"
         >
           <svg
