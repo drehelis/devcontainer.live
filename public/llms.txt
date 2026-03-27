@@ -5,7 +5,7 @@
 devcontainer.live is a visual tool for building `.devcontainer` setups. It allows users to select from official templates, add features, and configure runtime parameters, providing a real-time preview of the generated configuration files.
 
 ## Documentation
-- [Usage Guide](https://github.com/drehelis/devcontainer.live#development): Detailed instructions on how to use and contribute to the project.
+- [Development Guide](https://github.com/drehelis/devcontainer.live#development): Detailed instructions on how to use and contribute to the project.
 - [Dev Container Specification](https://containers.dev/): The definitive guide to the Development Container standard.
 
 ## Features
