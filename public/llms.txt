@@ -1,0 +1,23 @@
+# devcontainer.live
+
+> A modern, web-based Dev Container Generator to visually configure and generate `.devcontainer` configurations.
+
+devcontainer.live is a visual tool for building `.devcontainer` setups. It allows users to select from official templates, add features, and configure runtime parameters, providing a real-time preview of the generated configuration files.
+
+## Documentation
+- [Usage Guide](https://github.com/drehelis/devcontainer.live#development): Detailed instructions on how to use and contribute to the project.
+- [Dev Container Specification](https://containers.dev/): The definitive guide to the Development Container standard.
+
+## Features
+- **Project Templates:** Integrated support for official Dev Container templates from the Microsoft registry.
+- **Visual Features Browser:** Search and add standard features like Docker-in-Docker, Node.js, Python, and more.
+- **Live Preview:** Immediate feedback with syntax-highlighted previews of `devcontainer.json`, `Dockerfile`, and `docker-compose.yml`.
+- **Configuration Persistence:** Save and share configurations via URL hash.
+
+## Technical Details
+- **Frontend Stack:** Vue 3, Vite, Tailwind CSS.
+- **Data Source:** Pulls metadata directly from the [Dev Container Index](https://github.com/devcontainers/containers.dev).
+
+## Optional
+- [GitHub Repository](https://github.com/drehelis/devcontainer.live): Full source code and issue tracker.
+- [License](https://github.com/drehelis/devcontainer.live/blob/main/LICENSE): MIT License.
