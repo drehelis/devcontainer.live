@@ -15,14 +15,20 @@ const searchQuery = ref("");
 const customFeatureId = ref("");
 const filterType = ref<"all" | "official" | "community">("all");
 
+const OFFICIAL_PREFIXES = [
+  "ghcr.io/devcontainers/features",
+  "ghcr.io/devcontainers-extra/features",
+];
+
+const isOfficialFeature = (id: string) =>
+  OFFICIAL_PREFIXES.some((prefix) => id.startsWith(prefix));
+
 const filteredFeatures = computed(() => {
   let list = featuresList.value;
 
   if (filterType.value !== "all") {
     const isOfficial = filterType.value === "official";
-    list = list.filter(
-      (f) => f.id.startsWith("ghcr.io/devcontainers/features") === isOfficial,
-    );
+    list = list.filter((f) => isOfficialFeature(f.id) === isOfficial);
   }
 
   if (searchQuery.value) {
@@ -37,8 +43,8 @@ const filteredFeatures = computed(() => {
   }
 
   return [...list].sort((a, b) => {
-    const aOfficial = a.id.startsWith("ghcr.io/devcontainers/features");
-    const bOfficial = b.id.startsWith("ghcr.io/devcontainers/features");
+    const aOfficial = isOfficialFeature(a.id);
+    const bOfficial = isOfficialFeature(b.id);
     if (aOfficial && !bOfficial) return -1;
     if (!aOfficial && bOfficial) return 1;
     return a.name.localeCompare(b.name);
@@ -200,16 +206,12 @@ const manualFeatures = computed(() => {
                 class="px-1.5 rounded-full text-[6px] font-black uppercase tracking-widest border whitespace-nowrap shrink-0"
                 style="padding-top: 0.125rem; padding-bottom: 0.125rem"
                 :class="
-                  feature.id.startsWith('ghcr.io/devcontainers/features')
+                  isOfficialFeature(feature.id)
                     ? 'text-ide-accent/80 border-ide-accent/30 bg-ide-accent/5'
                     : 'text-[#a78bfa] border-[#a78bfa]/30 bg-[#a78bfa]/10'
                 "
               >
-                {{
-                  feature.id.startsWith("ghcr.io/devcontainers/features")
-                    ? "Official"
-                    : "Community"
-                }}
+                {{ isOfficialFeature(feature.id) ? "Official" : "Community" }}
               </span>
               <a
                 v-if="feature.documentationURL"
