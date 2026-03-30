@@ -3775,5 +3775,85 @@
     },
     "category": "Metin's Dev Containers",
     "documentationURL": "https://github.com/metinsenturk/devcontainer-templates/tree/main/src/python-uv"
+  },
+  {
+    "id": "ghcr.io/goodjobandrew/devcontainer-templates/ai-sandbox",
+    "name": "AI Sandbox",
+    "description": "Secure, firewalled Node.js environment for Claude Code",
+    "options": {
+      "CLAUDE_CODE_VERSION": {
+        "type": "string",
+        "description": "Version of @anthropic-ai/claude-code to install",
+        "default": "latest"
+      }
+    },
+    "category": "Dev Container Templates by goodjobandrew",
+    "documentationURL": "https://github.com/goodjobandrew/devcontainer-templates"
+  },
+  {
+    "id": "ghcr.io/alan-chen-dongsheng/devcontainer-templates/ai_compiler_env",
+    "name": "AI Compiler Environment",
+    "description": "Full-featured compiler/AI development environment: LLVM/Clang toolchain, ccache (unlimited), zsh + oh-my-zsh, Python (uv), Node.js, and Rust.",
+    "options": {
+      "llvmVersion": {
+        "type": "string",
+        "description": "LLVM/Clang version to install:",
+        "proposals": [
+          "20",
+          "19",
+          "18",
+          "17"
+        ],
+        "default": "20"
+      },
+      "nodeVersion": {
+        "type": "string",
+        "description": "Node.js major version to install:",
+        "proposals": [
+          "22",
+          "20",
+          "18"
+        ],
+        "default": "22"
+      }
+    },
+    "category": "Dev Container Features by AlanChen",
+    "documentationURL": "https://github.com/alan-chen-dongsheng/devcontainer-templates/tree/main/src/ai_compiler_env"
+  },
+  {
+    "id": "ghcr.io/iyaki/devcontainer-templates/opencode-ralph",
+    "name": "OpenCode Ralph Template",
+    "description": "A comprehensive development container template for OpenCode-powered projects with development tools pre-configured and ready to use with Spec-Driven Development and Ralph Loops.",
+    "options": null,
+    "category": "Devcontainer templates by iyaki",
+    "documentationURL": "https://github.com/iyaki/devcontainer-templates/tree/main/src/opencode-ralph"
+  },
+  {
+    "id": "ghcr.io/thucke/devcontainer-templates/typo3",
+    "name": "Typo3",
+    "description": "A template to support remote development with TYPO3.",
+    "options": {
+      "phpVersion": {
+        "type": "string",
+        "description": "Select the PHP version to use in the development container. You may choose PHP version from 8.2 to 8.5.",
+        "proposals": [
+          "8.2",
+          "8.3",
+          "8.4",
+          "8.5"
+        ],
+        "default": "8.4"
+      },
+      "webserver": {
+        "type": "string",
+        "description": "Which webserver do you prefer? Currently only FrankenPHP is supported, but more options will be added in the future.",
+        "proposals": [
+          "frankenphp"
+        ],
+        "default": "frankenphp"
+      }
+    },
+    "category": "Templates by Thomas Hucke",
+    "documentationURL": "https://github.com/thucke/devcontainer-templates/tree/main/src/typo3"
   }
 ]

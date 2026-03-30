@@ -354,8 +354,13 @@
       },
       "installDockerComposeSwitch": {
         "type": "boolean",
-        "default": true,
+        "default": false,
         "description": "Install Compose Switch (provided docker compose is available) which is a replacement to the Compose V1 docker-compose (python) executable. It translates the command line into Compose V2 docker compose then runs the latter."
+      },
+      "socketPath": {
+        "type": "string",
+        "default": "/var/run/docker-host.sock",
+        "description": "Path where the Docker socket is mounted inside the container. For rootless Docker, override the mount in devcontainer.json to map your host socket to this path."
       }
     },
     "category": "Reference Implementation Features",
@@ -2347,6 +2352,30 @@
     },
     "category": "DevContainer Features",
     "documentationURL": "https://github.com/stu-bell/devcontainer-features/tree/main/src/gemini-cli"
+  },
+  {
+    "id": "ghcr.io/stu-bell/devcontainer-features/homebrew:1",
+    "name": "Homebrew",
+    "description": "Installs the Homebrew package manager and optionally a brew package",
+    "options": {
+      "brewPackage": {
+        "type": "string",
+        "default": "",
+        "description": "Name of Brew package to install (e.g. 'hmans/beans/beans')"
+      },
+      "brewPackageVersion": {
+        "type": "string",
+        "default": "",
+        "description": "Minimum required version of brew package to install (e.g. '1.2.0')"
+      },
+      "brewArgs": {
+        "type": "string",
+        "default": "",
+        "description": "Argument string to pass to the brew install command (e.g. '--build-from-source')"
+      }
+    },
+    "category": "DevContainer Features",
+    "documentationURL": "https://github.com/stu-bell/devcontainer-features"
   },
   {
     "id": "ghcr.io/stu-bell/devcontainer-features/neovim:0",
@@ -19503,7 +19532,7 @@
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/alexpasmantier-television:1",
-    "name": "alexpasmantier-television",
+    "name": "alexpasmantier/television",
     "description": "Install \"tv\" (television) binary",
     "options": {
       "version": {
@@ -19517,6 +19546,31 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/alexpasmantier-television"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/ankitpokhrel-jira-cli:1",
+    "name": "ankitpokhrel/jira-cli",
+    "description": "Install \"jira\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"jira\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/ankitpokhrel-jira-cli"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/apt-build-essential:1",
+    "name": "apt-build-essential",
+    "description": "Install \"build-essential\" apt package (gcc, g++, make)",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/apt-build-essential"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/asdf-vm.com:1",
@@ -19577,6 +19631,23 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/atuin.sh"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/avivsinai-bitbucket-cli:1",
+    "name": "avivsinai/bitbucket-cli",
+    "description": "bkt — CLI for Bitbucket",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"bkt\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/avivsinai-bitbucket-cli"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/aws-cli:1",
     "name": "AWS CLI",
     "description": "Installs the AWS CLI along with needed dependencies. Useful for base Dockerfiles that often are missing required install dependencies like gpg.",
@@ -19595,7 +19666,7 @@
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/basecamp-fizzy-cli:1",
-    "name": "basecamp-fizzy-cli",
+    "name": "basecamp/fizzy-cli",
     "description": "Install \"fizzy\" CLI binary",
     "options": {
       "version": {
@@ -19679,6 +19750,14 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/bun.sh"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/ccache.dev:1",
+    "name": "ccache.dev",
+    "description": "Install \"ccache\" binary",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/ccache.dev"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/charmbracelet-gum:1",
     "name": "charmbracelet/gum",
     "description": "Install \"gum\" binary",
@@ -19713,8 +19792,24 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/chezmoi.io"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/clang-format:1",
+    "name": "clang-format",
+    "description": "Install \"clang-format\" binary",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/clang-format"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/clang-tidy:1",
+    "name": "clang-tidy",
+    "description": "Install \"clang-tidy\" binary",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/clang-tidy"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/cloudflare.com-warp-cli:1",
-    "name": "cloudflare.com-warp-cli",
+    "name": "cloudflare.com/warp-cli",
     "description": "Install \"warp-cli\" binary",
     "options": {
       "version": {
@@ -19728,6 +19823,22 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/cloudflare.com-warp-cli"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/cmake.org:1",
+    "name": "cmake.org",
+    "description": "Install \"cmake\" binary",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/cmake.org"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/collection-c-cpp:1",
+    "name": "collection-c-cpp",
+    "description": "C/C++ dev collection — cmake, ninja, gdb, valgrind, ccache, cppcheck, clang-format, clang-tidy, distcc, vcpkg, build-essential",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/collection-c-cpp"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/critique.work:1",
@@ -19745,6 +19856,14 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/critique.work"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/danmar-cppcheck:1",
+    "name": "danmar/cppcheck",
+    "description": "Install \"cppcheck\" binary",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/danmar-cppcheck"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/delta:1",
@@ -19815,6 +19934,82 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/diffity.com"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/direnv.net:1",
+    "name": "direnv.net",
+    "description": "Install \"direnv\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Currently unused. direnv is installed via the system package manager."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/direnv.net"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/distcc.org:1",
+    "name": "distcc.org",
+    "description": "Install \"distcc\" binary",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/distcc.org"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/dolthub.com:1",
+    "name": "dolthub.com",
+    "description": "Install \"dolt\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"dolt\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/dolthub.com"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/dolthub.com-doltgres:1",
+    "name": "dolthub.com/doltgres",
+    "description": "Install \"doltgres\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"doltgres\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/dolthub.com-doltgres"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/dotenv.org:1",
+    "name": "dotenv.org",
+    "description": "Install \"dotenvx\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"dotenvx\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/dotenv.org"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/dozzle.dev:1",
     "name": "dozzle.dev",
     "description": "Install \"dozzle\" binary",
@@ -19830,6 +20025,23 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/dozzle.dev"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/fathyb-carbonyl:1",
+    "name": "fathyb/carbonyl",
+    "description": "Install \"carbonyl\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"carbonyl\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/fathyb-carbonyl"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/fd:1",
@@ -19849,7 +20061,7 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/fd"
   },
   {
-    "id": "ghcr.io/devcontainer-community/devcontainer-features/feature-installer:0",
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/feature-installer:1",
     "name": "feature-installer",
     "description": "Install \"feature-installer\" binary",
     "options": {
@@ -19901,7 +20113,7 @@
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/github.com-cli:1",
-    "name": "github.com-cli",
+    "name": "github.com/cli",
     "description": "Install \"gh\" (GitHub CLI) binary",
     "options": {
       "version": {
@@ -20003,7 +20215,7 @@
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/joelhooks-agent-secrets:1",
-    "name": "joelhooks-agent-secrets",
+    "name": "joelhooks/agent-secrets",
     "description": "Install \"secrets\" (agent-secrets) binary",
     "options": {
       "version": {
@@ -20087,6 +20299,23 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/lazygit"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/lnav.org:1",
+    "name": "lnav.org",
+    "description": "Install \"lnav\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"lnav\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/lnav.org"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/memvid.com:1",
     "name": "memvid.com",
     "description": "Install \"memvid\" CLI",
@@ -20127,6 +20356,14 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/neovim.io"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/ninja-build.org:1",
+    "name": "ninja-build.org",
+    "description": "Install \"ninja\" binary",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/ninja-build.org"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/nixos.org:1",
@@ -20174,6 +20411,23 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/nvidia.com-cuda"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/onecli.sh-cli:1",
+    "name": "onecli.sh/cli",
+    "description": "Install \"onecli\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"onecli\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/onecli.sh-cli"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/opencode.ai:1",
@@ -20296,7 +20550,7 @@
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/schpet-linear-cli:1",
-    "name": "schpet-linear-cli",
+    "name": "schpet/linear-cli",
     "description": "Install \"linear\" binary",
     "options": {
       "version": {
@@ -20327,6 +20581,31 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/smallstep.com"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/socket.dev-sfw-free:1",
+    "name": "socket.dev/sfw-free",
+    "description": "Install \"sfw\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"sfw\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/socket.dev-sfw-free"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/sourceware.org-gdb:1",
+    "name": "sourceware.org/gdb",
+    "description": "Install \"gdb\" binary",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/sourceware.org-gdb"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/sshd:1",
@@ -20398,6 +20677,23 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/swc.rs"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/sxyazi-yazi:1",
+    "name": "sxyazi/yazi",
+    "description": "Install \"yazi\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"yazi\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/sxyazi-yazi"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/tailscale.com:1",
     "name": "tailscale.com",
     "description": "Install \"tailscale\" binary",
@@ -20432,6 +20728,56 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/taskwarrior.org"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/tree-sitter:1",
+    "name": "tree-sitter",
+    "description": "Install \"tree-sitter\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"tree-sitter\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/tree-sitter"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/turso.tech:1",
+    "name": "turso.tech",
+    "description": "Install \"tursodb\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"tursodb\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/turso.tech"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/valgrind.org:1",
+    "name": "valgrind.org",
+    "description": "Install \"valgrind\" binary",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/valgrind.org"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/vcpkg.io:1",
+    "name": "vcpkg.io",
+    "description": "Install vcpkg C/C++ package manager",
+    "options": null,
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/vcpkg.io"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/webinstall.dev:1",
     "name": "webinstall.dev",
     "description": "Install \"webi\" binary",
@@ -20464,6 +20810,40 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/yakitrak-notesmd-cli"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/yoctoproject.org:1",
+    "name": "yoctoproject.org",
+    "description": "Install \"bitbake\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"bitbake\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/yoctoproject.org"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/yoctoproject.org-bitbake:1",
+    "name": "yoctoproject.org/bitbake",
+    "description": "Install \"bitbake\" build tool for the Yocto Project",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"bitbake\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/yoctoproject.org-bitbake"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/yq:1",
@@ -21675,6 +22055,23 @@
     },
     "category": "MrSimonEmms Dev Container Features",
     "documentationURL": "https://github.com/mrsimonemms/devcontainers/tree/main/features/cobra-cli"
+  },
+  {
+    "id": "ghcr.io/mrsimonemms/devcontainers/dingo:1",
+    "name": "Dingo",
+    "description": "A meta-language for Go that adds Result types, error propagation (?), and pattern matching while maintaining 100% Go ecosystem compatibility",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest"
+        ],
+        "default": "latest",
+        "description": "Select the version you would like to install"
+      }
+    },
+    "category": "MrSimonEmms Dev Container Features",
+    "documentationURL": "https://github.com/mrsimonemms/devcontainers"
   },
   {
     "id": "ghcr.io/mrsimonemms/devcontainers/tcld:1",
@@ -23220,7 +23617,7 @@
         "description": "Enable or disable telemetry during installation. See README.md for details."
       }
     },
-    "category": "Gemini CLI (via npm)",
+    "category": "Devcontainer AI Features",
     "documentationURL": "https://github.com/siri404/devcontainer-ai-features"
   },
   {
@@ -23239,7 +23636,7 @@
         "description": "Enable or disable telemetry during installation. See README.md for details."
       }
     },
-    "category": "Gemini CLI (via npm)",
+    "category": "Devcontainer AI Features",
     "documentationURL": "https://github.com/siri404/devcontainer-ai-features"
   },
   {
@@ -23258,7 +23655,7 @@
         "description": "Enable or disable telemetry during installation. See README.md for details."
       }
     },
-    "category": "Gemini CLI (via npm)",
+    "category": "Devcontainer AI Features",
     "documentationURL": "https://github.com/siri404/devcontainer-ai-features"
   },
   {
@@ -23277,7 +23674,7 @@
         "description": "Enable or disable telemetry during installation. See README.md for details."
       }
     },
-    "category": "Gemini CLI (via npm)",
+    "category": "Devcontainer AI Features",
     "documentationURL": "https://github.com/siri404/devcontainer-ai-features"
   },
   {
@@ -24369,5 +24766,347 @@
     "options": null,
     "category": "Dev Container Features by ttyrho",
     "documentationURL": "https://github.com/ttyrho/devcontainer-features/tree/main/src/gfortran"
+  },
+  {
+    "id": "ghcr.io/dopplerhq/devcontainer-features/doppler-cli:1",
+    "name": "Doppler CLI",
+    "description": "Installs the Doppler CLI for secrets management.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of the Doppler CLI to install (e.g., '3.67.0' or 'latest')"
+      }
+    },
+    "category": "Doppler Features",
+    "documentationURL": "https://github.com/DopplerHQ/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/miguelrodo/devcontainerfeatures/apptainer:1",
+    "name": "Install Apptainer",
+    "description": "Install Apptainer, a container system for HPC",
+    "options": {
+      "timezone": {
+        "type": "string",
+        "proposals": [
+          "UTC",
+          "Europe/London",
+          "America/New_York"
+        ],
+        "default": "UTC",
+        "description": "Timezone to configure in the container (required for Apptainer mounts)"
+      }
+    },
+    "category": "Data Project Features by Miguel Rodo",
+    "documentationURL": "https://github.com/MiguelRodo/DevContainerFeatures"
+  },
+  {
+    "id": "ghcr.io/miguelrodo/devcontainerfeatures/fit-sne:1",
+    "name": "Install FIt-SNE",
+    "description": "Installs FIt-SNE (Fast Interpolation-based t-SNE) by compiling from source.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "1.2.1"
+        ],
+        "default": "latest",
+        "description": "FIt-SNE version or commit SHA to install."
+      }
+    },
+    "category": "Data Project Features by Miguel Rodo",
+    "documentationURL": "https://github.com/MiguelRodo/DevContainerFeatures"
+  },
+  {
+    "id": "ghcr.io/miguelrodo/devcontainerfeatures/github-tokens:1",
+    "name": "GitHub Tokens",
+    "description": "Manage GitHub authentication tokens (GITHUB_PAT, GITHUB_TOKEN) on each shell startup",
+    "options": {
+      "elevateGitHubToken": {
+        "description": "If true and a more permissive token (GH_TOKEN or GITHUB_PAT) is available, override GITHUB_TOKEN to match it. This helps R tools like renv that prioritize GITHUB_TOKEN over other tokens.",
+        "type": "boolean",
+        "default": true
+      },
+      "overrideGitHubToken": {
+        "description": "If true, force GITHUB_TOKEN to be set to either GH_TOKEN or GITHUB_PAT (in priority order), regardless of existing value. Use only if you always want to override GITHUB_TOKEN.",
+        "type": "boolean",
+        "default": false
+      }
+    },
+    "category": "Data Project Features by Miguel Rodo",
+    "documentationURL": "https://github.com/MiguelRodo/DevContainerFeatures"
+  },
+  {
+    "id": "ghcr.io/miguelrodo/devcontainerfeatures/mermaid:1",
+    "name": "Mermaid",
+    "description": "Installs Mermaid CLI to generate diagrams. Sets up a non-root user and Puppeteer configuration.",
+    "options": {
+      "userName": {
+        "type": "string",
+        "default": "mermaiduser",
+        "description": "Specify the username under which Mermaid CLI will run."
+      },
+      "puppeteerConfigDir": {
+        "type": "string",
+        "default": "/usr/local/share/mermaid-config",
+        "description": "Directory to store Puppeteer configuration files."
+      },
+      "nodeVersion": {
+        "type": "string",
+        "default": "lts",
+        "description": "Node.js version to install if not present (e.g., 'lts', '20', '18')."
+      }
+    },
+    "category": "Data Project Features by Miguel Rodo",
+    "documentationURL": "https://github.com/MiguelRodo/DevContainerFeatures"
+  },
+  {
+    "id": "ghcr.io/miguelrodo/devcontainerfeatures/renv-cache:1",
+    "name": "renv cache",
+    "description": "Configure R with renv cache",
+    "options": {
+      "setRLibPaths": {
+        "type": "boolean",
+        "description": "Whether to set default paths for R libraries (including for `renv`) to avoid needing to reinstall upon codespace rebuild.",
+        "default": true
+      },
+      "overrideTokensAtInstall": {
+        "description": "If true, temporarily override GITHUB_TOKEN and set GITHUB_PAT from the best available token (priority: GITHUB_PAT > GH_TOKEN > GITHUB_TOKEN) during the renv package install phase. Tokens are reset to their original values after install completes. Disable if you want to manage tokens manually.",
+        "type": "boolean",
+        "default": true
+      },
+      "restore": {
+        "type": "boolean",
+        "description": "Whether to run package restoration using renvvv::renvvv_restore(). Default is true.",
+        "default": true
+      },
+      "update": {
+        "type": "boolean",
+        "description": "Whether to run package update using renvvv::renvvv_update(). If both restore and update are true, renvvv::renvvv_restore_and_update() is used. Default is false.",
+        "default": false
+      },
+      "renvDir": {
+        "type": "string",
+        "description": "Path to the directory containing subdirectories with `renv.lock` files. Defaults to `/usr/local/share/renv-cache/renv` if the environment variable is not set.",
+        "default": "/usr/local/share/renv-cache/renv"
+      },
+      "pkgExclude": {
+        "type": "string",
+        "description": "Comma-separated list of packages to exclude from the renv snapshot restore process.",
+        "default": ""
+      },
+      "usePak": {
+        "type": "boolean",
+        "description": "Whether to use `pak` for package installation.",
+        "default": false
+      },
+      "debug": {
+        "type": "boolean",
+        "description": "Whether to print debug information during package restore.",
+        "default": false
+      },
+      "debugRenv": {
+        "type": "boolean",
+        "description": "Whether to print debug information during renv restore.",
+        "default": false
+      }
+    },
+    "category": "Data Project Features by Miguel Rodo",
+    "documentationURL": "https://github.com/MiguelRodo/DevContainerFeatures"
+  },
+  {
+    "id": "ghcr.io/miguelrodo/devcontainerfeatures/repos:2",
+    "name": "Automatically set up multi-repo projects",
+    "description": "Installs the 'repos' CLI tool to manage multiple Git repositories. Optionally runs 'repos setup' when the container starts to clone repositories defined in repos.list.",
+    "options": {
+      "runOnStart": {
+        "type": "boolean",
+        "default": false,
+        "description": "Automatically run 'repos setup' when the container starts."
+      }
+    },
+    "category": "Data Project Features by Miguel Rodo",
+    "documentationURL": "https://github.com/MiguelRodo/DevContainerFeatures"
+  },
+  {
+    "id": "ghcr.io/esimkowitz/devcontainer-features/claude-code-persistence:1",
+    "name": "Claude Code Persistence",
+    "description": "Persists Claude Code configuration (~/.claude/ and ~/.claude.json) across container rebuilds using Docker named volumes.",
+    "options": {
+      "persistClaudeDir": {
+        "type": "boolean",
+        "default": true,
+        "description": "Persist ~/.claude/ directory (history, projects, settings)"
+      },
+      "persistClaudeJson": {
+        "type": "boolean",
+        "default": false,
+        "description": "Persist ~/.claude.json file (auth/config)"
+      },
+      "sharedAcrossContainers": {
+        "type": "boolean",
+        "default": false,
+        "description": "When true, uses shared volume names across all devcontainers. When false, volumes are scoped per-container."
+      }
+    },
+    "category": "Evan's Devcontainer Features",
+    "documentationURL": "https://github.com/esimkowitz/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/esimkowitz/devcontainer-features/direnv:1",
+    "name": "direnv with dotenv support",
+    "description": "Installs direnv and configures shell hooks for bash, zsh, and fish. Enables load_dotenv by default so .env files are automatically loaded.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of direnv to install ('latest', 'system', or a specific version like '2.34.0')",
+        "proposals": [
+          "latest",
+          "system"
+        ]
+      }
+    },
+    "category": "Evan's Devcontainer Features",
+    "documentationURL": "https://github.com/esimkowitz/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/esimkowitz/devcontainer-features/fish-starship:1",
+    "name": "Fish Shell with Starship Prompt",
+    "description": "Installs Fish shell and Starship prompt with a clean devcontainer configuration. Persists shell history across container rebuilds.",
+    "options": {
+      "fishGreeting": {
+        "type": "string",
+        "default": "Glub glub! 🐟 🐠",
+        "description": "Custom Fish shell greeting message"
+      }
+    },
+    "category": "Evan's Devcontainer Features",
+    "documentationURL": "https://github.com/esimkowitz/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/esimkowitz/devcontainer-features/ssh-signing:1",
+    "name": "SSH Commit Signing",
+    "description": "Configures git to use SSH commit signing when an agent is available. Detects keys at container start.",
+    "options": {
+      "gitUserName": {
+        "type": "string",
+        "default": "",
+        "description": "Default git user.name (leave empty to skip)"
+      },
+      "gitUserEmail": {
+        "type": "string",
+        "default": "",
+        "description": "Default git user.email (leave empty to skip)"
+      },
+      "gitAliases": {
+        "type": "boolean",
+        "default": true,
+        "description": "Apply common git aliases and settings (st, co, br, pull.rebase, etc.)"
+      }
+    },
+    "category": "Evan's Devcontainer Features",
+    "documentationURL": "https://github.com/esimkowitz/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/iyaki/devcontainer-features/lefthook:2",
+    "name": "Lefthook",
+    "description": "Fast and powerful Git hooks manager for any type of projects.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Lefthook release version to install (for example: 2.1.3). Use 'latest' for the newest release."
+      }
+    },
+    "category": "Devcontainer features by iyaki",
+    "documentationURL": "https://github.com/iyaki/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/iyaki/devcontainer-features/opencode-ralph:1",
+    "name": "Ralph Agentic Loop runner for OpenCode",
+    "description": "[Dperecated] AI Agentic Loop shell runner aimed for spec-driven development workflows.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Release version to install. Use 'latest' or a release tag such as 'v2.0.0'."
+      },
+      "installDir": {
+        "type": "string",
+        "default": "/usr/local/bin",
+        "description": "Directory to install the ralph executable."
+      }
+    },
+    "category": "Devcontainer features by iyaki",
+    "documentationURL": "https://github.com/iyaki/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/iyaki/devcontainer-features/ralph:1",
+    "name": "Ralph Agentic Loop runner",
+    "description": "AI Agentic Loop shell runner aimed for spec-driven development workflows.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Release version to install. Use 'latest' or a release tag such as 'v2.0.0'."
+      }
+    },
+    "category": "Devcontainer features by iyaki",
+    "documentationURL": "https://github.com/iyaki/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/riccardobravin/devcontainer-features/zensical:0",
+    "name": "Zensical (via pipx)",
+    "description": "Zensical is a fresh take on what we envision a modern Open Source toolchain to build static sites should look like.",
+    "options": {
+      "version": {
+        "default": "latest",
+        "description": "Select the version to install.",
+        "proposals": [
+          "latest"
+        ],
+        "type": "string"
+      }
+    },
+    "category": "Dev Container Features (Riccardo Bravin)",
+    "documentationURL": "https://github.com/RiccardoBravin/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/mike-fi/devcontainer-features/databricks-cli:1",
+    "name": "Databricks CLI",
+    "description": "Installing a specific version of databricks-cli into the container",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "v0.294.0"
+        ],
+        "default": "main",
+        "description": "Databricks CLI version to install. Use \"main\" to resolve the latest GitHub release."
+      }
+    },
+    "category": "databricks-tooling",
+    "documentationURL": "https://github.com/mike-fi/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/wcgomes/devcontainer-features/the-agency:0",
+    "name": "The Agency",
+    "description": "A complete AI agency at your fingertips - From frontend wizards to Reddit community ninjas, from whimsy injectors to reality checkers. Each agent is a specialized expert with personality, processes, and proven deliverables. Credits: https://github.com/msitarzewski/agency-agents.",
+    "options": {
+      "tool": {
+        "type": "string",
+        "default": "auto",
+        "description": "Tool name passed to ./scripts/install.sh --tool <tool>. Use 'auto' for --parallel auto-detection."
+      },
+      "use-agent-zero": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, includes Canonical Agent Guide section in AGENTS.md and syncs AGENT-ZERO.md to ~/.the-agency/AGENT-ZERO.md. AGENT_ROUTING.md is synced to ~/.the-agency/AGENT_ROUTING.md."
+      }
+    },
+    "category": "wcgomes",
+    "documentationURL": "https://github.com/wcgomes/devcontainer-features?tab=readme-ov-file#feature-the-agency"
   }
 ]
