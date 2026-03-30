@@ -10,6 +10,7 @@ export function useEditorActions(
 ) {
   const copyStatus = ref<"idle" | "copied">("idle");
   const shareStatus = ref<"idle" | "copied">("idle");
+  const oneLinerStatus = ref<"idle" | "copied">("idle");
   const showIndentMenu = ref(false);
 
   async function copyToClipboard() {
@@ -22,6 +23,31 @@ export function useEditorActions(
       }, 2000);
     } catch (err) {
       console.error("Failed to copy!", err);
+    }
+  }
+
+  async function copyOneLiner() {
+    try {
+      const files = allFiles.value;
+      const fileNames = Object.keys(files);
+
+      let command = "mkdir -pv .devcontainer";
+
+      const fileCommands = fileNames.map((name) => {
+        const content = files[name].content;
+        // Use a quoted heredoc (<< 'EOF') to prevent shell expansion
+        return `cat << 'EOF' > .devcontainer/${name}\n${content}\nEOF`;
+      });
+
+      command = `${command}\n\n${fileCommands.join("\n\n")}`;
+
+      await navigator.clipboard.writeText(command);
+      oneLinerStatus.value = "copied";
+      setTimeout(() => {
+        oneLinerStatus.value = "idle";
+      }, 2000);
+    } catch (err) {
+      console.error("Failed to copy one-liner!", err);
     }
   }
 
@@ -80,8 +106,10 @@ export function useEditorActions(
   return {
     copyStatus,
     shareStatus,
+    oneLinerStatus,
     showIndentMenu,
     copyToClipboard,
+    copyOneLiner,
     copyShareLink,
     downloadConfig,
     reset,
