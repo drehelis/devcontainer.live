@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { ref, onMounted, onUnmounted } from "vue";
 import { useResponsive } from "../../composables/useResponsive";
 import { URLS } from "../../constants/urls";
 
 defineProps<{
   copyStatus: "idle" | "copied";
   shareStatus: "idle" | "copied";
+  oneLinerStatus: "idle" | "copied";
   files: string[];
   activeFile: string;
 }>();
@@ -12,12 +14,29 @@ defineProps<{
 const emit = defineEmits<{
   (e: "copy"): void;
   (e: "share"): void;
+  (e: "one-liner"): void;
   (e: "download"): void;
   (e: "reset"): void;
   (e: "update:activeFile", file: string): void;
 }>();
 
 const { isMobile } = useResponsive();
+const showCopyMenu = ref(false);
+
+function handleClickOutside(e: MouseEvent) {
+  const target = e.target as HTMLElement;
+  if (showCopyMenu.value && !target.closest(".copy-dropdown-container")) {
+    showCopyMenu.value = false;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener("click", handleClickOutside);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("click", handleClickOutside);
+});
 </script>
 
 <template>
@@ -89,46 +108,145 @@ const { isMobile } = useResponsive();
       </div>
     </div>
 
-    <div class="flex items-center gap-1 sm:gap-2 px-2 sm:px-4">
-      <button
-        @click="$emit('copy')"
-        class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright group"
-        :title="copyStatus === 'copied' ? 'Copied' : 'Copy JSON'"
-      >
-        <svg
-          v-if="copyStatus === 'idle'"
-          class="w-4 h-4 lg:w-3.5 lg:h-3.5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+    <div class="flex items-center gap-1 sm:gap-2 px-2 sm:px-4 relative">
+      <!-- Copy Dropdown -->
+      <div class="relative copy-dropdown-container">
+        <button
+          @click="showCopyMenu = !showCopyMenu"
+          class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright group"
+          :class="{ 'bg-ide-accent/10 text-ide-text-bright': showCopyMenu }"
+          title="Copy Options"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-3 8h3m-3 4h3"
-          />
-        </svg>
-        <svg
-          v-else
-          class="w-4 h-4 lg:w-3.5 lg:h-3.5 text-ide-green"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+          <svg
+            class="w-4 h-4 lg:w-3.5 lg:h-3.5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-3 8h3m-3 4h3"
+            />
+          </svg>
+          <span
+            v-if="!isMobile"
+            class="text-[10px] font-bold uppercase tracking-widest"
+            >Copy</span
+          >
+          <svg
+            class="w-2.5 h-2.5 opacity-50 transition-transform duration-200"
+            :class="{ 'rotate-180': showCopyMenu }"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+
+        <!-- Dropdown Menu -->
+        <div
+          v-if="showCopyMenu"
+          class="absolute top-full right-0 mt-2 w-48 bg-ide-sidebar border border-ide-border rounded-lg shadow-2xl z-50 overflow-hidden py-1 animate-in fade-in slide-in-from-top-1 duration-200"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="3"
-            d="M5 13l4 4L19 7"
-          />
-        </svg>
-        <span
-          v-if="!isMobile"
-          class="text-[10px] font-bold uppercase tracking-widest"
-          >{{ copyStatus === "copied" ? "Copied" : "Copy" }}</span
-        >
-      </button>
+          <button
+            @click="$emit('copy')"
+            class="w-full flex items-center relative px-3 py-2 hover:bg-ide-accent/10 transition-colors group text-left"
+          >
+            <div class="flex items-center gap-2 flex-1 min-w-0 pr-6">
+              <svg
+                class="w-3.5 h-3.5 text-ide-text-muted group-hover:text-ide-accent transition-colors shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              <div class="flex flex-col min-w-0">
+                <span
+                  class="text-[10px] font-bold uppercase tracking-tight text-ide-text-bright truncate"
+                  >Copy to Clipboard</span
+                >
+                <span class="text-[9px] text-ide-text-muted truncate"
+                  >Clipboard active file</span
+                >
+              </div>
+            </div>
+            <svg
+              v-if="copyStatus === 'copied'"
+              class="w-3.5 h-3.5 text-ide-green absolute right-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="3"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </button>
+
+          <div class="h-px bg-ide-border mx-2 my-1"></div>
+
+          <button
+            @click="$emit('one-liner')"
+            class="w-full flex items-center relative px-3 py-2 hover:bg-ide-accent/10 transition-colors group text-left"
+          >
+            <div class="flex items-center gap-2 flex-1 min-w-0 pr-6">
+              <svg
+                class="w-3.5 h-3.5 text-ide-text-muted group-hover:text-ide-accent transition-colors shrink-0"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <div class="flex flex-col min-w-0">
+                <span
+                  class="text-[10px] font-bold uppercase tracking-tight text-ide-text-bright truncate"
+                  >Copy Scaffolding</span
+                >
+                <span class="text-[9px] text-ide-text-muted truncate"
+                  >Bash one-liner command</span
+                >
+              </div>
+            </div>
+            <svg
+              v-if="oneLinerStatus === 'copied'"
+              class="w-3.5 h-3.5 text-ide-green absolute right-3"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="3"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
 
       <button
         @click="$emit('share')"

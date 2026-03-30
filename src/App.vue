@@ -39,8 +39,10 @@ const { sidebarWidth, startResizing } = useSidebarResize();
 const {
   copyStatus,
   shareStatus,
+  oneLinerStatus,
   showIndentMenu,
   copyToClipboard,
+  copyOneLiner,
   copyShareLink,
   downloadConfig,
 } = useEditorActions(allFiles, activeFile, reset, getShareUrl);
@@ -152,6 +154,13 @@ onMounted(() => {
       action: copyShareLink,
     },
     {
+      id: "action:one-liner",
+      label: "Copy One-liner",
+      description: "Copy a shell command to scaffold .devcontainer files",
+      category: "Actions",
+      action: copyOneLiner,
+    },
+    {
       id: "action:download",
       label: "Download Config",
       description: "Download devcontainer.json (or ZIP for multi-file)",
@@ -247,8 +256,10 @@ function handleCursorUpdate(pos: { line: number; col: number }) {
           v-model:active-file="activeFile"
           :copy-status="copyStatus"
           :share-status="shareStatus"
+          :one-liner-status="oneLinerStatus"
           @copy="copyToClipboard"
           @share="copyShareLink"
+          @one-liner="copyOneLiner"
           @download="downloadConfig"
           @reset="reset"
         />
