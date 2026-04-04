@@ -21,6 +21,7 @@ export const URLS = {
 
   // External
   SIMPLE_ICONS_BASE: "https://cdn.simpleicons.org",
+  BUY_ME_A_COFFEE: "https://www.buymeacoffee.com/drehelis",
 };
 
 export const BASE_URL = import.meta.env.BASE_URL;
