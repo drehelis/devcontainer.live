@@ -95,7 +95,7 @@
   --theme-text: #586e75;
   --theme-text-muted: #657b83;
   --theme-text-bright: #073642;
-  --bmc-color: #cb4b16; /* Same as theme-orange for high contrast on light bg */
+  --bmc-color: #cb4b16;
 }
 
 @layer base {
