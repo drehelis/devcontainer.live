@@ -43,7 +43,7 @@
 
   --mobile-nav-h: 4.5rem;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --bmc-color: #FFDD00;
+  --bmc-color: #ffdd00;
 }
 
 .theme-dracula {

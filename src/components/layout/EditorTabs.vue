@@ -343,7 +343,7 @@ onUnmounted(() => {
       </button>
 
       <div v-if="isMobile" class="w-px h-3 bg-ide-border mx-1"></div>
- 
+
       <a
         v-if="isMobile"
         :href="URLS.REPO_URL"
