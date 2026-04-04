@@ -2,6 +2,16 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { useResponsive } from "../../composables/useResponsive";
 import { URLS } from "../../constants/urls";
+import IconFile from "../ui/icons/IconFile.vue";
+import IconChevronRight from "../ui/icons/IconChevronRight.vue";
+import IconChevronDown from "../ui/icons/IconChevronDown.vue";
+import IconCopy from "../ui/icons/IconCopy.vue";
+import IconTerminal from "../ui/icons/IconTerminal.vue";
+import IconCheck from "../ui/icons/IconCheck.vue";
+import IconShare from "../ui/icons/IconShare.vue";
+import IconDownload from "../ui/icons/IconDownload.vue";
+import IconTrash from "../ui/icons/IconTrash.vue";
+import IconGithub from "../ui/icons/IconGithub.vue";
 
 defineProps<{
   copyStatus: "idle" | "copied";
@@ -63,21 +73,12 @@ onUnmounted(() => {
           @click="$emit('update:activeFile', file)"
         >
           <!-- Generic Document Icon for Desktop -->
-          <svg
+          <IconFile
             v-if="!isMobile"
-            class="w-3.5 h-3.5"
+            size="14"
             :class="activeFile === file ? 'opacity-80' : 'opacity-30'"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-            />
-          </svg>
+            stroke-width="2"
+          />
           <span>{{ file }}</span>
         </div>
       </div>
@@ -91,19 +92,7 @@ onUnmounted(() => {
         <div
           class="h-full flex items-center justify-end pr-1 text-ide-accent/40 lg:hidden"
         >
-          <svg
-            class="w-2.5 h-2.5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="4"
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
+          <IconChevronRight size="10" stroke-width="4" />
         </div>
       </div>
     </div>
@@ -117,38 +106,18 @@ onUnmounted(() => {
           :class="{ 'bg-ide-accent/10 text-ide-text-bright': showCopyMenu }"
           title="Copy Options"
         >
-          <svg
-            class="w-4 h-4 lg:w-3.5 lg:h-3.5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m-3 8h3m-3 4h3"
-            />
-          </svg>
+          <IconCopy class="w-4 h-4 lg:w-3.5 lg:h-3.5" stroke-width="2" />
           <span
             v-if="!isMobile"
             class="text-[10px] font-bold uppercase tracking-widest"
             >Copy</span
           >
-          <svg
-            class="w-2.5 h-2.5 opacity-50 transition-transform duration-200"
+          <IconChevronDown
+            size="10"
+            stroke-width="3"
+            class="opacity-50 transition-transform duration-200"
             :class="{ 'rotate-180': showCopyMenu }"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="3"
-              d="M19 9l-7 7-7-7"
-            />
-          </svg>
+          />
         </button>
 
         <!-- Dropdown Menu -->
@@ -161,19 +130,11 @@ onUnmounted(() => {
             class="w-full flex items-center relative px-3 py-2 hover:bg-ide-accent/10 transition-colors group text-left"
           >
             <div class="flex items-center gap-2 flex-1 min-w-0 pr-6">
-              <svg
-                class="w-3.5 h-3.5 text-ide-text-muted group-hover:text-ide-accent transition-colors shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                />
-              </svg>
+              <IconFile
+                size="14"
+                class="text-ide-text-muted group-hover:text-ide-accent transition-colors shrink-0"
+                stroke-width="2"
+              />
               <div class="flex flex-col min-w-0">
                 <span
                   class="text-[10px] font-bold uppercase tracking-tight text-ide-text-bright truncate"
@@ -184,20 +145,12 @@ onUnmounted(() => {
                 >
               </div>
             </div>
-            <svg
+            <IconCheck
               v-if="copyStatus === 'copied'"
-              class="w-3.5 h-3.5 text-ide-green absolute right-3"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="3"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
+              size="14"
+              stroke-width="3"
+              class="text-ide-green absolute right-3"
+            />
           </button>
 
           <div class="h-px bg-ide-border mx-2 my-1"></div>
@@ -207,19 +160,11 @@ onUnmounted(() => {
             class="w-full flex items-center relative px-3 py-2 hover:bg-ide-accent/10 transition-colors group text-left"
           >
             <div class="flex items-center gap-2 flex-1 min-w-0 pr-6">
-              <svg
-                class="w-3.5 h-3.5 text-ide-text-muted group-hover:text-ide-accent transition-colors shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                />
-              </svg>
+              <IconTerminal
+                size="14"
+                stroke-width="2"
+                class="text-ide-text-muted group-hover:text-ide-accent transition-colors shrink-0"
+              />
               <div class="flex flex-col min-w-0">
                 <span
                   class="text-[10px] font-bold uppercase tracking-tight text-ide-text-bright truncate"
@@ -230,20 +175,12 @@ onUnmounted(() => {
                 >
               </div>
             </div>
-            <svg
+            <IconCheck
               v-if="oneLinerStatus === 'copied'"
-              class="w-3.5 h-3.5 text-ide-green absolute right-3"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="3"
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
+              size="14"
+              stroke-width="3"
+              class="text-ide-green absolute right-3"
+            />
           </button>
         </div>
       </div>
@@ -255,34 +192,16 @@ onUnmounted(() => {
           shareStatus === 'copied' ? 'Link Copied' : 'Share Configuration'
         "
       >
-        <svg
+        <IconShare
           v-if="shareStatus === 'idle'"
           class="w-4 h-4 lg:w-3.5 lg:h-3.5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"
-          />
-        </svg>
-        <svg
+          stroke-width="2"
+        />
+        <IconCheck
           v-else
           class="w-4 h-4 lg:w-3.5 lg:h-3.5 text-ide-green"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="3"
-            d="M5 13l4 4L19 7"
-          />
-        </svg>
+          stroke-width="3"
+        />
         <span
           v-if="!isMobile"
           class="text-[10px] font-bold uppercase tracking-widest"
@@ -295,19 +214,7 @@ onUnmounted(() => {
         class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text-bright"
         title="Download devcontainer.json"
       >
-        <svg
-          class="w-4 h-4 lg:w-3.5 lg:h-3.5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-          />
-        </svg>
+        <IconDownload class="w-4 h-4 lg:w-3.5 lg:h-3.5" stroke-width="2" />
         <span
           v-if="!isMobile"
           class="text-[10px] font-bold uppercase tracking-widest"
@@ -322,19 +229,7 @@ onUnmounted(() => {
         class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-red/10 transition-colors text-ide-red/80 hover:text-ide-red group"
         title="Reset to Template"
       >
-        <svg
-          class="w-4 h-4 lg:w-3.5 lg:h-3.5"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-          />
-        </svg>
+        <IconTrash class="w-4 h-4 lg:w-3.5 lg:h-3.5" stroke-width="2" />
         <span
           v-if="!isMobile"
           class="text-[10px] font-bold uppercase tracking-widest"
@@ -352,15 +247,7 @@ onUnmounted(() => {
         class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-ide-accent/10 transition-colors text-ide-text-muted hover:text-ide-text group"
         title="View Source on GitHub"
       >
-        <svg
-          class="w-4 h-4 lg:w-3.5 lg:h-3.5"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-11.999-12-11.999z"
-          />
-        </svg>
+        <IconGithub size="14" />
       </a>
     </div>
   </div>

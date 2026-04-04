@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, watch, useTemplateRef, nextTick } from "vue";
 import { useCommandPalette } from "../../composables/useCommandPalette";
+import IconSearch from "../ui/icons/IconSearch.vue";
+import IconFrown from "../ui/icons/IconFrown.vue";
 
 const {
   isOpen,
@@ -114,19 +116,7 @@ const groupedCommands = computed(() => {
             class="flex items-center gap-3 px-4 border-b border-ide-border bg-ide-sidebar"
           >
             <!-- Search Icon -->
-            <svg
-              class="w-4 h-4 text-ide-text-muted shrink-0"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+            <IconSearch class="w-4 h-4 text-ide-text-muted shrink-0" />
 
             <input
               ref="input"
@@ -206,24 +196,11 @@ const groupedCommands = computed(() => {
               </template>
             </template>
 
-            <!-- Empty state -->
             <div
               v-else
               class="flex flex-col items-center justify-center py-12 text-ide-text-muted"
             >
-              <svg
-                class="w-8 h-8 mb-3 opacity-30"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="1.5"
-                  d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
+              <IconFrown class="w-8 h-8 mb-3 opacity-30" stroke-width="1.5" />
               <p class="text-[11px]">
                 No commands match <em>{{ query }}</em>
               </p>

@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import IconSliders from "../ui/icons/IconSliders.vue";
+import IconEye from "../ui/icons/IconEye.vue";
+
 defineProps<{
   activeView: "config" | "preview";
   version: string;
@@ -20,19 +23,7 @@ defineEmits<{
           : 'text-ide-text-muted/60'
       "
     >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-        />
-      </svg>
+      <IconSliders size="24" stroke-width="1.5" />
       <span class="text-[10px] font-black uppercase tracking-widest"
         >Config</span
       >
@@ -47,25 +38,7 @@ defineEmits<{
           : 'text-ide-text-muted/60'
       "
     >
-      <svg
-        class="w-6 h-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
-          d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-        />
-      </svg>
+      <IconEye size="24" stroke-width="1.5" />
       <span class="text-[10px] font-black uppercase tracking-widest"
         >Preview</span
       >
