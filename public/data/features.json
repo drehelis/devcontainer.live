@@ -19531,6 +19531,30 @@
     "documentationURL": "https://github.com/ChaosWars/vscode-features"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/add-script:1",
+    "name": "add-script",
+    "description": "Add a script from a URL or inline text to /usr/local/bin during devcontainer build",
+    "options": {
+      "name": {
+        "type": "string",
+        "default": "",
+        "description": "Name for the script placed in /usr/local/bin."
+      },
+      "url": {
+        "type": "string",
+        "default": "",
+        "description": "URL of a script to download."
+      },
+      "script": {
+        "type": "string",
+        "default": "",
+        "description": "Inline script text to add."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/add-script"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/alexpasmantier-television:1",
     "name": "alexpasmantier/television",
     "description": "Install \"tv\" (television) binary",
@@ -19748,6 +19772,20 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/bun.sh"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/ca-certificates:1",
+    "name": "ca-certificates",
+    "description": "Install \"ca-certificates\" and optionally add custom CA certificates from URLs",
+    "options": {
+      "urls": {
+        "type": "string",
+        "default": "",
+        "description": "Newline-separated list of URLs to download as additional CA certificates into /usr/local/share/ca-certificates."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/ca-certificates"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/ccache.dev:1",
@@ -20112,6 +20150,23 @@
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/getdnote.com"
   },
   {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/gitagent.sh:1",
+    "name": "gitagent.sh",
+    "description": "Install \"gitagent\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Version of \"gitagent\" to install."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/gitagent.sh"
+  },
+  {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/github.com-cli:1",
     "name": "github.com/cli",
     "description": "Install \"gh\" (GitHub CLI) binary",
@@ -20229,6 +20284,23 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/joelhooks-agent-secrets"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/jonas-tig:1",
+    "name": "jonas/tig",
+    "description": "Install \"tig\" binary",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "proposals": [
+          "latest"
+        ],
+        "description": "Currently unused. tig is installed via the system package manager."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/jonas-tig"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/jq:1",
@@ -20547,6 +20619,25 @@
     },
     "category": "Community features by devcontainer.community",
     "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/ripgrep"
+  },
+  {
+    "id": "ghcr.io/devcontainer-community/devcontainer-features/run-script:1",
+    "name": "run-script",
+    "description": "Run a script from a URL or inline text during devcontainer build",
+    "options": {
+      "url": {
+        "type": "string",
+        "default": "",
+        "description": "URL of a script to download and execute."
+      },
+      "script": {
+        "type": "string",
+        "default": "",
+        "description": "Inline script text to execute."
+      }
+    },
+    "category": "Community features by devcontainer.community",
+    "documentationURL": "https://github.com/devcontainer-community/devcontainer-features/tree/main/src/run-script"
   },
   {
     "id": "ghcr.io/devcontainer-community/devcontainer-features/schpet-linear-cli:1",
