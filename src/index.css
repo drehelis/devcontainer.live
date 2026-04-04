@@ -18,6 +18,7 @@
   --color-ide-text: var(--theme-text);
   --color-ide-text-muted: var(--theme-text-muted);
   --color-ide-text-bright: var(--theme-text-bright);
+  --color-ide-bmc: var(--bmc-color);
 
   --font-sans: "Geist", ui-sans-serif, system-ui;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular;
@@ -42,6 +43,7 @@
 
   --mobile-nav-h: 4.5rem;
   --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --bmc-color: #FFDD00;
 }
 
 .theme-dracula {
@@ -93,6 +95,7 @@
   --theme-text: #586e75;
   --theme-text-muted: #657b83;
   --theme-text-bright: #073642;
+  --bmc-color: #cb4b16; /* Same as theme-orange for high contrast on light bg */
 }
 
 @layer base {
