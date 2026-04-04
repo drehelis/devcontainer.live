@@ -3698,7 +3698,7 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "6.9.0"
+        "default": "6.10.0"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -3712,7 +3712,7 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "6.9.0"
+        "default": "6.10.0"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -3727,7 +3727,9 @@
         "type": "string",
         "description": "Python version:",
         "proposals": [
+          "3.14",
           "3.13",
+          "3.12",
           "latest"
         ],
         "default": "latest"
@@ -3851,6 +3853,15 @@
           "frankenphp"
         ],
         "default": "frankenphp"
+      },
+      "database": {
+        "type": "string",
+        "description": "Which database would you like to use in your development environment?",
+        "proposals": [
+          "sqlite",
+          "mysql"
+        ],
+        "default": "mysql"
       }
     },
     "category": "Templates by Thomas Hucke",
