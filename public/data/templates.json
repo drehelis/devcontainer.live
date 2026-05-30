@@ -255,6 +255,7 @@
         "type": "string",
         "description": ".NET version:",
         "proposals": [
+          "11.0-preview",
           "10.0",
           "9.0",
           "8.0",
@@ -263,6 +264,7 @@
           "10.0-noble",
           "9.0-noble",
           "8.0-noble",
+          "11.0-preview-resolute",
           "8.0-jammy"
         ],
         "default": "10.0-noble"
@@ -338,14 +340,12 @@
         "type": "string",
         "description": "Go version:",
         "proposals": [
-          "1-trixie",
-          "1.24-trixie",
+          "1.26-trixie",
           "1.25-trixie",
-          "1.25-bookworm",
-          "1.24-bookworm",
-          "1.24-bullseye"
+          "1.26-bookworm",
+          "1.25-bookworm"
         ],
-        "default": "1.25-trixie"
+        "default": "1.26-trixie"
       }
     },
     "category": "Reference Implementation Templates",
@@ -360,16 +360,12 @@
         "type": "string",
         "description": "Go version:",
         "proposals": [
-          "1-trixie",
+          "1.26-trixie",
           "1.25-trixie",
-          "1.24-trixie",
-          "1-bookworm",
-          "1.25-bookworm",
-          "1.24-bookworm",
-          "1-bullseye",
-          "1.24-bullseye"
+          "1.26-bookworm",
+          "1.25-bookworm"
         ],
-        "default": "1.25-trixie"
+        "default": "1.26-trixie"
       }
     },
     "category": "Reference Implementation Templates",
@@ -701,14 +697,11 @@
           "4-trixie",
           "3.4-trixie",
           "3.3-trixie",
-          "3.2-trixie",
           "4-bookworm",
           "3.4-bookworm",
           "3.3-bookworm",
-          "3.2-bookworm",
           "3.4-bullseye",
-          "3.3-bullseye",
-          "3.2-bullseye"
+          "3.3-bullseye"
         ],
         "default": "4-trixie"
       }
@@ -728,14 +721,11 @@
           "4-trixie",
           "3.4-trixie",
           "3.3-trixie",
-          "3.2-trixie",
           "4-bookworm",
           "3.4-bookworm",
           "3.3-bookworm",
-          "3.2-bookworm",
           "3.4-bullseye",
-          "3.3-bullseye",
-          "3.2-bullseye"
+          "3.3-bullseye"
         ],
         "default": "4-trixie"
       }
@@ -1187,6 +1177,7 @@
         "type": "string",
         "description": "Swift version:",
         "proposals": [
+          "6.3",
           "6.2",
           "6.1",
           "6.0",
@@ -1201,7 +1192,7 @@
           "5.2",
           "5.1"
         ],
-        "default": "6.2"
+        "default": "6.3"
       }
     },
     "category": "Swift Container Templates",
@@ -2035,11 +2026,11 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.10.0",
+          "4.9.0",
           "4.8.0",
           "4.7.0",
-          "4.6.0",
-          "4.5.0",
-          "4.4.1"
+          "4.6.0"
         ],
         "default": "latest"
       }
@@ -2069,11 +2060,11 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.10.0",
+          "4.9.0",
           "4.8.0",
           "4.7.0",
-          "4.6.0",
-          "4.5.0",
-          "4.4.1"
+          "4.6.0"
         ],
         "default": "latest"
       }
@@ -2101,11 +2092,11 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.10.0",
+          "4.9.0",
           "4.8.0",
           "4.7.0",
-          "4.6.0",
-          "4.5.0",
-          "4.4.1"
+          "4.6.0"
         ],
         "default": "latest"
       }
@@ -2122,6 +2113,7 @@
         "type": "string",
         "description": "PowerShell version:",
         "proposals": [
+          "7.6",
           "7.4"
         ],
         "default": "7.4"
@@ -2131,11 +2123,11 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.10.0",
+          "4.9.0",
           "4.8.0",
           "4.7.0",
-          "4.6.0",
-          "4.5.0",
-          "4.4.1"
+          "4.6.0"
         ],
         "default": "latest"
       }
@@ -2165,11 +2157,11 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.10.0",
+          "4.9.0",
           "4.8.0",
           "4.7.0",
-          "4.6.0",
-          "4.5.0",
-          "4.4.1"
+          "4.6.0"
         ],
         "default": "latest"
       }
@@ -3299,9 +3291,10 @@
           "0.14.0",
           "0.14.1",
           "0.15.1",
-          "0.15.2"
+          "0.15.2",
+          "0.16.0"
         ],
-        "default": "0.15.2"
+        "default": "0.16.0"
       }
     },
     "category": "Ziglang devcontainer Template",
@@ -3698,7 +3691,7 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "6.10.0"
+        "default": "6.10.3"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -3712,7 +3705,7 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "6.10.0"
+        "default": "6.10.3"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -3838,7 +3831,7 @@
       "phpVersion": {
         "type": "string",
         "description": "Select the PHP version to use in the development container. You may choose PHP version from 8.2 to 8.5.",
-        "proposals": [
+        "enum": [
           "8.2",
           "8.3",
           "8.4",
@@ -3848,23 +3841,94 @@
       },
       "webserver": {
         "type": "string",
-        "description": "Which webserver do you prefer? Currently only FrankenPHP is supported, but more options will be added in the future.",
-        "proposals": [
-          "frankenphp"
+        "description": "Which webserver do you prefer? Choose between Apache, FrankenPHP or Nginx.",
+        "enum": [
+          "apache",
+          "frankenphp",
+          "nginx"
         ],
         "default": "frankenphp"
       },
       "database": {
         "type": "string",
-        "description": "Which database would you like to use in your development environment?",
-        "proposals": [
+        "description": "Which database would you like to use in your development environment? You can choose between SQLite, MySQL, MariaDB and PostgreSQL.",
+        "enum": [
           "sqlite",
-          "mysql"
+          "mysql",
+          "mariadb",
+          "postgresql"
         ],
         "default": "mysql"
       }
     },
     "category": "Templates by Thomas Hucke",
     "documentationURL": "https://github.com/thucke/devcontainer-templates/tree/main/src/typo3"
+  },
+  {
+    "id": "ghcr.io/althack/devcontainers/gz",
+    "name": "Gazebo",
+    "description": "Gazebo development environment.",
+    "options": {
+      "distro": {
+        "type": "string",
+        "description": "Gazebo distribution to use.",
+        "proposals": [
+          "jetty",
+          "ionic",
+          "harmonic"
+        ],
+        "default": "jetty"
+      },
+      "imageVariant": {
+        "type": "string",
+        "description": "Container image variant to use for this Gazebo distro.",
+        "proposals": [
+          "base",
+          "dev"
+        ],
+        "default": "base"
+      }
+    },
+    "category": "althack",
+    "documentationURL": "https://github.com/athackst/devcontainer-templates/tree/main/templates/src/gz"
+  },
+  {
+    "id": "ghcr.io/doughatcher/devcontainer-templates/magento",
+    "name": "Magento Open Source",
+    "description": "Magento 2 (Open Source / Community Edition) development environment with PHP-FPM, MariaDB, Redis, RabbitMQ, OpenSearch, MailHog, and an optional Nginx sidecar. Auto-installs Magento on first start.",
+    "options": {
+      "phpVersion": {
+        "type": "string",
+        "description": "PHP version. Must align with the Magento version you intend to install.",
+        "default": "8.4",
+        "proposals": [
+          "8.1",
+          "8.2",
+          "8.3",
+          "8.4"
+        ]
+      },
+      "composerVersion": {
+        "type": "string",
+        "description": "Composer version to install. Use 'latest-stable' for the most recent 2.x.",
+        "default": "latest-stable",
+        "proposals": [
+          "latest-stable",
+          "2.6.0",
+          "2.7.0",
+          "2.8.0"
+        ]
+      },
+      "commerceEdition": {
+        "type": "string",
+        "description": "Composer project to bootstrap when no composer.json is present in the workspace.",
+        "default": "magento/project-community-edition",
+        "proposals": [
+          "magento/project-community-edition"
+        ]
+      }
+    },
+    "category": "Magento Open Source Dev Container Templates",
+    "documentationURL": "https://github.com/doughatcher/magento/tree/main/.template"
   }
 ]
