@@ -803,12 +803,13 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Ubuntu version (use ubuntu-22.04 or ubuntu-24.04 on local arm64/Apple Silicon):",
+        "description": "Ubuntu version (use ubuntu-26.04 or ubuntu-24.04 or ubuntu-22.04 on local arm64/Apple Silicon):",
         "proposals": [
+          "resolute",
           "noble",
           "jammy"
         ],
-        "default": "noble"
+        "default": "resolute"
       }
     },
     "category": "Reference Implementation Templates",
@@ -2026,11 +2027,10 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.12.0",
+          "4.11.0",
           "4.10.0",
-          "4.9.0",
-          "4.8.0",
-          "4.7.0",
-          "4.6.0"
+          "4.9.0"
         ],
         "default": "latest"
       }
@@ -2060,11 +2060,10 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.12.0",
+          "4.11.0",
           "4.10.0",
-          "4.9.0",
-          "4.8.0",
-          "4.7.0",
-          "4.6.0"
+          "4.9.0"
         ],
         "default": "latest"
       }
@@ -2092,11 +2091,10 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.12.0",
+          "4.11.0",
           "4.10.0",
-          "4.9.0",
-          "4.8.0",
-          "4.7.0",
-          "4.6.0"
+          "4.9.0"
         ],
         "default": "latest"
       }
@@ -2123,11 +2121,10 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.12.0",
+          "4.11.0",
           "4.10.0",
-          "4.9.0",
-          "4.8.0",
-          "4.7.0",
-          "4.6.0"
+          "4.9.0"
         ],
         "default": "latest"
       }
@@ -2157,11 +2154,10 @@
         "description": "Azure Functions CLI version:",
         "proposals": [
           "latest",
+          "4.12.0",
+          "4.11.0",
           "4.10.0",
-          "4.9.0",
-          "4.8.0",
-          "4.7.0",
-          "4.6.0"
+          "4.9.0"
         ],
         "default": "latest"
       }
@@ -3691,7 +3687,7 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "6.10.3"
+        "default": "7.2.0"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -3705,11 +3701,27 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "6.10.3"
+        "default": "7.2.0"
       }
     },
     "category": "Philips Software Dev Container Templates",
     "documentationURL": "https://github.com/philips-software/amp-devcontainer/blob/main/README.md"
+  },
+  {
+    "id": "ghcr.io/tjarbo/pretalx-devcontainer/pretalx",
+    "name": "Pretalx",
+    "description": "A devcontainer for developing on pretalx (Open Source Software).",
+    "options": null,
+    "category": "pretalx Dev Container Templates",
+    "documentationURL": "https://github.com/tjarbo/pretalx-devcontainer"
+  },
+  {
+    "id": "ghcr.io/tjarbo/pretalx-devcontainer/pretalx-plugin",
+    "name": "Pretalx Plugin",
+    "description": "A devcontainer for developing pretalx plugins.",
+    "options": null,
+    "category": "pretalx Dev Container Templates",
+    "documentationURL": "https://github.com/tjarbo/pretalx-devcontainer"
   },
   {
     "id": "ghcr.io/metinsenturk/devcontainer-templates/python",
