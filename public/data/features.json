@@ -275,11 +275,12 @@
         "type": "string",
         "enum": [
           "none",
+          "latest",
           "v1",
           "v2"
         ],
-        "default": "v2",
-        "description": "Default version of Docker Compose (v1, v2 or none)"
+        "default": "latest",
+        "description": "Default version of Docker Compose (v1, v2, latest or none)"
       },
       "azureDnsAutoDetection": {
         "type": "boolean",
@@ -910,8 +911,8 @@
         "proposals": [
           "latest",
           "8",
-          "8.2",
-          "8.2.0",
+          "8.5",
+          "8.5.0",
           "none"
         ],
         "default": "latest",
@@ -7227,10 +7228,10 @@
     "options": {
       "version": {
         "type": "string",
-        "default": "2.10.0",
+        "default": "2.10.1",
         "description": "Version of composer to install",
         "proposals": [
-          "2.10.0",
+          "2.10.1",
           "2.9.8",
           "2.8.12",
           "2.7.9",
@@ -7362,10 +7363,10 @@
     "options": {
       "version": {
         "type": "string",
-        "default": "3.5.1",
+        "default": "3.5.3",
         "description": "Version of xdebug to install",
         "proposals": [
-          "3.5.1",
+          "3.5.3",
           "3.4.7",
           "3.3.2",
           "3.2.2",
@@ -21491,12 +21492,12 @@
   {
     "id": "ghcr.io/thediveo/devcontainer-features/bpftool:0",
     "name": "bpftool",
-    "description": "Installs bpftool from upstream https://github.com/libbpf/bpftool binary releases.",
+    "description": "Installs bpftool binary from upstream https://github.com/libbpf/bpftool binary releases.",
     "options": {
       "version": {
         "type": "string",
         "default": "latest",
-        "description": "version of bpftool to install from upstream"
+        "description": "version of bpftool binary to install from upstream"
       }
     },
     "category": "devcontainer features by TheDiveO",
@@ -21555,7 +21556,21 @@
     "documentationURL": "https://github.com/thediveo/devcontainer-features"
   },
   {
-    "id": "ghcr.io/thediveo/devcontainer-features/go-ebpf:0",
+    "id": "ghcr.io/thediveo/devcontainer-features/gcx:0",
+    "name": "gcx",
+    "description": "Installs Grafana gcx CLI from upstream https://github.com/grafana/gcx binary releases.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "version of gcx to install from upstream"
+      }
+    },
+    "category": "devcontainer features by TheDiveO",
+    "documentationURL": "https://github.com/thediveo/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/thediveo/devcontainer-features/go-ebpf:1",
     "name": "Go ebpf development",
     "description": "Installs clang and llvm, and on top Cilium's bpf2go.",
     "options": {
@@ -21569,17 +21584,23 @@
     "documentationURL": "https://github.com/thediveo/devcontainer-features"
   },
   {
-    "id": "ghcr.io/thediveo/devcontainer-features/go-mod-upgrade:0",
+    "id": "ghcr.io/thediveo/devcontainer-features/go-mod-upgrade:1",
     "name": "go-mod-upgrade",
     "description": "upgrade outdated Go dependencies interactively.",
-    "options": null,
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "version of go-mod-upgrade to install"
+      }
+    },
     "category": "devcontainer features by TheDiveO",
     "documentationURL": "https://github.com/thediveo/devcontainer-features"
   },
   {
-    "id": "ghcr.io/thediveo/devcontainer-features/gocover:0",
+    "id": "ghcr.io/thediveo/devcontainer-features/gocover:1",
     "name": "Go Coverage with Badge",
-    "description": "runs Go unit tests with coverages, updating the README.md with a coverage badge.",
+    "description": "a gocover command to run Go unit tests with coverages, updating the README.md with a coverage badge.",
     "options": {
       "root": {
         "type": "boolean",
@@ -21636,7 +21657,7 @@
     "documentationURL": "https://github.com/thediveo/devcontainer-features"
   },
   {
-    "id": "ghcr.io/thediveo/devcontainer-features/goreportcard:0",
+    "id": "ghcr.io/thediveo/devcontainer-features/goreportcard:1",
     "name": "Go Report Card",
     "description": "provides goreportcard-cli.",
     "options": null,
@@ -21672,7 +21693,7 @@
     "documentationURL": "https://github.com/thediveo/devcontainer-features"
   },
   {
-    "id": "ghcr.io/thediveo/devcontainer-features/local-pkgsite:0",
+    "id": "ghcr.io/thediveo/devcontainer-features/local-pkgsite:1",
     "name": "Local Go Pkgsite",
     "description": "A local Go pkgsite serving the module documentation, with automatic browser refresh.",
     "options": {
@@ -21742,7 +21763,21 @@
     "documentationURL": "https://github.com/thediveo/devcontainer-features"
   },
   {
-    "id": "ghcr.io/thediveo/devcontainer-features/pull-through-cache-registry:0",
+    "id": "ghcr.io/thediveo/devcontainer-features/pinact:0",
+    "name": "pinact",
+    "description": "Installs pinact from upstream https://github.com/suzuki-shunsuke/pinact binary releases.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "version of pinact to install from upstream"
+      }
+    },
+    "category": "devcontainer features by TheDiveO",
+    "documentationURL": "https://github.com/thediveo/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/thediveo/devcontainer-features/pull-through-cache-registry:1",
     "name": "OCI registry pull-through cache to mirror rate-limited upstream registries, such as Docker Hub",
     "description": "Deploys a devcontainer-local CNCF Distribution Registry configured as a pull-through cache for the local docker-in-docker",
     "options": {
@@ -24306,6 +24341,20 @@
     "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/auto-header"
   },
   {
+    "id": "ghcr.io/helpers4/devcontainer/claude-dev:1",
+    "name": "Claude Code Development Environment",
+    "description": "Installs the Claude Code IDE extension (anthropic.claude-code) for VS Code and Cursor. Mounts ~/.claude from the host via a directory symlink — credentials and config persist across all rebuilds.",
+    "options": {
+      "username": {
+        "type": "string",
+        "default": "node",
+        "description": "Username in the container that should receive the Claude credentials symlink."
+      }
+    },
+    "category": "helpers4 Dev Container Features",
+    "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/claude-dev"
+  },
+  {
     "id": "ghcr.io/helpers4/devcontainer/dotfiles-sync:1",
     "name": "Dotfiles Sync",
     "description": "Syncs local Git, SSH, GPG, npm, yarn config files into the devcontainer. Optionally syncs cloud credentials (AWS, kube, Docker) — opt-in only. Works on macOS, Linux, Windows (WSL), Codespaces, Gitpod, DevPod. Merges instead of overwriting.",
@@ -24369,6 +24418,14 @@
     },
     "category": "helpers4 Dev Container Features",
     "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/github-dev"
+  },
+  {
+    "id": "ghcr.io/helpers4/devcontainer/helpers4-common:1",
+    "name": "helpers4 Common Library",
+    "description": "Minimal bootstrap for helpers4 features: installs the shared /usr/local/share/helpers4/common.sh library (user detection, home resolution, apt helpers via h4_ensure_packages). Features that need specific packages install them via h4_ensure_packages.",
+    "options": null,
+    "category": "helpers4 Dev Container Features",
+    "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/helpers4-common"
   },
   {
     "id": "ghcr.io/helpers4/devcontainer/package-auto-install:1",
@@ -24455,11 +24512,19 @@
     "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/peon-ping"
   },
   {
+    "id": "ghcr.io/helpers4/devcontainer/pnpm-store:1",
+    "name": "pnpm Store (shared)",
+    "description": "Shares a single pnpm content-addressable store across every repo and across rebuilds via a Docker named volume, so no stray .pnpm-store folders pollute your repos. Zero-config and autonomous: the volume is created automatically, with no host directory to pre-create.",
+    "options": null,
+    "category": "helpers4 Dev Container Features",
+    "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/pnpm-store"
+  },
+  {
     "id": "ghcr.io/helpers4/devcontainer/shell-history-per-project:1",
     "name": "Shell History Per Project",
     "description": "Persist shell history per project by automatically detecting and configuring all available shells (zsh, bash, fish). Supports auto-detection or manual shell selection.",
     "options": {
-      "shell": {
+      "targetShell": {
         "type": "string",
         "enum": [
           "auto",
@@ -25657,17 +25722,17 @@
   {
     "id": "ghcr.io/miguelrodo/devcontainerfeatures/build-info:1",
     "name": "Container Metadata Injector",
-    "description": "Bakes build-time release version and date metadata from GHA directly into a system-wide command.",
+    "description": "Bakes build-time release version and date metadata directly into a system-wide command.",
     "options": {
-      "version": {
+      "imageVersion": {
         "type": "string",
-        "default": "development",
-        "description": "The automated version number injected from the runner host environment."
+        "default": "",
+        "description": "The automated version number injected from the runner host environment. Valid formats include 1, v1.2, 1.2.3.4, v2.0-12."
       },
       "buildDate": {
         "type": "string",
-        "default": "unknown",
-        "description": "The build timestamp injected from the runner host environment."
+        "default": "",
+        "description": "If left empty, automatically sets to the current date and time formatted as an ISO 8601 UTC timestamp."
       }
     },
     "category": "Data Project Features by Miguel Rodo",
@@ -25774,15 +25839,20 @@
     "name": "renv cache",
     "description": "Configure R with renv cache",
     "options": {
-      "setRLibPaths": {
-        "type": "boolean",
-        "description": "Whether to set default paths for R libraries (including for `renv`) to avoid needing to reinstall upon codespace rebuild.",
-        "default": true
+      "repositories": {
+        "type": "string",
+        "description": "Comma-separated list of GitHub repos whose `renv.lock` files it will restore, e.g. `myUsername/repo1,myUsername/repo2`. By default, uses the `renv.lock` file at the root of the repository. Can specify branch (e.g., `myUsername/repo1@branch`), `renv` profile (e.g., `myUsername/repo1:renvProfile`) or both (e.g., `myUsername/repo1@branch:renvProfile`)",
+        "default": ""
       },
-      "overrideTokensAtInstall": {
-        "description": "If true, temporarily override GITHUB_TOKEN and set GITHUB_PAT from the best available token (priority: GITHUB_PAT > GH_TOKEN > GITHUB_TOKEN) during the renv package install phase. Tokens are reset to their original values after install completes. Disable if you want to manage tokens manually.",
-        "type": "boolean",
-        "default": true
+      "pkg": {
+        "type": "string",
+        "description": "Comma-separated list of specific packages to cache explicitly.",
+        "default": ""
+      },
+      "pkgExclude": {
+        "type": "string",
+        "description": "Comma-separated list of packages to exclude from the renv snapshot restore process.",
+        "default": ""
       },
       "restore": {
         "type": "boolean",
@@ -25794,40 +25864,50 @@
         "description": "Whether to run package update using renvvv::renvvv_update(). If both restore and update are true, renvvv::renvvv_restore_and_update() is used. Default is false.",
         "default": false
       },
-      "renvDir": {
+      "createUnifiedLockfile": {
         "type": "string",
-        "description": "Path to the directory containing subdirectories with `renv.lock` files. Defaults to `/usr/local/share/renv-cache/renv` if the environment variable is not set.",
-        "default": "/usr/local/share/renv-cache/renv"
+        "enum": [
+          "auto",
+          "true",
+          "false"
+        ],
+        "description": "Whether to create a single unified `renv.lock` file combining dependencies. 'auto' creates it only if multiple lockfiles or explicit packages are provided. 'true' always creates it. 'false' skips creation.",
+        "default": "auto"
       },
-      "pkgExclude": {
+      "purgePostUnification": {
         "type": "string",
-        "description": "Comma-separated list of packages to exclude from the renv snapshot restore process.",
-        "default": ""
+        "enum": [
+          "none",
+          "keep-one",
+          "keep-both"
+        ],
+        "description": "Determines which package versions to keep when purging the global cache to save disk space (if a unified lockfile is created). 'none' disables purging. 'keep-one' retains the update-based lockfile packages if `update` is true and the restore-based lockfile otherwise. 'keep-both' retains both. If no unified lockfile is create, this option is ignored.",
+        "default": "none"
+      },
+      "setRLibPaths": {
+        "type": "boolean",
+        "description": "Whether to set default paths for R libraries (including for `renv`) to avoid needing to reinstall upon codespace rebuild.",
+        "default": true
+      },
+      "overrideTokensAtInstall": {
+        "description": "If true, temporarily override GITHUB_TOKEN and set GITHUB_PAT from the best available token (priority: GITHUB_PAT > GH_TOKEN > GITHUB_TOKEN) during the renv package install phase. Tokens are reset to their original values after install completes. Disable if you want to manage tokens manually.",
+        "type": "boolean",
+        "default": true
+      },
+      "lockfileDir": {
+        "type": "string",
+        "description": "Path to the directory containing subdirectories with `renv.lock` files. Defaults to `/usr/local/share/renv-cache/lockfiles`.",
+        "default": "/usr/local/share/renv-cache/lockfiles"
       },
       "usePak": {
         "type": "boolean",
-        "description": "Whether to use `pak` for package installation.",
-        "default": false
-      },
-      "debug": {
-        "type": "boolean",
-        "description": "Whether to print debug information during package restore.",
+        "description": "Whether to use `pak` for package installation. For some reason, restoring from the `renv` cache has not worked when using `pak` to build the image, so this is not recommended.",
         "default": false
       },
       "debugRenv": {
         "type": "boolean",
-        "description": "Whether to print debug information during renv restore.",
+        "description": "Whether to use verbose renv output. Sets `RENV_CONFIG_INSTALL_VERBOSE` and `RENV_VERBOSE` to true when enabled.",
         "default": false
-      },
-      "repositories": {
-        "type": "string",
-        "description": "Comma-separated list of GitHub repos to clone. Must support branch and profile syntax: user/repo@branch:profile. If :profile is omitted, it defaults to the root renv.lock.",
-        "default": ""
-      },
-      "pkg": {
-        "type": "string",
-        "description": "Comma-separated list of specific packages to cache explicitly.",
-        "default": ""
       },
       "installSystemRequirements": {
         "type": "boolean",
@@ -25975,6 +26055,20 @@
     "documentationURL": "https://github.com/iyaki/devcontainer-features"
   },
   {
+    "id": "ghcr.io/iyaki/devcontainer-features/oh-my-pi:1",
+    "name": "Oh My Pi",
+    "description": "Oh My Pi AI coding agent toolkit for terminal-based development.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Release version to install. Use 'latest' or a release tag such as 'v15.11.2'."
+      }
+    },
+    "category": "Devcontainer features by iyaki",
+    "documentationURL": "https://github.com/iyaki/devcontainer-features"
+  },
+  {
     "id": "ghcr.io/iyaki/devcontainer-features/opencode-ralph:1",
     "name": "Ralph Agentic Loop runner for OpenCode",
     "description": "[Dperecated] AI Agentic Loop shell runner aimed for spec-driven development workflows.",
@@ -26055,6 +26149,11 @@
         "type": "boolean",
         "default": true,
         "description": "Check for updates on container start"
+      },
+      "divisions": {
+        "type": "string",
+        "default": "",
+        "description": "Comma-separated list of divisions to install (e.g., engineering,security). Leave empty to install all agents."
       }
     },
     "category": "wcgomes",
@@ -26074,6 +26173,11 @@
         "type": "boolean",
         "default": true,
         "description": "Install agency-agents (144+ specialized agents)"
+      },
+      "divisions": {
+        "type": "string",
+        "default": "",
+        "description": "Comma-separated list of divisions to install (e.g., engineering,security). Leave empty to install all agents."
       },
       "autoupdate": {
         "type": "boolean",
@@ -26264,6 +26368,30 @@
     "options": null,
     "category": "Dev Container features by sliekens",
     "documentationURL": "https://github.com/sliekens/devcontainer-features/blob/main/src/github-cli/README.md"
+  },
+  {
+    "id": "ghcr.io/sliekens/devcontainer-features/grok-build:1",
+    "name": "Grok Build",
+    "description": "Installs the xAI `grok` CLI (Grok Build) via the upstream installer and persists shared `~/.grok` state across devcontainers.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install. Use `latest` for the current channel release, or specify a version like `0.2.51`."
+      },
+      "channel": {
+        "type": "string",
+        "default": "stable",
+        "enum": [
+          "stable",
+          "alpha",
+          "enterprise"
+        ],
+        "description": "Release channel to install from when `version` is `latest`."
+      }
+    },
+    "category": "Dev Container features by sliekens",
+    "documentationURL": "https://github.com/sliekens/devcontainer-features/blob/main/src/grok-build/README.md"
   },
   {
     "id": "ghcr.io/sliekens/devcontainer-features/mistral-vibe:1",
@@ -27540,22 +27668,22 @@
     "documentationURL": "https://github.com/postfinance/devcontainer-features"
   },
   {
-    "id": "ghcr.io/nicoviii/devcontainer-features/lefthook:0",
-    "name": "Lefthook (via GitHub Releases)",
-    "description": "Fast and powerful Git hooks manager for any type of projects.",
+    "id": "ghcr.io/nicoviii/devcontainer-features/just:0",
+    "name": "Just (via GitHub Releases)",
+    "description": "just is a handy way to save and run project-specific commands.",
     "options": {
       "version": {
         "type": "string",
-        "description": "The version of Lefthook to install. Use 'latest' to install the latest version.",
+        "description": "The version of Just to install. Use 'latest' to install the latest version.",
         "proposals": [
           "latest",
-          "2.1.6"
+          "1.51.0"
         ],
         "default": "latest"
       }
     },
     "category": "Devcontainer Features by NicoVIII",
-    "documentationURL": "https://github.com/NicoVIII/devcontainer-features/tree/main/src/lefthook"
+    "documentationURL": "https://github.com/NicoVIII/devcontainer-features/tree/main/src/just"
   },
   {
     "id": "ghcr.io/soup-bowl/features/firefox-set:0",
@@ -27940,5 +28068,376 @@
     "options": {},
     "category": "Antigravity CLI feature by aqua",
     "documentationURL": "https://github.com/aqua/devcontainer-antigravity-cli"
+  },
+  {
+    "id": "ghcr.io/cjcrobin/devcontainer-features/qodercli:1",
+    "name": "Qoder CLI",
+    "description": "Installs the Qoder CLI globally (supports both Global and China editions)",
+    "options": {
+      "edition": {
+        "type": "string",
+        "proposals": [
+          "global",
+          "cn"
+        ],
+        "default": "global",
+        "description": "Qoder CLI edition to install. 'global' installs from qoder.com, 'cn' installs from qoder.com.cn."
+      }
+    },
+    "category": "Dev Container Feature by cjcrobin",
+    "documentationURL": "https://github.com/cjcrobin/devcontainer-features/tree/master/src/qodercli"
+  },
+  {
+    "id": "ghcr.io/aqua/devcontainer-gcloud/gcloud:1",
+    "name": "Google Cloud CLI",
+    "description": "Installs the Google Cloud CLI (gcloud) for managing Google Cloud resources or using local emulators & SDKs.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of gcloud to install (e.g. 450.0.0)"
+      },
+      "datastore_emulator": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, also install the Datastore emulator"
+      },
+      "firestore_emulator": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, also install the Firestore emulator"
+      },
+      "bigtable_emulator": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, also install the Bigtable emulator"
+      },
+      "pubsub_emulator": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, also install the Pubsub emulator"
+      },
+      "appengine_go": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, also install the App Engine Go SDK"
+      },
+      "appengine_java": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, also install the App Engine Java SDK"
+      },
+      "appengine_python": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, also install the App Engine Python SDK"
+      }
+    },
+    "category": "Google gcloud CLI feature by aqua",
+    "documentationURL": "https://github.com/aqua/devcontainer-gcloud"
+  },
+  {
+    "id": "ghcr.io/kuju63/devcontainer-features/betterleaks:1",
+    "name": "betterleaks",
+    "description": "A feature to help you find better leaks",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "enum": [
+          "latest",
+          "v1.5.0",
+          "v1.4.1"
+        ],
+        "description": "The version of betterleaks to install."
+      }
+    },
+    "category": "Dev Container features by kuju63",
+    "documentationURL": "https://github.com/kuju63/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/act:1",
+    "name": "act",
+    "description": "Installs act, a tool to run GitHub Actions locally.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "0.2.89"
+        ],
+        "default": "latest",
+        "description": "Version of act to install. Use 'latest' or an exact version like '0.2.89' (partial versions are not supported)."
+      }
+    },
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/act/README.md"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/agentcore:1",
+    "name": "AWS AgentCore CLI",
+    "description": "Installs the AWS Bedrock AgentCore CLI (@aws/agentcore) for building and deploying AI agents to Amazon Bedrock AgentCore Runtime.",
+    "options": null,
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/agentcore/README.md"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/aws-sam-cli:1",
+    "name": "AWS SAM CLI",
+    "description": "Installs the AWS Serverless Application Model (SAM) CLI for building, testing, and deploying serverless applications.",
+    "options": null,
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/aws-sam-cli/README.md"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/bash-language-server:1",
+    "name": "Bash Language Server (optional shellcheck and shfmt)",
+    "description": "Installs bash-language-server via npm. Optionally installs shellcheck and shfmt if not already present.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest"
+        ],
+        "default": "latest",
+        "description": "Version of bash-language-server to install. Use 'latest' for the newest available."
+      },
+      "installShellcheck": {
+        "type": "boolean",
+        "default": false,
+        "description": "When true, installs shellcheck via the system package manager if shellcheck is not already on PATH."
+      },
+      "installShellfmt": {
+        "type": "boolean",
+        "default": false,
+        "description": "When true, installs shfmt via the system package manager if shfmt is not already on PATH."
+      }
+    },
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/bash-language-server/README.md"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/claude-code:1",
+    "name": "Claude Code",
+    "description": "Installs Claude Code CLI and optionally configures plugin marketplaces, plugins, attribution settings and custom statusline.",
+    "options": {
+      "marketplace": {
+        "type": "string",
+        "default": "",
+        "description": "Comma-separated list of plugin marketplaces to register. Each entry accepts owner/repo shorthand (e.g. obra/superpowers-marketplace) or a full GitHub URL (e.g. https://github.com/obra/superpowers-marketplace). Skipped when empty."
+      },
+      "plugin": {
+        "type": "string",
+        "default": "",
+        "description": "Comma-separated list of plugins to install after marketplaces are configured. Each entry accepts plugin-name@marketplace-name format (e.g. superpowers@superpowers-marketplace) or a full GitHub URL. Skipped when empty."
+      },
+      "removeAttribution": {
+        "type": "boolean",
+        "default": false,
+        "description": "When true, injects empty commit and pr attribution strings into ~/.claude/settings.json, suppressing Co-Authored-By lines from Claude Code commits."
+      },
+      "statusline": {
+        "type": "boolean",
+        "default": false,
+        "description": "When true, installs statusline.sh to ~/.claude/statusline-command.sh and configures it as the Claude Code status line in ~/.claude/settings.json."
+      },
+      "planMode": {
+        "type": "boolean",
+        "default": true,
+        "description": "When true, sets plan mode as the default permission mode in ~/.claude/settings.json, so Claude plans before executing actions."
+      }
+    },
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/claude-code/README.md"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/gitlab-ci-local:1",
+    "name": "gitlab-ci-local",
+    "description": "Installs gitlab-ci-local, a tool to run GitLab CI pipelines locally.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "4.72.0"
+        ],
+        "default": "latest",
+        "description": "Version of gitlab-ci-local to install. Use 'latest' or an exact version like '4.72.0' (partial versions are not supported)."
+      }
+    },
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/gitlab-ci-local/README.md"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/gitlab-cli:1",
+    "name": "GitLab CLI",
+    "description": "Installs the GitLab CLI (glab) for interacting with GitLab repositories and CI/CD pipelines.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "1.50.0"
+        ],
+        "default": "latest",
+        "description": "Version of glab to install (e.g. '1.50.0'). Use 'latest' for the newest available."
+      }
+    },
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/gitlab-cli/README.md"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/just:1",
+    "name": "just",
+    "description": "Installs just, a handy way to save and run project-specific commands via justfile.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "1.51.0"
+        ],
+        "default": "latest",
+        "description": "Version of just to install. Use 'latest' or an exact version like '1.51.0' (partial versions are not supported)."
+      },
+      "lspVersion": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "false",
+          "0.4.5"
+        ],
+        "default": "latest",
+        "description": "Version of just-lsp to install. Use 'latest' or an exact version like '0.4.5'. Set to 'false' to skip installation."
+      }
+    },
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/just/README.md"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/kiro-cli:1",
+    "name": "Kiro CLI",
+    "description": "Installs the Kiro cli.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "2.5.0"
+        ],
+        "default": "latest",
+        "description": "Version of Kiro CLI to install. Use 'latest' for the newest available, or a full version like '2.3.0'."
+      },
+      "disableAutoupdates": {
+        "type": "boolean",
+        "default": false,
+        "description": "Disable automatic background updates for Kiro CLI."
+      }
+    },
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/kiro-cli/README.md"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/nvidia-container-toolkit:1",
+    "name": "NVIDIA Container Toolkit",
+    "description": "Installs the NVIDIA Container Toolkit (nvidia-container-toolkit) for GPU-accelerated containers.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "1.17.8",
+          "1.16.2"
+        ],
+        "default": "latest",
+        "description": "Version of nvidia-container-toolkit to install (e.g. '1.17.8'). Use 'latest' for the newest available."
+      }
+    },
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/nvidia-container-toolkit/README.md"
+  },
+  {
+    "id": "ghcr.io/srzstephen/devcontainer-features/prek:1",
+    "name": "prek",
+    "description": "Installs prek, a pre-commit and pre-push hook runner.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "0.4.3"
+        ],
+        "default": "latest",
+        "description": "Version of prek to install. Use 'latest' or an exact version like '0.4.3' (partial versions are not supported)."
+      }
+    },
+    "category": "Devcontainer Features by SrzStephen",
+    "documentationURL": "https://github.com/SrzStephen/devcontainer-features/blob/main/src/prek/README.md"
+  },
+  {
+    "id": "ghcr.io/xavierbeheydt/devcontainer-extras/lazyvim:0",
+    "name": "LazyVim",
+    "description": "Installs LazyVim as the default Neovim configuration. Skipped automatically if ~/.config/nvim already exists (e.g. mounted from host).",
+    "options": null,
+    "category": "Dev Container Extras by XavierBeheydt",
+    "documentationURL": "https://github.com/XavierBeheydt/devcontainer-extras"
+  },
+  {
+    "id": "ghcr.io/sjp/tectonic-feature/tectonic:1",
+    "name": "Tectonic",
+    "description": "Installs the Tectonic LaTeX toolkit (a modern, self-contained TeX/LaTeX engine).",
+    "options": {
+      "installDirectory": {
+        "type": "string",
+        "default": "/usr/local/bin",
+        "description": "Directory to install the tectonic binary into. Must be on PATH."
+      }
+    },
+    "category": "Tectonic Feature by sjp",
+    "documentationURL": "https://github.com/sjp/tectonic-feature/tree/master/src/tectonic"
+  },
+  {
+    "id": "ghcr.io/dnegstad/devcontainer-dev-certs/devcontainer-dev-certs:1",
+    "name": "Dev Container Development Certificates",
+    "description": "Enables trusted HTTPS in Dev Containers by preparing certificate trust infrastructure and installing companion VS Code extensions that automatically generate, trust, and transfer ASP.NET and Aspire compatible development certificates from the host machine. Add to your devcontainer.json: \"features\": { \"ghcr.io/dnegstad/devcontainer-dev-certs/devcontainer-dev-certs:1\": {} }",
+    "options": {
+      "trustNss": {
+        "type": "boolean",
+        "default": false,
+        "description": "Install NSS tools (certutil) for Chromium/Firefox certificate trust inside the container"
+      },
+      "sslCertDirs": {
+        "type": "string",
+        "default": "/etc/ssl/certs:/usr/lib/ssl/certs:/etc/pki/tls/certs:/var/lib/ca-certificates/openssl",
+        "description": "Colon-separated system CA certificate directories to include in SSL_CERT_DIR alongside the dev-certs trust directory. The default covers paths from several Linux distributions. Override this if your base image uses non-standard paths. By default, directories that don't exist on this image are filtered out (see pruneMissingCertDirs)."
+      },
+      "pruneMissingCertDirs": {
+        "type": "boolean",
+        "default": true,
+        "description": "Filter out directories that don't exist on this image from sslCertDirs before writing SSL_CERT_DIR. The default list spans several distros and only a subset exists on any given image; while OpenSSL ignores a missing directory, some consumers (Rust's openssl-probe / rustls-native-certs) error on one. Set to false to use sslCertDirs verbatim — for example when a directory will be created after install but before it's needed."
+      },
+      "generateDotNetCert": {
+        "type": "boolean",
+        "default": true,
+        "description": "Auto-generate the ASP.NET Core / Aspire compatible HTTPS development certificate. Set to false to skip generation (for example when only syncing user-provided certificates)."
+      },
+      "syncUserCertificates": {
+        "type": "boolean",
+        "default": true,
+        "description": "Allow the host extension to sync user-provided certificates (configured via the devcontainerDevCerts.userCertificates VS Code setting) into this container."
+      },
+      "syncContainerCert": {
+        "type": "boolean",
+        "default": false,
+        "description": "Opt in to reverse-sync: when this container already has a valid ASP.NET HTTPS dev certificate (e.g. produced by `dotnet dev-certs https` baked into the image), the workspace extension pushes it to the host extension to trust on this host machine. The host independently re-validates the certificate, restricts SANs to local addresses by default (override with devcontainerDevCerts.allowNonLocalContainerCertSans), and prompts before adding it to the host OS trust store. Setting this to true ALSO implicitly overrides generateDotNetCert for this container — the container becomes the source of its own dev cert, so we don't ask the host to generate a different one and send it back. User-managed certificates are unaffected. Gated host-side by the existing devcontainerDevCerts.generateDotNetCert and devcontainer-dev-certs.autoProvision VS Code settings — if the user has opted out of managed dev certs on their host, the push is rejected. No fallback: if no valid cert is found in the container, the push is skipped entirely."
+      },
+      "extraCertDestinations": {
+        "type": "string",
+        "default": "",
+        "description": "Comma-separated additional directories to write cert artifacts to. Each entry: <abs-dir>[=<format>] where format is pem|key|pem-bundle|pfx|all (defaults to all). Every synced cert is written under the directory as {name}.{pem,key,pfx} (and/or {name}-bundle.pem). Example: /etc/nginx/certs=pem,/var/myapp."
+      }
+    },
+    "category": "Dev Certs Feature by David Negstad",
+    "documentationURL": "https://github.com/dnegstad/devcontainer-dev-certs"
   }
 ]
