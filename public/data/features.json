@@ -1027,20 +1027,30 @@
     "documentationURL": "https://github.com/devcontainers/features/tree/main/src/python"
   },
   {
-    "id": "ghcr.io/devcontainers/features/ruby:1",
-    "name": "Ruby (via rvm)",
-    "description": "Installs Ruby, rvm, rbenv, common Ruby utilities, and needed dependencies.",
+    "id": "ghcr.io/devcontainers/features/ruby:2",
+    "name": "Ruby (via ruby-build)",
+    "description": "Installs Ruby using ruby-build, with optional rbenv or rvm for version management.",
     "options": {
       "version": {
         "type": "string",
         "proposals": [
           "latest",
           "none",
-          "3.4",
-          "3.2"
+          "4.0",
+          "3.4"
         ],
         "default": "latest",
         "description": "Select or enter a Ruby version to install"
+      },
+      "versionManager": {
+        "type": "string",
+        "enum": [
+          "none",
+          "rbenv",
+          "rvm"
+        ],
+        "default": "none",
+        "description": "Version manager to install alongside Ruby: 'rbenv', 'rvm', or 'none' (ruby-build only)"
       }
     },
     "category": "Reference Implementation Features",
@@ -18555,6 +18565,23 @@
     "documentationURL": "http://github.com/devcontainers-extra/features/tree/main/src/tfenv-homebrew"
   },
   {
+    "id": "ghcr.io/devcontainers-extra/features/tflint:1",
+    "name": "tflint (via Github Releases)",
+    "description": "A Pluggable Terraform Linter",
+    "options": {
+      "version": {
+        "default": "latest",
+        "description": "Select the version to install.",
+        "proposals": [
+          "latest"
+        ],
+        "type": "string"
+      }
+    },
+    "category": "Dev Container Features by devcontainers-extra",
+    "documentationURL": "http://github.com/devcontainers-extra/features/tree/main/src/tflint"
+  },
+  {
     "id": "ghcr.io/devcontainers-extra/features/tfsec:1",
     "name": "tfsec (via Github Releases)",
     "description": "tfsec is a static analysis security scanner for your Terraform code. Designed to run locally and in your CI pipelines, developer-friendly output and fully documented checks mean detection and remediation can take place as quickly and efficiently as possible",
@@ -26069,33 +26096,14 @@
     "documentationURL": "https://github.com/iyaki/devcontainer-features"
   },
   {
-    "id": "ghcr.io/iyaki/devcontainer-features/opencode-ralph:1",
-    "name": "Ralph Agentic Loop runner for OpenCode",
-    "description": "[Dperecated] AI Agentic Loop shell runner aimed for spec-driven development workflows.",
-    "options": {
-      "version": {
-        "type": "string",
-        "default": "latest",
-        "description": "Release version to install. Use 'latest' or a release tag such as 'v2.0.0'."
-      },
-      "installDir": {
-        "type": "string",
-        "default": "/usr/local/bin",
-        "description": "Directory to install the ralph executable."
-      }
-    },
-    "category": "Devcontainer features by iyaki",
-    "documentationURL": "https://github.com/iyaki/devcontainer-features"
-  },
-  {
     "id": "ghcr.io/iyaki/devcontainer-features/ralph:1",
-    "name": "Ralphex - Ralph-Wiggum Agentic Loop runner",
-    "description": "AI Agentic Loop shell runner aimed for spec-driven development workflows.",
+    "name": "SpecRalph - Spec-Driven Ralph-Wiggum Agentic AI Loops Runner",
+    "description": "Spec-driven AI coding automation CLI. AI Loops runner for Claude Code, OpenCode, Cursor, and other agent CLIs.",
     "options": {
       "version": {
         "type": "string",
         "default": "latest",
-        "description": "Release version to install. Use 'latest' or a release tag such as 'v2.0.0'."
+        "description": "SpecRalph version to install. Use 'latest' or a release tag such as 'v3.0.0'."
       }
     },
     "category": "Devcontainer features by iyaki",
