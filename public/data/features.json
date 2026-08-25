@@ -247,7 +247,7 @@
     "documentationURL": "https://github.com/devcontainers/features/tree/main/src/desktop-lite"
   },
   {
-    "id": "ghcr.io/devcontainers/features/docker-in-docker:3",
+    "id": "ghcr.io/devcontainers/features/docker-in-docker:4",
     "name": "Docker (Docker-in-Docker)",
     "description": "Create child containers *inside* a container, independent from the host's docker instance. Installs Docker extension in the container along with needed CLIs.",
     "options": {
@@ -307,6 +307,11 @@
         "type": "boolean",
         "default": false,
         "description": "Disable ip6tables (this option is only applicable for Docker versions 27 and greater)"
+      },
+      "iptablesSwitchAtRuntime": {
+        "type": "boolean",
+        "default": true,
+        "description": "If true, the iptables alternative is selected at container start (inside docker-init.sh) instead of at image build time. Useful when the desired iptables backend depends on the host kernel at runtime rather than at build time."
       }
     },
     "category": "Reference Implementation Features",
@@ -1205,6 +1210,16 @@
         "type": "boolean",
         "default": false,
         "description": "Install terraform-docs, a utility to generate documentation from Terraform modules"
+      },
+      "terraformDocsVersion": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "0.20.0",
+          "0.19.0"
+        ],
+        "default": "latest",
+        "description": "terraform-docs version to install (only used when installTerraformDocs is true) (https://github.com/terraform-docs/terraform-docs/releases)"
       },
       "httpProxy": {
         "type": "string",
@@ -2636,6 +2651,14 @@
     "documentationURL": "https://github.com/stuartleeks/dev-container-features"
   },
   {
+    "id": "ghcr.io/stuartleeks/dev-container-features/github-copilot-cli:0",
+    "name": "GitHub Copilot CLI (with persistence)",
+    "description": "Install GitHub Copilot CLI and configure it to store configuration in a mounted volume to preserve across container builds",
+    "options": {},
+    "category": "Assorted Features",
+    "documentationURL": "https://github.com/stuartleeks/dev-container-features"
+  },
+  {
     "id": "ghcr.io/stuartleeks/dev-container-features/railway-cli:0",
     "name": "Railway CLI",
     "description": "Set up the `railway` CLI for working with Railway",
@@ -3481,6 +3504,34 @@
     "documentationURL": "https://github.com/mikaello/devcontainer-features"
   },
   {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/actionlint:1",
+    "name": "actionlint",
+    "description": "Static checker for GitHub Actions workflow files.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install from GitHub releases"
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/ast-grep:1",
+    "name": "ast-grep",
+    "description": "Structural code search, linting, and rewriting using AST-aware patterns.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install from GitHub releases"
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
     "id": "ghcr.io/jsburckhardt/devcontainer-features/bat:1",
     "name": "bat",
     "description": "A cat(1) clone with syntax highlighting and Git integration.",
@@ -3517,6 +3568,20 @@
     "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
   },
   {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/colibri:1",
+    "name": "colibri",
+    "description": "Run GLM-5.2 (744B MoE) on a consumer machine — pure C, zero deps, experts streamed from disk. Tiny engine, immense model.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of colibri to install from GitHub releases e.g. v1.0.0"
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
     "id": "ghcr.io/jsburckhardt/devcontainer-features/copa:1",
     "name": "Copacetic CLI",
     "description": "Project Copacetic: Directly patch container image vulnerabilities. Copa is a CLI tool written in Go and based on buildkit that can be used to directly patch container images given the vulnerability scanning results from popular tools like Trivy.",
@@ -3547,6 +3612,34 @@
         "type": "string",
         "default": "latest",
         "description": "Version of cyclonedx to install. Accepts versions with 'v' prefix."
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/delta:1",
+    "name": "delta",
+    "description": "Better pager for git diff, grep, rg --json, and blame output with syntax highlighting.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of delta to install from GitHub releases e.g. 0.19.2"
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/difftastic:1",
+    "name": "Difftastic",
+    "description": "Syntax-aware structural diffs that are much easier to read than plain text diffs.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install from GitHub releases"
       }
     },
     "category": "Devcontainer Features",
@@ -3623,6 +3716,20 @@
     "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
   },
   {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/gitai:1",
+    "name": "Git AI",
+    "description": "A Git extension for tracking AI-generated code through every commit, merge, rebase, cherry-pick, etc.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of git-ai to install from GitHub releases e.g. v1.6.21"
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
     "id": "ghcr.io/jsburckhardt/devcontainer-features/gitleaks:1",
     "name": "Gitleaks",
     "description": "Gitleaks is a SAST tool for detecting and preventing hardcoded secrets like passwords, api keys, and tokens in git repos. Gitleaks is an easy-to-use, all-in-one solution for detecting secrets, past or present, in your code.",
@@ -3651,6 +3758,20 @@
     "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
   },
   {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/herdr:1",
+    "name": "herdr",
+    "description": "herdr is a fast, cross-platform CLI tool from herdrdev/herdr distributed as a static binary via GitHub releases.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of herdr to install (e.g. 'latest' or a specific tag like 'v0.7.3')."
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
     "id": "ghcr.io/jsburckhardt/devcontainer-features/hurl:1",
     "name": "hurl",
     "description": "Run and test HTTP requests with plain text.",
@@ -3673,6 +3794,20 @@
         "type": "string",
         "default": "latest",
         "description": "Version of hyperfine to install from GitHub releases e.g. v1.20.0"
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/jj:1",
+    "name": "jj",
+    "description": "Git-compatible version control with a cleaner workflow for commits, branches, rebasing, and history editing.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install from GitHub releases"
       }
     },
     "category": "Devcontainer Features",
@@ -3749,6 +3884,34 @@
     "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
   },
   {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/markitdown:1",
+    "name": "MarkItDown",
+    "description": "Convert PDFs, Office docs, images, audio, HTML, CSV/JSON/XML, ZIPs, and more into Markdown from the CLI.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install (e.g. 0.1.6). Set to 'latest' to install the most recent version."
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/mise:1",
+    "name": "mise",
+    "description": "Manage dev tool versions, environment variables, and project tasks in one CLI.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install from GitHub releases (e.g., v2024.7.1)"
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
     "id": "ghcr.io/jsburckhardt/devcontainer-features/notation:1",
     "name": "notation",
     "description": "Notation is a CLI project to add signatures as standard items in the registry ecosystem, and to build a set of simple tooling for signing and verifying these signatures. This should be viewed as similar security to checking git commit signatures, although the signatures are generic and can be used for additional purposes. Notation is an implementation of the Notary v2 specifications",
@@ -3757,6 +3920,34 @@
         "type": "string",
         "default": "latest",
         "description": "Version of notation to install. Accepts versions with 'v' prefix."
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/officecli:1",
+    "name": "officecli",
+    "description": "AI-friendly CLI to read, edit, and automate Microsoft Office files (.docx, .xlsx, .pptx) as a single static binary — no Office installation required.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of officecli to install from GitHub releases (e.g. 'latest' or 'v1.0.139')."
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/open-code-review:1",
+    "name": "Open Code Review",
+    "description": "CLI-oriented code review tool for diffs with deterministic checks plus optional LLM review.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install from GitHub releases (e.g., v1.5.0)"
       }
     },
     "category": "Devcontainer Features",
@@ -3819,12 +4010,40 @@
     "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
   },
   {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/skillspector:1",
+    "name": "SkillSpector",
+    "description": "Standalone security scanner for local AI-agent skill/config files; useful only if you want an AI-dev-security feature.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of skillspector to install from GitHub releases e.g. v1.0.0"
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
     "id": "ghcr.io/jsburckhardt/devcontainer-features/skopeo:1",
     "name": "skopeo",
     "description": "skopeo is a command line utility that performs various operations on container images and image repositories.",
     "options": {},
     "category": "Devcontainer Features",
     "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/strix:1",
+    "name": "Strix",
+    "description": "Open-source AI penetration testing tool to find and fix your app's vulnerabilities. Installs the strix CLI from GitHub releases.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of strix to install from GitHub releases e.g. 1.1.0"
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/usestrix/strix"
   },
   {
     "id": "ghcr.io/jsburckhardt/devcontainer-features/tmux:2",
@@ -3882,6 +4101,20 @@
         "type": "boolean",
         "default": false,
         "description": "flag to download the init package into /tmp folder"
+      }
+    },
+    "category": "Devcontainer Features",
+    "documentationURL": "https://github.com/jsburckhardt/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jsburckhardt/devcontainer-features/zizmor:1",
+    "name": "zizmor",
+    "description": "Static security analysis for GitHub Actions workflows.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install from GitHub releases"
       }
     },
     "category": "Devcontainer Features",
@@ -6097,6 +6330,25 @@
     "documentationURL": "https://github.com/joshuanianji/devcontainer-features/tree/main/src/github-cli-persistence"
   },
   {
+    "id": "ghcr.io/joshuanianji/devcontainer-features/google-cloud-cli:1",
+    "name": "Google Cloud CLI",
+    "description": "Installs the Google Cloud CLI (gcloud) via Google's apt repository. Forked from ghcr.io/dhoeric/features/google-cloud-cli with a trixie-compatible key import (`gpg --dearmor` instead of the removed `apt-key`).",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Select or enter a gcloud CLI version"
+      },
+      "installGkeGcloudAuthPlugin": {
+        "type": "boolean",
+        "default": false,
+        "description": "Install 'gke-gcloud-auth-plugin' plugin?"
+      }
+    },
+    "category": "Features by joshuanianji",
+    "documentationURL": "https://github.com/joshuanianji/devcontainer-features/tree/main/src/google-cloud-cli"
+  },
+  {
     "id": "ghcr.io/joshuanianji/devcontainer-features/lamdera:1",
     "name": "Lamdera",
     "description": "Installs Lamdera.",
@@ -6119,7 +6371,7 @@
   {
     "id": "ghcr.io/joshuanianji/devcontainer-features/mount-pnpm-store:1",
     "name": "Mount pnpm Store",
-    "description": "Sets pnpm store to ~/.pnpm-store and mounts it to a volume to share between multiple devcontainers",
+    "description": "Mounts a shared Docker volume as the pnpm store directory so packages are downloaded once and reused across multiple devcontainers. Points pnpm at the volume via containerEnv — no pnpm invocation, no symlink.",
     "options": {},
     "category": "Features by joshuanianji",
     "documentationURL": "https://github.com/joshuanianji/devcontainer-features/tree/main/src/mount-pnpm-store"
@@ -7181,6 +7433,14 @@
     "documentationURL": "https://github.com/cirolosapio/devcontainers-features/tree/main/src/alpine-ohmyzsh"
   },
   {
+    "id": "ghcr.io/cirolosapio/devcontainers-features/alpine-opencode:0",
+    "name": "alpine-opencode",
+    "description": "Installs opencode on alpine",
+    "options": null,
+    "category": "Alpine DevContainer Features",
+    "documentationURL": "https://github.com/cirolosapio/devcontainers-features/tree/main/src/alpine-opencode"
+  },
+  {
     "id": "ghcr.io/cirolosapio/devcontainers-features/alpine-openssh:0",
     "name": "alpine-openssh",
     "description": "Installs openssh on alpine",
@@ -7238,11 +7498,11 @@
     "options": {
       "version": {
         "type": "string",
-        "default": "2.10.1",
+        "default": "2.10.2",
         "description": "Version of composer to install",
         "proposals": [
-          "2.10.1",
-          "2.9.8",
+          "2.10.2",
+          "2.9.9",
           "2.8.12",
           "2.7.9",
           "2.6.6",
@@ -8630,6 +8890,23 @@
     },
     "category": "Dev Container Features by kreemer",
     "documentationURL": "https://github.com/kreemer/features/tree/main/src/stow"
+  },
+  {
+    "id": "ghcr.io/kreemer/features/yazi:1",
+    "name": "Yazi",
+    "description": null,
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest"
+        ],
+        "default": "latest",
+        "description": "Select or enter a version."
+      }
+    },
+    "category": "Dev Container Features by kreemer",
+    "documentationURL": "https://github.com/kreemer/features/tree/main/src/yazi"
   },
   {
     "id": "ghcr.io/veronoicc/devcontainer-features/frida-core-devkit:1",
@@ -16759,6 +17036,24 @@
     "documentationURL": "http://github.com/devcontainers-extra/features/tree/main/src/ory-oathkeeper"
   },
   {
+    "id": "ghcr.io/devcontainers-extra/features/outagedeck:1",
+    "name": "OutageDeck CLI (via GitHub Releases)",
+    "description": "Check the live status of cloud and SaaS providers from a terminal or CI script.",
+    "options": {
+      "version": {
+        "default": "latest",
+        "description": "Select the OutageDeck CLI version to install.",
+        "proposals": [
+          "latest",
+          "0.1.0"
+        ],
+        "type": "string"
+      }
+    },
+    "category": "Dev Container Features by devcontainers-extra",
+    "documentationURL": "https://github.com/devcontainers-extra/features/tree/main/src/outagedeck"
+  },
+  {
     "id": "ghcr.io/devcontainers-extra/features/packer-asdf:2",
     "name": "Packer (via asdf)",
     "description": "Packer is a free and open source tool for creating golden images for multiple platforms from a single source configuration.",
@@ -21550,9 +21845,9 @@
     "documentationURL": "https://github.com/thediveo/devcontainer-features"
   },
   {
-    "id": "ghcr.io/thediveo/devcontainer-features/docsify:0",
-    "name": "docsify",
-    "description": "Automatically serves ./docs (or another) workspace directory via 'docsify serve' in the background.",
+    "id": "ghcr.io/thediveo/devcontainer-features/docsify:1",
+    "name": "docsify server",
+    "description": "Automatically serves ./docs (or another) workspace directory via 'browser-sync' in the background.",
     "options": {
       "port": {
         "type": "string",
@@ -21562,14 +21857,6 @@
         ],
         "default": "3300"
       },
-      "livereload-port": {
-        "type": "string",
-        "description": "TCP port to receive live reload events from",
-        "proposals": [
-          "3301"
-        ],
-        "default": "3301"
-      },
       "docs-path": {
         "type": "string",
         "description": "workspace relative directory to serve from",
@@ -21577,6 +21864,22 @@
           "docs"
         ],
         "default": "docs"
+      },
+      "reload-delay": {
+        "type": "string",
+        "description": "time in milliseconds to delay the reload event following file changes",
+        "proposals": [
+          "2000"
+        ],
+        "default": "2000"
+      },
+      "reload-debounce": {
+        "type": "string",
+        "description": "time in milliseconds to restrict the frequency in which browser:reload events can be emitted to connected clients",
+        "proposals": [
+          "5000"
+        ],
+        "default": "5000"
       }
     },
     "category": "devcontainer features by TheDiveO",
@@ -21663,6 +21966,14 @@
         "type": "string",
         "default": "",
         "description": "comma-separated list of additional build tags (-tags)"
+      },
+      "run": {
+        "type": "string",
+        "default": "",
+        "proposals": [
+          "^Test"
+        ],
+        "description": "if set, run only those tests, examples, and fuzz tests matching the regular expression"
       },
       "uncovered-packages": {
         "type": "string",
@@ -22609,6 +22920,23 @@
     },
     "category": "MrSimonEmms Dev Container Features",
     "documentationURL": "https://github.com/mrsimonemms/devcontainers/tree/main/src/buf"
+  },
+  {
+    "id": "ghcr.io/mrsimonemms/devcontainers/butane:1",
+    "name": "Butane",
+    "description": "Butane translates human-readable Butane Configs into machine-readable Ignition Configs.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest"
+        ],
+        "default": "latest",
+        "description": "Select the version you would like to install"
+      }
+    },
+    "category": "MrSimonEmms Dev Container Features",
+    "documentationURL": "https://github.com/mrsimonemms/devcontainers"
   },
   {
     "id": "ghcr.io/mrsimonemms/devcontainers/cobra-cli:1",
@@ -24370,16 +24698,30 @@
   {
     "id": "ghcr.io/helpers4/devcontainer/claude-dev:1",
     "name": "Claude Code Development Environment",
-    "description": "Installs the Claude Code IDE extension (anthropic.claude-code) for VS Code and Cursor. Mounts ~/.claude from the host via a directory symlink — credentials and config persist across all rebuilds.",
+    "description": "Installs the Claude Code IDE extension (anthropic.claude-code) for VS Code and Cursor. Bind-mounts ~/.claude from the host and symlinks it at container start — credentials, config, and memory persist across all rebuilds.",
     "options": {
       "username": {
         "type": "string",
-        "default": "node",
-        "description": "Username in the container that should receive the Claude credentials symlink."
+        "default": "auto",
+        "description": "Username in the container that should receive the Claude credentials symlink. 'auto' detects vscode/node/codespace/uid-1000, in that order."
       }
     },
     "category": "helpers4 Dev Container Features",
     "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/claude-dev"
+  },
+  {
+    "id": "ghcr.io/helpers4/devcontainer/copilot-dev:1",
+    "name": "GitHub Copilot Development Environment",
+    "description": "GitHub Copilot Chat VS Code extension, gh copilot CLI extension, and shared instructions for commit messages, pull-request descriptions, and code reviews (Conventional Commits + gitmoji + active repo PR template).",
+    "options": {
+      "installCli": {
+        "type": "boolean",
+        "default": true,
+        "description": "Install the gh copilot CLI extension (gh copilot explain / suggest). Requires gh CLI to be present (e.g. via github-dev). Skipped with a warning if gh is not found."
+      }
+    },
+    "category": "helpers4 Dev Container Features",
+    "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/copilot-dev"
   },
   {
     "id": "ghcr.io/helpers4/devcontainer/dotfiles-sync:1",
@@ -24435,7 +24777,7 @@
   {
     "id": "ghcr.io/helpers4/devcontainer/github-dev:1",
     "name": "GitHub Development Environment",
-    "description": "GitHub CLI (gh) and GitHub VS Code extensions (Copilot Chat, Pull Requests & Issues, GitHub Actions, RemoteHub). Centralizes all GitHub tooling in one feature, including shared Copilot Chat instructions for commit messages and pull-request titles/descriptions (Conventional Commits + gitmoji + the active repo's PR template).",
+    "description": "GitHub CLI (gh) and GitHub VS Code platform extensions (Pull Requests & Issues, GitHub Actions, RemoteHub). For Copilot Chat and AI generation instructions use the copilot-dev feature.",
     "options": {
       "ghVersion": {
         "type": "string",
@@ -24455,9 +24797,47 @@
     "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/helpers4-common"
   },
   {
+    "id": "ghcr.io/helpers4/devcontainer/mistral-dev:1",
+    "name": "Mistral Vibe Development Environment",
+    "description": "Installs the Mistral Vibe IDE extension (mistralai.mistral-vibe-code) for VS Code and Cursor. Bind-mounts ~/.vibe from the host and symlinks it at container start — credentials and config persist across all rebuilds.",
+    "options": {
+      "username": {
+        "type": "string",
+        "default": "auto",
+        "description": "Username in the container that should receive the Mistral Vibe credentials symlink. 'auto' detects vscode/node/codespace/uid-1000, in that order."
+      },
+      "installCli": {
+        "type": "boolean",
+        "default": false,
+        "description": "Also install the Mistral Vibe CLI (vibe command). Requires Python 3.12+ and pip in the container."
+      }
+    },
+    "category": "helpers4 Dev Container Features",
+    "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/mistral-dev"
+  },
+  {
+    "id": "ghcr.io/helpers4/devcontainer/nub:1",
+    "name": "Nub — Fast TypeScript/Node Toolchain",
+    "description": "Installs nub (nubjs.com): a Rust binary that runs TypeScript/JavaScript files, package.json scripts, and local CLIs directly on the Node.js and package manager already in the container — no new runtime, no lock-in. Does not manage Node versions itself (dependsOn the official node feature), so it never competes with this container's own version-selection mechanism.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of nub to install (latest, or a specific release like 1.2.3)."
+      },
+      "installGlobally": {
+        "type": "boolean",
+        "default": true,
+        "description": "Symlink nub and nubx into /usr/local/bin so they're available system-wide (all users, root, sudo) without relying on the user's PATH."
+      }
+    },
+    "category": "helpers4 Dev Container Features",
+    "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/nub"
+  },
+  {
     "id": "ghcr.io/helpers4/devcontainer/package-auto-install:1",
     "name": "Automatic Package Installation",
-    "description": "Automatically detects and runs npm/yarn/pnpm install in non-interactive mode after container creation.",
+    "description": "Automatically detects and runs npm/yarn/pnpm/nub install in non-interactive mode after container creation.",
     "options": {
       "command": {
         "type": "string",
@@ -24467,7 +24847,7 @@
           "auto"
         ],
         "default": "auto",
-        "description": "Installation command to use: 'install', 'ci' (npm ci/pnpm install --frozen-lockfile), or 'auto' to detect"
+        "description": "Installation command to use: 'install', 'ci' (npm ci/pnpm install --frozen-lockfile), or 'auto' to detect. Ignored when packageManager resolves to 'nub' — nub only has 'install'."
       },
       "packageManager": {
         "type": "string",
@@ -24475,10 +24855,11 @@
           "auto",
           "npm",
           "yarn",
-          "pnpm"
+          "pnpm",
+          "nub"
         ],
         "default": "auto",
-        "description": "Package manager to use. 'auto' detects based on lockfile"
+        "description": "Package manager to use. 'auto' detects based on lockfile (never resolves to 'nub' — that's an explicit opt-in, not auto-detected, since nub isn't itself a lockfile format). 'nub' runs 'nub install', which requires the nub feature also be installed with its default installGlobally:true (otherwise nub isn't on PATH here), and only understands npm/pnpm/bun lockfiles — not yarn.lock."
       },
       "workingDirectory": {
         "type": "string",
@@ -24519,6 +24900,11 @@
         "default": "default",
         "description": "Sound packs to install: 'default' (peon, peasant, sc_kerrigan, sc_battlecruiser, glados), 'all', or a comma-separated list (e.g. 'peon,glados,murloc')"
       },
+      "packsLang": {
+        "type": "string",
+        "default": "",
+        "description": "Restrict pack selection to language(s), e.g. 'fr' or 'en,fr' — passed straight through to the installer's own --lang flag, which understands per-pack language metadata (not just name matching, e.g. matches 'peon_fr'). Left empty, no language filtering happens. If set while 'packs' is still 'default', searches the full pack registry instead of just the 5 default franchise picks — those 5 may not all have a matching-language variant."
+      },
       "noRc": {
         "type": "boolean",
         "default": true,
@@ -24537,6 +24923,31 @@
     },
     "category": "helpers4 Dev Container Features",
     "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/peon-ping"
+  },
+  {
+    "id": "ghcr.io/helpers4/devcontainer/playwright-dev:1",
+    "name": "Playwright Development Environment",
+    "description": "Playwright E2E/browser-automation toolchain: OS-level dependencies for headless Chromium, Firefox, and WebKit (via the official `playwright install-deps`), a browser-binary cache shared across rebuilds through a Docker named volume, and the official Playwright Test VS Code extension.",
+    "options": {
+      "browsers": {
+        "type": "string",
+        "enum": [
+          "chromium",
+          "firefox",
+          "webkit",
+          "all"
+        ],
+        "default": "all",
+        "description": "Which browser engine(s) to install OS-level dependencies for, and to pre-download into the shared browser cache."
+      },
+      "installDeps": {
+        "type": "boolean",
+        "default": true,
+        "description": "Install the OS packages required to run the selected browser(s) headless, via `playwright install-deps`. Disable if the base image already provides them."
+      }
+    },
+    "category": "helpers4 Dev Container Features",
+    "documentationURL": "https://github.com/helpers4/devcontainer/tree/main/src/playwright-dev"
   },
   {
     "id": "ghcr.io/helpers4/devcontainer/pnpm-store:1",
@@ -25061,7 +25472,7 @@
     "options": {
       "version": {
         "type": "string",
-        "default": "4.0.5",
+        "default": "4.0.6",
         "description": "The ruby version to be installed"
       },
       "versionManager": {
@@ -25728,6 +26139,31 @@
     "documentationURL": "https://github.com/DopplerHQ/devcontainer-features"
   },
   {
+    "id": "ghcr.io/dopplerhq/devcontainer-features/volume-permissions:1",
+    "name": "Prepare Volume Permissions",
+    "description": "Creates directories and takes ownership of them as the remote user. Useful for prepping volume mounts in environments where the hosts's UID does not match the remote user's UID.",
+    "options": {
+      "basePath": {
+        "type": "string",
+        "default": "",
+        "description": "Base path to prepend to every `paths` value.",
+        "proposals": [
+          "${containerWorkspaceFolder}"
+        ]
+      },
+      "paths": {
+        "type": "string",
+        "default": "",
+        "description": "Comma-separated list of paths to chown as the remote user.",
+        "proposals": [
+          "${containerWorkspaceFolder}/.pnpm-store,${containerWorkspaceFolder}/node_modules"
+        ]
+      }
+    },
+    "category": "Doppler Features",
+    "documentationURL": "https://github.com/DopplerHQ/devcontainer-features"
+  },
+  {
     "id": "ghcr.io/miguelrodo/devcontainerfeatures/apptainer:1",
     "name": "Install Apptainer",
     "description": "Install Apptainer, a container system for HPC",
@@ -26096,6 +26532,51 @@
     "documentationURL": "https://github.com/iyaki/devcontainer-features"
   },
   {
+    "id": "ghcr.io/iyaki/devcontainer-features/phpantom:1",
+    "name": "PHPantom LSP",
+    "description": "Installs PHPantom — a fast, lightweight PHP language server written in Rust — from the PHPantom-dev/phpantom_lsp GitHub Releases as a self-contained binary.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "PHPantom release version to install (for example: 0.9.0). Use 'latest' for the newest release. Release tags are bare numbers (no 'v' prefix)."
+      }
+    },
+    "category": "Devcontainer features by iyaki",
+    "documentationURL": "https://github.com/iyaki/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/iyaki/devcontainer-features/pie:1",
+    "name": "PHP Installer for Extensions (PIE)",
+    "description": "Installs PIE — the official PHP Installer for Extensions (replaces PECL) — from the php/pie GitHub Releases as a self-contained static binary.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "PIE release version to install (for example: 1.4.9). Use 'latest' for the newest release. Release tags are bare numbers (no 'v' prefix)."
+      }
+    },
+    "category": "Devcontainer features by iyaki",
+    "documentationURL": "https://github.com/iyaki/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/iyaki/devcontainer-features/pie-extensions:1",
+    "name": "PHP Extensions via PIE",
+    "description": "Installs PHP extensions using PIE (PHP Installer for Extensions) into the PHP installation provided by a PHP runtime feature. Requires the pie feature and a PHP runtime with build tools, e.g. the official PHP devcontainer feature.",
+    "options": {
+      "extensions": {
+        "type": "string",
+        "default": "",
+        "description": "Comma-separated list of PIE packages to install, e.g. \"apcu/apcu,xdebug/xdebug\". PIE package names are Composer-style vendor/package names; per-package version constraints are supported, e.g. \"xdebug/xdebug:^3.4\".",
+        "proposals": [
+          "xdebug/xdebug"
+        ]
+      }
+    },
+    "category": "Devcontainer features by iyaki",
+    "documentationURL": "https://github.com/iyaki/devcontainer-features"
+  },
+  {
     "id": "ghcr.io/iyaki/devcontainer-features/ralph:1",
     "name": "SpecRalph - Spec-Driven Ralph-Wiggum Agentic AI Loops Runner",
     "description": "Spec-driven AI coding automation CLI. AI Loops runner for Claude Code, OpenCode, Cursor, and other agent CLIs.",
@@ -26424,6 +26905,20 @@
     "documentationURL": "https://github.com/sliekens/devcontainer-features/blob/main/src/mono/README.md"
   },
   {
+    "id": "ghcr.io/sliekens/devcontainer-features/omp:1",
+    "name": "Oh My Pi",
+    "description": "Installs the Oh My Pi coding agent CLI (`omp`) from official prebuilt release assets (noninteractive, derived from https://omp.sh/install) and persists shared `~/.omp` state across devcontainers. Requires Bun 1.3.14+ or Node.js as a peer dependency for the full harness.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install. Use `latest` for the current release, or specify a version like `17.2.9` or `v17.2.9`."
+      }
+    },
+    "category": "Dev Container features by sliekens",
+    "documentationURL": "https://github.com/sliekens/devcontainer-features/blob/main/src/omp/README.md"
+  },
+  {
     "id": "ghcr.io/sliekens/devcontainer-features/opencode:1",
     "name": "OpenCode",
     "description": "Installs `opencode` from official GitHub release assets and persists shared state across devcontainers.",
@@ -26436,6 +26931,20 @@
     },
     "category": "Dev Container features by sliekens",
     "documentationURL": "https://github.com/sliekens/devcontainer-features/blob/main/src/opencode/README.md"
+  },
+  {
+    "id": "ghcr.io/sliekens/devcontainer-features/pi:1",
+    "name": "Pi",
+    "description": "Installs the Pi coding agent CLI (`pi`) via a noninteractive npm install and persists shared `~/.pi` state across devcontainers. Requires Node.js 22.19+ with npm as a peer dependency.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install. Use `latest` for the current npm release, or specify a version like `0.83.0` or `v0.83.0`."
+      }
+    },
+    "category": "Dev Container features by sliekens",
+    "documentationURL": "https://github.com/sliekens/devcontainer-features/blob/main/src/pi/README.md"
   },
   {
     "id": "ghcr.io/sliekens/devcontainer-features/rename-user:1",
@@ -26458,6 +26967,52 @@
     },
     "category": "Dev Container features by sliekens",
     "documentationURL": "https://github.com/sliekens/devcontainer-features/blob/main/src/tea/README.md"
+  },
+  {
+    "id": "ghcr.io/sliekens/devcontainer-features/worktrunk:1",
+    "name": "Worktrunk",
+    "description": "Installs the Worktrunk CLI (`wt` and `git-wt`) from official GitHub release assets, sets a container-safe system worktree-path default, and persists `~/.config/worktrunk` across devcontainers.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version to install. Use \"latest\" for the most recent release, or specify a version like \"0.69.2\" or \"v0.69.2\"."
+      },
+      "tabCompletions": {
+        "type": "boolean",
+        "default": true,
+        "description": "Install Worktrunk shell integration (tab completions and the `wt` directory-switching wrapper) for bash, zsh, and fish."
+      }
+    },
+    "category": "Dev Container features by sliekens",
+    "documentationURL": "https://github.com/sliekens/devcontainer-features/blob/main/src/worktrunk/README.md"
+  },
+  {
+    "id": "ghcr.io/postfinance/devcontainer-features/apm:1",
+    "name": "APM (Agent Package Manager)",
+    "description": "Installs APM (Agent Package Manager).",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "0.26.0",
+          "0.25.0"
+        ],
+        "default": "latest",
+        "description": "The version of APM to install."
+      },
+      "downloadUrl": {
+        "type": "string",
+        "default": "",
+        "proposals": [
+          "https://mycompany.com/artifactory/github-releases-remote"
+        ],
+        "description": "The download URL to use for APM binaries."
+      }
+    },
+    "category": "PostFinance Features",
+    "documentationURL": "https://github.com/postfinance/devcontainer-features"
   },
   {
     "id": "ghcr.io/postfinance/devcontainer-features/browsers:1",
@@ -26923,7 +27478,7 @@
     "documentationURL": "https://github.com/postfinance/devcontainer-features"
   },
   {
-    "id": "ghcr.io/postfinance/devcontainer-features/instant-client:1",
+    "id": "ghcr.io/postfinance/devcontainer-features/instant-client:2",
     "name": "Instant client",
     "description": "Installs the Oracle Instant Client Basic package.",
     "options": {
@@ -26932,8 +27487,8 @@
         "proposals": [
           "latest",
           "23",
-          "21",
-          "23.8.0.25.04"
+          "21.23.0.0.0",
+          "19.32.0.0.0"
         ],
         "default": "latest",
         "description": "The version of Instant Client to install."
@@ -27166,9 +27721,9 @@
         "type": "string",
         "proposals": [
           "latest",
-          "1.27.2",
-          "1.27.2-1",
-          "1.26"
+          "1.31.3",
+          "1.31.3-1",
+          "1.30"
         ],
         "default": "latest",
         "description": "The version of Nginx to install."
@@ -27301,8 +27856,9 @@
         "type": "string",
         "proposals": [
           "latest",
-          "12.9",
-          "13.1"
+          "13.3",
+          "13.1",
+          "12.9"
         ],
         "default": "latest",
         "description": "The version of NVIDIA CUDA to install."
@@ -27380,7 +27936,7 @@
     "documentationURL": "https://github.com/postfinance/devcontainer-features"
   },
   {
-    "id": "ghcr.io/postfinance/devcontainer-features/playwright-deps:1",
+    "id": "ghcr.io/postfinance/devcontainer-features/playwright-deps:2",
     "name": "Playwright Dependencies",
     "description": "Installs all dependencies required to run Playwright.",
     "options": {
@@ -27676,22 +28232,93 @@
     "documentationURL": "https://github.com/postfinance/devcontainer-features"
   },
   {
-    "id": "ghcr.io/nicoviii/devcontainer-features/just:0",
-    "name": "Just (via GitHub Releases)",
-    "description": "just is a handy way to save and run project-specific commands.",
+    "id": "ghcr.io/nicoviii/devcontainer-features/roc:0",
+    "name": "Roc (nightly, via GitHub Releases)",
+    "description": "Roc is a fast, friendly, functional language.",
     "options": {
       "version": {
         "type": "string",
-        "description": "The version of Just to install. Use 'latest' to install the latest version.",
+        "description": "The nightly of Roc to install, given as '<date>-<commit>' (the release tag without its 'nightly-' prefix). Use 'latest' to install the most recent nightly.",
         "proposals": [
           "latest",
-          "1.51.0"
+          "2026-08-22-db56022"
         ],
         "default": "latest"
       }
     },
     "category": "Devcontainer Features by NicoVIII",
-    "documentationURL": "https://github.com/NicoVIII/devcontainer-features/tree/main/src/just"
+    "documentationURL": "https://github.com/NicoVIII/devcontainer-features/tree/main/src/roc"
+  },
+  {
+    "id": "ghcr.io/althack/devcontainers/linux-pulseaudio-forwarding:0",
+    "name": "Linux PulseAudio Forwarding",
+    "description": "Forward a local Linux host PulseAudio or PipeWire-Pulse socket into a development container.",
+    "options": null,
+    "category": "althack",
+    "documentationURL": "https://github.com/althack/devcontainers/tree/main/features/src/linux-pulseaudio-forwarding"
+  },
+  {
+    "id": "ghcr.io/althack/devcontainers/linux-x11-forwarding:0",
+    "name": "Linux X11 Forwarding",
+    "description": "Forward a local Linux host's X11 display into a development container.",
+    "options": {
+      "x11Display": {
+        "type": "string",
+        "default": ":0",
+        "description": "Set DISPLAY for X11 clients launched from the container."
+      },
+      "softwareGL": {
+        "type": "boolean",
+        "default": true,
+        "description": "Force Mesa software rendering with LIBGL_ALWAYS_SOFTWARE=1."
+      }
+    },
+    "category": "althack",
+    "documentationURL": "https://github.com/althack/devcontainers/tree/main/features/src/linux-x11-forwarding"
+  },
+  {
+    "id": "ghcr.io/althack/devcontainers/ros2:0",
+    "name": "ROS 2",
+    "description": "Install ROS 2 and the tools needed to develop ROS packages.",
+    "options": {
+      "distro": {
+        "type": "string",
+        "proposals": [
+          "auto",
+          "humble",
+          "jazzy",
+          "kilted",
+          "lyrical"
+        ],
+        "default": "auto",
+        "description": "ROS 2 distribution to install. By default, select the recommended distribution for the container's Ubuntu release."
+      },
+      "package": {
+        "type": "string",
+        "proposals": [
+          "ros-core",
+          "ros-base",
+          "desktop",
+          "perception",
+          "simulation",
+          "desktop-full"
+        ],
+        "default": "desktop",
+        "description": "ROS 2 metapackage to install. Common variants are suggested."
+      },
+      "additionalPackages": {
+        "type": "string",
+        "default": "",
+        "description": "Space-separated ROS package suffixes to install in addition to the selected metapackage, without the ros-<distro>- prefix."
+      },
+      "workspace": {
+        "type": "string",
+        "default": "${containerWorkspaceFolder}",
+        "description": "Workspace whose install/setup.sh file should be sourced when present."
+      }
+    },
+    "category": "althack",
+    "documentationURL": "https://github.com/althack/devcontainers/tree/main/features/src/ros2"
   },
   {
     "id": "ghcr.io/soup-bowl/features/firefox-set:0",
@@ -27700,6 +28327,33 @@
     "options": null,
     "category": "Devcontainer Features by Soup-bowl",
     "documentationURL": "https://github.com/soup-bowl/features"
+  },
+  {
+    "id": "ghcr.io/rosstaco/devcontainer-features/atlassian-jira-confluence-cli:1",
+    "name": "Atlassian CLI for Jira & Confluence",
+    "description": "Installs the Atlassian CLI (acli) for working with Jira and Confluence Cloud from the command line",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest"
+        ],
+        "default": "latest",
+        "description": "Version of acli to install. Use 'latest' or a specific version like '1.3.21'"
+      },
+      "installPath": {
+        "type": "string",
+        "default": "/usr/local/bin",
+        "description": "Directory where the acli binary will be installed"
+      },
+      "configureBrowser": {
+        "type": "boolean",
+        "default": true,
+        "description": "Install an xdg-open shim in /usr/local/bin that prefers $BROWSER (e.g. the VS Code browser helper) so 'acli auth login' opens the OAuth page on your host instead of failing inside the container"
+      }
+    },
+    "category": "Devcontainer Features by rosstaco",
+    "documentationURL": "https://github.com/rosstaco/devcontainer-features/tree/main/src/atlassian-jira-confluence-cli"
   },
   {
     "id": "ghcr.io/rosstaco/devcontainer-features/copilot-persistence:1",
@@ -27773,6 +28427,50 @@
     },
     "category": "Devcontainer Features by rosstaco",
     "documentationURL": "https://github.com/rosstaco/devcontainer-features/tree/main/src/ohmyposh"
+  },
+  {
+    "id": "ghcr.io/rosstaco/devcontainer-features/package-source-overrides:1",
+    "name": "Package Source Overrides",
+    "description": "Configure npm, pnpm, pip, and NuGet to use internal override package sources instead of public feeds, early in the container lifecycle so other Features resolve packages through them too",
+    "options": {
+      "npmRegistry": {
+        "type": "string",
+        "default": "",
+        "description": "Registry URL for npm and pnpm (they share .npmrc). Leave empty to skip npm/pnpm. Example: https://artifactory.example.com/artifactory/api/npm/npm-remote/"
+      },
+      "pipIndexUrl": {
+        "type": "string",
+        "default": "",
+        "description": "pip / PyPI index URL that replaces the default index. Leave empty to skip pip. Example: https://artifactory.example.com/artifactory/api/pypi/pypi-remote/simple"
+      },
+      "nugetSource": {
+        "type": "string",
+        "default": "",
+        "description": "NuGet v3 package source URL that replaces nuget.org. Leave empty to skip NuGet. Example: https://artifactory.example.com/artifactory/api/nuget/v3/nuget-remote/index.json"
+      },
+      "nugetSourceName": {
+        "type": "string",
+        "default": "override",
+        "description": "Friendly key/name for the configured NuGet package source"
+      },
+      "scope": {
+        "type": "string",
+        "enum": [
+          "system",
+          "user",
+          "both"
+        ],
+        "default": "both",
+        "description": "Where configuration is written: 'system' (system-wide files), 'user' (root + remote user home), or 'both'"
+      },
+      "strictSsl": {
+        "type": "boolean",
+        "default": true,
+        "description": "When false, allow self-signed/insecure internal proxies (npm strict-ssl=false, pip trusted-host, NuGet allowInsecureConnections)"
+      }
+    },
+    "category": "Devcontainer Features by rosstaco",
+    "documentationURL": "https://github.com/rosstaco/devcontainer-features/tree/main/src/package-source-overrides"
   },
   {
     "id": "ghcr.io/rosstaco/devcontainer-features/prompty-dumpty:1",
@@ -27851,6 +28549,14 @@
     },
     "category": "Keeper Secrets Manager (KSM) Dev Container Features",
     "documentationURL": "https://github.com/cdsolinfo/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/nkaaf/devcontainer-features/azure-functions:0",
+    "name": "Azure Functions Development Tools",
+    "description": "Installs tools that are recommended for the development of Azure Function Apps.",
+    "options": null,
+    "category": "Devcontainer Features by nkaaf",
+    "documentationURL": "https://github.com/nkaaf/devcontainer-features"
   },
   {
     "id": "ghcr.io/nkaaf/devcontainer-features/latex-texlive:0",
@@ -28078,6 +28784,47 @@
     "documentationURL": "https://github.com/aqua/devcontainer-antigravity-cli"
   },
   {
+    "id": "ghcr.io/cjcrobin/devcontainer-features/claudecode:1",
+    "name": "Claude Code",
+    "description": "Installs Claude Code CLI (@anthropic-ai/claude-code) globally via npm.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of @anthropic-ai/claude-code to install (e.g. 'latest', '1.0.17'). Passed directly to 'npm install -g'."
+      }
+    },
+    "category": "Dev Container Feature by cjcrobin",
+    "documentationURL": "https://github.com/cjcrobin/devcontainer-features/tree/master/src/claudecode"
+  },
+  {
+    "id": "ghcr.io/cjcrobin/devcontainer-features/codexcli:1",
+    "name": "Codex CLI",
+    "description": "Installs OpenAI Codex CLI using the standalone installer (pre-built static binary, works on all Linux distributions).",
+    "options": {},
+    "category": "Dev Container Feature by cjcrobin",
+    "documentationURL": "https://github.com/cjcrobin/devcontainer-features/tree/master/src/codexcli"
+  },
+  {
+    "id": "ghcr.io/cjcrobin/devcontainer-features/playwright-cli:1",
+    "name": "Playwright CLI",
+    "description": "Installs Playwright CLI (@playwright/cli) globally via npm. Supports Ubuntu/Debian, Alpine, RHEL/Fedora/CentOS and other Linux distributions.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of @playwright/cli to install (e.g. 'latest', '0.1.17'). Passed directly to 'npm install -g'."
+      },
+      "installSkills": {
+        "type": "boolean",
+        "default": true,
+        "description": "Run 'playwright-cli install --skills' after installation to install Playwright skills for coding agents."
+      }
+    },
+    "category": "Dev Container Feature by cjcrobin",
+    "documentationURL": "https://github.com/cjcrobin/devcontainer-features/tree/master/src/playwright-cli"
+  },
+  {
     "id": "ghcr.io/cjcrobin/devcontainer-features/qodercli:1",
     "name": "Qoder CLI",
     "description": "Installs the Qoder CLI globally (supports both Global and China editions)",
@@ -28154,8 +28901,8 @@
         "default": "latest",
         "enum": [
           "latest",
-          "v1.5.0",
-          "v1.4.1"
+          "v1.7.3",
+          "v1.6.1"
         ],
         "description": "The version of betterleaks to install."
       }
@@ -28447,5 +29194,154 @@
     },
     "category": "Dev Certs Feature by David Negstad",
     "documentationURL": "https://github.com/dnegstad/devcontainer-dev-certs"
+  },
+  {
+    "id": "ghcr.io/jrussellsmyth/devcontainer-features/crush:1",
+    "name": "Crush",
+    "description": "Installs the Crush CLI, Charmbracelet's terminal-based AI coding assistant.",
+    "options": {
+      "version": {
+        "type": "string",
+        "default": "latest",
+        "description": "Version of Crush to install (default: latest)"
+      }
+    },
+    "category": "Devcontainer Features by jrussellsmyth",
+    "documentationURL": "https://github.com/jrussellsmyth/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jrussellsmyth/devcontainer-features/openspec:1",
+    "name": "OpenSpec",
+    "description": "Installs the OpenSpec CLI and can initialize supported AI tool integrations in your workspace.",
+    "options": {
+      "toolSupport": {
+        "type": "string",
+        "default": "none",
+        "description": "Configure OpenSpec tool support in the workspace on first interactive shell. Use 'none', 'all', or a comma-separated list of supported IDs: amazon-q, antigravity, auggie, claude, cline, codex, codebuddy, continue, costrict, crush, cursor, factory, gemini, github-copilot, iflow, kilocode, kiro, opencode, pi, qoder, qwen, roocode, trae, windsurf."
+      }
+    },
+    "category": "Devcontainer Features by jrussellsmyth",
+    "documentationURL": "https://github.com/jrussellsmyth/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/jrussellsmyth/devcontainer-features/yarn-apt-publickey:1",
+    "name": "Yarn APT Public Key Update",
+    "description": "Installs the Yarn GPG keyring before other features run. Workaround for expired keyrings in devcontainers.",
+    "options": null,
+    "category": "Devcontainer Features by jrussellsmyth",
+    "documentationURL": "https://github.com/jrussellsmyth/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/nolanjx/devcontainer-features/claude-code:1",
+    "name": "Claude Code CLI",
+    "description": "Installs the Claude Code CLI via the official standalone installer",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest",
+          "stable"
+        ],
+        "default": "latest",
+        "description": "Release channel ('latest' or 'stable') or a specific version (e.g. '2.1.212')."
+      },
+      "mattpocock-skills": {
+        "type": "boolean",
+        "default": false,
+        "description": "Pre-install Matt Pocock's Skills. Requires setting CLAUDE_CODE_PLUGIN_SEED_DIR at runtime — see NOTES.md."
+      },
+      "superpowers": {
+        "type": "boolean",
+        "default": false,
+        "description": "Pre-install Superpowers. Requires setting CLAUDE_CODE_PLUGIN_SEED_DIR at runtime — see NOTES.md."
+      }
+    },
+    "category": "Dev Container Features by NolanJX",
+    "documentationURL": "https://github.com/NolanJX/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/nolanjx/devcontainer-features/codex:1",
+    "name": "Codex CLI",
+    "description": "Installs the Codex CLI via the official standalone installer",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest"
+        ],
+        "default": "latest",
+        "description": "Select a Codex CLI version to install ('latest' or a specific version, e.g. '0.146.0')."
+      }
+    },
+    "category": "Dev Container Features by NolanJX",
+    "documentationURL": "https://github.com/NolanJX/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/nolanjx/devcontainer-features/cursor:1",
+    "name": "Cursor CLI",
+    "description": "Installs the Cursor CLI via the official standalone installer",
+    "options": null,
+    "category": "Dev Container Features by NolanJX",
+    "documentationURL": "https://github.com/NolanJX/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/nolanjx/devcontainer-features/dsh:1",
+    "name": "DeepSeek Harness",
+    "description": "Installs the DeepSeek Harness. Requires Node.js. Requires VS Code — see NOTES.md.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest"
+        ],
+        "default": "latest",
+        "description": "Select a dsh version to install ('latest' or a specific version, e.g. '0.1.0-rc.6')."
+      }
+    },
+    "category": "Dev Container Features by NolanJX",
+    "documentationURL": "https://github.com/NolanJX/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/nolanjx/devcontainer-features/mattpocock-skills:1",
+    "name": "Matt Pocock's Skills",
+    "description": "Pre-installs Matt Pocock's Skills. Requires Node.js.",
+    "options": null,
+    "category": "Dev Container Features by NolanJX",
+    "documentationURL": "https://github.com/NolanJX/devcontainer-features"
+  },
+  {
+    "id": "ghcr.io/nolanjx/devcontainer-features/pi-coding-agent:1",
+    "name": "Pi Coding Agent",
+    "description": "Installs the Pi Coding Agent. Requires Node.js.",
+    "options": {
+      "version": {
+        "type": "string",
+        "proposals": [
+          "latest"
+        ],
+        "default": "latest",
+        "description": "Select a Pi Coding Agent version to install ('latest' or a specific version, e.g. '0.84.2')."
+      }
+    },
+    "category": "Dev Container Features by NolanJX",
+    "documentationURL": "https://github.com/NolanJX/devcontainer-features"
+  },
+  {
+    "id": "registry.gitlab.com/pravorskyi/devcontainer-features/claude-code:1",
+    "name": "Claude Code (apt)",
+    "description": "Installs Claude Code from the official Anthropic apt repository.",
+    "options": {
+      "channel": {
+        "type": "string",
+        "enum": [
+          "stable",
+          "latest"
+        ],
+        "default": "stable",
+        "description": "Release channel of the apt repository."
+      }
+    },
+    "category": "Claude Code (apt) Dev Container Feature",
+    "documentationURL": "https://gitlab.com/pravorskyi/devcontainer-features"
   }
 ]

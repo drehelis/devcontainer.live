@@ -8,11 +8,11 @@
         "type": "string",
         "description": "Alpine version:",
         "proposals": [
+          "3.23",
           "3.22",
-          "3.21",
-          "3.20"
+          "3.21"
         ],
-        "default": "3.22"
+        "default": "3.23"
       }
     },
     "category": "Reference Implementation Templates",
@@ -158,11 +158,6 @@
         "type": "boolean",
         "default": "true",
         "description": "Install OSS Moby build instead of Docker CE"
-      },
-      "enableNonRootDocker": {
-        "type": "boolean",
-        "description": "Enable non-root user to access Docker in container?",
-        "default": "true"
       }
     },
     "category": "Reference Implementation Templates",
@@ -454,13 +449,10 @@
         "proposals": [
           "24-trixie",
           "22-trixie",
-          "20-trixie",
           "24-bookworm",
           "22-bookworm",
-          "20-bookworm",
           "24-bullseye",
-          "22-bullseye",
-          "20-bullseye"
+          "22-bullseye"
         ],
         "default": "24-trixie"
       }
@@ -479,10 +471,8 @@
         "proposals": [
           "24-bookworm",
           "22-bookworm",
-          "20-bookworm",
           "24-bullseye",
-          "22-bullseye",
-          "20-bullseye"
+          "22-bullseye"
         ],
         "default": "24-bookworm"
       }
@@ -501,13 +491,10 @@
         "proposals": [
           "24-trixie",
           "22-trixie",
-          "20-trixie",
           "24-bookworm",
           "22-bookworm",
-          "20-bookworm",
           "24-bullseye",
-          "22-bullseye",
-          "20-bullseye"
+          "22-bullseye"
         ],
         "default": "24-trixie"
       }
@@ -588,8 +575,6 @@
           "8.4-bookworm",
           "8.3-trixie",
           "8.3-bookworm",
-          "8.2-trixie",
-          "8.2-bookworm",
           "8-bookworm"
         ],
         "default": "8.5-trixie"
@@ -613,8 +598,6 @@
           "8.4-bookworm",
           "8.3-trixie",
           "8.3-bookworm",
-          "8.2-trixie",
-          "8.2-bookworm",
           "8-trixie"
         ],
         "default": "8.5-trixie"
@@ -782,13 +765,10 @@
         "proposals": [
           "24-trixie",
           "22-trixie",
-          "20-trixie",
           "24-bookworm",
           "22-bookworm",
-          "20-bookworm",
           "24-bullseye",
-          "22-bullseye",
-          "20-bullseye"
+          "22-bullseye"
         ],
         "default": "24-trixie"
       }
@@ -2037,6 +2017,34 @@
     },
     "category": "Azure Functions Dev Container Templates",
     "documentationURL": "https://github.com/shibayan/devcontainers/tree/master/src/azure-functions-dotnet"
+  },
+  {
+    "id": "ghcr.io/shibayan/devcontainers/azure-functions-go",
+    "name": "Azure Functions (Go)",
+    "description": "Develop Go based Azure Functions. Includes all needed SDKs, extensions, and dependencies.",
+    "options": {
+      "goVersion": {
+        "type": "string",
+        "description": "Go version:",
+        "proposals": [
+          "1.26",
+          "1.25",
+          "1.24"
+        ],
+        "default": "1.24"
+      },
+      "azureFunctionsCliVersion": {
+        "type": "string",
+        "description": "Azure Functions CLI version:",
+        "proposals": [
+          "latest",
+          "4.12.0"
+        ],
+        "default": "latest"
+      }
+    },
+    "category": "Azure Functions Dev Container Templates",
+    "documentationURL": "https://github.com/shibayan/devcontainers/tree/master/src/azure-functions-go"
   },
   {
     "id": "ghcr.io/shibayan/devcontainers/azure-functions-java",
@@ -3369,6 +3377,27 @@
     "documentationURL": "https://github.com/ryanlua/templates/tree/main/src/roblox"
   },
   {
+    "id": "ghcr.io/schnellerhase/devcontainer-fenics/fenics",
+    "name": "FEniCS devcontainer",
+    "description": "Fully featured Ubuntu based FEniCS installtion.",
+    "options": {
+      "tag": {
+        "type": "string",
+        "description": "FEniCS version - tag of dolfinx/dolfinx to use:",
+        "proposals": [
+          "nightly",
+          "v0.11.0",
+          "v0.10.0",
+          "v0.9.0",
+          "v0.8.0"
+        ],
+        "default": "nightly"
+      }
+    },
+    "category": "FEniCS",
+    "documentationURL": "https://github.com/schnellerhase/devcontainer-FEniCS"
+  },
+  {
     "id": "ghcr.io/pirpedro/devcontainers/dev-tools",
     "name": "Dev Container Tools (base)",
     "description": "Base template with common-utils, git, antidote, chezmoi and dev-gadgets features, SSH agent forwarding and Chezmoi workspace layout.",
@@ -3553,22 +3582,17 @@
     "name": "kubernetes",
     "description": "Develop applications using kubectl",
     "options": {
-      "imageVariant": {
+      "imageTag": {
         "type": "string",
-        "description": "Python version (use -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "description": "The tag version of the pre-built image to use",
         "proposals": [
-          "3-bookworm",
-          "3.12-bookworm",
-          "3.11-bookworm",
-          "3.10-bookworm",
-          "3.9-bookworm",
-          "3-bullseye",
-          "3.12-bullseye",
-          "3.11-bullseye",
-          "3.10-bullseye",
-          "3.9-bullseye"
+          "1.0.1",
+          "1.0.2",
+          "1.0.2",
+          "1.0.3",
+          "latest"
         ],
-        "default": "3.12-bullseye"
+        "default": "latest"
       }
     },
     "category": "Devcontainers templates by jhoareaumarion",
@@ -3687,7 +3711,35 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "7.2.0"
+        "default": "8.0.1"
+      }
+    },
+    "category": "Philips Software Dev Container Templates",
+    "documentationURL": "https://github.com/philips-software/amp-devcontainer/blob/main/README.md"
+  },
+  {
+    "id": "ghcr.io/philips-software/amp-devcontainer/embedded-cpp",
+    "name": "Embedded C++",
+    "description": "A modern, batteries-included software development environment for embedded C++",
+    "options": {
+      "imageVersion": {
+        "type": "string",
+        "description": "amp-devcontainer version",
+        "default": "8.0.1"
+      }
+    },
+    "category": "Philips Software Dev Container Templates",
+    "documentationURL": "https://github.com/philips-software/amp-devcontainer/blob/main/README.md"
+  },
+  {
+    "id": "ghcr.io/philips-software/amp-devcontainer/embedded-rust",
+    "name": "Embedded Rust",
+    "description": "A modern, batteries-included software development environment for embedded Rust",
+    "options": {
+      "imageVersion": {
+        "type": "string",
+        "description": "amp-devcontainer version",
+        "default": "8.0.1"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -3701,7 +3753,7 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "7.2.0"
+        "default": "8.0.1"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -3902,7 +3954,7 @@
       }
     },
     "category": "althack",
-    "documentationURL": "https://github.com/athackst/devcontainer-templates/tree/main/templates/src/gz"
+    "documentationURL": "https://github.com/althack/devcontainers/tree/main/templates/src/gz"
   },
   {
     "id": "ghcr.io/doughatcher/devcontainer-templates/magento",
@@ -3942,5 +3994,225 @@
     },
     "category": "Magento Open Source Dev Container Templates",
     "documentationURL": "https://github.com/doughatcher/magento/tree/main/.template"
+  },
+  {
+    "id": "ghcr.io/leogallego/ansible-claude-code-devcontainer/claude-code-ansible",
+    "name": "Ansible Development Tools (AI-enhanced ansible-dev-tools)",
+    "description": "AI-enhanced ansible-dev-tools with Ansible MCP servers, skills pre-configured, Claude Code, and Abbenay AI gateway",
+    "options": {},
+    "category": "Ansible DevTools with Claude Code",
+    "documentationURL": "https://github.com/leogallego/ansible-claude-code-devcontainer/tree/main/src/claude-code-ansible"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/bun",
+    "name": "Bun",
+    "description": "Security-focused Bun dev container for JS/TS with hardened defaults and cached installs.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Bun and Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "1-trixie",
+          "1-bookworm"
+        ],
+        "default": "1-trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/bun"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/debian",
+    "name": "Debian",
+    "description": "Security-focused minimal Debian base for any stack, with hardened, non-root defaults.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "trixie",
+          "bookworm"
+        ],
+        "default": "trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/debian"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/deno",
+    "name": "Deno",
+    "description": "Security-focused Deno dev container for JS/TS with hardened defaults and cached modules.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Deno and Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "2-trixie",
+          "2-bookworm"
+        ],
+        "default": "2-trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/deno"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/golang",
+    "name": "Go",
+    "description": "Security-focused Go dev container with hardened defaults and rebuild-friendly caches.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Go and Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "1.27-trixie",
+          "1.27-bookworm",
+          "1.26-trixie",
+          "1.26-bookworm"
+        ],
+        "default": "1.26-trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/golang"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/mise",
+    "name": "mise",
+    "description": "Security-focused mise dev container for multiple runtimes, with cached tool installs.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "trixie",
+          "bookworm"
+        ],
+        "default": "trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/mise"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/node",
+    "name": "Node.js",
+    "description": "Security-focused Node.js dev container for JS/TS with non-root defaults and Corepack.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Node.js and Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "26-trixie",
+          "26-bookworm",
+          "24-trixie",
+          "24-bookworm"
+        ],
+        "default": "26-trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/node"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/opentofu",
+    "name": "OpenTofu",
+    "description": "Security-focused OpenTofu dev container with tofu-ls and a plugin cache volume.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "OpenTofu and Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "1-trixie",
+          "1-bookworm"
+        ],
+        "default": "1-trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/opentofu"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/rustup",
+    "name": "Rust",
+    "description": "Security-focused Rust dev container with rust-analyzer and persistent Cargo caches.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "trixie",
+          "bookworm"
+        ],
+        "default": "trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/rustup"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/terraform",
+    "name": "Terraform",
+    "description": "Security-focused Terraform dev container with terraform-ls and a plugin cache volume.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Terraform and Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "1-trixie",
+          "1-bookworm"
+        ],
+        "default": "1-trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/terraform"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/uv",
+    "name": "Python (uv)",
+    "description": "Security-focused Python dev container with uv, hardened defaults, and cached packages.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "trixie",
+          "bookworm"
+        ],
+        "default": "trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/uv"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/zig",
+    "name": "Zig",
+    "description": "Security-focused Zig dev container with zls integration and a persistent build cache.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Zig and Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "0.16-trixie",
+          "0.16-bookworm",
+          "0.15-trixie",
+          "0.15-bookworm"
+        ],
+        "default": "0.16-trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/zig"
+  },
+  {
+    "id": "ghcr.io/mkvlrn/mise-devcontainers/archlinux",
+    "name": "mise-devcontainer-archlinux",
+    "description": "Arch-based development container built around mise.",
+    "options": null,
+    "category": "mise Dev Container Templates",
+    "documentationURL": "https://github.com/mkvlrn/mise-devcontainers"
   }
 ]
