@@ -41,7 +41,7 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Debian / Ubuntu version (use Debian 13, Debian 12, Ubuntu 24.04, and Ubuntu 22.04 on local arm64/Apple Silicon):",
+        "description": "Debian / Ubuntu version (use debian13, debian12, ubuntu24.04, and ubuntu22.04 on local arm64/Apple Silicon):",
         "proposals": [
           "debian13",
           "debian12",
@@ -101,11 +101,10 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Debian version (use trixie bookworm or bullseye on local arm64/Apple Silicon):",
+        "description": "Debian version (use trixie or bookworm on local arm64/Apple Silicon):",
         "proposals": [
           "trixie",
-          "bookworm",
-          "bullseye"
+          "bookworm"
         ],
         "default": "trixie"
       }
@@ -250,7 +249,8 @@
         "type": "string",
         "description": ".NET version:",
         "proposals": [
-          "11.0-preview",
+          "11.0",
+          "11.0-resolute",
           "10.0",
           "9.0",
           "8.0",
@@ -259,7 +259,6 @@
           "10.0-noble",
           "9.0-noble",
           "8.0-noble",
-          "11.0-preview-resolute",
           "8.0-jammy"
         ],
         "default": "10.0-noble"
@@ -335,12 +334,14 @@
         "type": "string",
         "description": "Go version:",
         "proposals": [
+          "1.27-trixie",
           "1.26-trixie",
           "1.25-trixie",
+          "1.27-bookworm",
           "1.26-bookworm",
           "1.25-bookworm"
         ],
-        "default": "1.26-trixie"
+        "default": "1.27-trixie"
       }
     },
     "category": "Reference Implementation Templates",
@@ -355,12 +356,14 @@
         "type": "string",
         "description": "Go version:",
         "proposals": [
+          "1.27-trixie",
           "1.26-trixie",
           "1.25-trixie",
+          "1.27-bookworm",
           "1.26-bookworm",
           "1.25-bookworm"
         ],
-        "default": "1.26-trixie"
+        "default": "1.27-trixie"
       }
     },
     "category": "Reference Implementation Templates",
@@ -445,14 +448,12 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Node.js version (use -trixie, -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "description": "Node.js version (use -trixie or -bookworm variants on local arm64/Apple Silicon):",
         "proposals": [
           "24-trixie",
           "22-trixie",
           "24-bookworm",
-          "22-bookworm",
-          "24-bullseye",
-          "22-bullseye"
+          "22-bookworm"
         ],
         "default": "24-trixie"
       }
@@ -467,12 +468,10 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Node.js version (use -bookworm or -bullseye variants on local arm64/Apple Silicon):",
+        "description": "Node.js version (use -bookworm variants on local arm64/Apple Silicon):",
         "proposals": [
           "24-bookworm",
-          "22-bookworm",
-          "24-bullseye",
-          "22-bullseye"
+          "22-bookworm"
         ],
         "default": "24-bookworm"
       }
@@ -487,14 +486,12 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Node.js version (use -trixie, -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "description": "Node.js version (use -trixie or -bookworm variants on local arm64/Apple Silicon):",
         "proposals": [
           "24-trixie",
           "22-trixie",
           "24-bookworm",
-          "22-bookworm",
-          "24-bullseye",
-          "22-bullseye"
+          "22-bookworm"
         ],
         "default": "24-trixie"
       }
@@ -509,12 +506,11 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Debian OS version (use bookworm, or bullseye on local arm64/Apple Silicon):",
+        "description": "Debian OS version (use bookworm on local arm64/Apple Silicon):",
         "proposals": [
-          "bookworm",
-          "bullseye"
+          "bookworm"
         ],
-        "default": "bullseye"
+        "default": "bookworm"
       }
     },
     "category": "Reference Implementation Templates",
@@ -567,7 +563,7 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "PHP version (use -trixie, -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "description": "PHP version (use -trixie or -bookworm variants on local arm64/Apple Silicon):",
         "proposals": [
           "8.5-trixie",
           "8.5-bookworm",
@@ -590,7 +586,7 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "PHP version (use -trixie, -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "description": "PHP version (use -trixie or -bookworm variants on local arm64/Apple Silicon):",
         "proposals": [
           "8.5-trixie",
           "8.5-bookworm",
@@ -613,7 +609,7 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Python version (use -trixie, -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "description": "Python version (use -trixie or -bookworm variants on local arm64/Apple Silicon):",
         "proposals": [
           "3.14-trixie",
           "3.13-trixie",
@@ -675,18 +671,16 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Ruby version (use -trixie, -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "description": "Ruby version (use -trixie or -bookworm variants on local arm64/Apple Silicon):",
         "proposals": [
-          "4-trixie",
+          "4.0-trixie",
           "3.4-trixie",
           "3.3-trixie",
-          "4-bookworm",
+          "4.0-bookworm",
           "3.4-bookworm",
-          "3.3-bookworm",
-          "3.4-bullseye",
-          "3.3-bullseye"
+          "3.3-bookworm"
         ],
-        "default": "4-trixie"
+        "default": "4.0-trixie"
       }
     },
     "category": "Reference Implementation Templates",
@@ -699,18 +693,16 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Ruby version (use - trixie, -bookworm, -bullseye variants on local arm64/Apple Silicon):",
+        "description": "Ruby version (use -trixie or -bookworm variants on local arm64/Apple Silicon):",
         "proposals": [
-          "4-trixie",
+          "4.0-trixie",
           "3.4-trixie",
           "3.3-trixie",
-          "4-bookworm",
+          "4.0-bookworm",
           "3.4-bookworm",
-          "3.3-bookworm",
-          "3.4-bullseye",
-          "3.3-bullseye"
+          "3.3-bookworm"
         ],
-        "default": "4-trixie"
+        "default": "4.0-trixie"
       }
     },
     "category": "Reference Implementation Templates",
@@ -723,11 +715,10 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Debian OS version (use trixie, bookworm, or bullseye on local arm64/Apple Silicon):",
+        "description": "Debian OS version (use trixie or bookworm on local arm64/Apple Silicon):",
         "proposals": [
           "trixie",
-          "bookworm",
-          "bullseye"
+          "bookworm"
         ],
         "default": "trixie"
       }
@@ -742,11 +733,10 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Debian OS version (use bookworm, or bullseye on local arm64/Apple Silicon):",
+        "description": "Debian OS version (use trixie or bookworm on local arm64/Apple Silicon):",
         "proposals": [
           "trixie",
-          "bookworm",
-          "bullseye"
+          "bookworm"
         ],
         "default": "trixie"
       }
@@ -761,14 +751,12 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Node.js version (use -trixie, -bookworm, or -bullseye variants on local arm64/Apple Silicon):",
+        "description": "Node.js version (use -trixie or -bookworm variants on local arm64/Apple Silicon):",
         "proposals": [
           "24-trixie",
           "22-trixie",
           "24-bookworm",
-          "22-bookworm",
-          "24-bullseye",
-          "22-bullseye"
+          "22-bookworm"
         ],
         "default": "24-trixie"
       }
@@ -812,10 +800,10 @@
         "type": "string",
         "description": ".NET version:",
         "proposals": [
-          "8.0-bookworm",
-          "8.0-jammy"
+          "10.0-noble",
+          "8.0-noble"
         ],
-        "default": "8.0-bookworm"
+        "default": "10.0-noble"
       }
     },
     "category": "Azure SQL Database Dev Container Templates",
@@ -830,10 +818,9 @@
         "type": "string",
         "description": ".NET version:",
         "proposals": [
-          "8.0-bookworm",
-          "8.0-jammy"
+          "10.0-noble"
         ],
-        "default": "8.0-bookworm"
+        "default": "10.0-noble"
       }
     },
     "category": "Azure SQL Database Dev Container Templates",
@@ -848,14 +835,10 @@
         "type": "string",
         "description": "Node.js version:",
         "proposals": [
-          "22-bookworm",
-          "22-bullseye",
-          "20-bookworm",
-          "20-bullseye",
-          "18-bookworm",
-          "18-bullseye"
+          "24-trixie",
+          "22-trixie"
         ],
-        "default": "22-bullseye"
+        "default": "24-trixie"
       }
     },
     "category": "Azure SQL Database Dev Container Templates",
@@ -870,14 +853,10 @@
         "type": "string",
         "description": "Python version:",
         "proposals": [
-          "3.10-bookworm",
-          "3.11-bookworm",
-          "3.12-bookworm",
-          "3.10-bullseye",
-          "3.11-bullseye",
-          "3.12-bullseye"
+          "3.14-trixie",
+          "3.13-trixie"
         ],
-        "default": "3.12-bullseye"
+        "default": "3.14-trixie"
       }
     },
     "category": "Azure SQL Database Dev Container Templates",
@@ -1158,6 +1137,7 @@
         "type": "string",
         "description": "Swift version:",
         "proposals": [
+          "6.4",
           "6.3",
           "6.2",
           "6.1",
@@ -1173,7 +1153,7 @@
           "5.2",
           "5.1"
         ],
-        "default": "6.3"
+        "default": "6.4"
       }
     },
     "category": "Swift Container Templates",
@@ -3711,7 +3691,7 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "8.0.1"
+        "default": "8.4.0"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -3725,7 +3705,7 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "8.0.1"
+        "default": "8.4.0"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -3739,7 +3719,7 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "8.0.1"
+        "default": "8.4.0"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -3753,7 +3733,7 @@
       "imageVersion": {
         "type": "string",
         "description": "amp-devcontainer version",
-        "default": "8.0.1"
+        "default": "8.4.0"
       }
     },
     "category": "Philips Software Dev Container Templates",
@@ -4071,11 +4051,29 @@
           "1.26-trixie",
           "1.26-bookworm"
         ],
-        "default": "1.26-trixie"
+        "default": "1.27-trixie"
       }
     },
     "category": "Bare Dev Container Templates",
     "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/golang"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/lean",
+    "name": "Lean 4",
+    "description": "Security-focused Lean 4 dev container with elan, persisted toolchains and Mathlib cache.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "trixie",
+          "bookworm"
+        ],
+        "default": "trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/lean"
   },
   {
     "id": "ghcr.io/bare-devcontainer/templates/mise",
@@ -4084,10 +4082,9 @@
     "options": {
       "imageVariant": {
         "type": "string",
-        "description": "Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "description": "Debian version (trixie = Debian 13). Other published tags can be entered.",
         "proposals": [
-          "trixie",
-          "bookworm"
+          "trixie"
         ],
         "default": "trixie"
       }
@@ -4134,9 +4131,27 @@
     "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/opentofu"
   },
   {
+    "id": "ghcr.io/bare-devcontainer/templates/pnpm",
+    "name": "Node.js (pnpm)",
+    "description": "Security-focused pnpm dev container for JS/TS with pnpm-managed Node.js and caches.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "pnpm and Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "12-trixie",
+          "12-bookworm"
+        ],
+        "default": "12-trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/pnpm"
+  },
+  {
     "id": "ghcr.io/bare-devcontainer/templates/rustup",
     "name": "Rust",
-    "description": "Security-focused Rust dev container with rust-analyzer and persistent Cargo caches.",
+    "description": "Security-focused Rust dev container with rust-analyzer, persisted toolchains and caches.",
     "options": {
       "imageVariant": {
         "type": "string",
@@ -4150,6 +4165,26 @@
     },
     "category": "Bare Dev Container Templates",
     "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/rustup"
+  },
+  {
+    "id": "ghcr.io/bare-devcontainer/templates/temurin",
+    "name": "Java (Temurin)",
+    "description": "Security-focused Java dev container with the Temurin JDK and cached wrapper builds.",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "Java and Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
+        "proposals": [
+          "25-trixie",
+          "25-bookworm",
+          "21-trixie",
+          "21-bookworm"
+        ],
+        "default": "25-trixie"
+      }
+    },
+    "category": "Bare Dev Container Templates",
+    "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/temurin"
   },
   {
     "id": "ghcr.io/bare-devcontainer/templates/terraform",
@@ -4196,16 +4231,25 @@
         "type": "string",
         "description": "Zig and Debian version (trixie = Debian 13, bookworm = Debian 12). Other published tags can be entered.",
         "proposals": [
+          "0.17-trixie",
+          "0.17-bookworm",
           "0.16-trixie",
           "0.16-bookworm",
-          "0.15-trixie",
-          "0.15-bookworm"
+          "master-trixie"
         ],
-        "default": "0.16-trixie"
+        "default": "0.17-trixie"
       }
     },
     "category": "Bare Dev Container Templates",
     "documentationURL": "https://github.com/bare-devcontainer/templates/tree/main/src/zig"
+  },
+  {
+    "id": "ghcr.io/mkvlrn/mise-devcontainers/alpine",
+    "name": "mise-devcontainer-alpine",
+    "description": "Alpine-based development container built around mise.",
+    "options": null,
+    "category": "mise Dev Container Templates",
+    "documentationURL": "https://github.com/mkvlrn/mise-devcontainers"
   },
   {
     "id": "ghcr.io/mkvlrn/mise-devcontainers/archlinux",
@@ -4214,5 +4258,64 @@
     "options": null,
     "category": "mise Dev Container Templates",
     "documentationURL": "https://github.com/mkvlrn/mise-devcontainers"
+  },
+  {
+    "id": "ghcr.io/mkvlrn/mise-devcontainers/debian",
+    "name": "mise-devcontainer-debian",
+    "description": "Debian-based development container built around mise.",
+    "options": null,
+    "category": "mise Dev Container Templates",
+    "documentationURL": "https://github.com/mkvlrn/mise-devcontainers"
+  },
+  {
+    "id": "ghcr.io/mkvlrn/mise-devcontainers/fedora",
+    "name": "mise-devcontainer-fedora",
+    "description": "Fedora-based development container built around mise.",
+    "options": null,
+    "category": "mise Dev Container Templates",
+    "documentationURL": "https://github.com/mkvlrn/mise-devcontainers"
+  },
+  {
+    "id": "ghcr.io/mkvlrn/mise-devcontainers/ubuntu",
+    "name": "mise-devcontainer-ubuntu",
+    "description": "Ubuntu-based development container built around mise.",
+    "options": null,
+    "category": "mise Dev Container Templates",
+    "documentationURL": "https://github.com/mkvlrn/mise-devcontainers"
+  },
+  {
+    "id": "ghcr.io/t0ng5/esp-idf/esp-idf",
+    "name": "Blank ESP-IDF Environment",
+    "description": "A template to create a new blank esp-idf project in a dev container",
+    "options": {
+      "imageVariant": {
+        "type": "string",
+        "description": "ESP-IDF version",
+        "enum": [
+          "latest",
+          "release-v6.1",
+          "release-v6.0",
+          "release-v5.5",
+          "release-v5.4",
+          "release-v5.3",
+          "release-v5.2",
+          "release-v5.1",
+          "release-v5.0",
+          "release-v4.4",
+          "release-v4.3",
+          "release-v4.2",
+          "release-v4.1",
+          "release-v4.0",
+          "release-v3.3"
+        ],
+        "default": "latest"
+      },
+      "projectName": {
+        "type": "string",
+        "description": "Name for the new project"
+      }
+    },
+    "category": "ESP-IDF Dev Container Templates",
+    "documentationURL": "https://github.com/T0ng5/esp-idf/tree/main/src/color"
   }
 ]
