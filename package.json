@@ -14,25 +14,25 @@
   "dependencies": {
     "@types/lz-string": "^1.3.34",
     "js-yaml": "^5.5.0",
-    "jszip": "^3.10.1",
+    "jszip": "^3.10.2",
     "lz-string": "^1.5.0",
-    "prettier": "^3.8.1",
-    "shiki": "^4.0.2",
-    "vue": "^3.5.30"
+    "prettier": "^3.9.10",
+    "shiki": "^4.5.0",
+    "vue": "^3.5.44"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.2.1",
-    "@tailwindcss/vite": "^4.0.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@tailwindcss/vite": "^4.3.3",
     "@types/js-yaml": "^4.0.9",
     "@types/jszip": "^3.4.0",
     "@types/node": "^26.0.0",
-    "@vitejs/plugin-vue": "^6.0.5",
-    "@vue/tsconfig": "^0.9.0",
-    "autoprefixer": "^10.4.27",
-    "postcss": "^8.5.8",
-    "tailwindcss": "^4.2.1",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "@vue/tsconfig": "^0.9.1",
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.30",
+    "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
-    "vite": "^8.0.0",
-    "vue-tsc": "^3.2.5"
+    "vite": "^8.3.4",
+    "vue-tsc": "^3.3.13"
   }
 }
